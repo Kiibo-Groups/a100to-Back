@@ -60,6 +60,7 @@ final class Versions
   'laravel/socialite' => 'v5.6.1@a14a177f2cc71d8add71e2b19e00800e83bdda09',
   'laravel/tinker' => 'v2.8.1@04a2d3bd0d650c0764f70bf49d1ee39393e4eb10',
   'laravel/ui' => 'v3.4.6@65ec5c03f7fee2c8ecae785795b829a15be48c2c',
+  'laravelcollective/html' => 'v6.4.0@ac74f580459a5120079b8def0404e5d312a09504',
   'lcobucci/clock' => '3.0.0@039ef98c6b57b101d10bd11d8fdfda12cbd996dc',
   'lcobucci/jwt' => '4.3.0@4d7de2fe0d51a96418c0d04004986e410e87f6b4',
   'league/commonmark' => '2.4.0@d44a24690f16b8c1808bf13b1bd54ae4c63ea048',
@@ -162,7 +163,7 @@ final class Versions
   'spatie/ignition' => '1.4.5@cc09114b7057bd217b676f047544b33f5b6247e6',
   'spatie/laravel-ignition' => '1.6.4@1a2b4bd3d48c72526c0ba417687e5c56b5cf49bc',
   'theseer/tokenizer' => '1.2.1@34a41e998c2183e22995f158c581e7b5e755ab9e',
-  'laravel/laravel' => 'No version set (parsed as 1.0.0)@',
+  'laravel/laravel' => 'dev-master@538764203bc6ac171a5a34e6b3c72b2b789f84b8',
 );
 
     private function __construct()
