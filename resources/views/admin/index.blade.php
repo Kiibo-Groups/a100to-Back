@@ -24,8 +24,7 @@
     <link href="{{ Asset('assets/css/wow.css') }}" rel="stylesheet">
 
     <!-- Style Sheet -->
-    <link href="{{ Asset('assets/css/nouislider.min.css') }}" rel="stylesheet">
-    <link href="{{ Asset('assets/css/range-slider.css') }}" rel="stylesheet">
+
     <link href="{{ Asset('assets/css/style.css?v=') }}<?php echo time(); ?>" rel="stylesheet">
 <!-- NewsStyles -->
 </head>
@@ -107,7 +106,7 @@
 <script src="{{ Asset('assets/js/bundle.min.js') }}"></script>
 <!-- Plugin Js -->
 <script src="{{ Asset('assets/js/jquery.fancybox.min.js') }}"></script>
-<script src="{{ Asset('assets/js/owl.carousel.min.js') }}"></script>
+
 <script src="{{ Asset('assets/js/parallaxie.min.js') }}"></script>
 <script src="{{ Asset('assets/js/wow.min.js') }}"></script>
 <!-- REVOLUTION JS FILES -->
@@ -128,7 +127,7 @@
 <!-- custom script-->
 <script src="{{ Asset('assets/js/nouislider.min.js') }}"></script>
 <script src="{{ Asset('assets/js/slick.min.js') }}"></script>
-<script src="{{ Asset('assets/js/contact_us.js') }}"></script>
+
 <script src="{{ Asset('assets/js/script.js') }}"></script>
 </body>
 </html>
