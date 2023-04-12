@@ -183,6 +183,8 @@ return [
 
         FruitCake\Cors\CorsServiceProvider::class,
 
+        Collective\Html\HtmlServiceProvider::class,
+
 
     ],
 
@@ -243,6 +245,8 @@ return [
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
 
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
 
 

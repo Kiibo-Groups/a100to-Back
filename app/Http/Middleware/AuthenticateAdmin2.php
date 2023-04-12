@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AuthenticateAdmin
+class AuthenticateAdmin2
 {
     /**
      * Handle an incoming request.

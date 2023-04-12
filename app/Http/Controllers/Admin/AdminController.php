@@ -5,12 +5,12 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Auth;
-use App\Admin;
-use App\User;
-use App\AppUser;
-use App\Order;
-use App\OrderItem;
-use App\Delivery;
+use App\Models\Admin;
+use App\Models\User;
+use App\Models\AppUser;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\Delivery;
 use DB;
 use Validator;
 use Redirect;
@@ -38,6 +38,7 @@ class AdminController extends Controller {
 	*/
 	public function login(Request $request)
 	{
+		
 		$username = $request->input('username');
 		$password = $request->input('password');
 

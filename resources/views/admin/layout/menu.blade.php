@@ -1,4 +1,4 @@
-@inject('admin', 'App\Admin')
+@inject('admin', 'App\Models\Admin')
 @php($page = Request::segment(2))
 
 <style type="text/css">
@@ -323,8 +323,8 @@
 
 		<!-- Mandaditos -->
 		<?php
-		$newCommand = DB::table('commaned')->where('status',0)->count(); // Servicio nuevo
-		$notAsignCommand = DB::table('commaned')->where('status',3)->count(); // Servicio no asignado
+		//$newCommand = DB::table('commaned')->where('status',0)->count(); // Servicio nuevo
+		//$notAsignCommand = DB::table('commaned')->where('status',3)->count(); // Servicio no asignado
 		?>
 		@if($admin->hasPerm('Gestion de servicios'))
 		<li class="menu-item @if($page === 'commaned') active @endif">
@@ -332,9 +332,9 @@
 				<span class="menu-label">
 					<span class="menu-name">
 						Gestionar Servicios
-						@if($newCommand > 0)
-							<span class="icon-badge badge-success badge badge-pill">{{ $newCommand }}</span>
-						@endif
+					
+							<span class="icon-badge badge-success badge badge-pill"></span>
+					
 						<span class="menu-arrow"></span>
 					</span>
 				</span>
@@ -350,9 +350,9 @@
 						<span class="menu-label">
 							<span class="menu-name">
 								Servicios Nuevos
-								@if($newCommand > 0)
-								<span class="icon-badge badge-success badge badge-pill">{{ $newCommand }}</span>
-								@endif
+								
+								<span class="icon-badge badge-success badge badge-pill"></span>
+							
 							</span>
 						</span>
 						<span class="menu-icon">
@@ -366,9 +366,9 @@
 						<span class="menu-label">
 							<span class="menu-name">
 								Servicios no asignados
-								@if($notAsignCommand > 0)
-								<span class="icon-badge badge-success badge badge-pill">{{ $notAsignCommand }}</span>
-								@endif
+							
+								<span class="icon-badge badge-success badge badge-pill"></span>
+								
 							</span>
 						</span>
 						<span class="menu-icon">
