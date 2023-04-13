@@ -10,7 +10,7 @@ use App\City;
 use App\UserImage;
 use App\Models\Order;
 use App\Models\Admin;
-use App\CategoryStore;
+use App\Models\CategoryStore;
 use App\Opening_times;
 use DB;
 use Validator;
@@ -98,6 +98,7 @@ class AdminController extends Controller {
 		$city = new City;
 		$cats = new CategoryStore;
 		$times = new Opening_times;
+		$user 	= new User;
 		return View($this->folder.'dashboard.setting',[
 
 			'data' 		=> User::find(Auth::user()->id),
@@ -113,7 +114,9 @@ class AdminController extends Controller {
 			'types'		=> $cats->getAll(),
 			'Update'    => true,
 			'times'     => $times->getAll(Auth::user()->id),
-			'opening_time' => $times
+			'opening_time' => $times,
+			'overview'	=> $user->overview(),
+			'currency'  => Admin::find(1)->currency
 		]);
 	}
 	

@@ -1,4 +1,4 @@
-@extends('user.layout.main')
+@extends('user.layout.main2')
 
 @section('title') Actualiza tu información @endsection
 
