@@ -30,6 +30,9 @@
     <!-- icons -->
     <link rel="stylesheet" href="{{ Asset('assets_admin/css/icons.min.css') }}" type="text/css">
 
+
+    
+
 </head>
 
 <!-- body start -->
@@ -139,7 +142,7 @@
                         <li>
                           <a href="#sidebarAuth" data-bs-toggle="collapse">
                               <i class="mdi mdi-file-multiple"></i>
-                              <span> Elementos de catalogo </span>
+                              <span> Catalogo </span>
                               <span class="menu-arrow"></span>
                           </a>
                           <div class="collapse" id="sidebarAuth">
@@ -247,6 +250,8 @@
 
     </div>
 
+
+    
 
     <!-- Vendor js -->
 
