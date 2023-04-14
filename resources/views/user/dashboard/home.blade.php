@@ -10,55 +10,22 @@
 
 
 @section('content')
-    <div class="container pull-up">
+    <div class="content-page">
+        <div class="content">
 
-        <div class="row">
-            <div class="col m-b-30">
-                <div class="card ">
-                    <div class="text-center card-body">
-                        <div class="text-success">
-                            <div class="avatar avatar-sm ">
-                                <span class="avatar-title rounded-circle badge-soft-success">
-                                    <i class="mdi mdi-chart-bar mdi-18px"></i>
-                                </span>
-                            </div>
-                            <h6 class="m-t-5 m-b-0">&nbsp;</h6>
-                        </div>
+            <!-- Start Content-->
+            <div class="container-fluid">
 
-                        <div class=" text-center">
 
-                            @if ($overview['saldos'] > 0)
-                                <!-- Saldo a favor -->
-                                <h3 style="font-size: 19px">Tienes un saldo a favor de:</h3>
-                            @else
-                                <!-- Saldo que debe -->
-                                <h3 style="font-size: 19px">Tienes un saldo deudor de:</h3>
-                            @endif
-                        </div>
-                        <div class="text-overline ">
-                            @if ($overview['saldos'] > 0)
-                                <!-- Saldo a favor -->
-                                <h1 style="color:green;">{{ $currency }}{{ number_format($overview['saldos'], 2) }} <i
-                                        class="mdi mdi-trending-up"></i></h1>
-                            @else
-                                <!-- Saldo que debe -->
-                                <?php
-                                $sal = str_replace('-', '', $overview['saldos']);
-                                ?>
-                                <h1 style="color:red;">{{ $currency }}{{ number_format($sal, 2) }} <i
-                                        class="mdi mdi-trending-down"></i> </h1>
-                            @endif
-                        </div>
-                    </div>
-                </div>
+
+
+                @include('user.dashboard.overview')
+
+                @include('user.dashboard.chart')
+
+
             </div>
         </div>
-
-        @include('user.dashboard.overview')
-
-        @include('user.dashboard.chart')
-
-
     </div>
 @endsection
 
