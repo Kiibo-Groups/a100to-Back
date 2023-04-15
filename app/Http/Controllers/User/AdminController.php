@@ -67,6 +67,8 @@ class AdminController extends Controller {
 		$user 	= new User;
 		$order = new Order;
 		$admin = new Admin;
+
+	
 			
 		return View($this->folder.'dashboard.home',[
 

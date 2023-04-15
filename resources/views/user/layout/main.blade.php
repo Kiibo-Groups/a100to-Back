@@ -12,9 +12,9 @@
     <!-- App favicon -->
 
     <link rel="shortcut icon" href="{{ Asset('assets/img/logo.png') }}" type="image/png" sizes="16x16">
-
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <!-- App css -->
-
+    <link rel="stylesheet" type="text/css" href="{{ Asset('assets/css/atmos.css') }}">
     <link rel="stylesheet" href="{{ Asset('assets_admin/css/config/default/bootstrap.min.css') }}" type="text/css"
         id="app-default-stylesheet">
 
@@ -148,7 +148,12 @@
     <script src="{{ Asset('assets_admin/libs/raphael/raphael.min.js') }}"></script>
     <!-- App js-->
     <script src="{{ Asset('assets_admin/js/app.min.js') }}"></script>
+
+    <script src="{{ Asset('assets/js/atmos.min.js?v=') }}<?php echo time(); ?>"></script>
+
     <script src="{{ Asset('assets/vendor/apexchart/apexcharts.min.js') }}"></script>
+    <!--chart data for current dashboard-->
+
 
 
 
