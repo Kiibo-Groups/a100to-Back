@@ -1,7 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"></html>
 
 <head>
+    <style>
+        #div2 {
+        max-height: 100%;
+        overflow: auto;
+    
+        }
+    </style>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" name="viewport">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -24,10 +31,6 @@
         type="text/css">
     <link rel="stylesheet" href="{{ Asset('assets_admin/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}"
         type="text/css">
-
-
-
-
 
 
 
@@ -136,7 +139,7 @@
                 <!--- Sidemenu -->
                 <div id="sidebar-menu">
 
-                    @include('user.layout.menu')
+                    @include('user.layout.menu1')
 
                 </div>
             </div>
@@ -146,6 +149,8 @@
         <!-- ============================================================== -->
         <!-- Start Page Content here -->
         <!-- ============================================================== -->
+
+       
 
         @yield('content')
 
@@ -158,12 +163,8 @@
 
 
 
-    <script src="{{ Asset('assets/vendor/daterangepicker/daterangepicker.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
-
     <script src="{{ Asset('assets/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ Asset('assets/js/atmos.min.js?v=') }}<?php echo time(); ?>"></script>
-
 
     <!-- Vendor js -->
 
@@ -186,8 +187,7 @@
     <script src="{{ Asset('assets_admin/libs/jquery-knob/jquery.knob.min.js') }}"></script>
 
     <!--Morris Chart-->
-    <script src="{{ Asset('assets_admin/libs/morris.js06/morris.min.js') }}"></script>
-    <script src="{{ Asset('assets_admin/libs/raphael/raphael.min.js') }}"></script>
+ 
     <!-- App js-->
     <script src="{{ Asset('assets_admin/js/app.min.js') }}"></script>
 
@@ -200,7 +200,7 @@
     <script>
         $(function() {
             $(".datepicker").datepicker();
-    
+
         });
 
 
