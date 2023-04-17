@@ -1,18 +1,19 @@
 <?php namespace App\Http\Controllers\User;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Auth;
-use App\Models\User;
-use App\Models\Order;
-use App\Exports\OrderExport;
-use App\Models\Admin;
 use DB;
-use Validator;
-use Redirect;
 use IMS;
+use Auth;
+use Redirect;
+use Validator;
+use App\Models\User;
+use App\Models\Admin;
+use App\Models\Order;
+use App\Http\Requests;
+use App\Exports\OrderExport;
+use Illuminate\Http\Request;
 use Excel;
+use App\Http\Controllers\Controller;
+
 class ReportController extends Controller {
 
 	public $folder  = "user/report.";
@@ -30,6 +31,7 @@ class ReportController extends Controller {
 	
 	public function report(Request $Request)
 	{
+		
 		$res = new Order;
 
 		return View($this->folder.'report',[
