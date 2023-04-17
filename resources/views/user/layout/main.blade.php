@@ -33,6 +33,7 @@
 
 
 
+
 </head>
 
 <!-- body start -->
@@ -132,7 +133,8 @@
 
     </div>
 
-
+    <script src="{{ Asset('assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ Asset('assets/js/atmos.min.js?v=') }}<?php echo time(); ?>"></script>
 
 
     <!-- Vendor js -->
@@ -149,7 +151,7 @@
     <!-- App js-->
     <script src="{{ Asset('assets_admin/js/app.min.js') }}"></script>
 
-    <script src="{{ Asset('assets/js/atmos.min.js?v=') }}<?php echo time(); ?>"></script>
+
 
     <script src="{{ Asset('assets/vendor/apexchart/apexcharts.min.js') }}"></script>
     <!--chart data for current dashboard-->

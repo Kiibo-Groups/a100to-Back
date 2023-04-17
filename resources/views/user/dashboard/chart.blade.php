@@ -1,10 +1,14 @@
+<style>
+    #chart-01 {
+  max-width: 550px;
+  margin: 35px auto;
+}
+
+</style>
 <div class="row">
     <div class="col-lg-12  m-b-30">
         <div class="card">
             <div class="card-header">
-                {{ $admin->getMonthName(6) }}
-                {{ $admin->chart(4, 1)['order'] }}
-              
                 <div class="card-title">Informe de pedido de los últimos 6 meses</div>
 
                 <div class="card-controls">
@@ -15,7 +19,7 @@
 
             </div>
             <div class="card-body">
-                <div id="chart-01"></div>
+                <div id="chart-01" ></div>
             </div>
             <div class="">
             </div>
@@ -28,16 +32,13 @@
                 </div>
             </div>
 
-            
+
         </div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
 @section('js')
-
-
     <script type="text/javascript">
-
         (function($) {
             'use strict';
 
@@ -117,8 +118,6 @@
 
 
         })(window.jQuery);
-
-
-       
+        console.log(chart);
     </script>
 @endsection

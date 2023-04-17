@@ -2,15 +2,18 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" name="viewport">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-touch-fullscreen" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <title>@yield('title')</title>
-    <link rel="icon" type="image/x-icon" href="{{ Asset('assets/img/logo.png') }}" />
-    <link rel="icon" href="{{ Asset('assets/img/logo.png') }}" type="image/png" sizes="16x16">
-  
+
+    <meta charset="utf-8" />
+    <title>Administrador de negocio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- App favicon -->
+
+    <link rel="shortcut icon" href="{{ Asset('assets/img/logo.png') }}" type="image/png" sizes="16x16">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <!-- App css -->
     <link rel="stylesheet" type="text/css" href="{{ Asset('assets/css/atmos.css') }}">
     <link rel="stylesheet" href="{{ Asset('assets_admin/css/config/default/bootstrap.min.css') }}" type="text/css"
         id="app-default-stylesheet">
@@ -27,21 +30,18 @@
     <!-- icons -->
     <link rel="stylesheet" href="{{ Asset('assets_admin/css/icons.min.css') }}" type="text/css">
 
-    @yield('css')
-    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-    <script>
-        window.OneSignal = window.OneSignal || [];
-        OneSignal.push(function() {
-            OneSignal.init({
-                appId: "4e770d1a-beba-4efe-97b0-bee51f3fea77",
-            });
-        });
-    </script>
+
+
+
 
 </head>
 
-<body class="loading "  data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": true}, "topbar": {"color": "light"}, "showRightSidebarOnPageLoad": true}'>
-    
+<!-- body start -->
+
+<body class="loading"
+    data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": true}, "topbar": {"color": "light"}, "showRightSidebarOnPageLoad": true}'>
+
+    <!-- Begin page -->
     <div id="wrapper">
 
 
@@ -134,75 +134,30 @@
     </div>
 
 
-    <script src="{{ Asset('assets/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ Asset('assets/js/atmos.min.js?v=') }}<?php echo time(); ?>"></script>
 
 
-        <!-- Vendor js -->
+    <!-- Vendor js -->
 
-        <script src="{{ Asset('assets_admin/js/vendor.min.js') }}"></script>
+    <script src="{{ Asset('assets_admin/js/vendor.min.js') }}"></script>
 
-        <!-- knob plugin -->
-    
-        <script src="{{ Asset('assets_admin/libs/jquery-knob/jquery.knob.min.js') }}"></script>
-    
-        <!--Morris Chart-->
-        <script src="{{ Asset('assets_admin/libs/morris.js06/morris.min.js') }}"></script>
-        <script src="{{ Asset('assets_admin/libs/raphael/raphael.min.js') }}"></script>
-        <!-- App js-->
-        <script src="{{ Asset('assets_admin/js/app.min.js') }}"></script>
-    
-    
-    
-        <script src="{{ Asset('assets/vendor/apexchart/apexcharts.min.js') }}"></script>
+    <!-- knob plugin -->
 
-    <script>
-        function deleteConfirm(url) {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.value) {
-                    Swal.fire(
-                        'Deleted!',
-                        'This Entry has been deleted.',
-                        'success'
-                    )
+    <script src="{{ Asset('assets_admin/libs/jquery-knob/jquery.knob.min.js') }}"></script>
 
-                    window.location = url;
-                }
-            })
-        }
+    <!--Morris Chart-->
+    <script src="{{ Asset('assets_admin/libs/morris.js06/morris.min.js') }}"></script>
+    <script src="{{ Asset('assets_admin/libs/raphael/raphael.min.js') }}"></script>
+    <!-- App js-->
+    <script src="{{ Asset('assets_admin/js/app.min.js') }}"></script>
 
-        function confirmAlert(url) {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, Do it!'
-            }).then((result) => {
-                if (result.value) {
-                    Swal.fire(
-                        'Changed!',
-                        'This Entry has been Changed.',
-                        'success'
-                    )
 
-                    window.location = url;
-                }
-            })
-        }
-    </script>
 
-    @yield('js')
+    <script src="{{ Asset('assets/vendor/apexchart/apexcharts.min.js') }}"></script>
+    <!--chart data for current dashboard-->
+
+
+
+
 
 </body>
 

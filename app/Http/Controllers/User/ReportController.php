@@ -4,9 +4,10 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
-use App\User;
-use App\Order;
+use App\Models\User;
+use App\Models\Order;
 use App\Exports\OrderExport;
+use App\Models\Admin;
 use DB;
 use Validator;
 use Redirect;
@@ -24,7 +25,7 @@ class ReportController extends Controller {
 	{					
 		$res = new User;
 		
-		return View($this->folder.'index',['data' => $res->getAll(),'form_url' => env('user').'/exportData']);
+		return View($this->folder.'index',['data' => $res->getAll(),'overview'	=> $res->overview(),'currency'  => Admin::find(1)->currency,'form_url' => env('user').'/exportData']);
 	}	
 	
 	public function report(Request $Request)
