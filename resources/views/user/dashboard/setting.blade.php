@@ -23,14 +23,10 @@
             <div  class="container-fluid">
 
                 <div class="row ">
+                  
                     <div class="col-12">
-
-
-
-
-                                          
-            
-
+                    
+                        
                         {!! Form::model($data, ['url' => [$form_url], 'files' => true, 'method' => 'POST'], ['class' => 'col s12']) !!}
 
                         @include('admin.user.form', ['type' => 'user'])

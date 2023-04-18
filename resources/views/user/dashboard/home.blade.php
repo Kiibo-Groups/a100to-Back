@@ -1,4 +1,4 @@
-@extends('user.layout.main2')
+@extends('user.layout.main')
 
 @section('title')
     Bienvenido(a) ! {{ Auth::user()->name }}
@@ -10,11 +10,11 @@
 
 
 @section('content')
-    <div class="content-page">
+    <div class="content-page" id="div2">
         <div class="content">
 
             <!-- Start Content-->
-            <div class="container-fluid">
+            <div class="container-fluid" >
 
 
                 @include('user.dashboard.overview')

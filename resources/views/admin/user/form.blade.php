@@ -3,7 +3,9 @@
 
     <div class="card py-3 m-b-30">
 
-
+        <div class="col-md-12" style="text-align: left;">
+            <b style="margin-left:20px">@yield('title')</b>
+        </div>
         <div class="card-body" style="padding-top:80px;">
 
             @if ($data->logo)

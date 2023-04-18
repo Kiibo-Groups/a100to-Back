@@ -1,16 +1,19 @@
 <?php namespace App\Http\Controllers\User;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Auth;
-use App\Models\Category;
-use App\Item;
-use App\Addon;
 use DB;
-use Validator;
-use Redirect;
 use IMS;
+use Auth;
+use Redirect;
+use Validator;
+use App\Models\Item;
+use App\Models\User;
+use App\Models\Addon;
+use App\Models\Admin;
+use App\Http\Requests;
+use App\Models\Category;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 class CategoryController extends Controller {
 
 	public $folder  = "user/category.";
@@ -22,12 +25,15 @@ class CategoryController extends Controller {
 	public function index()
 	{					
 		$res = new Category;
+		$user 	= new User;
 		
 		return View($this->folder.'index',[
 			'data' => $res->getAll(),
 			'user' => Auth::user(),
 			'name' => '',
 			'type' => 0,
+			'overview'	=> $user->overview(),
+			'currency'  => Admin::find(1)->currency,
 			'link' => env('user').'/category/']);
 	}	
 
@@ -109,6 +115,7 @@ class CategoryController extends Controller {
 			['data' => category::find($id),
 			'user' => Auth::user(),
 			'stat'  => 'edit',
+			
 			'form_url' => env('user').'/category/'.$id]
 		);
 	}

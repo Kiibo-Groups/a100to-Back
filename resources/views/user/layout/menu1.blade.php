@@ -32,13 +32,13 @@
       <div class="collapse" id="sidebarAuth">
           <ul class="nav-second-level">
               <li>
-                  <a href="auth-login.html">Categoría</a>
+                <a href="{{ Asset(env('user') . '/category') }}" class=" menu-link">Categoría</a>
               </li>
               <li>
-                  <a href="auth-register.html">Productos</a>
+                <a href="{{ Asset(env('user') . '/item') }}" class=" menu-link">Productos</a>
               </li>
               <li>
-                  <a href="auth-recoverpw.html">Complementos</a>
+                <a href="{{ Asset(env('user') . '/addon') }}" class=" menu-link">Complementos</a>
               </li>
            
           </ul>
@@ -47,9 +47,15 @@
 
 
     <li>
-        <a href="apps-calendar.html">
+        <a href="{{ Asset(env('user') . '/loyalty') }}" class=" menu-link">
             <i class="mdi mdi-calendar"></i>
             <span> Programa de lealtad </span>
+        </a>
+    </li>
+    <li>
+        <a href="{{ Asset(env('user') . '/delivery') }}" class=" menu-link">
+            <i class="mdi mdi-calendar"></i>
+            <span> Personal de entrega </span>
         </a>
     </li>
     <li>

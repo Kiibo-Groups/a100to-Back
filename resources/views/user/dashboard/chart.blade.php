@@ -1,6 +1,6 @@
 <style>
     #chart-01 {
-  max-width: 550px;
+  max-width: 750px;
   margin: 35px auto;
 }
 

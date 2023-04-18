@@ -1,15 +1,18 @@
 <?php namespace App\Http\Controllers\User;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Auth;
-use App\Addon;
-use App\Category;
 use DB;
-use Validator;
-use Redirect;
 use IMS;
+use Auth;
+use Redirect;
+use Validator;
+use App\Models\User;
+use App\Models\Addon;
+use App\Models\Admin;
+use App\Http\Requests;
+use App\Models\Category;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 class AddonController extends Controller {
 
 	public $folder  = "user/addon.";
@@ -20,7 +23,8 @@ class AddonController extends Controller {
 	*/
 	public function index()
 	{					
-		$res = new Addon;
+		$res  = new Addon;
+		$user = new User;
 		
 		return View($this->folder.'index',[
 			'data' => $res->getAll(),
@@ -28,7 +32,10 @@ class AddonController extends Controller {
 			'name' 		=> '',
 			'cate' 		=> '',
 			'category' => Category::where('store_id',Auth::user()->id)->where('type',1)->get(),
-			'c' => $this->currency()]);
+			'c' => $this->currency(),
+			'overview'	=> $user->overview(),
+			'currency'  => Admin::find(1)->currency
+		]);
 	}	
 	
 	/*

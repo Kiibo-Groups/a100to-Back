@@ -1,21 +1,24 @@
 <?php namespace App\Http\Controllers\User;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Auth;
-use App\Category;
-use App\Item;
-use App\Type;
-use App\Addon;
-use App\ItemAddon;
-use App\Text;
-use App\Exports\ItemExport;
 use DB;
-use Validator;
-use Redirect;
 use IMS;
+use Auth;
 use Excel;
+use Redirect;
+use Validator;
+use App\Models\Item;
+use App\Models\Text;
+use App\Models\Type;
+use App\Models\User;
+use App\Models\Addon;
+use App\Models\Admin;
+use App\Http\Requests;
+use App\Models\Category;
+use App\Models\ItemAddon;
+use App\Exports\ItemExport;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 class ItemController extends Controller {
 
 	public $folder  = "user/item.";
@@ -28,6 +31,7 @@ class ItemController extends Controller {
 	{					
 		$res 	= new Item;
 		$addon  = new Addon;
+		$user 	= new User;
 		
 		return View($this->folder.'index',[
 
@@ -37,7 +41,9 @@ class ItemController extends Controller {
 			'name' => '',
 			'cate' => '',
 			'category' => Category::where('store_id',Auth::user()->id)->where('type',0)->get(),
-			'assign' => new ItemAddon
+			'assign' => new ItemAddon,
+			'overview'	=> $user->overview(),
+			'currency'  => Admin::find(1)->currency
 
 			]);
 	}	

@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Auth;
+use Validator;
+use App\Models\Order;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Validator;
-use Auth;
+
 class Category extends Authenticatable
 {
     protected $table = "category";
@@ -84,6 +86,19 @@ class Category extends Authenticatable
     }
 
     //Query Scope
+
+    public function overview()
+    {
+        return [
+
+            'order'     => Order::where('store_id',Auth::user()->id)->count(),
+            'complete'  => Order::where('store_id',Auth::user()->id)->where('status',6)->count(),
+            'month'     => Order::where('store_id',Auth::user()->id)->whereDate('created_at','LIKE',date('Y-m').'%')
+                                ->count(),
+            'items'     => Item::where('store_id',Auth::user()->id)->where('status',0)->count(),
+            'saldos'    => User::find(Auth::user()->id)->saldo
+        ];
+    }
     
 
 }
