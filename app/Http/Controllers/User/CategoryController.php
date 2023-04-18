@@ -38,6 +38,7 @@ class CategoryController extends Controller {
 	}	
 
 	public function search(Request $request){
+		$user 	= new User;
 		$name = $request->get('name');
 		$type = (null !== $request->get('type')) ? $request->get('type') : 0;
 
@@ -54,6 +55,8 @@ class CategoryController extends Controller {
 			'name' => $name,
 			'user' => Auth::user(),
 			'type' => $type,
+			'overview'	=> $user->overview(),
+			'currency'  => Admin::find(1)->currency,
 			'link' => env('user').'/category/']);
 		
     }

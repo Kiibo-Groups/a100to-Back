@@ -76,6 +76,11 @@
             <ul class="list-unstyled topnav-menu float-end mb-0">
 
                 <li class="dropdown notification-list topbar-dropdown">
+                    @php
+                        $user 	= new App\Models\User;
+                        $overview = $user->overview();
+			            $currency  = App\Models\Admin::find(1)->currency;
+                    @endphp
 
                     @if ($overview['saldos'] > 0)
                         <!-- Saldo a favor -->
@@ -196,6 +201,7 @@
 
 
     <script src="{{ Asset('assets/vendor/apexchart/apexcharts.min.js') }}"></script>
+    <script src="{{ Asset('assets/vendor/sweetalert/sweetalert2.all.min.js') }}"></script>
 
     <script>
         $(function() {
