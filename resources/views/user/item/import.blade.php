@@ -6,7 +6,6 @@
 
 @section('content')
     <div class="content-page" id="div2">
-
         <div class="content">
             <!-- Start Content-->
             <div class="container-fluid">

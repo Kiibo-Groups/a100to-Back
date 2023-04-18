@@ -71,6 +71,9 @@ class Delivery extends Authenticatable
         $add->type_driver       = isset($data['type_driver']) ? $data['type_driver'] : 0;
         $add->max_range_km      = isset($data['max_range_km']) ? $data['max_range_km'] : 1;
         $add->rfc               = isset($data['rfc']) ? $data['rfc'] : '';
+        $add->external_id       = isset($data['external_id']) ? $data['external_id'] : '';
+        $add->amount_acum       = isset($data['amount_acum']) ? $data['amount_acum'] : 0;
+        $add->status_send       = isset($data['status_send']) ? $data['status_send'] : 0;
 
         if ($from == 'app') {
             $add->status = 1; // Bloqueado

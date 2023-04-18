@@ -46,12 +46,7 @@
   </li>
 
 
-    <li>
-        <a href="{{ Asset(env('user') . '/loyalty') }}" class=" menu-link">
-            <i class="mdi mdi-calendar"></i>
-            <span> Programa de lealtad </span>
-        </a>
-    </li>
+
     <li>
         <a href="{{ Asset(env('user') . '/delivery') }}" class=" menu-link">
             <i class="mdi mdi-calendar"></i>
