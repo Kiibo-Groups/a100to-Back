@@ -26,7 +26,7 @@
     <li>
       <a href="#sidebarAuth" data-bs-toggle="collapse">
           <i class="mdi mdi-file-multiple"></i>
-          <span> Catalogo </span>
+          <span> Catálogo </span>
           <span class="menu-arrow"></span>
       </a>
       <div class="collapse" id="sidebarAuth">

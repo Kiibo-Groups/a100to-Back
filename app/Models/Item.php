@@ -57,6 +57,7 @@ class Item extends Authenticatable
         $add->status            = isset($data['status']) ? $data['status'] : 0;
         $add->sort_no           = isset($data['sort_no']) ? $data['sort_no'] : 0;
         $add->nonveg            = isset($data['nonveg']) ? $data['nonveg'] : 0;
+        $add->trending            = isset($data['trending']) ? $data['trending'] : 0;
         $add->s_data            = serialize([$a,$b]);
 
 
