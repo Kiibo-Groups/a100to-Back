@@ -5,16 +5,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\NodejsServer;
 use Illuminate\Http\Request;
 use Auth;
-use App\User;
-use App\City;
-use App\Order;
-use App\OrderItem;
-use App\Delivery;
-use App\Admin;
-use App\Item;
-use App\Tables;
-use App\AppUser;
-use App\Order_staff;
+use App\Models\User;
+use App\Models\City;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\Delivery;
+use App\Models\Admin;
+use App\Models\Item;
+use App\Models\Tables;
+use App\Models\AppUser;
+use App\Models\Order_staff;
 use DB;
 use Validator;
 use Redirect;
@@ -172,6 +172,7 @@ class OrderController extends Controller {
 		$order_Ext->d_boy 		= $Request->get('d_boy');
 		$order_Ext->order_id 	= $Request->get('id');
 		$order_Ext->status 		= 3;
+		$order_Ext->external_id = 0;
 		$order_Ext->save();
 
 		// Notificamos al usuario

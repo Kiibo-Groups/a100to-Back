@@ -1,336 +1,159 @@
 @php($page = Request::segment(1))
-<style type="text/css">
-    .menu-item {
-        border-bottom: 1px solid #222222 !important;
-    }
-</style>
-<div class="admin-sidebar-brand">
-    <!-- begin sidebar branding-->
-    <!-- <img class="admin-brand-logo" src="{{ Asset('assets/img/icon.png') }}" width="40" alt="atmos Logo"> -->
-    <span class="admin-brand-content font-secondary">
-        <a href="{{ Asset(env('user') . '/home') }}" style="font-size:12px;">{{ Auth::user()->name }}</a>
-    </span>
-    <!-- end sidebar branding-->
-    <div class="ml-auto">
-        <!-- sidebar pin-->
-        <a href="#" class="admin-pin-sidebar btn-ghost btn btn-rounded-circle"></a>
-        <!-- sidebar close for mobile device-->
-        <a href="#" class="admin-close-sidebar"></a>
-    </div>
-</div>
-<div class="admin-sidebar-wrapper js-scrollbar">
-    <ul class="menu">
-        <li class="menu-item @if ($page === 'home' || $page == 'setting') active @endif">
-            <a href="#" class="open-dropdown menu-link">
-                <span class="menu-label">
-                    <span class="menu-name">Dashboard ii
-                        <span class="menu-arrow"></span>
-                    </span>
 
-                </span>
-                <span class="menu-icon">
-                    <i class="icon-placeholder mdi mdi-shape-outline "></i>
-                </span>
-            </a>
-            <!--submenu-->
-            <ul class="sub-menu">
 
-                <li class="menu-item">
-                    <a href="{{ Asset(env('user') . '/home') }}" class=" menu-link">
-                        <span class="menu-label">
-                            <span class="menu-name">Inicio</span>
-                        </span>
-                        <span class="menu-icon">
-                            <i class="icon-placeholder  mdi mdi-home">
+<ul id="side-menu">
 
-                            </i>
-                        </span>
-                    </a>
+    <li class="menu-title">MENÚ</li>
+
+
+    <li>
+        <a href="#email" data-bs-toggle="collapse">
+            <i class="mdi mdi-view-dashboard"></i>
+            <span> Dashboard </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="email">
+            <ul class="nav-second-level">
+                <li>
+                    <a href="{{ Asset(env('user') . '/home') }}">Inicio</a>
                 </li>
-
-                <li class="menu-item ">
-                    <a href="{{ Asset(env('user') . '/setting') }}" class=" menu-link">
-                        <span class="menu-label">
-                            <span class="menu-name">Configuración</span>
-                        </span>
-                        <span class="menu-icon">
-                            <i class="icon-placeholder  mdi mdi-message-settings-variant">
-
-                            </i>
-                        </span>
-                    </a>
+                <li>
+                    <a href="{{ Asset(env('user') . '/setting') }}" class=" menu-link">Configuración</a>
                 </li>
             </ul>
-        </li>
+        </div>
 
-        @if (Auth::user()->tables_opt == 0)
-            <!-- Asignacion de mesas -->
-            <li class="menu-item @if ($page === 'tables') active @endif">
-                <a href="{{ Asset(env('user') . '/tables') }}" class="menu-link">
-                    <span class="menu-label"><span class="menu-name">Asignación de mesas</span></span>
-                    <span class="menu-icon">
-                        <i class="mdi mdi-table-column-plus-after"></i>
-                    </span>
-                </a>
-            </li>
-            <!-- Asignacion de mesas -->
-        @endif
-
-        <li class="menu-item @if ($page === 'category' || $page == 'item' || $page == 'addon') active @endif">
-            <a href="#" class="open-dropdown menu-link">
-                <span class="menu-label">
-                    <span class="menu-name">Elementos de catalogo
-                        <span class="menu-arrow"></span>
-                    </span>
-
-                </span>
-                <span class="menu-icon">
-                    <i class="icon-placeholder mdi mdi-tag"></i>
-                </span>
-            </a>
-            <!--submenu-->
-
-            <ul class="sub-menu">
-
-                <li class="menu-item">
-                    <a href="{{ Asset(env('user') . '/category') }}" class=" menu-link">
-                        <span class="menu-label">
-                            <span class="menu-name">Categoría</span>
-                        </span>
-                        <span class="menu-icon">
-                            <i class="icon-placeholder  mdi mdi-tag">
-
-                            </i>
-                        </span>
-                    </a>
+    <li>
+        <a href="#sidebarAuth" data-bs-toggle="collapse">
+            <i class="mdi mdi-file-multiple"></i>
+            <span> Catálogo </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="sidebarAuth">
+            <ul class="nav-second-level">
+                <li>
+                    <a href="{{ Asset(env('user') . '/category') }}" class=" menu-link">Categoría</a>
+                </li>
+                <li>
+                    <a href="{{ Asset(env('user') . '/item') }}" class=" menu-link">Productos</a>
+                </li>
+                <li>
+                    <a href="{{ Asset(env('user') . '/addon') }}" class=" menu-link">Complementos</a>
                 </li>
 
-                <li class="menu-item ">
-                    <a href="{{ Asset(env('user') . '/item') }}" class=" menu-link">
-                        <span class="menu-label">
-                            <span class="menu-name">Productos</span>
-                        </span>
-                        <span class="menu-icon">
-                            <i class="icon-placeholder  mdi mdi-tag">
-
-                            </i>
-                        </span>
-                    </a>
-                </li>
-                @if (Auth::user()->subtype == 0)
-                    <li class="menu-item">
-                        <a href="{{ Asset(env('user') . '/addon') }}" class=" menu-link">
-                            <span class="menu-label">
-                                <span class="menu-name">Complementos</span>
-                            </span>
-                            <span class="menu-icon">
-                                <i class="icon-placeholder  mdi mdi-folder-plus"></i>
-                            </span>
-                        </a>
-                    </li>
-                @endif
             </ul>
-        </li>
+        </div>
+    </li>
 
-        <!-- Programa de lealtas -->
-        <li class="menu-item @if ($page === 'delivery') active @endif">
-            <a href="{{ Asset(env('user') . '/loyalty') }}" class="menu-link">
-                <span class="menu-label">
-                    <span class="menu-name">Programa de lealtad</span>
-                </span>
-                <span class="menu-icon">
-                    <i class="mdi mdi-chart-bar"></i>
-                </span>
-            </a>
-        </li>
-        <!-- Programa de lealtas -->
 
-        <!-- Agregado de Staff -->
-        <li class="menu-item @if ($page === 'delivery') active @endif">
-            <a href="{{ Asset(env('user') . '/delivery') }}" class="menu-link">
-                <span class="menu-label">
-                    <span class="menu-name">personal de entrega</span>
-                </span>
-                <span class="menu-icon">
-                    <i class="mdi mdi-account-clock"></i>
-                </span>
-            </a>
-        </li>
-        <!-- Agregado de Staff -->
 
-        <li class="menu-item @if ($page === 'order') active @endif">
-            <a href="#" class="open-dropdown menu-link">
-                <span class="menu-label">
-                    <span class="menu-name">Gestionar pedidos
+    <li>
+        <a href="{{ Asset(env('user') . '/delivery') }}" class=" menu-link">
+            <i class="mdi mdi-calendar"></i>
+            <span> Personal de entrega </span>
+        </a>
+    </li>
+    <li>
+        <a href="#sidebarExpages" data-bs-toggle="collapse">
 
-                        <?php
-$cOrder = DB::table('orders')->where('store_id',Auth::user()->id)->where('status',0)->count();
-$rOrder = DB::table('orders')->where('store_id',Auth::user()->id)->where('status',1)->count();
-$rrOrder = DB::table('orders')->where('store_id',Auth::user()->id)->where('status',1.5)->count();
-$rrsOrder = DB::table('orders')->where('store_id',Auth::user()->id)->where('status',4)->count();
-if($cOrder > 0)
-{
-?>
+            <i class="icon-placeholder mdi mdi-cart"></i>
+            <?php
+                    $cOrder = DB::table('orders')->where('store_id',Auth::user()->id)->where('status',0)->count();
+                    $rOrder = DB::table('orders')->where('store_id',Auth::user()->id)->where('status',1)->count();
+                    $rrOrder = DB::table('orders')->where('store_id',Auth::user()->id)->where('status',1.5)->count();
+                    $rrsOrder = DB::table('orders')->where('store_id',Auth::user()->id)->where('status',4)->count();
+                    if($cOrder > 0)
+                        {
+                    ?>
 
-                        <span class="icon-badge badge-success badge badge-pill">{{ $cOrder }}</span>
+            <span class="badge bg-success float-end" style="margin-right: 20px">{{ $cOrder }}</span>
 
-                        <?php } ?>
+            <?php } ?>
 
-                        <span class="menu-arrow"></span>
-                    </span>
-
-                </span>
-                <span class="menu-icon">
-                    <i class="icon-placeholder mdi mdi-cart"></i>
-                </span>
-            </a>
-            <!--submenu-->
-            <ul class="sub-menu">
-
-                <li class="menu-item">
+            <span> Pedidos </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="sidebarExpages">
+            <ul class="nav-second-level">
+                <li>
                     <a href="{{ Asset('order?status=0') }}" class=" menu-link">
-                        <span class="menu-label">
-                            <span class="menu-name">Nuevos pedidos
-
-                                @if ($cOrder > 0)
-                                    <span class="icon-badge badge-success badge badge-pill">{{ $cOrder }}</span>
-                                @endif
-
-                            </span>
-                        </span>
-                        <span class="menu-icon">
-                            <i class="icon-placeholder  mdi mdi-cart">
-
-                            </i>
-                        </span>
+                        @if ($cOrder > 0)
+                            <span class="badge bg-success float-end"
+                                style="margin-right: 20px">{{ $cOrder }}</span>
+                        @endif
+                        Nuevos
                     </a>
                 </li>
-
-
-                <li class="menu-item">
+                <li>
                     <a href="{{ Asset('order?status=1') }}" class=" menu-link">
-                        <span class="menu-label">
-                            <span class="menu-name">Ordenes en ejecución
-
-                                @if ($rOrder > 0)
-                                    <span class="icon-badge badge-success badge badge-pill">{{ $rOrder }}</span>
-                                @endif
-
-                            </span>
-                        </span>
-                        <span class="menu-icon">
-                            <i class="icon-placeholder  mdi mdi-camera-control">
-
-                            </i>
-                        </span>
+                        @if ($rOrder > 0)
+                            <span class="badge bg-success float-end"
+                                style="margin-right: 20px">{{ $rOrder }}</span>
+                        @endif
+                        En ejecución
                     </a>
                 </li>
-
-                <li class="menu-item">
+                <li>
                     <a href="{{ Asset('order?status=1.5') }}" class=" menu-link">
-                        <span class="menu-label">
-                            <span class="menu-name">En espera de repartidor
-
-                                @if ($rrOrder > 0)
-                                    <span class="icon-badge badge-success badge badge-pill">{{ $rrOrder }}</span>
-                                @endif
-
-                            </span>
-                        </span>
-                        <span class="menu-icon">
-                            <i class="icon-placeholder  mdi mdi-camera-control">
-
-                            </i>
-                        </span>
+                        @if ($rrOrder > 0)
+                            <span class="badge bg-success float-end"
+                                style="margin-right: 20px">{{ $rrOrder }}</span>
+                        @endif
+                        En espera
                     </a>
                 </li>
-
-
-                <li class="menu-item">
+                <li>
                     <a href="{{ Asset('order?status=4') }}" class=" menu-link">
-                        <span class="menu-label">
-                            <span class="menu-name">Pedidos en Ruta
-
-                                @if ($rrsOrder > 0)
-                                    <span class="icon-badge badge-success badge badge-pill">{{ $rrsOrder }}</span>
-                                @endif
-
-                            </span>
-                        </span>
-                        <span class="menu-icon">
-                            <i class="icon-placeholder  mdi mdi-camera-control">
-
-                            </i>
-                        </span>
+                        @if ($rrsOrder > 0)
+                            <span class="badge bg-success float-end"
+                                style="margin-right: 20px">{{ $rrsOrder }}</span>
+                        @endif
+                        En Ruta
                     </a>
                 </li>
-
-
-                <li class="menu-item">
+                <li>
                     <a href="{{ Asset('order?status=2') }}" class=" menu-link">
-                        <span class="menu-label">
-                            <span class="menu-name">Órdenes canceladas</span>
-                        </span>
-                        <span class="menu-icon">
-                            <i class="icon-placeholder  mdi mdi-cancel">
-
-                            </i>
-                        </span>
+                                            
+                        Canceladas
                     </a>
                 </li>
-
-                <li class="menu-item">
+                <li>
                     <a href="{{ Asset('order?status=5') }}" class=" menu-link">
-                        <span class="menu-label">
-                            <span class="menu-name">Órdenes completadas</span>
-                        </span>
-                        <span class="menu-icon">
-                            <i class="icon-placeholder  mdi mdi-check-all">
-
-                            </i>
-                        </span>
+                                            
+                        Completadas
                     </a>
                 </li>
             </ul>
-        </li>
+        </div>
+    </li>
 
 
-        @if (Auth::user()->d_repo == 0)
-            <li class="menu-item @if ($page === 'report') active @endif">
-                <a href="{{ Asset('report') }}" class="menu-link">
-                    <span class="menu-label"><span class="menu-name">Reportes</span></span>
-                    <span class="menu-icon">
-                        <i class="icon-placeholder mdi mdi-file"></i>
-                    </span>
-                </a>
-            </li>
-        @else
-            <li class="menu-item @if ($page === 'report') active @endif" hidden>
-                <a href="{{ Asset('report') }}" class="menu-link">
-                    <span class="menu-label"><span class="menu-name">Reportes</span></span>
-                    <span class="menu-icon">
-                        <i class="icon-placeholder mdi mdi-file"></i>
-                    </span>
-                </a>
-            </li>
-        @endif
-
-
-        <li class="menu-item">
-            <a href="{{ Asset(env('user') . '/logout') }}" class="menu-link">
-                <span class="menu-label"><span class="menu-name">Cerrar sesión</span></span>
-                <span class="menu-icon">
-                    <i class="icon-placeholder mdi mdi-logout"></i>
-                </span>
+    @if (Auth::user()->d_repo == 0)
+        <li>
+            <a href="{{ Asset('report') }}" class=" menu-link">
+                <i class="icon-placeholder mdi mdi-file"></i>
+                <span> Reportes </span>
             </a>
         </li>
+    @else
+        <li hidden>
+            <a href="{{ Asset('report') }}" class=" menu-link">
+                <i class="icon-placeholder mdi mdi-file"></i>
+                <span> Reportes </span>
+            </a>
+        </li>
+    @endif
 
-    </ul>
-</div>
-<script>
-    OneSignal.push(function() {
-        OneSignal.sendTags({
-            store_id: '{{ Auth::user()->id }}'
-        });
-    });
-</script>
+
+
+    <li class="menu-title mt-2">USUARIO</li>
+    <li>
+        <a href="{{ Asset(env('user') . '/logout') }}" class="menu-link">
+            <i class="icon-placeholder mdi mdi-logout"></i>
+            <span> Cerrar sesión </span>
+        </a>
+    </li>
+
+
+
+</ul>

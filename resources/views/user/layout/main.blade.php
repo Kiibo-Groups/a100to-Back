@@ -144,7 +144,7 @@
                 <!--- Sidemenu -->
                 <div id="sidebar-menu">
 
-                    @include('user.layout.menu1')
+                    @include('user.layout.menu')
 
                 </div>
             </div>
@@ -167,8 +167,17 @@
     </div>
 
 
-
     <script src="{{ Asset('assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ Asset('assets/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script src="{{ Asset('assets/vendor/popper/popper.js') }}"></script>
+    <script src="{{ Asset('assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ Asset('assets/vendor/select2/js/select2.full.min.js') }}"></script>
+    <script src="{{ Asset('assets/vendor/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
+ 
+
+ 
+
+  
     <script src="{{ Asset('assets/js/atmos.min.js?v=') }}<?php echo time(); ?>"></script>
 
     <!-- Vendor js -->
