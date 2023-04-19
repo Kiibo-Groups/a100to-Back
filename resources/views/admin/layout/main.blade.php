@@ -16,6 +16,10 @@
     <title>@yield('title')</title>
     <link rel="icon" type="image/x-icon" href="{{ Asset('assets/img/logo.png') }}" />
     <link rel="icon" href="{{ Asset('assets/img/logo.png') }}" type="image/png" sizes="16x16">
+
+
+
+    
     <!-- Plugins css -->
     <link rel="stylesheet" href="{{ Asset('assets_admin/libs/spectrum-colorpicker2/spectrum.min.css') }}"
         type="text/css">
@@ -102,7 +106,7 @@
 
                     @include('admin.layout.menu')
 
-                </div>
+                </div> </section>
             </div>
         </div>
         <!-- Left Sidebar End -->
@@ -132,6 +136,11 @@
     <!-- Vendor js -->
     <script src="{{ Asset('assets_admin/js/vendor.min.js') }}"></script>
     <!-- Plugins js-->
+
+
+
+
+    
     <script src="{{ Asset('assets_admin/libs/flatpickr/flatpickr.min.js') }}"></script>
     <script src="{{ Asset('assets_admin/libs/spectrum-colorpicker2/spectrum.min.js') }}"></script>
     <script src="{{ Asset('assets_admin/libs/clockpicker/bootstrap-clockpicker.min.js') }}"></script>
@@ -144,6 +153,10 @@
     <script src="{{ Asset('assets_admin/js/app.min.js') }}"></script>
     <script src="{{ Asset('assets/vendor/apexchart/apexcharts.min.js') }}"></script>
     <script src="{{ Asset('assets/vendor/sweetalert/sweetalert2.all.min.js') }}"></script>
+
+
+
+
     <script>
         function deleteConfirm(url) {
             Swal.fire({
