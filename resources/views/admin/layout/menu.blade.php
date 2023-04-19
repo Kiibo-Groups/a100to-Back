@@ -1,6 +1,69 @@
 @inject('admin', 'App\Models\Admin')
 @php($page = Request::segment(2))
 
+
+
+
+<ul id="side-menu">
+
+    <li class="menu-title">MENÚ</li>
+
+
+    <li>
+        <a href="#email" data-bs-toggle="collapse">
+            <i class="mdi mdi-view-dashboard"></i>
+            <span> Dashboard </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="email">
+            <ul class="nav-second-level">
+                <li>
+                    <a href="{{ Asset(env('admin') . '/home') }}">Inicio</a>
+                </li>
+                <li>
+                    <a href="{{ Asset(env('admin') . '/setting') }}" class=" menu-link">Configuración</a>
+                </li>
+            </ul>
+        </div>
+
+
+
+
+
+   
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <style type="text/css">
 	.menu-item{
 		border-bottom: 1px solid #0b394f !important;
