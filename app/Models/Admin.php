@@ -122,7 +122,20 @@ class Admin extends Authenticatable
        	$add->username 			= isset($data['username']) ? $data['username'] : null;
        	$add->name 				= isset($data['name']) ? $data['name'] : null;
        	$add->perm 				= isset($data['perm']) ? implode(",", $data['perm']) : null;
-		$add->city_id           = isset($data['city_id']) ? $data['city_id'] : 0;
+		$add->city_id           = isset($data['city_id']) ? $data['city_id'] : 0; 
+		$add->city_notify       = isset($data['city_notify']) ? $data['city_notify'] : 0; 
+		$add->costs_ship        = isset($data['costs_ship']) ? $data['costs_ship'] :0 ; 
+		$add->c_type            = isset($data['c_type']) ? $data['c_type'] :0 ; 
+		$add->c_value           = isset($data['c_value']) ? $data['c_value'] :0 ; 
+		$add->comm_stripe       = isset($data['comm_stripe']) ? $data['c_value'] :0 ; 
+		$add->comm_fijo_stripe  = isset($data['comm_fijo_stripe']) ? $data['comm_fijo_stripe'] :0 ; 
+		$add->min_distance      = isset($data['min_distance']) ? $data['min_distance'] :0 ; 
+		$add->max_distance_staff      = isset($data['max_distance_staff']) ? $data['max_distance_staff'] :0 ; 
+		$add->min_value         = isset($data['min_value']) ? $data['min_value'] :0 ; 
+		$add->s_data            = isset($data['s_data']) ? $data['s_data'] :0 ; 
+		$add->ApiKey_google     = isset($data['ApiKey_google']) ? $data['ApiKey_google'] :'' ; 
+		$add->send_terminal     = isset($data['send_terminal']) ? $data['send_terminal'] :0 ; 
+		$add->max_cash          = isset($data['max_cash']) ? $data['max_cash'] :0 ; 
 
         if(isset($data['password']))
         {

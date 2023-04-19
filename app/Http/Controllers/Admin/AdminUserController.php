@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Admin;
-use App\City;
+use App\Models\City;
 use DB;
 use Illuminate\Support\Facades\Redirect as FacadesRedirect;
 use Validator;
