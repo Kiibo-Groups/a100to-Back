@@ -2,8 +2,6 @@
 @php($page = Request::segment(2))
 
 
-
-
 <ul id="side-menu">
 
     <li class="menu-title">MENÚ</li>

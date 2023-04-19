@@ -1,149 +1,136 @@
 <!DOCTYPE html>
-<html lang="en"></html>
+<html lang="en">
+
 <head>
-    <style>
-        #div2 {
-        max-height: 100%;
-        overflow: auto;
-    
-        }
-    </style>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" name="viewport">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>@yield('title')</title>
-    <link rel="icon" type="image/x-icon" href="{{ Asset('assets/img/logo.png') }}" />
-    <link rel="icon" href="{{ Asset('assets/img/logo.png') }}" type="image/png" sizes="16x16">
-    <!-- Plugins css -->
-    <link rel="stylesheet" href="{{ Asset('assets_admin/libs/spectrum-colorpicker2/spectrum.min.css') }}"
-        type="text/css">
-    <link rel="stylesheet" href="{{ Asset('assets_admin/libs/flatpickr/flatpickr.min.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ Asset('assets_admin/libs/clockpicker/bootstrap-clockpicker.min.css') }}"
-        type="text/css">
-    <link rel="stylesheet" href="{{ Asset('assets_admin/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}"
-        type="text/css">
-    <link rel="stylesheet" href="{{ Asset('assets_admin/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}"
-        type="text/css">
-
-    <link rel="stylesheet" type="text/css" href="{{ Asset('assets/css/atmos.css') }}">
-    <link rel="stylesheet" href="{{ Asset('assets_admin/css/config/default/bootstrap.min.css') }}" type="text/css"
-        id="app-default-stylesheet">
-
-    <link rel="stylesheet" href="{{ Asset('assets_admin/css/config/default/app.min.css') }}" type="text/css"
-        id="bs-default-stylesheet">
-
-    <link rel="stylesheet" href="{{ Asset('assets_admin/css/config/default/bootstrap-dark.min.css') }}" type="text/css"
-        id="bs-dark-stylesheet" disabled="disabled">
-
-    <link rel="stylesheet" href="{{ Asset('assets_admin/css/config/default/app-dark.min.css') }}" type="text/css"
-        id="app-dark-stylesheet" disabled="disabled">
-    <!-- icons -->
-    <link rel="stylesheet" href="{{ Asset('assets_admin/css/icons.min.css') }}" type="text/css">
+    <link rel="icon" type="image/x-icon" href="{{Asset('assets/img/logo.png') }}" />
+    <link rel="icon" href="{{Asset('assets/img/logo.png')}}" type="image/png" sizes="16x16">
+    <link rel="stylesheet" href="{{Asset('assets/vendor/pace/pace.css')}}">
+    <script src="{{Asset('assets/vendor/pace/pace.min.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{Asset('assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{Asset('assets/vendor/jquery-scrollbar/jquery.scrollbar.css')}}">
+    <link rel="stylesheet" href="{{Asset('assets/vendor/select2/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{Asset('assets/vendor/jquery-ui/jquery-ui.min.css')}}">
+    <link rel="stylesheet" href="{{Asset('assets/vendor/daterangepicker/daterangepicker.css')}}">
+    <link rel="stylesheet" href="{{Asset('assets/vendor/timepicker/bootstrap-timepicker.min.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Hind+Vadodara:400,500,600" rel="stylesheet">
+    <link rel="stylesheet" href="{{Asset('assets/fonts/jost/jost.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{Asset('assets/fonts/materialdesignicons/materialdesignicons.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{Asset('assets/css/atmos.css?v=')}}<?php echo time(); ?>">
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
     @yield('css')
 
 
 </head>
 
-<body class="loading "
-    data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": true}, "topbar": {"color": "light"}, "showRightSidebarOnPageLoad": true}'>
-   
-    <div id="wrapper">
+<body class="sidebar-pinned ">
+    <aside class="admin-sidebar">
+
+        @include('admin.layout.menu')
 
 
-        <!-- Topbar Start -->
-        <div class="navbar-custom">
-      
-            <!-- LOGO -->
-            <div class="logo-box">
-                <a href="/home" class="logo logo-light text-center">
-                    <span class="logo-sm">
-                        A100TO
-                    </span>
-                    <span class="logo-lg">
-                        A100TO
-                    </span>
-                </a>
-                <a href="/home" class="logo logo-dark text-center">
-                    <span class="logo-sm">
-                        A100TO
-                    </span>
-                    <span class="logo-lg" style="font-size: 18px">
-                        A100TO
-                    </span>
-                </a>
+    </aside>
+    <main class="admin-main">
+        <header class="admin-header">
+
+            @include('admin.layout.header')
+
+        </header>
+
+        <section class="admin-content">
+            <div class="bg-dark m-b-30">
+                <div class="container">
+                    <div class="row p-b-60 p-t-60">
+                        <div class="col-md-10 mx-auto text-center text-white p-b-30">
+
+                            @if(Request::segment(3))
+
+                            <h1 style="text-align: left;text-transform: uppercase;font-size: 22px;font-weight: 900">@yield('title')</h1>
 
 
-            </div>
+                            @else
 
-            <ul class="list-unstyled topnav-menu topnav-menu-left mb-0">
-                <li>
-                    <button class="button-menu-mobile disable-btn waves-effect">
-                        <i class="fe-menu"></i>
-                    </button>
-                </li>
-                <li>
-                    <h4 class="page-title-main"> Bienvenido(a) ! {{ Auth::guard('admin')->user()->name }} </h4>
-                </li>
-            </ul>
+                            <h1 style="text-align: left;margin-left: -8%;text-transform: uppercase;font-size: 22px;font-weight: 900">@yield('title')</h1>
 
-            <div class="clearfix"></div>
 
-        </div>
-        <!-- end Topbar -->
+                            @endif
 
-        <!-- ========== Left Sidebar Start ========== -->
-        <div class="left-side-menu">
-            <div class="h-100" data-simplebar>
-                <!--- Sidemenu -->
-                <div id="sidebar-menu">
+                            @if(Session::has('error'))
+                            <div class="row" style="text-align: left">
+                                <div class="col-md-1">&nbsp;</div>
+                                <div class="col-md-8" style="margin-left: 2%;margin-top: 2%">
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <strong>ERROR : </strong> {{ Session::get('error') }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
 
-                    @include('admin.layout.menu')
+                            @if(Session::has('message'))
+                            <div class="row" style="text-align: left">
+                                <div class="col-md-1">&nbsp;</div>
+                                <div class="col-md-8" style="margin-left: 2%;margin-top: 2%">
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>SUCCESS : </strong> {{ Session::get('message') }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
 
+                            @if ($errors->any())
+
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                    <li style="color:white">{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- Left Sidebar End -->
 
-        <!-- ============================================================== -->
-        <!-- Start Page Content here -->
-        <!-- ============================================================== -->
+            @yield('content')
 
-       
-
-        @yield('content')
-
-        <!-- ============================================================== -->
-        <!-- End Page content -->
-        <!-- ============================================================== -->
+            </div>
+            </div>
+            </div>
+        </section>
+    </main>
 
 
-    </div>
+    <script src="{{Asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{Asset('assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{Asset('assets/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script src="{{Asset('assets/vendor/popper/popper.js') }}"></script>
+    <script src="{{Asset('assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{Asset('assets/vendor/select2/js/select2.full.min.js') }}"></script>
+    <script src="{{Asset('assets/vendor/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
+    <script src="{{Asset('assets/vendor/listjs/listjs.min.js') }}"></script>
+    <script src="{{Asset('assets/vendor/moment/moment.min.js') }}"></script>
+    <script src="{{Asset('assets/vendor/daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{Asset('assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{Asset('assets/vendor/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+    <script src="{{Asset('assets/js/atmos.min.js') }}"></script>
+    <!--page specific scripts for demo-->
 
-    <script src="{{ Asset('assets/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/popper/popper.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/select2/js/select2.full.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
-    <script src="{{ Asset('assets/js/atmos.min.js?v=') }}<?php echo time(); ?>"></script>
-    <!-- Vendor js -->
-    <script src="{{ Asset('assets_admin/js/vendor.min.js') }}"></script>
-    <!-- Plugins js-->
-    <script src="{{ Asset('assets_admin/libs/flatpickr/flatpickr.min.js') }}"></script>
-    <script src="{{ Asset('assets_admin/libs/spectrum-colorpicker2/spectrum.min.js') }}"></script>
-    <script src="{{ Asset('assets_admin/libs/clockpicker/bootstrap-clockpicker.min.js') }}"></script>
-    <script src="{{ Asset('assets_admin/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
-    <!-- Init js-->
-    <script src="{{ Asset('assets_admin/js/pages/form-pickers.init.js') }}"></script>
-    <!-- knob plugin -->
-    <script src="{{ Asset('assets_admin/libs/jquery-knob/jquery.knob.min.js') }}"></script>
-    <!-- App js-->
-    <script src="{{ Asset('assets_admin/js/app.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/apexchart/apexcharts.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/sweetalert/sweetalert2.all.min.js') }}"></script>
+
+    <!--Additional Page includes-->
+    <!--chart data for current dashboard-->
+    <script src="{{Asset('assets/js/dashboard-05.js') }}"></script>
+    <script src="{{Asset('assets/vendor/sweetalert/sweetalert2.all.min.js') }}"></script>
+
     <script>
         function deleteConfirm(url) {
             Swal.fire({

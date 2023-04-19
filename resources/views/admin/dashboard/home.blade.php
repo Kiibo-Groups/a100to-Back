@@ -1,4 +1,4 @@
-@extends('admin.layout.main2')
+@extends('admin.layout.main')
 
 @section('title')
     Bienvenido(a) ! {{ Auth::guard('admin')->user()->name }}

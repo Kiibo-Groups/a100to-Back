@@ -77,8 +77,8 @@ class Admin extends Authenticatable
 		$update->costs_ship 	    = isset($data['costs_ship']) ? $data['costs_ship'] : 0;
 		$update->c_type 			= isset($data['c_type']) ? $data['c_type'] : 0;
 		$update->c_value 			= isset($data['c_value']) ? $data['c_value'] : 0;
-		$update->t_type_comm		= isset($data['t_type_comm']) ? $data['t_type_comm'] : 0;
-		$update->t_value_comm    	= isset($data['t_value_comm']) ? $data['t_value_comm'] : 0;
+		//$update->t_type_comm		= isset($data['t_type_comm']) ? $data['t_type_comm'] : 0; // No hay campo en la BD
+		//$update->t_value_comm    	= isset($data['t_value_comm']) ? $data['t_value_comm'] : 0;
 		$update->min_distance       = isset($data['min_distance']) ? $data['min_distance'] : 0;
 		$update->max_distance_staff = isset($data['max_distance_staff']) ? $data['max_distance_staff'] : 0;
         $update->min_value          = isset($data['min_value']) ? $data['min_value'] : 0;
@@ -90,8 +90,8 @@ class Admin extends Authenticatable
 		$update->comm_stripe   	    = isset($data['comm_stripe']) ? $data['comm_stripe'] : null;
 		$update->send_terminal      = isset($data['send_terminal']) ? $data['send_terminal'] : 0;
 		$update->max_cash 			= isset($data['max_cash']) ? $data['max_cash'] : 0;
-		$update->v_count 		    = isset($data['v_count']) ? $data['v_count'] : 0;
-		$update->v_value 		    = isset($data['v_value']) ? $data['v_value'] : 0;
+		//$update->v_count 		    = isset($data['v_count']) ? $data['v_count'] : 0;
+		//$update->v_value 		    = isset($data['v_value']) ? $data['v_value'] : 0;
 		$update->s_data 			= serialize($a);
 
 		if(isset($data['new_password']))
