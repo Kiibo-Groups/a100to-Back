@@ -6,7 +6,6 @@
 
     <li class="menu-title">MENÚ</li>
 
-
     <li>
         <a href="#email" data-bs-toggle="collapse">
             <i class="mdi mdi-view-dashboard"></i>
@@ -21,20 +20,18 @@
                 <li>
                     <a href="{{ Asset(env('admin') . '/setting') }}" class=" menu-link">Configuración</a>
                 </li>
+				<li>
+                    <a href="{{ Asset(env('admin') . '/category') }}" class=" menu-link">Categorias</a>
+                </li>
+				<li>
+                    <a href="{{ Asset(env('admin') . '/text/add') }}" class=" menu-link">Texto de la aplicación</a>
+                </li>
+				<li>
+                    <a href="{{ Asset(env('admin') .'/page/add') }}" class=" menu-link">Páginas de aplicaciones</a>
+                </li>
+
             </ul>
         </div>
-
-
-
-
-
-   
-
-
-
-
-
-
 </ul>
 
 

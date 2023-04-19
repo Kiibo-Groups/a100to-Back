@@ -15,3 +15,5 @@ yarn-error.log
 /.idea
 /.vscode
 /public/uploads/item
+/public/uploads/admin
+

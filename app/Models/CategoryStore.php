@@ -44,9 +44,9 @@ class CategoryStore extends Authenticatable
         $add                = $type === 'add' ? new CategoryStore : CategoryStore::find($type);
         $add->name          = isset($data['name']) ? $data['name'] : null;
         $add->status        = isset($data['status']) ? $data['status'] : null;
-        $add->type_cat      = isset($data['type_cat']) ? $data['type_cat'] : 0;
-        $add->id_cp         = isset($data['id_cp']) ? $data['id_cp'] : 0;
-        $add->id_c          = isset($data['id_c']) ? $data['id_c'] : 0;
+        //$add->type_cat      = isset($data['type_cat']) ? $data['type_cat'] : 0; No esta el campo en la BD
+        //$add->id_cp         = isset($data['id_cp']) ? $data['id_cp'] : 0;
+        //$add->id_c          = isset($data['id_c']) ? $data['id_c'] : 0;
         $add->sort_no       = isset($data['sort_no']) ? $data['sort_no'] : 0;
         if(isset($data['img']))
         {
@@ -141,17 +141,20 @@ class CategoryStore extends Authenticatable
 
     public function getCatP()
     {
-        return CategoryStore::where('type_cat',0)->orderBy('sort_no','ASC')->get();
+        //return CategoryStore::where('type_cat',0)->orderBy('sort_no','ASC')->get(); // se quita no existe el campo "type_cat"
+        return CategoryStore::orderBy('sort_no','ASC')->get();
     }
 
     public function getCatC()
     {
-        return CategoryStore::where('type_cat',1)->orderBy('sort_no','ASC')->get();
+        //return CategoryStore::where('type_cat',1)->orderBy('sort_no','ASC')->get();
+        return CategoryStore::orderBy('sort_no','ASC')->get();
     }
 
     public function getCats()
     {
-        return CategoryStore::where('type_cat',2)->orderBy('sort_no','ASC')->get();
+        //return CategoryStore::where('type_cat',2)->orderBy('sort_no','ASC')->get();
+        return CategoryStore::orderBy('sort_no','ASC')->get();
     }
 
     public function getCatID($id)
