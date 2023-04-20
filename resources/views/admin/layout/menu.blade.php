@@ -53,6 +53,19 @@
         </li>
     @endif
     <!-- SubCuentas -->
+
+            <!-- Banners -->
+            @if ($admin->hasPerm('Banners'))
+        <li>
+            <a href="{{ Asset(env('admin') . '/banner') }}" class=" menu-link">
+                <i class="mdi mdi-calendar"></i>
+                <span> Banners </span>
+            </a>
+        </li>
+        @endif
+        <!-- Banners -->
+
+
 </ul>
 
 
