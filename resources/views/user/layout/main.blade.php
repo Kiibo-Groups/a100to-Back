@@ -91,7 +91,12 @@
                         </div>
                     @else
                         <!-- Saldo que debe -->
-                        <div class="nav-link "> Tienes un saldo deudor de: </div>
+                  
+                        <div class="nav-link "> <b style="font-size: 16px; color:black">Tienes un saldo deudor de:</b>
+                            <span
+                                style="color:red; font-size: 18px;">{{ $currency }}{{ number_format($overview['saldos'], 2) }}
+                                <i class="mdi mdi-trending-up"></i></span>
+                        </div>
                     @endif
 
                 </li>
@@ -173,12 +178,9 @@
     <script src="{{ Asset('assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ Asset('assets/vendor/select2/js/select2.full.min.js') }}"></script>
     <script src="{{ Asset('assets/vendor/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
- 
-
- 
-
-  
     <script src="{{ Asset('assets/js/atmos.min.js?v=') }}<?php echo time(); ?>"></script>
+
+    
 
     <!-- Vendor js -->
 
@@ -195,20 +197,10 @@
     <!-- Init js-->
 
     <script src="{{ Asset('assets_admin/js/pages/form-pickers.init.js') }}"></script>
-
     <!-- knob plugin -->
-
     <script src="{{ Asset('assets_admin/libs/jquery-knob/jquery.knob.min.js') }}"></script>
-
-    <!--Morris Chart-->
- 
     <!-- App js-->
     <script src="{{ Asset('assets_admin/js/app.min.js') }}"></script>
-
-
-
-
-
     <script src="{{ Asset('assets/vendor/apexchart/apexcharts.min.js') }}"></script>
     <script src="{{ Asset('assets/vendor/sweetalert/sweetalert2.all.min.js') }}"></script>
 

@@ -116,6 +116,7 @@
                                                     @endif
                                                 </td>
                                                 <td style="text-align: right">
+                                                    <div class="btn-group" role="group">
 
                                                     <button class="btn btn-primary dropdown-toggle" type="button"
                                                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -176,6 +177,7 @@
                                                             </a>
                                                         </li>
                                                     </ul>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach

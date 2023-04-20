@@ -140,11 +140,6 @@
     <!-- Vendor js -->
     <script src="{{ Asset('assets_admin/js/vendor.min.js') }}"></script>
     <!-- Plugins js-->
-
-
-
-
-
     <script src="{{ Asset('assets_admin/libs/flatpickr/flatpickr.min.js') }}"></script>
     <script src="{{ Asset('assets_admin/libs/spectrum-colorpicker2/spectrum.min.js') }}"></script>
     <script src="{{ Asset('assets_admin/libs/clockpicker/bootstrap-clockpicker.min.js') }}"></script>
