@@ -63,6 +63,7 @@ class Offer extends Authenticatable
         $add->start_from        = isset($data['start_from']) ? date('Y-m-d',strtotime($data['start_from'])) : null;
         $add->valid_till        = isset($data['valid_till']) ? date('Y-m-d',strtotime($data['valid_till'])) : null;
         $add->s_data            = serialize([$a,$b]);
+        $add->unique_offer      = isset($data['unique_offer']) ? $data['unique_offer'] : 0;
         $add->save();
 
         $store = new OfferStore;

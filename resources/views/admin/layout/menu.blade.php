@@ -76,19 +76,29 @@
     @endif
     <!-- Ciudades -->
 
+    <!-- Negocios -->
+    @if ($admin->hasPerm('Adminisrtar Restaurantes'))
+        <li>
+            <a href="{{ Asset(env('admin') . '/user') }}" class=" menu-link">
+                <i class="mdi mdi-calendar"></i>
+                <span>
+                    Negocios </span>
+            </a>
+        </li>
+    @endif
+    <!-- Negocios -->
 
-
-        <!-- Negocios -->
-        @if ($admin->hasPerm('Adminisrtar Restaurantes'))
-                <li>
-                <a href="{{ Asset(env('admin') . '/user') }}" class=" menu-link">
-                    <i class="mdi mdi-calendar"></i>
-                    <span> 
-                        Negocios </span>
-                </a>
-            </li>
-        @endif
-        <!-- Negocios -->
+    <!-- Ofertas de descuento -->
+    @if ($admin->hasPerm('Ofertas de descuento'))
+        <li>
+            <a href="{{ Asset(env('admin') . '/offer') }}" class=" menu-link">
+                <i class="mdi mdi-calendar"></i>
+                <span>
+                    Ofertas </span>
+            </a>
+        </li>
+    @endif
+    <!-- Ofertas de descuento -->
 
 
 </ul>
@@ -134,23 +144,6 @@
 
 
 
-
-
-
-        <!-- Ofertas de descuento -->
-        @if ($admin->hasPerm('Ofertas de descuento'))
-            <li class="menu-item @if ($page === 'offer') active @endif">
-                <a href="{{ Asset(env('admin') . '/offer') }}" class="menu-link">
-                    <span class="menu-label">
-                        <span class="menu-name">Ofertas de descuento</span>
-                    </span>
-                    <span class="menu-icon">
-                        <i class="icon-placeholder mdi mdi-calendar"></i>
-                    </span>
-                </a>
-            </li>
-        @endif
-        <!-- Ofertas de descuento -->
 
         <!-- Repartidores -->
         @if ($admin->hasPerm('Repartidores'))
