@@ -54,16 +54,41 @@
     @endif
     <!-- SubCuentas -->
 
-            <!-- Banners -->
-            @if ($admin->hasPerm('Banners'))
+    <!-- Banners -->
+    @if ($admin->hasPerm('Banners'))
         <li>
             <a href="{{ Asset(env('admin') . '/banner') }}" class=" menu-link">
                 <i class="mdi mdi-calendar"></i>
                 <span> Banners </span>
             </a>
         </li>
+    @endif
+    <!-- Banners -->
+
+    <!-- Ciudades -->
+    @if ($admin->hasPerm('Administrar Ciudades'))
+        <li>
+            <a href="{{ Asset(env('admin') . '/city') }}" class=" menu-link">
+                <i class="mdi mdi-calendar"></i>
+                <span> Ciudades </span>
+            </a>
+        </li>
+    @endif
+    <!-- Ciudades -->
+
+
+
+        <!-- Negocios -->
+        @if ($admin->hasPerm('Adminisrtar Restaurantes'))
+                <li>
+                <a href="{{ Asset(env('admin') . '/user') }}" class=" menu-link">
+                    <i class="mdi mdi-calendar"></i>
+                    <span> 
+                        Negocios </span>
+                </a>
+            </li>
         @endif
-        <!-- Banners -->
+        <!-- Negocios -->
 
 
 </ul>
@@ -106,55 +131,11 @@
 
 <div class="admin-sidebar-wrapper js-scrollbar">
     <ul class="menu">
-      
 
 
-        <!-- Banners -->
-        @if ($admin->hasPerm('Banners'))
-            <li class="menu-item @if ($page === 'banner') active @endif">
-                <a href="{{ Asset(env('admin') . '/banner') }}" class="menu-link">
-                    <span class="menu-label">
-                        <span class="menu-name">
-                            Banners
-                        </span>
-                    </span>
-                    <span class="menu-icon">
-                        <i class="icon-placeholder mdi mdi-image-filter "></i>
-                    </span>
-                </a>
-            </li>
-        @endif
-        <!-- Banners -->
 
-        <!-- Ciudades -->
-        @if ($admin->hasPerm('Administrar Ciudades'))
-            <li class="menu-item @if ($page === 'city') active @endif">
-                <a href="{{ Asset(env('admin') . '/city') }}" class="menu-link">
-                    <span class="menu-label">
-                        <span class="menu-name">Administrar ciudades</span>
-                    </span>
-                    <span class="menu-icon">
-                        <i class="mdi mdi-map-marker"></i>
-                    </span>
-                </a>
-            </li>
-        @endif
-        <!-- Ciudades -->
 
-        <!-- Negocios -->
-        @if ($admin->hasPerm('Adminisrtar Restaurantes'))
-            <li class="menu-item @if ($page === 'user') active @endif">
-                <a href="{{ Asset(env('admin') . '/user') }}" class="menu-link">
-                    <span class="menu-label">
-                        <span class="menu-name">Administrar negocios</span>
-                    </span>
-                    <span class="menu-icon">
-                        <i class="icon-placeholder mdi mdi-home"></i>
-                    </span>
-                </a>
-            </li>
-        @endif
-        <!-- Negocios -->
+
 
         <!-- Ofertas de descuento -->
         @if ($admin->hasPerm('Ofertas de descuento'))
