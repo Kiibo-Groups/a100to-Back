@@ -47,7 +47,7 @@
     @if ($admin->hasPerm('Subaccount'))
         <li>
             <a href="{{ Asset(env('admin') . '/adminUser') }}" class=" menu-link">
-                <i class="mdi mdi-calendar"></i>
+                <i class="mdi mdi-map-marker"></i>
                 <span> SubCuentas </span>
             </a>
         </li>
@@ -58,7 +58,7 @@
     @if ($admin->hasPerm('Banners'))
         <li>
             <a href="{{ Asset(env('admin') . '/banner') }}" class=" menu-link">
-                <i class="mdi mdi-calendar"></i>
+                <i class="mdi mdi-image"></i>
                 <span> Banners </span>
             </a>
         </li>
@@ -69,7 +69,7 @@
     @if ($admin->hasPerm('Administrar Ciudades'))
         <li>
             <a href="{{ Asset(env('admin') . '/city') }}" class=" menu-link">
-                <i class="mdi mdi-calendar"></i>
+                <i class="mdi mdi-map-marker"></i>
                 <span> Ciudades </span>
             </a>
         </li>
@@ -80,7 +80,7 @@
     @if ($admin->hasPerm('Adminisrtar Restaurantes'))
         <li>
             <a href="{{ Asset(env('admin') . '/user') }}" class=" menu-link">
-                <i class="mdi mdi-calendar"></i>
+                <i class="mdi mdi-home"></i>
                 <span>
                     Negocios </span>
             </a>
@@ -99,6 +99,32 @@
         </li>
     @endif
     <!-- Ofertas de descuento -->
+
+    <!-- Repartidores -->
+    @if ($admin->hasPerm('Repartidores'))
+        <li>
+            <a href="#repartidores" data-bs-toggle="collapse">
+                <i class="mdi mdi-account-clock"></i>
+                <span> Repartidores </span>
+                <span class="menu-arrow"></span>
+            </a>
+            <div class="collapse" id="repartidores">
+                <ul class="nav-second-level">
+
+                    <li>
+                        <a href="{{ Asset(env('admin') . '/delivery') }}">Listado</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ Asset(env('admin') . '/report_staff') }}" class=" menu-link">Reportes</a>
+                    </li>
+
+
+
+                </ul>
+            </div>
+        </li>
+    @endif
 
 
 </ul>

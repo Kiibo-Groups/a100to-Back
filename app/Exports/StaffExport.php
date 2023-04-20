@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Delivery;
+use App\Models\Delivery;
 use App\User;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromView;
