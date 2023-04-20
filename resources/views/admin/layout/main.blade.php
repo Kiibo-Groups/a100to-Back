@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en"></html>
+<html lang="en">
+
+</html>
+
 <head>
     <style>
         #div2 {
-        max-height: 100%;
-        overflow: auto;
-    
+            max-height: 100%;
+            overflow: auto;
+
         }
     </style>
     <meta charset="UTF-8">
@@ -19,7 +22,7 @@
 
 
 
-    
+
     <!-- Plugins css -->
     <link rel="stylesheet" href="{{ Asset('assets_admin/libs/spectrum-colorpicker2/spectrum.min.css') }}"
         type="text/css">
@@ -53,13 +56,13 @@
 
 <body class="loading "
     data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": true}, "topbar": {"color": "light"}, "showRightSidebarOnPageLoad": true}'>
-   
+
     <div id="wrapper">
 
 
         <!-- Topbar Start -->
         <div class="navbar-custom">
-      
+
             <!-- LOGO -->
             <div class="logo-box">
                 <a href="/home" class="logo logo-light text-center">
@@ -106,7 +109,8 @@
 
                     @include('admin.layout.menu')
 
-                </div> </section>
+                </div>
+                </section>
             </div>
         </div>
         <!-- Left Sidebar End -->
@@ -115,7 +119,7 @@
         <!-- Start Page Content here -->
         <!-- ============================================================== -->
 
-       
+
 
         @yield('content')
 
@@ -140,7 +144,7 @@
 
 
 
-    
+
     <script src="{{ Asset('assets_admin/libs/flatpickr/flatpickr.min.js') }}"></script>
     <script src="{{ Asset('assets_admin/libs/spectrum-colorpicker2/spectrum.min.js') }}"></script>
     <script src="{{ Asset('assets_admin/libs/clockpicker/bootstrap-clockpicker.min.js') }}"></script>
@@ -158,6 +162,11 @@
 
 
     <script>
+        $(function() {
+            $(".datepicker").datepicker();
+
+        });
+
         function deleteConfirm(url) {
             Swal.fire({
                 title: 'Are you sure?',
