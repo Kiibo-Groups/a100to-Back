@@ -110,21 +110,98 @@
             </a>
             <div class="collapse" id="repartidores">
                 <ul class="nav-second-level">
-
                     <li>
                         <a href="{{ Asset(env('admin') . '/delivery') }}">Listado</a>
                     </li>
-
                     <li>
                         <a href="{{ Asset(env('admin') . '/report_staff') }}" class=" menu-link">Reportes</a>
                     </li>
-
-
-
                 </ul>
             </div>
         </li>
     @endif
+
+    <!-- Gestion de pedidos -->
+    <?php
+    $cOrder = DB::table('orders')
+        ->where('status', 0)
+        ->count();
+    $ROrder = DB::table('orders')
+        ->whereIn('status', [1, 1.5, 3, 4])
+        ->count();
+    ?>
+
+    @if ($admin->hasPerm('Gestion de pedidos'))
+        <li>
+            <a href="#pedidos" data-bs-toggle="collapse">
+                <i class="mdi mdi-cart"></i>
+                @if ($cOrder > 0)
+                    <span class="badge bg-success float-end" style="margin-right: 20px">{{ $cOrder }}</span>
+                @endif
+                <span> Pedidos </span>
+                <span class="menu-arrow"></span>
+            </a>
+            <div class="collapse" id="pedidos">
+                <!--submenu-->
+                <ul class="nav-second-level">
+                    <!-- Pedidos nuevos -->
+                    <li>
+                        <a href="{{ Asset(env('admin') . '/order?status=0') }}">
+                            @if ($cOrder > 0)
+                                <span class="badge bg-success float-end"
+                                    style="margin-right: 20px">{{ $cOrder }}</span>
+                            @endif
+                            Nuevos
+                        </a>
+                    </li>
+                    <!-- Pedidos nuevos -->
+
+                    <!-- Pedidos en curso -->
+                    <li>
+                        <a href="{{ Asset(env('admin') . '/order?status=1') }}">
+                            @if ($ROrder > 0)
+                                <span class="badge bg-success float-end"
+                                    style="margin-right: 20px">{{ $ROrder }}</span>
+                            @endif
+                            En Curso
+                        </a>
+                    </li>
+                    <!-- Pedidos en curso -->
+
+                    <!-- Pedidos cancelados -->
+                    <li>
+                        <a href="{{ Asset(env('admin') . '/order?status=2') }}">Cancelados</a>
+                    </li>
+                    <!-- Pedidos cancelados -->
+
+                    <!-- Pedidos completos -->
+                    <li>
+                        <a href="{{ Asset(env('admin') . '/order?status=5') }}">Completos</a>
+                    </li>
+                    <!-- Pedidos completos -->
+                </ul>
+            </div>
+        </li>
+    @endif
+    <!-- Gestion de pedidos -->
+
+    <!-- Notificaciones push -->
+    @if ($admin->hasPerm('Notificaciones push'))
+           <li>
+            <a href="{{ Asset(env('admin') . '/push') }}" class=" menu-link">
+                <i class="mdi mdi-send"></i>
+                <span>
+                    Notificaciones </span>
+            </a>
+        </li>
+    @endif
+    <!-- Notificaciones push -->
+
+
+
+
+
+
 
 
 </ul>
@@ -170,266 +247,6 @@
 
 
 
-
-        <!-- Repartidores -->
-        @if ($admin->hasPerm('Repartidores'))
-            <li class="menu-item @if ($page === 'delivery' || $page == 'report_staff') active @endif">
-                <a href="#" class="open-dropdown menu-link">
-                    <span class="menu-label">
-                        <span class="menu-name">Repartidores
-                            <span class="menu-arrow"></span>
-                        </span>
-                    </span>
-                    <span class="menu-icon">
-                        <i class="mdi mdi-account-clock"></i>
-                    </span>
-                </a>
-                <!--submenu-->
-                <ul class="sub-menu">
-                    <li class="menu-item">
-                        <a href="{{ Asset(env('admin') . '/delivery') }}" class=" menu-link">
-                            <span class="menu-label">
-                                <span class="menu-name">Listado</span>
-                            </span>
-                            <span class="menu-icon">
-                                <i class="icon-placeholder  mdi mdi-image-filter">
-                                </i>
-                            </span>
-                        </a>
-                    </li>
-
-                    <li class="menu-item ">
-                        <a href="{{ Asset(env('admin') . '/report_staff') }}" class=" menu-link">
-                            <span class="menu-label">
-                                <span class="menu-name">Reportes</span>
-                            </span>
-                            <span class="menu-icon">
-                                <i class="icon-placeholder  mdi mdi-image">
-                                </i>
-                            </span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        @endif
-        <!-- Repartidores -->
-
-        <!-- Gestion de pedidos -->
-        <?php
-        $cOrder = DB::table('orders')
-            ->where('status', 0)
-            ->count();
-        $ROrder = DB::table('orders')
-            ->whereIn('status', [1, 1.5, 3, 4])
-            ->count();
-        ?>
-        @if ($admin->hasPerm('Gestion de pedidos'))
-            <li class="menu-item @if ($page === 'order') active @endif">
-                <a href="#" class="open-dropdown menu-link">
-                    <span class="menu-label">
-                        <span class="menu-name">
-                            Gestionar pedidos
-                            @if ($cOrder > 0)
-                                <span class="icon-badge badge-success badge badge-pill">{{ $cOrder }}</span>
-                            @endif
-                            <span class="menu-arrow"></span>
-                        </span>
-                    </span>
-                    <span class="menu-icon">
-                        <i class="icon-placeholder mdi mdi-cart"></i>
-                    </span>
-                </a>
-                <!--submenu-->
-                <ul class="sub-menu">
-
-                    <!-- Pedidos nuevos -->
-                    <li class="menu-item">
-                        <a href="{{ Asset(env('admin') . '/order?status=0') }}" class=" menu-link">
-                            <span class="menu-label">
-                                <span class="menu-name">
-                                    Pedidos Nuevos
-                                    @if ($cOrder > 0)
-                                        <span
-                                            class="icon-badge badge-success badge badge-pill">{{ $cOrder }}</span>
-                                    @endif
-                                </span>
-                            </span>
-                            <span class="menu-icon">
-                                <i class="icon-placeholder  mdi mdi-cart"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <!-- Pedidos nuevos -->
-
-                    <!-- Pedidos en curso -->
-                    <li class="menu-item">
-                        <a href="{{ Asset(env('admin') . '/order?status=1') }}" class=" menu-link">
-                            <span class="menu-label">
-                                <span class="menu-name">
-                                    Pedidos en Curso
-                                    @if ($ROrder > 0)
-                                        <span
-                                            class="icon-badge badge-success badge badge-pill">{{ $ROrder }}</span>
-                                    @endif
-                                </span>
-                            </span>
-                            <span class="menu-icon">
-                                <i class="icon-placeholder  mdi mdi-camera-control"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <!-- Pedidos en curso -->
-
-                    <!-- Pedidos cancelados -->
-                    <li class="menu-item">
-                        <a href="{{ Asset(env('admin') . '/order?status=2') }}" class=" menu-link">
-                            <span class="menu-label">
-                                <span class="menu-name">
-                                    Pedidos Cancelados
-                                </span>
-                            </span>
-                            <span class="menu-icon">
-                                <i class="icon-placeholder  mdi mdi-cancel"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <!-- Pedidos cancelados -->
-
-                    <!-- Pedidos completos -->
-                    <li class="menu-item">
-                        <a href="{{ Asset(env('admin') . '/order?status=5') }}" class=" menu-link">
-                            <span class="menu-label">
-                                <span class="menu-name">
-                                    Pedidos Completos
-                                </span>
-                            </span>
-                            <span class="menu-icon">
-                                <i class="icon-placeholder  mdi mdi-check-all"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <!-- Pedidos completos -->
-                </ul>
-            </li>
-        @endif
-        <!-- Gestion de pedidos -->
-
-        <!-- Mandaditos -->
-        <?php
-        //$newCommand = DB::table('commaned')->where('status',0)->count(); // Servicio nuevo
-        //$notAsignCommand = DB::table('commaned')->where('status',3)->count(); // Servicio no asignado
-        ?>
-        @if ($admin->hasPerm('Gestion de servicios'))
-            <li class="menu-item @if ($page === 'commaned') active @endif">
-                <a href="#" class="open-dropdown menu-link">
-                    <span class="menu-label">
-                        <span class="menu-name">
-                            Gestionar Servicios
-
-                            <span class="icon-badge badge-success badge badge-pill"></span>
-
-                            <span class="menu-arrow"></span>
-                        </span>
-                    </span>
-                    <span class="menu-icon">
-                        <i class="icon-placeholder mdi mdi-cart"></i>
-                    </span>
-                </a>
-                <!--submenu-->
-                <ul class="sub-menu">
-
-                    <li class="menu-item">
-                        <a href="{{ Asset(env('admin') . '/commaned?status=0') }}" class=" menu-link">
-                            <span class="menu-label">
-                                <span class="menu-name">
-                                    Servicios Nuevos
-
-                                    <span class="icon-badge badge-success badge badge-pill"></span>
-
-                                </span>
-                            </span>
-                            <span class="menu-icon">
-                                <i class="icon-placeholder  mdi mdi-cart"></i>
-                            </span>
-                        </a>
-                    </li>
-
-                    <li class="menu-item">
-                        <a href="{{ Asset(env('admin') . '/commaned?status=3') }}" class=" menu-link">
-                            <span class="menu-label">
-                                <span class="menu-name">
-                                    Servicios no asignados
-
-                                    <span class="icon-badge badge-success badge badge-pill"></span>
-
-                                </span>
-                            </span>
-                            <span class="menu-icon">
-                                <i class="icon-placeholder  mdi mdi-camera-control"></i>
-                            </span>
-                        </a>
-                    </li>
-
-                    <li class="menu-item">
-                        <a href="{{ Asset(env('admin') . '/commaned?status=1') }}" class=" menu-link">
-                            <span class="menu-label">
-                                <span class="menu-name">
-                                    Servicios en curso
-                                </span>
-                            </span>
-                            <span class="menu-icon">
-                                <i class="icon-placeholder  mdi mdi-camera-control"></i>
-                            </span>
-                        </a>
-                    </li>
-
-                    <li class="menu-item">
-                        <a href="{{ Asset(env('admin') . '/commaned?status=6') }}" class=" menu-link">
-                            <span class="menu-label">
-                                <span class="menu-name">
-                                    Servicios Finalizados
-                                </span>
-                            </span>
-                            <span class="menu-icon">
-                                <i class="icon-placeholder  mdi mdi-camera-control"></i>
-                            </span>
-                        </a>
-                    </li>
-
-                    <li class="menu-item">
-                        <a href="{{ Asset(env('admin') . '/commaned?status=2') }}" class=" menu-link">
-                            <span class="menu-label">
-                                <span class="menu-name">
-                                    Servicios Cancelados
-                                </span>
-                            </span>
-                            <span class="menu-icon">
-                                <i class="icon-placeholder  mdi mdi-camera-control"></i>
-                            </span>
-                        </a>
-                    </li>
-                </ul>
-                <!--submenu-->
-            </li>
-        @endif
-        <!-- Mandaditos -->
-
-        <!-- Notificaciones push -->
-        @if ($admin->hasPerm('Notificaciones push'))
-            <li class="menu-item @if ($page === 'push') active @endif">
-                <a href="{{ Asset(env('admin') . '/push') }}" class="menu-link">
-                    <span class="menu-label">
-                        <span class="menu-name">
-                            Notificaciones
-                        </span>
-                    </span>
-                    <span class="menu-icon">
-                        <i class="icon-placeholder mdi mdi-send "></i>
-                    </span>
-                </a>
-            </li>
-        @endif
-        <!-- Notificaciones push -->
 
         <!-- Reporte de ventas -->
         @if ($admin->hasPerm('Reportes de ventas'))

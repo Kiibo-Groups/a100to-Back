@@ -3,11 +3,14 @@
 @section('title') Imprimir Recibo @endsection
 
 @section('content')
+<div class="content-page" id="div2">
+    @include('user.layout.alert')
+    <div class="content">
+        <div class="container-fluid" id="printableArea">
 
-<div class="pull-up">
-    <div class="container" id="printableArea">
         <div class="row">
             <div class="col-md-12 m-b-40">
+             
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -123,5 +126,5 @@
         </div>
     </div>
 </div>
-
+</div>
 @endsection
