@@ -73,16 +73,14 @@
                         A100TO
                     </span>
                 </a>
-                <a href="/home" class="logo logo-dark text-center">
+                <a href="{{ Asset(env('admin') . '/home') }}" class="logo logo-dark text-center">
                     <span class="logo-sm">
                         A100TO
                     </span>
-                    <span class="logo-lg" style="font-size: 18px">
-                        A100TO
+                    <span class="logo-lg" >
+                        <img src="{{ Asset('assets/img/logo.png') }}" alt="" height="86">
                     </span>
                 </a>
-
-
             </div>
 
             <ul class="list-unstyled topnav-menu topnav-menu-left mb-0">
@@ -106,23 +104,16 @@
             <div class="h-100" data-simplebar>
                 <!--- Sidemenu -->
                 <div id="sidebar-menu">
-
                     @include('admin.layout.menu')
-
                 </div>
                 </section>
             </div>
         </div>
         <!-- Left Sidebar End -->
-
         <!-- ============================================================== -->
         <!-- Start Page Content here -->
         <!-- ============================================================== -->
-
-
-
         @yield('content')
-
         <!-- ============================================================== -->
         <!-- End Page content -->
         <!-- ============================================================== -->
@@ -152,9 +143,6 @@
     <script src="{{ Asset('assets_admin/js/app.min.js') }}"></script>
     <script src="{{ Asset('assets/vendor/apexchart/apexcharts.min.js') }}"></script>
     <script src="{{ Asset('assets/vendor/sweetalert/sweetalert2.all.min.js') }}"></script>
-
-
-
 
     <script>
         $(function() {

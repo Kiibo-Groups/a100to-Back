@@ -150,17 +150,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin','prefix' => env('admin
         Route::get('getCity/{id}/{type}','OrderController@getCity');
 
 
-        /*
-        |-------------------------------
-        |Manage Mandaditos
-        |-------------------------------
-        */
-        Route::resource('commaned','CommanedController');
-        Route::get('commaned','CommanedController@index');
-        Route::get('commanedStatus','CommanedController@commanedStatus');
-        Route::get('commaned/delete/{id}','CommanedController@delete');
-        Route::get('commaned/status/{id}','CommanedController@status');
-
+ 
 
         /*
         |-------------------------------

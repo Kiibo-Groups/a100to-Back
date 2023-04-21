@@ -5,7 +5,7 @@ return [
     'documentations' => [
         'default' => [
             'api' => [
-                'title' => 'KiiBo Prueba  Jair',
+                'title' => 'a100to',
             ],
 
             'routes' => [

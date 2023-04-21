@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\api;
+<?php namespace App\Http\Controllers\Api;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -8,33 +8,33 @@ use App\Http\Controllers\WhatsAppCloud;
 
 use Illuminate\Http\Request;
 use Auth;
-use App\City;
-use App\OfferStore;
-use App\Offer;
-use App\User;
-use App\Cart;
-use App\CartCoupen;
-use App\AppUser;
-use App\Order;
-use App\Order_staff;
-use App\OrderAddon;
-use App\OrderItem;
-use App\Lang;
-use App\Rate;
-use App\Slider;
-use App\Banner;
-use App\Address;
-use App\Admin;
-use App\Page;
-use App\Language;
-use App\Text;
-use App\Delivery;
-use App\CategoryStore;
-use App\Opening_times;
-use App\CardsUser;
-use App\Favorites;
-use App\Tables;
-use App\Commaned;
+use App\Models\City;
+use App\Models\OfferStore;
+use App\Models\Offer;
+use App\Models\User;
+use App\Models\Cart;
+use App\Models\CartCoupen;
+use App\Models\AppUser;
+use App\Models\Order;
+use App\Models\Order_staff;
+use App\Models\OrderAddon;
+use App\Models\OrderItem;
+use App\Models\Lang;
+use App\Models\Rate;
+use App\Models\Slider;
+use App\Models\Banner;
+use App\Models\Address;
+use App\Models\Admin;
+use App\Models\Page;
+use App\Models\Language;
+use App\Models\Text;
+use App\Models\Delivery;
+use App\Models\CategoryStore;
+use App\Models\Opening_times;
+use App\Models\CardsUser;
+use App\Models\Favorites;
+use App\Models\Tables;
+
 use App\Visits;
 use App\Deposit;
 
@@ -43,6 +43,8 @@ use Validator;
 use Redirect;
 use Excel;
 use Stripe;
+
+
 
 class ApiController extends Controller {
 

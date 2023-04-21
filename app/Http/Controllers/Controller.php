@@ -10,6 +10,11 @@ use Twilio\Rest\Client;
 use App\Models\Admin;
 use App\Language;
 use Twilio;
+
+/**
+ * @OA\Info(title="My First API", version="0.1")
+*/
+
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;

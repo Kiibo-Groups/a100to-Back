@@ -11,7 +11,7 @@ use DB;
 use Validator;
 use Redirect;
 use IMS;
-class deliveryController extends Controller {
+class DeliveryController extends Controller {
 
 	public $folder  = "user/delivery.";
 	/*

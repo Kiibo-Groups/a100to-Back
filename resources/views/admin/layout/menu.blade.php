@@ -1,7 +1,6 @@
 @inject('admin', 'App\Models\Admin')
 @php($page = Request::segment(2))
 
-
 <ul id="side-menu">
 
     <li class="menu-title">MENÚ</li>
@@ -187,7 +186,7 @@
 
     <!-- Notificaciones push -->
     @if ($admin->hasPerm('Notificaciones push'))
-           <li>
+        <li>
             <a href="{{ Asset(env('admin') . '/push') }}" class=" menu-link">
                 <i class="mdi mdi-send"></i>
                 <span>
@@ -197,126 +196,55 @@
     @endif
     <!-- Notificaciones push -->
 
-
-
-
-
-
-
-
-</ul>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<style type="text/css">
-    .menu-item {
-        border-bottom: 1px solid #0b394f !important;
-    }
-</style>
-
-<div class="admin-sidebar-brand">
-    <!-- begin sidebar branding-->
-    <span class="admin-brand-content font-secondary">
-        <a href="{{ Asset(env('admin') . '/home') }}">
-            <img class="admin-brand-logo" src="{{ Asset('upload/admin/' . Auth::guard('admin')->user()->logo) }}"
-                width="40" alt="admin Logo">
-            {{ Auth::guard('admin')->user()->name }}
-        </a>
-    </span>
-    <!-- end sidebar branding-->
-    <div class="ml-auto">
-        <!-- sidebar pin-->
-        <a href="#" class="admin-pin-sidebar btn-ghost btn btn-rounded-circle"></a>
-        <!-- sidebar close for mobile device-->
-        <a href="#" class="admin-close-sidebar"></a>
-    </div>
-</div>
-
-<div class="admin-sidebar-wrapper js-scrollbar">
-    <ul class="menu">
-
-
-
-
-        <!-- Reporte de ventas -->
-        @if ($admin->hasPerm('Reportes de ventas'))
-            <li class="menu-item @if ($page === 'report') active @endif">
-                <a href="{{ Asset(env('admin') . '/report') }}" class="menu-link">
-                    <span class="menu-label">
-                        <span class="menu-name">Reporte de ventas</span>
-                    </span>
-                    <span class="menu-icon">
-                        <i class="icon-placeholder mdi mdi-file"></i>
-                    </span>
-                </a>
-            </li>
-        @endif
-        <!-- Reporte de ventas -->
-
-        <!-- Usuarios -->
-        @if ($admin->hasPerm('Usuarios Registrados'))
-            <li class="menu-item @if ($page === 'appUser' || $page == 'report_users') active @endif">
-                <a href="#" class="open-dropdown menu-link">
-                    <span class="menu-label">
-                        <span class="menu-name">Usuarios Registrados
-                            <span class="menu-arrow"></span>
-                        </span>
-                    </span>
-                    <span class="menu-icon">
-                        <i class="icon-placeholder mdi mdi-account"></i>
-                    </span>
-                </a>
-                <!--submenu-->
-                <ul class="sub-menu">
-                    <li class="menu-item">
-                        <a href="{{ Asset(env('admin') . '/appUser') }}" class=" menu-link">
-                            <span class="menu-label">
-                                <span class="menu-name">Listado</span>
-                            </span>
-                            <span class="menu-icon">
-                                <i class="icon-placeholder  mdi mdi-image-filter">
-                                </i>
-                            </span>
-                        </a>
-                    </li>
-
-                    <li class="menu-item ">
-                        <a href="{{ Asset(env('admin') . '/report_users') }}" class=" menu-link">
-                            <span class="menu-label">
-                                <span class="menu-name">Reportes</span>
-                            </span>
-                            <span class="menu-icon">
-                                <i class="icon-placeholder  mdi mdi-image">
-                                </i>
-                            </span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        @endif
-        <!-- Usuarios -->
-
-        <!-- Cerrar Sesión -->
-        <li class="menu-item">
-            <a href="{{ Asset(env('admin') . '/logout') }}" class="menu-link">
-                <span class="menu-label">
-                    <span class="menu-name">Cerrar Sesion</span>
-                </span>
-                <span class="menu-icon">
-                    <i class="icon-placeholder mdi mdi-logout"></i>
-                </span>
+    <!-- Reporte de ventas -->
+    @if ($admin->hasPerm('Reportes de ventas'))
+        <li>
+            <a href="{{ Asset(env('admin') . '/report') }}" class=" menu-link">
+                <i class="mdi mdi-file"></i>
+                <span>
+                    Reporte de ventas </span>
             </a>
         </li>
-        <!-- Cerrar Sesión -->
-    </ul>
-</div>
+    @endif
+    <!-- Reporte de ventas -->
+
+    <!-- Usuarios -->
+    @if ($admin->hasPerm('Usuarios Registrados'))
+        <li>
+            <a href="#usuarios" data-bs-toggle="collapse">
+                <i class="mdi mdi-account"></i>
+                <span> Usuarios </span>
+                <span class="menu-arrow"></span>
+            </a>
+            <!--submenu-->
+
+            <div class="collapse" id="usuarios">
+                <!--submenu-->
+                <ul class="nav-second-level">
+
+
+
+                    <li>
+                        <a href="{{ Asset(env('admin') . '/appUser') }}">Listado</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ Asset(env('admin') . '/report_users') }}">Reportes</a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </li>
+    @endif
+    <!-- Usuarios -->
+
+    <li>
+        <a href="{{ Asset(env('admin') . '/logout') }}" class=" menu-link">
+            <i class="mdi mdi-logout"></i>
+            <span>
+                Cerrar Sesion </span>
+        </a>
+    </li>
+
+</ul>

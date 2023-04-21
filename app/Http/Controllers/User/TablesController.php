@@ -10,7 +10,7 @@ use DB;
 use Validator;
 use Redirect;
 use IMS;
-class tablesController extends Controller {
+class TablesController extends Controller {
 
 	public $folder  = "user/tables.";
 	/*

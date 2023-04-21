@@ -69,8 +69,6 @@
     data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": true}, "topbar": {"color": "light"}, "showRightSidebarOnPageLoad": true}'>
 
     <div id="wrapper">
-
-
         <!-- Topbar Start -->
         <div class="navbar-custom">
             <ul class="list-unstyled topnav-menu float-end mb-0">
@@ -98,13 +96,8 @@
                                 <i class="mdi mdi-trending-up"></i></span>
                         </div>
                     @endif
-
                 </li>
-
             </ul>
-
-
-
             <!-- LOGO -->
             <div class="logo-box">
                 <a href="/home" class="logo logo-light text-center">
@@ -115,18 +108,15 @@
                         A100TO
                     </span>
                 </a>
-                <a href="/home" class="logo logo-dark text-center">
+                <a href="{{ Asset(env('user') . '/home') }}" class="logo logo-dark text-center">
                     <span class="logo-sm">
                         A100TO
                     </span>
-                    <span class="logo-lg" style="font-size: 18px">
-                        A100TO
+                    <span class="logo-lg" >
+                        <img src="{{ Asset('assets/img/logo.png') }}" alt="" height="86">
                     </span>
                 </a>
-
-
             </div>
-
             <ul class="list-unstyled topnav-menu topnav-menu-left mb-0">
                 <li>
                     <button class="button-menu-mobile disable-btn waves-effect">
@@ -137,7 +127,6 @@
                     <h4 class="page-title-main"> Bienvenido(a) ! {{ Auth::user()->name }} </h4>
                 </li>
             </ul>
-
             <div class="clearfix"></div>
 
         </div>
@@ -159,19 +148,12 @@
         <!-- ============================================================== -->
         <!-- Start Page Content here -->
         <!-- ============================================================== -->
-
-       
-
         @yield('content')
 
         <!-- ============================================================== -->
         <!-- End Page content -->
         <!-- ============================================================== -->
-
-
     </div>
-
-
     <script src="{{ Asset('assets/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ Asset('assets/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
     <script src="{{ Asset('assets/vendor/popper/popper.js') }}"></script>
@@ -179,23 +161,14 @@
     <script src="{{ Asset('assets/vendor/select2/js/select2.full.min.js') }}"></script>
     <script src="{{ Asset('assets/vendor/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
     <script src="{{ Asset('assets/js/atmos.min.js?v=') }}<?php echo time(); ?>"></script>
-
-    
-
     <!-- Vendor js -->
-
     <script src="{{ Asset('assets_admin/js/vendor.min.js') }}"></script>
-
     <!-- Plugins js-->
-
-
     <script src="{{ Asset('assets_admin/libs/flatpickr/flatpickr.min.js') }}"></script>
     <script src="{{ Asset('assets_admin/libs/spectrum-colorpicker2/spectrum.min.js') }}"></script>
     <script src="{{ Asset('assets_admin/libs/clockpicker/bootstrap-clockpicker.min.js') }}"></script>
     <script src="{{ Asset('assets_admin/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
-
     <!-- Init js-->
-
     <script src="{{ Asset('assets_admin/js/pages/form-pickers.init.js') }}"></script>
     <!-- knob plugin -->
     <script src="{{ Asset('assets_admin/libs/jquery-knob/jquery.knob.min.js') }}"></script>

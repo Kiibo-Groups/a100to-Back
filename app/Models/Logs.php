@@ -16,7 +16,7 @@ use Auth;
 
 use Excel;
 
-class logs extends Authenticatable
+class Logs extends Authenticatable
 
 {
 
