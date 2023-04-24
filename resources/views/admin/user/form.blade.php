@@ -223,10 +223,11 @@
         <input type="text" name="t_value" value="{{ $data->t_value }}" hidden>
     @endif
 
-    <h1 style="font-size: 20px">Gastos y Tiempos de entrega</h1>
+    <h1 style="font-size: 20px;margin-left: 30px">Gastos y Tiempos de entrega</h1>
 
 
     <div class="card ">
+        
         <div class="card-body">
 
             <div class="form-row">
@@ -310,7 +311,7 @@
 
 
     <!--*********** Horario de Atencion *****************-->
-    <h1 style="font-size: 20px">
+    <h1 style="font-size: 20px;margin-left: 30px">
         Horarios de atención
         <br /><small style="font-size:14px;">(Si algun día de la semana marcas como cerrado, deja en blanco el
             horario de atención)</small>
@@ -691,7 +692,7 @@
 
 
 </div>
-<button type="submit" class="btn btn-success btn-cta">Guardar Cambios</button><br><br>
+<button type="submit" class="btn btn-success btn-cta" style="margin-left: 45px">Guardar Cambios</button><br><br>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

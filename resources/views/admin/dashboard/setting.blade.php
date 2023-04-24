@@ -68,7 +68,7 @@
                                         </div>
                                     </div>
 
-                                    <h1 style="font-size: 20px">Establecer tiempo para nuevas visitas</h1>
+                                    <h1 style="font-size: 20px;margin-left: 30px">Establecer tiempo para nuevas visitas</h1>
                                     <div class="card py-3 m-b-30">
                                         <div class="card-body">
                                             <div class="form-row">
@@ -96,7 +96,7 @@
                                         </div>
                                     </div>
 
-                                    <h1 style="font-size: 20px">Establecer cargos de comisión por servicio de
+                                    <h1 style="font-size: 20px;margin-left: 30px">Establecer cargos de comisión por servicio de
                                         mandaditos<br />
                                         <small style="font-size:12px;">(dejar en 0 si no requiere cobrar comisión)</small>
                                     </h1>
@@ -124,7 +124,7 @@
                                         </div>
                                     </div>
 
-                                    <h1 style="font-size: 20px">Establecer valor máximo para pago en efectivo</h1>
+                                    <h1 style="font-size: 20px;margin-left: 30px">Establecer valor máximo para pago en efectivo</h1>
                                     <div class="card py-3 m-b-30">
                                         <div class="card-body">
                                             <div class="form-row">
@@ -139,7 +139,7 @@
                                     </div>
 
 
-                                    <h1 style="font-size: 20px">Establecer distancia maxima para notificación de
+                                    <h1 style="font-size: 20px;margin-left: 30px">Establecer distancia maxima para notificación de
                                         repartidores.</h1>
                                     <div class="card py-3 m-b-30">
                                         <div class="card-body">
@@ -155,7 +155,7 @@
                                         </div>
                                     </div>
 
-                                    <h1 style="font-size: 20px">Establecer cargos de comisión por pago con tarjeta</h1>
+                                    <h1 style="font-size: 20px;margin-left: 30px">Establecer cargos de comisión por pago con tarjeta</h1>
                                     <div class="card py-3 m-b-30">
                                         <div class="card-body">
                                             <div class="form-row">
@@ -181,7 +181,7 @@
                                         </div>
                                     </div>
 
-                                    <h4>Google ApiKey <br /><small style="font-size: 12px">(Introduce el ApiKey de tu
+                                    <h4 style=";margin-left: 30px">Google ApiKey <br /><small style="font-size: 12px;margin-left: 30px">(Introduce el ApiKey de tu
                                             cuenta en <a href="https://cloud.google.com/"
                                                 target="_blank">https://cloud.google.com/</a> )</small></h4>
                                     <div class="card py-3 m-b-30">
@@ -197,7 +197,7 @@
                                         </div>
                                     </div>
 
-                                    <h4>Social Links</h4>
+                                    <h4 style=";margin-left: 30px">Social Links</h4>
                                     <div class="card py-3 m-b-30">
                                         <div class="card-body">
                                             <div class="form-row">
@@ -230,7 +230,7 @@
                                         </div>
                                     </div>
 
-                                    <h4>Change Password</h4>
+                                    <h4 style=";margin-left: 30px">Change Password</h4>
                                     <div class="card py-3 m-b-30">
                                         <div class="card-body">
                                             <div class="form-row">
@@ -251,7 +251,7 @@
                                         </div>
                                     </div>
 
-                                    <button type="submit" class="btn btn-success btn-cta">Guardar Cambios</button>
+                                    <button type="submit" class="btn btn-success btn-cta" style="margin-left: 33px">Guardar Cambios</button>
                             </form>
                         </div>
                     </div>

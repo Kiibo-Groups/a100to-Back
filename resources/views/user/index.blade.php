@@ -8,57 +8,57 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>Panel de Administración</title>
 
-    <link rel="icon" type="image/x-icon" href="{{url('/assets/img/logo.png')}}">
-    <link rel="icon" type="image/x-icon" href="{{url('/assets/img/logo.png')}}" type="image/png" sizes="16x16">
+    <link rel="icon" type="image/x-icon" href="{{ Asset('assets/img/logo.png') }}" />
+    <link rel="icon" href="{{ Asset('assets/img/logo.png') }}" type="image/png" sizes="16x16">
 
     <!-- NewsStyles -->
 
-    <link href="{{ Asset('assets/css/bundle.min.css') }}" rel="stylesheet">
-        <link rel="stylesheet" href="{{url('/assets/css/line-awesome.min.css')}}">
-        <link rel="stylesheet" href="{{url('/assets/css/revolution-settings.min.css')}}">
-        <link rel="stylesheet" href="{{url('/assets/css/jquery.fancybox.min.css')}}">
-     
-        <link rel="stylesheet" href="{{url('/assets/css/LineIcons.min.css')}}">
-        <link rel="stylesheet" href="{{url('/assets/css/slick-theme.css')}}">
-        <link rel="stylesheet" href="{{url('/assets/css/slick.css')}}">
-        <link rel="stylesheet" href="{{url('/assets/css/wow.css')}}">
-      
-        <link rel="stylesheet" href="{{url('/assets/css/style.css?v=')}}">
+
+    <link rel="stylesheet" href="{{ Asset('assets_admin/css/config/default/bootstrap.min.css') }}" type="text/css"
+        id="app-default-stylesheet">
+
+    <link rel="stylesheet" href="{{ Asset('assets_admin/css/config/default/app.min.css') }}" type="text/css"
+        id="bs-default-stylesheet">
+
+    <link rel="stylesheet" href="{{ Asset('assets_admin/css/config/default/bootstrap-dark.min.css') }}" type="text/css"
+        id="bs-dark-stylesheet" disabled="disabled">
+
+    <link rel="stylesheet" href="{{ Asset('assets_admin/css/config/default/app-dark.min.css') }}" type="text/css"
+        id="app-dark-stylesheet" disabled="disabled">
+
+    <!-- icons -->
+    <link rel="stylesheet" href="{{ Asset('assets_admin/css/icons.min.css') }}" type="text/css">
+
+
+
 
 
 
     <!-- NewsStyles -->
 
 </head>
-<body data-spy="scroll" data-target=".navbar" data-offset="90">
+<body class="loading authentication-bg authentication-bg-pattern">
 
-    <!-- Preloader -->
-    <div class="preloader">
-        <div class="center">
-            <div class="spinner">
-                <div class="blob top"></div>
-                <div class="blob bottom"></div>
-                <div class="blob left"></div>
-                <div class="blob move-blob"></div>
-            </div>
-        </div>
-    </div>
-    <!-- Preloader End -->
 
-    <!--login start-->
-    <section class="p-lg-0 login-sec">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 col-lg-6 order-2 order-lg-1 position-relative d-flex align-items-center bg-1">
-                    <div class="login-content text-center text-lg-left">
+    <div class="account-pages my-5">
+        <div class="container">
 
-                        <!--title-->
-                        <div class="title d-inline-block mb-4">
-                            <h3 class="mb-3 heading">Bienvenido(a) a Prommo</h3>
-                            <p class="text">Ingresa los acceso que se te han proporcionado al registrarte con nosotros.</p>
-                        </div>
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-4">
+                    <div class="text-center">   
+                        <a href="index.html">
+                            <img src="{{ Asset('assets/img/Logoblancotransparente.png') }}" alt="" height="82" class="mx-auto">
+                        </a>
+                        <p class="text-muted mt-2 mb-4"></p>
 
-                        @if(Session::has('error'))
+                    </div>
+                    <div class="card">
+                        <div class="card-body p-4">
+                            
+                            <div class="text-center mb-4">
+                                <h4 class="text-uppercase mt-0">Bienvenido(a)</h4>
+                            </div>
+                            @if(Session::has('error'))
 
                             <div class="alert alert-danger alert-dismissible fade show" style="background-color:#8e1313 !important;border-color:#8e1313;color:#fff !important;" role="alert">
                             <strong>ERROR : </strong> {{ Session::get('error') }}
@@ -80,69 +80,48 @@
 
                         @endif
 
-                        <!--form-->
-                        <form class="needs-validation" action="{{ $form_url }}" method="post">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <div class="row">
-                            <div class="col-12">
-                                <input class="form-control" type="email" name="username" placeholder="Usuario" required="required">
-                            </div>
-                            <div class="col-12">
-                                <input class="form-control" type="password" name="password" placeholder="Contraseña" required="required">
-                            </div>
-                        </div>
-                            <div class="form-button">
-                                <button id="submit" type="submit" class="btn btn-large rounded-pill main-btn">Iniciar Sesión</button>
-                            </div>
-                        </form>
+                            <form class="needs-validation" action="{{ $form_url }}" method="post">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <div class="mb-3">
+                                    <label for="emailaddress" class="form-label">Email address</label>
+                                    <input class="form-control" type="email" name="username" required="" placeholder="Enter your email">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input class="form-control" type="password" name="password" placeholder="Contraseña" required="required">
+                                </div>
+
+
+                                <div class="mb-3 d-grid text-center">
+                                    <button class="btn " style="background-color: #ff914d; color: #fff" type="submit"> Iniciar Sesión </button>
+                                </div>
+                            </form>
+
+                        </div> <!-- end card-body -->
                     </div>
-                    <!--bottom nav start-->
-                    <div class="bottom-mini-nav">
-                        <div class="row no-gutters bg-1">
-                            <div class="col-12 col-lg-12 simple-navbar d-flex align-items-center justify-content-start">
-                                <nav class="navbar">
-                                    <a class="nav-link link" href="https://play.google.com/store/apps/dev?id=9163379332333958723" target="_blank">Descargar Apps</a>
-                                    <a class="nav-link link" href="https://soypideme.com/about" target="_blank">Acerca de nosotros</a>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                    <!--bottom nav end-->
-                </div>
-                <div class="col-12 col-lg-6 p-0 order-1 order-lg-2 login-side-background" style="background-image: url('{{ Asset('assets/img/bg-store.png') }}');">
-                    <!--Feature Image Half-->
-                </div>
+                    <!-- end card -->
+
+           
+
+                </div> <!-- end col -->
             </div>
+            <!-- end row -->
         </div>
-    </section>
+        <!-- end container -->
+    </div>
+    <!-- end page -->
+
+
+
+
+
     <!--adress end-->
 
-<!-- JavaScript -->
-<script src="{{ Asset('assets/js/bundle.min.js') }}"></script>
-<!-- Plugin Js -->
-<script src="{{ Asset('assets/js/jquery.fancybox.min.js') }}"></script>
-<script src="{{ Asset('assets/js/owl.carousel.min.js') }}"></script>
-<script src="{{ Asset('assets/js/parallaxie.min.js') }}"></script>
-<script src="{{ Asset('assets/js/wow.min.js') }}"></script>
-<!-- REVOLUTION JS FILES -->
-<script src="{{ Asset('assets/js/jquery.themepunch.tools.min.js') }}"></script>
-<script src="{{ Asset('assets/js/jquery.themepunch.revolution.min.js') }}"></script>
-<!-- SLIDER REVOLUTION EXTENSIONS -->
-<script src="{{ Asset('assets/js/extensions/revolution.extension.actions.min.js') }}"></script>
-<script src="{{ Asset('assets/js/extensions/revolution.extension.carousel.min.js') }}"></script>
-<script src="{{ Asset('assets/js/extensions/revolution.extension.kenburn.min.js') }}"></script>
-<script src="{{ Asset('assets/js/extensions/revolution.extension.layeranimation.min.js') }}"></script>
-<script src="{{ Asset('assets/js/extensions/revolution.extension.migration.min.js') }}"></script>
-<script src="{{ Asset('assets/js/extensions/revolution.extension.navigation.min.js') }}"></script>
-<script src="{{ Asset('assets/js/extensions/revolution.extension.parallax.min.js') }}"></script>
-<script src="{{ Asset('assets/js/extensions/revolution.extension.slideanims.min.js') }}"></script>
-<script src="{{ Asset('assets/js/extensions/revolution.extension.video.min.js') }}"></script>
-<!--Tilt Js-->
-<script src="{{ Asset('assets/js/TweenMax.min.js') }}"></script>
-<!-- custom script-->
-<script src="{{ Asset('assets/js/nouislider.min.js') }}"></script>
-<script src="{{ Asset('assets/js/slick.min.js') }}"></script>
+    <script src="{{ Asset('assets_admin/js/vendor.min.js') }}"></script>
 
-<script src="{{ Asset('assets/js/script.js') }}"></script>
+    <!-- App js -->
+
+    <script src="{{ Asset('assets_admin/js/app.min.js') }}"></script>
 </body>
 </html>
