@@ -33,7 +33,7 @@
 
 
 
-    <link rel="stylesheet" type="text/css" href="{{ Asset('assets/css/atmos.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ Asset('public/assets/css/atmos.css') }}">
     <link rel="stylesheet" href="{{ Asset('public/assets_admin/css/config/default/bootstrap.min.css') }}" type="text/css"
         id="app-default-stylesheet">
 
@@ -153,13 +153,13 @@
         <!-- End Page content -->
         <!-- ============================================================== -->
     </div>
-    <script src="{{ Asset('assets/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/popper/popper.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/select2/js/select2.full.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
-    <script src="{{ Asset('assets/js/atmos.min.js?v=') }}<?php echo time(); ?>"></script>
+    <script src="{{ Asset('public/assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ Asset('public/assets/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script src="{{ Asset('public/assets/vendor/popper/popper.js') }}"></script>
+    <script src="{{ Asset('public/assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ Asset('public/assets/vendor/select2/js/select2.full.min.js') }}"></script>
+    <script src="{{ Asset('public/assets/vendor/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
+    <script src="{{ Asset('public/assets/js/atmos.min.js?v=') }}<?php echo time(); ?>"></script>
     <!-- Vendor js -->
     <script src="{{ Asset('public/assets_admin/js/vendor.min.js') }}"></script>
     <!-- Plugins js-->
@@ -173,8 +173,8 @@
     <script src="{{ Asset('public/assets_admin/libs/jquery-knob/jquery.knob.min.js') }}"></script>
     <!-- App js-->
     <script src="{{ Asset('public/assets_admin/js/app.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/apexchart/apexcharts.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/sweetalert/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ Asset('public/assets/vendor/apexchart/apexcharts.min.js') }}"></script>
+    <script src="{{ Asset('public/assets/vendor/sweetalert/sweetalert2.all.min.js') }}"></script>
 
     <script>
         $(function() {
@@ -185,18 +185,19 @@
 
         function deleteConfirm(url) {
             Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                title: 'Estas seguro(a)',
+                text: "No podrás revertir esto!",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonText: 'Si, eliminarlo!',
+                cancelButtonText: "Cancelar",
             }).then((result) => {
                 if (result.value) {
                     Swal.fire(
-                        'Deleted!',
-                        'This Entry has been deleted.',
+                        'Eliminado!',
+                        'Esta entrada ha sido eliminada.',
                         'success'
                     )
 
@@ -207,18 +208,19 @@
 
         function confirmAlert(url) {
             Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                title: 'Estas seguro(a)',
+                text: "",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, Do it!'
+                confirmButtonText: 'Sí, hazlo!',
+                cancelButtonText: "Cancelar",
             }).then((result) => {
                 if (result.value) {
                     Swal.fire(
-                        'Changed!',
-                        'This Entry has been Changed.',
+                        'Cambiado!',
+                        'Esta entrada ha sido modificada.',
                         'success'
                     )
 
