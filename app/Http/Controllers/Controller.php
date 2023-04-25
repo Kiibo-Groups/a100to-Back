@@ -233,7 +233,7 @@ class Controller extends BaseController
 				// A Twilio phone number you purchased at twilio.com/console
 				'from' =>  '+13144417163',
 				// the body of the text message you'd like to send
-				'body' => 'Bienvenido a Prommo, ingresa el siguiente código para terminar tu registro: '.$otp.' '.$hash
+				'body' => 'Bienvenido a A100to, ingresa el siguiente código para terminar tu registro: '.$otp.' '.$hash
 			]
 		);
 

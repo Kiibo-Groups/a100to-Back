@@ -21,22 +21,22 @@ class NodejsServer extends BaseController
 
     function newOrder($data)
     {
-        return $this->CurlGet($data,"https://us-central1-prommo-app.cloudfunctions.net/app/api/newOrder/");
+        return $this->CurlGet($data,"https://<>/app/api/newOrder/");
     }
 
     function orderStatus($data)
     {
-        return $this->CurlGet($data,"https://us-central1-prommo-app.cloudfunctions.net/app/api/orderStatus/");
+        return $this->CurlGet($data,"https://<>/app/api/orderStatus/");
     }
     
     function setStaffDelivery($data)
     {
-        return $this->CurlGet($data,"https://us-central1-prommo-app.cloudfunctions.net/app/api/setStaffDelivery/");
+        return $this->CurlGet($data,"https://<>/app/api/setStaffDelivery/");
     }
 
     function delStaffDeliveryOrder($data)
     {
-        return $this->CurlGet($data,"https://us-central1-prommo-app.cloudfunctions.net/app/api/delStaffDeliveryOrder/");
+        return $this->CurlGet($data,"https://<>/app/api/delStaffDeliveryOrder/");
     }
 
     /**
@@ -46,12 +46,12 @@ class NodejsServer extends BaseController
     */
     function newStaffDelivery($data)
     {
-        return $this->CurlGet($data,"https://us-central1-prommo-app.cloudfunctions.net/app/api/newStaff/");
+        return $this->CurlGet($data,"https://<>/app/api/newStaff/");
     }
 
     function updateStaffDelivery($data)
     {
-        return $this->CurlGet($data,"https://us-central1-prommo-app.cloudfunctions.net/app/api/updateStaff/");
+        return $this->CurlGet($data,"https://<>/app/api/updateStaff/");
     }
 
     /**
@@ -67,7 +67,7 @@ class NodejsServer extends BaseController
             'id_order' => isset($data['id_order']) ? $data['id_order'] : ''
         );
     
-        return $this->CurlGet($fields,"https://us-central1-prommo-app.cloudfunctions.net/app/api/newOrderComm/");
+        return $this->CurlGet($fields,"https://<>/app/api/newOrderComm/");
     }
 
     // Cron para termino del pedido
@@ -77,7 +77,7 @@ class NodejsServer extends BaseController
             'id_order' => isset($data['order_id']) ? $data['order_id'] : 0
         );
         
-        return $this->CurlGet($fields,"https://us-central1-prommo-app.cloudfunctions.net/app/api/InitCronOrder/");
+        return $this->CurlGet($fields,"https://<>/app/api/InitCronOrder/");
     }
     
     

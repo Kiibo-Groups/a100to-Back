@@ -211,15 +211,15 @@ class AppUser extends Authenticatable
             $res->save();
 
             $para       =   $data['email'];
-            $asunto     =   'Codigo de acceso - Prommo';
-            $mensaje    =   "Hola ".$res->name." Un gusto saludarte, se ha pedido un codigo de recuperacion para acceder a tu cuenta en Prommo";
+            $asunto     =   'Codigo de acceso - A100TO';
+            $mensaje    =   "Hola ".$res->name." Un gusto saludarte, se ha pedido un codigo de recuperacion para acceder a tu cuenta en A100TO";
             $mensaje    .=  ' '.'<br>';
             $mensaje    .=  "Tu codigo es: <br />";
             $mensaje    .=  '# '.$otp;
             $mensaje    .=  "<br /><hr />Recuerda, si no lo has solicitado tu has caso omiso a este mensaje y te recomendamos hacer un cambio en tu contrasena.";
-            $mensaje    .=  "<br/ ><br /><br /> Te saluda el equipo de Prommo";
+            $mensaje    .=  "<br/ ><br /><br /> Te saluda el equipo de A100TO";
         
-            $cabeceras = 'From: Prommo' . "\r\n";
+            $cabeceras = 'From: A100TO' . "\r\n";
             
             $cabeceras .= 'MIME-Version: 1.0' . "\r\n";
             
