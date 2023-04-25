@@ -121,13 +121,13 @@
 
     </div>
 
-    <script src="{{ Asset('assets/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/popper/popper.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/select2/js/select2.full.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
-    <script src="{{ Asset('assets/js/atmos.min.js?v=') }}<?php echo time(); ?>"></script>
+    <script src="{{ Asset('public/assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ Asset('public/assets/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script src="{{ Asset('public/assets/vendor/popper/popper.js') }}"></script>
+    <script src="{{ Asset('public/assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ Asset('public/assets/vendor/select2/js/select2.full.min.js') }}"></script>
+    <script src="{{ Asset('public/assets/vendor/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
+    <script src="{{ Asset('public/assets/js/atmos.min.js?v=') }}<?php echo time(); ?>"></script>
     <!-- Vendor js -->
     <script src="{{Asset('public/assets_admin/js/vendor.min.js') }}"></script>
     <!-- Plugins js-->
@@ -141,8 +141,8 @@
     <script src="{{Asset('public/assets_admin/libs/jquery-knob/jquery.knob.min.js') }}"></script>
     <!-- App js-->
     <script src="{{Asset('public/assets_admin/js/app.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/apexchart/apexcharts.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/sweetalert/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ Asset('public/assets/vendor/apexchart/apexcharts.min.js') }}"></script>
+    <script src="{{ Asset('public/assets/vendor/sweetalert/sweetalert2.all.min.js') }}"></script>
 
     <script>
         $(function() {
