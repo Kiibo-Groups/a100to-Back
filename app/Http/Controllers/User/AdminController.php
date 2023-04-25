@@ -49,11 +49,11 @@ class AdminController extends Controller {
 		
 		if (auth()->attempt(['email' => $username, 'password' => $password,'status' => 0]))
 		{
-			return Redirect::to(env('user').'/home')->with('message', 'Welcome ! Your are logged in now.'.Auth::user()->id);
+			return Redirect::to(env('user').'/home')->with('message', 'Bienvenido ! Estás conectado ahora.'.Auth::user()->id);
 		}
 		else
 		{
-			return Redirect::to(env('user').'/login')->with('error', 'Username password not match')->withInput();
+			return Redirect::to(env('user').'/login')->with('error', 'La contraseña y/o Nombre de usuario no coinciden')->withInput();
 		}
 	}
 
