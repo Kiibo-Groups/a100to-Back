@@ -60,4 +60,4 @@
 	</div>
 </div>
 
-<button type="submit" class="btn btn-success btn-cta">Guardar</button>
+<button type="submit" class="btn btn-success width-xl waves-effect waves-light btn-cta">Guardar</button>

@@ -25,7 +25,7 @@
                                 <b style="margin-left:20px">@yield('title')</b>
                             </div>
                             <div class="col-md-6" style="text-align: right;"><a href="{{ Asset($link . 'add') }}"
-                                    class="btn m-b-15 ml-2 mr-2 btn-rounded btn-warning">Add New</a>&nbsp;&nbsp;&nbsp;</div>
+                                    class="btn btn-warning rounded-pill waves-effect waves-light">Agregar nuevo</a>&nbsp;&nbsp;&nbsp;</div>
 
                         </div>
 
@@ -73,11 +73,11 @@
                                             </td>
                                             <td>
                                                 @if ($row->status == 0)
-                                                    <button type="button" class="btn btn-sm m-b-15 ml-2 mr-2 btn-success"
-                                                        onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Active</button>
+                                                    <button type="button" class="btn btn-success width-xs waves-effect waves-light"
+                                                        onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Activo</button>
                                                 @else
-                                                    <button type="button" class="btn btn-sm m-b-15 ml-2 mr-2 btn-danger"
-                                                        onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Disabled</button>
+                                                    <button type="button" class="btn btn-danger width-xs waves-effect waves-light"
+                                                        onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Inactivo</button>
                                                 @endif
                                             </td>
                                             <td style="text-align: right">

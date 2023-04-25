@@ -252,7 +252,7 @@
                                         </div>
                                     </div>
 
-                                    <button type="submit"  class="btn btn-primary width-xl waves-effect waves-light btn-cta" >Guardar Cambios</button>
+                                    <button type="submit"  class="btn btn-success width-xl waves-effect waves-light btn-cta" >Guardar Cambios</button>
                             </form>
                         </div>
                     </div>
