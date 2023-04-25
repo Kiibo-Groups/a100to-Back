@@ -121,7 +121,7 @@ class AdminUserController extends Controller {
 
 		$data->addNew($Request->all(),$id);
 		
-		return redirect(env('admin').'/adminUser')->with('message','Record Updated Successfully.');
+		return redirect(env('admin').'/adminUser')->with('message','Registro actualizado con éxito.');
 	}
 	
 	/*
@@ -133,7 +133,7 @@ class AdminUserController extends Controller {
 	{
 		Admin::where('id',$id)->delete();
 
-		return redirect(env('admin').'/adminUser')->with('message','Record Deleted Successfully.');
+		return redirect(env('admin').'/adminUser')->with('message','Registro eliminado con éxito.');
 	}
 
 	/*
@@ -147,6 +147,6 @@ class AdminUserController extends Controller {
 		$res->status 	= $res->status == 0 ? 1 : 0;
 		$res->save();
 
-		return redirect(env('admin').'/adminUser')->with('message','Status Updated Successfully.');
+		return redirect(env('admin').'/adminUser')->with('message','Estado actualizado con éxito.');
 	}
 }

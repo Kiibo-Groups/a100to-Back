@@ -124,7 +124,7 @@ class AddonController extends Controller {
 		
 		$data->addNew($Request->all(),$id);
 		
-		return redirect(env('user').'/addon')->with('message','Record Updated Successfully.');
+		return redirect(env('user').'/addon')->with('message','Registro actualizado con éxito.');
 	}
 	
 	/*
@@ -136,6 +136,6 @@ class AddonController extends Controller {
 	{
 		Addon::where('id',$id)->delete();
 
-		return redirect(env('user').'/addon')->with('message','Record Deleted Successfully.');
+		return redirect(env('user').'/addon')->with('message','Registro eliminado con éxito.');
 	}
 }

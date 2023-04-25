@@ -161,7 +161,7 @@ class ItemController extends Controller {
 
 		$data->addNew($Request->all(),$id);
 		
-		return redirect(env('user').'/item')->with('message','Record Updated Successfully.');
+		return redirect(env('user').'/item')->with('message','Registro actualizado con éxito.');
 	}
 	
 	/*
@@ -174,7 +174,7 @@ class ItemController extends Controller {
 		Item::where('id',$id)->delete();
 		ItemAddon::where('item_id',$id)->delete();
 
-		return redirect(env('user').'/item')->with('message','Record Deleted Successfully.');
+		return redirect(env('user').'/item')->with('message','Registro eliminado con éxito.');
 	}
 
 	/*

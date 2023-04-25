@@ -121,13 +121,13 @@ class AdminController extends Controller {
 
 		if($admin->matchPassword($Request->get('password')))
 		{
-			return Redirect::back()->with('error','Opps! Your current password is not match.');
+			return Redirect::back()->with('error','Opps! Su contraseña actual no coincide.');
 		}
 		else
 		{
 			$admin->updateData($Request->all());
 
-			return Redirect::back()->with('message','Account Information Updated Successfully.');
+			return Redirect::back()->with('message','Información actualizada con éxito.');
 		}
 	}
 

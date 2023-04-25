@@ -86,7 +86,7 @@ class OfferController extends Controller {
 
 		$data->addNew($Request->all(),$id);
 		
-		return redirect(env('user').'/offer')->with('message','Record Updated Successfully.');
+		return redirect(env('user').'/offer')->with('message','Registro actualizado con éxito.');
 	}
 	
 	/*
@@ -98,7 +98,7 @@ class OfferController extends Controller {
 	{
 		Offer::where('id',$id)->delete();
 
-		return redirect(env('user').'/offer')->with('message','Record Deleted Successfully.');
+		return redirect(env('user').'/offer')->with('message','Registro eliminado con éxito.');
 	}
 
 	/*
@@ -112,6 +112,6 @@ class OfferController extends Controller {
 		$res->status 	= $res->status == 0 ? 1 : 0;
 		$res->save();
 
-		return redirect(env('user').'/offer')->with('message','Status Updated Successfully.');
+		return redirect(env('user').'/offer')->with('message','Estado actualizado con éxito.');
 	}
 }

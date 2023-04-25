@@ -147,7 +147,7 @@ class UserController extends Controller {
 
 		$data->addNew($Request->all(),$id);
 		
-		return redirect(env('admin').'/user')->with('message','Record Updated Successfully.');
+		return redirect(env('admin').'/user')->with('message','Registro actualizado con éxito.');
 	}
 	
 	/*
@@ -163,7 +163,7 @@ class UserController extends Controller {
 		// Eliminamos el menu o productos
 		Addon::where('store_id',$id)->delete();
 
-		return redirect(env('admin').'/user')->with('message','Record Deleted Successfully.');
+		return redirect(env('admin').'/user')->with('message','Registro eliminado con éxito.');
 	}
 
 	/*
@@ -188,7 +188,7 @@ class UserController extends Controller {
 
 		$res->save();
 
-		return redirect(env('admin').'/user')->with('message','Status Updated Successfully.');
+		return redirect(env('admin').'/user')->with('message','Estado actualizado con éxito.');
 	}
 
 	public function imageRemove($id)

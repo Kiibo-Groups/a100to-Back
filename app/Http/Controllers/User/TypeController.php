@@ -69,7 +69,7 @@ class TypeController extends Controller {
 		
 		$data->addNew($Request->all(),$id);
 		
-		return redirect(env('user').'/type')->with('message','Record Updated Successfully.');
+		return redirect(env('user').'/type')->with('message','Registro actualizado con éxito.');
 	}
 	
 	/*
@@ -81,6 +81,6 @@ class TypeController extends Controller {
 	{
 		Type::where('id',$id)->delete();
 
-		return redirect(env('user').'/type')->with('message','Record Deleted Successfully.');
+		return redirect(env('user').'/type')->with('message','Registro eliminado con éxito.');
 	}
 }

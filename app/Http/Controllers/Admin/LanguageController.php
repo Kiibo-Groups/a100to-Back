@@ -89,7 +89,7 @@ class LanguageController extends Controller {
 
 		$data->addNew($Request->all(),$id);
 
-		return redirect(env('admin').'/language')->with('message','Record Updated Successfully.');
+		return redirect(env('admin').'/language')->with('message','Registro actualizado con éxito.');
 	}
 
 	/*
@@ -101,6 +101,6 @@ class LanguageController extends Controller {
 	{
 		Language::where('id',$id)->delete();
 
-		return redirect(env('admin').'/language')->with('message','Record Deleted Successfully.');
+		return redirect(env('admin').'/language')->with('message','Registro eliminado con éxito.');
 	}
 }

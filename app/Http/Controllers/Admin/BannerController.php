@@ -139,7 +139,7 @@ class BannerController extends Controller {
 		
 		$data->addNew($Request->all(),$id);
 		
-		return redirect(env('admin').'/banner')->with('message','Record Updated Successfully.');
+		return redirect(env('admin').'/banner')->with('message','Registro actualizado con éxito.');
 	}
 	
 	/*
@@ -157,7 +157,7 @@ class BannerController extends Controller {
 
 		$res->delete();
 
-		return redirect(env('admin').'/banner')->with('message','Record Deleted Successfully.');
+		return redirect(env('admin').'/banner')->with('message','Registro eliminado con éxito.');
 	}
 
 	/*
@@ -171,6 +171,6 @@ class BannerController extends Controller {
 		$res->status 	= $res->status == 0 ? 1 : 0;
 		$res->save();
 
-		return redirect(env('admin').'/banner')->with('message','Status Updated Successfully.');
+		return redirect(env('admin').'/banner')->with('message','Estado actualizado con éxito.');
 	}
 }

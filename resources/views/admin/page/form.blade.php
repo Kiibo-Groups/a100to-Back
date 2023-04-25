@@ -1,4 +1,4 @@
-<div class="tab-content" id="myTabContent1">
+<div >
 
 
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">

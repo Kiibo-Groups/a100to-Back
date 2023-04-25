@@ -230,7 +230,7 @@ class DeliveryController extends Controller {
 
 		$data->addNew($Request->all(),$id,'web');
 
-		return redirect(env('admin').'/delivery')->with('message','Record Updated Successfully.');
+		return redirect(env('admin').'/delivery')->with('message','Registro actualizado con éxito.');
 	}
 
 	/*
@@ -242,7 +242,7 @@ class DeliveryController extends Controller {
 	{
 		Delivery::where('id',$id)->delete();
 
-		return redirect(env('admin').'/delivery')->with('message','Record Deleted Successfully.');
+		return redirect(env('admin').'/delivery')->with('message','Registro eliminado con éxito.');
 	}
 
 	/*
@@ -276,7 +276,7 @@ class DeliveryController extends Controller {
 			
 		}
 
-		return redirect(env('admin').'/delivery')->with('message','Status Updated Successfully.');
+		return redirect(env('admin').'/delivery')->with('message','Estado actualizado con éxito.');
 	}
 
 	public function status_admin($id)

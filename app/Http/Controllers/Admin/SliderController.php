@@ -89,7 +89,7 @@ class SliderController extends Controller {
 		
 		$data->addNew($Request->all(),$id);
 		
-		return redirect(env('admin').'/slider')->with('message','Record Updated Successfully.');
+		return redirect(env('admin').'/slider')->with('message','Registro actualizado con éxito.');
 	}
 	
 	/*
@@ -105,6 +105,6 @@ class SliderController extends Controller {
 
 		$res->delete();
 
-		return redirect(env('admin').'/slider')->with('message','Record Deleted Successfully.');
+		return redirect(env('admin').'/slider')->with('message','Registro eliminado con éxito.');
 	}
 }

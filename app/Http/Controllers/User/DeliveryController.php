@@ -96,7 +96,7 @@ class DeliveryController extends Controller {
 
 		$data->addNew($Request->all(),$id,'web');
 		
-		return redirect(env('user').'/delivery')->with('message','Record Updated Successfully.');
+		return redirect(env('user').'/delivery')->with('message','Registro actualizado con éxito.');
 	}
 	
 	/*
@@ -108,7 +108,7 @@ class DeliveryController extends Controller {
 	{
 		Delivery::where('id',$id)->delete();
 
-		return redirect(env('user').'/delivery')->with('message','Record Deleted Successfully.');
+		return redirect(env('user').'/delivery')->with('message','Registro eliminado con éxito.');
 	}
 
 	/*
@@ -141,6 +141,6 @@ class DeliveryController extends Controller {
 			
 		}
 
-		return redirect(env('user').'/delivery')->with('message','Status Updated Successfully.');
+		return redirect(env('user').'/delivery')->with('message','Estado actualizado con éxito.');
 	}
 }

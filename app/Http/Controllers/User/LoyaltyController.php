@@ -105,7 +105,7 @@ class LoyaltyController extends Controller {
 		
 		$data->addNew($Request->all(),$id);
 		
-		return redirect(env('user').'/loyalty')->with('message','Record Updated Successfully.');
+		return redirect(env('user').'/loyalty')->with('message','Registro actualizado con éxito.');
 	}
 	
 	/*

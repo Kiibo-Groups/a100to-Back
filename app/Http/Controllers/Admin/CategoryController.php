@@ -178,7 +178,7 @@ class CategoryController extends Controller {
 
 		if ($flag == true) {
 			$data->addNew($Request->all(),$id); 
-			return redirect(env('admin').'/category')->with('message','Record Updated Successfully.');
+			return redirect(env('admin').'/category')->with('message','Registro actualizado con éxito.');
 		}else {
 			return redirect::back()->with('error','Por favor, ingresa datos validos!!');
 		} 
@@ -213,6 +213,6 @@ class CategoryController extends Controller {
 		$res->status 	= $res->status == 0 ? 1 : 0;
 		$res->save();
 
-		return redirect(env('admin').'/category')->with('message','Status Updated Successfully.');
+		return redirect(env('admin').'/category')->with('message','Estado actualizado con éxito.');
 	}
 }

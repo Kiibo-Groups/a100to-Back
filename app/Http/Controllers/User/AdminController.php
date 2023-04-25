@@ -140,7 +140,7 @@ class AdminController extends Controller {
 
 		$data->addNew($Request->all(),$id);
 
-		return Redirect::back()->with('message','Account Information Updated Successfully.');
+		return Redirect::back()->with('message','Información actualizada con éxito.');
 	}
 
 	public function close()
@@ -149,7 +149,7 @@ class AdminController extends Controller {
 		$res->open  = $res->open == 0 ? 1 : 0;
 		$res->save();
 
-		return Redirect::back()->with('message','Status Changes Successfully.');
+		return Redirect::back()->with('message','Cambios de estado con éxito.');
 
 	}
 }

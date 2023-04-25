@@ -111,7 +111,7 @@ class CityController extends Controller {
 
 		$data->addNew($Request->all(),$id);
 		
-		return redirect(env('admin').'/city')->with('message','Record Updated Successfully.');
+		return redirect(env('admin').'/city')->with('message','Registro actualizado con éxito.');
 	}
 	
 	/*
@@ -143,6 +143,6 @@ class CityController extends Controller {
 		$res->status 	= $res->status == 0 ? 1 : 0;
 		$res->save();
 
-		return redirect(env('admin').'/city')->with('message','Status Updated Successfully.');
+		return redirect(env('admin').'/city')->with('message','Estado actualizado con éxito.');
 	}
 }

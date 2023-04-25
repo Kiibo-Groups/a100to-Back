@@ -6,13 +6,15 @@
 
 @section('content')
     <div class="content-page" id="div2">
-        @include('user.layout.alert')
+       
         <div class="content">
             <div class="container-fluid">
 
-                <div class="row ">
+                <div class="row " style="padding: 20px">
                     <div class="col-lg-11 mx-auto mt-2">
+                        @include('user.layout.alert')
                         <div class="tab-content" id="myTabContent1">
+                            
                             <form action="{{ $form_url }}" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -235,15 +237,14 @@
                                         <div class="card-body">
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
-                                                    <label for="inputPassword4">Current Password</label>
+                                                    <label for="inputPassword4">Contraseña actual</label>
                                                     <input type="password" class="form-control" id="inputPassword4"
                                                         name="password" required="required"
-                                                        placeholder="Enter Your Current Password For Save Setting">
+                                                        placeholder="Ingrese su contraseña actual para guardar la configuración">
                                                 </div>
 
                                                 <div class="form-group col-md-6">
-                                                    <label for="inputPassword4">New Password <small style="color:red">(if
-                                                            u want to change current password)</small></label>
+                                                    <label for="inputPassword4">Nueva Password <small style="color:red">(Si quieres cambiar la contraseña actual)</small></label>
                                                     <input type="password" class="form-control" id="inputPassword4"
                                                         name="new_password">
                                                 </div>
@@ -251,7 +252,7 @@
                                         </div>
                                     </div>
 
-                                    <button type="submit" class="btn btn-success btn-cta" style="margin-left: 33px">Guardar Cambios</button>
+                                    <button type="submit"  class="btn btn-primary width-xl waves-effect waves-light btn-cta" >Guardar Cambios</button>
                             </form>
                         </div>
                     </div>
