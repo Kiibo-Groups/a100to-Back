@@ -15,7 +15,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row ">
-                    <div class="col-lg-12 mx-auto  mt-2">
+                    <div class="col-lg-11 mx-auto  mt-2">
 
                         {!! Form::model($data, ['url' => [$form_url], 'files' => true], ['class' => 'col s12']) !!}
 

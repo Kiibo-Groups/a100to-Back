@@ -14,11 +14,14 @@
         <div class="content">
             <!-- Start Content-->
             <div class="container-fluid">
+                <div class="row ">
+                    <div class="col-lg-11 mx-auto mt-2">
 
-                @include('admin.dashboard.overview')
-                @include('admin.dashboard.chart')
+                        @include('admin.dashboard.overview')
+                        @include('admin.dashboard.chart')
 
-
+                    </div>
+                </div>
             </div>
         </div>
     </div>

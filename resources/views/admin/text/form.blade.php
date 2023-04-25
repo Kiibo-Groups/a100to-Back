@@ -8,7 +8,7 @@
 
             <input type="hidden" name="lid[]" value="{{ $l['id'] }}">
 
-            <h4 style="color:#000;margin-left: 30px">Welcome Page</h4>
+            <h4 style="color:#000">Welcome Page</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
@@ -31,7 +31,7 @@
             </div>
 
             <!--start-->
-            <h4 style="margin-left: 30px">Select City Page</h4>
+            <h4 >Select City Page</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
@@ -69,7 +69,7 @@
             <!--End-->
 
             <!--start-->
-            <h4 style="margin-left: 30px">Home Page</h4>
+            <h4 >Home Page</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
@@ -165,7 +165,7 @@
             <!--End-->
 
             <!--start-->
-            <h4 style="margin-left: 30px">Side Menu</h4>
+            <h4 >Side Menu</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
@@ -195,7 +195,7 @@
             <!--End-->
 
             <!--start-->
-            <h4 style="margin-left: 30px">Item Page</h4>
+            <h4 >Item Page</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
@@ -275,7 +275,7 @@
             <!--End-->
 
             <!--start-->
-            <h4 style="margin-left: 30px">Info Page</h4>
+            <h4 >Info Page</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
@@ -325,7 +325,7 @@
             <!--End-->
 
             <!--start-->
-            <h4 style="margin-left: 30px">Cart Page</h4>
+            <h4 >Cart Page</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
@@ -415,7 +415,7 @@
             <!--End-->
 
             <!--start-->
-            <h4 style="margin-left: 30px">Coupon Page</h4>
+            <h4 >Coupon Page</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
@@ -445,7 +445,7 @@
             <!--End-->
 
             <!--start-->
-            <h4 style="margin-left: 30px">Login Page</h4>
+            <h4 >Login Page</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
@@ -495,7 +495,7 @@
             <!--End-->
 
             <!--start-->
-            <h4 style="margin-left: 30px">Forgot Password</h4>
+            <h4 >Forgot Password</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
@@ -526,7 +526,7 @@
             <!--End-->
 
             <!--start-->
-            <h4 style="margin-left: 30px">Signup</h4>
+            <h4 >Signup</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
@@ -557,7 +557,7 @@
             <!--End-->
 
             <!--start-->
-            <h4 style="margin-left: 30px">Place Order</h4>
+            <h4 >Place Order</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
@@ -607,7 +607,7 @@
             <!--End-->
 
             <!--start-->
-            <h4 style="margin-left: 30px">Add New Address</h4>
+            <h4 >Add New Address</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
@@ -644,7 +644,7 @@
 
 
             <!--start-->
-            <h4 style="margin-left: 30px">Order Confirm Page</h4>
+            <h4 >Order Confirm Page</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
@@ -688,7 +688,7 @@
             <!--End-->
 
             <!--start-->
-            <h4 style="margin-left: 30px">My Account</h4>
+            <h4 >My Account</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
@@ -738,7 +738,7 @@
             <!--End-->
 
             <!--start-->
-            <h4 style="margin-left: 30px">Order History</h4>
+            <h4 >Order History</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
@@ -808,7 +808,7 @@
             <!--End-->
 
             <!--start-->
-            <h4 style="margin-left: 30px">Rating & Info Pages</h4>
+            <h4 >Rating & Info Pages</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
@@ -903,7 +903,7 @@
             <!--End-->
 
             <!--start-->
-            <h4 style="margin-left: 30px">Delivery App</h4>
+            <h4 >Delivery App</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
@@ -987,7 +987,7 @@
             <!--End-->
 
             <!--start-->
-            <h4 style="margin-left: 30px">Store App</h4>
+            <h4 >Store App</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
@@ -1100,4 +1100,4 @@
 
 </div>
 
-<button type="submit" class="btn btn-success btn-cta" style="margin-left: 30px">Save changes</button><br><br>
+<button type="submit" class="btn btn-success btn-cta" >Save changes</button><br><br>

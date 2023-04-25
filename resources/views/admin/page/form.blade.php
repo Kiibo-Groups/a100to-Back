@@ -3,7 +3,7 @@
 
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
-        <h4 style="color:#000;margin-left: 30px">About Us Page</h4>
+        <h4 style="color:#000">About Us Page</h4>
         <div class="card py-3 m-b-30">
             <div class="card-body">
                 <div class="form-row">
@@ -31,7 +31,7 @@
             </div>
         </div>
 
-        <h4 style="margin-left: 30px">How it Works</h4>
+        <h4 >How it Works</h4>
         <div class="card py-3 m-b-30">
             <div class="card-body">
                 <div class="form-row">
@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        <h4 style="margin-left: 30px">Faq's</h4>
+        <h4 >Faq's</h4>
         <div class="card py-3 m-b-30">
             <div class="card-body">
                 <div class="form-row">
@@ -73,7 +73,7 @@
             </div>
         </div>
 
-        <h4 style="margin-left: 30px">Contact Us</h4>
+        <h4 >Contact Us</h4>
         <div class="card py-3 m-b-30">
             <div class="card-body">
                 <div class="form-row">
@@ -88,4 +88,4 @@
     </div>
 </div>
 
-<button type="submit" class="btn btn-success btn-cta" style="margin-left: 30px">Save changes</button><br><br>
+<button type="submit" class="btn btn-success btn-cta" >Save changes</button><br><br>
