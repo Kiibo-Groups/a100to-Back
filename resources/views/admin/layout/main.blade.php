@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="{{Asset('public/assets_admin/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}"
         type="text/css">
 
-    <link rel="stylesheet" type="text/css" href="{{ Asset('assets/css/atmos.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ Asset('public/assets/css/atmos.css') }}">
     <link rel="stylesheet" href="{{Asset('public/assets_admin/css/config/default/bootstrap.min.css') }}" type="text/css"
         id="app-default-stylesheet">
 
