@@ -18,7 +18,7 @@ class AuthenticateAdmin2
     public function handle(Request $request, Closure $next)
     {
         if (!Auth::guard('admin')->check()) {
-            return redirect(env('admin') . '/login')->with('error', 'Please login for access this page');
+            return redirect(env('admin') . '/login')->with('error', 'Por favor inicie sesión para acceder a esta página');
         }
         return $next($request);
     }

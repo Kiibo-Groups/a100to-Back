@@ -16,7 +16,7 @@ class Authenticate extends Middleware
     {
         if (! $request->expectsJson()) {
             //return route('login');
-            return redirect(env('user').'/login')->with('error','Please login for access this page');
+            return redirect(env('user').'/login')->with('error','Por favor inicie sesión para acceder a esta página');
         }
     }
 }
