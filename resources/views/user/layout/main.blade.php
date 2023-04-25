@@ -3,11 +3,10 @@
 
 <head>
     <style>
-        #div2 {
+    #div2 {
         max-height: 100%;
         overflow: auto;
-    
-        }
+    }
     </style>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" name="viewport">

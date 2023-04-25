@@ -78,7 +78,7 @@
                         A100TO
                     </span>
                     <span class="logo-lg" >
-                        <img src="{{ Asset('assets/img/logo.png') }}" alt="" height="86">
+                        <img src="{{ Asset('public/assets/img/logo.png') }}" alt="" height="86">
                     </span>
                 </a>
             </div>

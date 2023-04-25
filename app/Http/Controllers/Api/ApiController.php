@@ -521,7 +521,7 @@ class ApiController extends Controller {
 					"amount" => $_GET['amount'] * 100,
 					"currency" => "MXN",
 					"source" => $_GET['token'],
-					"description" => "Pago de compra en Prommo"
+					"description" => "Pago de compra en A100To"
 			]);
 
 			if($res['status'] === "succeeded")

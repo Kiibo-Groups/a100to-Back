@@ -42,16 +42,7 @@
             </ul>
         </div>
     </li>
-    <!-- SubCuentas -->
-    @if ($admin->hasPerm('Subaccount'))
-        <li>
-            <a href="{{ Asset(env('admin') . '/adminUser') }}" class=" menu-link">
-                <i class="mdi mdi-map-marker"></i>
-                <span> SubCuentas </span>
-            </a>
-        </li>
-    @endif
-    <!-- SubCuentas -->
+     
 
     <!-- Banners -->
     @if ($admin->hasPerm('Banners'))
@@ -80,8 +71,7 @@
         <li>
             <a href="{{ Asset(env('admin') . '/user') }}" class=" menu-link">
                 <i class="mdi mdi-home"></i>
-                <span>
-                    Negocios </span>
+                <span>  Negocios </span>
             </a>
         </li>
     @endif
@@ -98,28 +88,7 @@
         </li>
     @endif
     <!-- Ofertas de descuento -->
-
-    <!-- Repartidores -->
-    @if ($admin->hasPerm('Repartidores'))
-        <li>
-            <a href="#repartidores" data-bs-toggle="collapse">
-                <i class="mdi mdi-account-clock"></i>
-                <span> Repartidores </span>
-                <span class="menu-arrow"></span>
-            </a>
-            <div class="collapse" id="repartidores">
-                <ul class="nav-second-level">
-                    <li>
-                        <a href="{{ Asset(env('admin') . '/delivery') }}">Listado</a>
-                    </li>
-                    <li>
-                        <a href="{{ Asset(env('admin') . '/report_staff') }}" class=" menu-link">Reportes</a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-    @endif
-
+ 
     <!-- Gestion de pedidos -->
     <?php
     $cOrder = DB::table('orders')
@@ -195,18 +164,7 @@
         </li>
     @endif
     <!-- Notificaciones push -->
-
-    <!-- Reporte de ventas -->
-    @if ($admin->hasPerm('Reportes de ventas'))
-        <li>
-            <a href="{{ Asset(env('admin') . '/report') }}" class=" menu-link">
-                <i class="mdi mdi-file"></i>
-                <span>
-                    Reporte de ventas </span>
-            </a>
-        </li>
-    @endif
-    <!-- Reporte de ventas -->
+ 
 
     <!-- Usuarios -->
     @if ($admin->hasPerm('Usuarios Registrados'))

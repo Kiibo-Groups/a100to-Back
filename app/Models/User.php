@@ -161,7 +161,7 @@ class User extends Authenticatable
 
         if ($type == 'add') {
             // Creamos el QR
-            $link_qr        = "https://prommo.web.app/item?store=".substr(md5($add->name),0,15)."&id=".$add->id;
+            $link_qr        = "https://a100to.web.app/item?store=".substr(md5($add->name),0,15)."&id=".$add->id;
             $codeQR         = base64_encode(QrCode::format('png')->size(200)->generate($link_qr));
     
             $add->qr_code   = $codeQR;

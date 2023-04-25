@@ -54,7 +54,7 @@
 
                         <!--title-->
                         <div class="title d-inline-block mb-4">
-                            <h3 class="mb-3 heading">Bienvenido(a) 11a Prommo</h3>
+                            <h3 class="mb-3 heading">Bienvenido(a) a100to</h3>
                             <p class="text">Ingresa los acceso que se te han proporcionado al registrarte con nosotros.</p>
                         </div>
 
