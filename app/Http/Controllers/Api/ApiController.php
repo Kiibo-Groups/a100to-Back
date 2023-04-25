@@ -35,8 +35,8 @@ use App\Models\CardsUser;
 use App\Models\Favorites;
 use App\Models\Tables;
 
-use App\Visits;
-use App\Deposit;
+use App\Models\Visits;
+use App\Models\Deposit;
 
 use DB;
 use Validator;
