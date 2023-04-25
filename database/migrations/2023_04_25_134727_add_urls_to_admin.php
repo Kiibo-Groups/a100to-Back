@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class AddUrlsToAdmin extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('password_resets', function (Blueprint $table) {
-            $table->string('email')->index();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
+        Schema::table('admin', function (Blueprint $table) {
+           
+            $table->string('url1')->nullable()->after('ApiKey_google');
+            $table->string('url2')->nullable()->after('url1');    
+       
+           
         });
     }
 
@@ -27,6 +29,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('password_resets');
+        Schema::table('admin', function (Blueprint $table) {
+            //
+        });
     }
-};
+}

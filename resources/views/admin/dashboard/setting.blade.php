@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="content-page" id="div2">
-       
+
         <div class="content">
             <div class="container-fluid">
 
@@ -14,7 +14,7 @@
                     <div class="col-lg-11 mx-auto mt-2">
                         @include('user.layout.alert')
                         <div class="tab-content" id="myTabContent1">
-                            
+
                             <form action="{{ $form_url }}" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -63,7 +63,8 @@
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     @if ($data->logo)
-                                                        <img src="{{ Asset('upload/admin/' . $data->logo) }}" width="50">
+                                                        <img src="{{ Asset('upload/admin/' . $data->logo) }}"
+                                                            width="50">
                                                     @endif
                                                 </div>
                                             </div>
@@ -183,7 +184,8 @@
                                         </div>
                                     </div>
 
-                                    <h4 style="">Google ApiKey <br /><small style="font-size: 12px">(Introduce el ApiKey de tu
+                                    <h4 style="">Google ApiKey <br /><small style="font-size: 12px">(Introduce el
+                                            ApiKey de tu
                                             cuenta en <a href="https://cloud.google.com/"
                                                 target="_blank">https://cloud.google.com/</a> )</small></h4>
                                     <div class="card py-3 m-b-30">
@@ -198,6 +200,27 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <h4 style="">Videos de introducción </h4>
+                                    <div class="card py-3 m-b-30">
+                                        <div class="card-body">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="ApiKey_google">Url #1</label>
+                                                    <input type="text" class="form-control" id="url1"
+                                                        name="url1" value="{{ $data->url1 }}">
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <label for="ApiKey_google">Url #2</label>
+                                                    <input type="text" class="form-control" id="url2"
+                                                        name="url2" value="{{ $data->url2 }}">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
 
                                     <h4 style="">Social Links</h4>
                                     <div class="card py-3 m-b-30">
@@ -244,7 +267,9 @@
                                                 </div>
 
                                                 <div class="form-group col-md-6">
-                                                    <label for="inputPassword4">Nueva Password <small style="color:red">(Si quieres cambiar la contraseña actual)</small></label>
+                                                    <label for="inputPassword4">Nueva Password <small
+                                                            style="color:red">(Si quieres cambiar la contraseña
+                                                            actual)</small></label>
                                                     <input type="password" class="form-control" id="inputPassword4"
                                                         name="new_password">
                                                 </div>
@@ -252,7 +277,9 @@
                                         </div>
                                     </div>
 
-                                    <button type="submit"  class="btn btn-success width-xl waves-effect waves-light btn-cta" >Guardar Cambios</button>
+                                    <button type="submit"
+                                        class="btn btn-success width-xl waves-effect waves-light btn-cta">Guardar
+                                        Cambios</button>
                             </form>
                         </div>
                     </div>

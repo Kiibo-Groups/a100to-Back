@@ -88,6 +88,10 @@ class Admin extends Authenticatable
 		$update->stripe_api_id 		= isset($data['stripe_api_id']) ? $data['stripe_api_id'] : null;
 		$update->ApiKey_google   	= isset($data['ApiKey_google']) ? $data['ApiKey_google'] : null;
 		$update->comm_stripe   	    = isset($data['comm_stripe']) ? $data['comm_stripe'] : null;
+
+		$update->url1   	        = isset($data['url1']) ? $data['url1'] : null;
+		$update->url2   	        = isset($data['url2']) ? $data['url2'] : null;
+
 		$update->send_terminal      = isset($data['send_terminal']) ? $data['send_terminal'] : 0;
 		$update->max_cash 			= isset($data['max_cash']) ? $data['max_cash'] : 0;
 		//$update->v_count 		    = isset($data['v_count']) ? $data['v_count'] : 0;

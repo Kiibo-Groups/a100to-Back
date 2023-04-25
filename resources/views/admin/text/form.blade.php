@@ -1100,4 +1100,4 @@
 
 </div>
 
-<button type="submit" class="btn btn-success btn-cta" >Save changes</button><br><br>
+<button type="submit" class="btn btn-success width-xl waves-effect waves-light btn-cta" >Guardar cambios</button><br><br>
