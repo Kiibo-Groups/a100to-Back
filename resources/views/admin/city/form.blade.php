@@ -66,5 +66,5 @@
 </div>
 
 <div class="form-row m-b-30">
-    <button type="submit" class="btn btn-success btn-cta">Guardar Cambios</button>
+    <button type="submit" class="btn btn-success width-xl waves-effect waves-light btn-cta">Guardar Cambios</button>
 </div>
