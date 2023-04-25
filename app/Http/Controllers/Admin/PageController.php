@@ -50,7 +50,7 @@ class PageController extends Controller {
 
 			$update->save();
 
-			return redirect::back()->with('message','Updated Successfully.');
+			return redirect::back()->with('message','Actualizado con éxito.');
 
 			exit;
 		}
@@ -77,6 +77,6 @@ class PageController extends Controller {
 		
 		$data->addNew($Request->all(),"add");
 		
-		return redirect::back()->with('message','Updated Successfully.');
+		return redirect::back()->with('message','Actualizado con éxito.');
 	}
 }

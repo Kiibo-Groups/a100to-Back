@@ -206,7 +206,7 @@ class ItemController extends Controller {
 
 		$data->addNew($Request->all(),$Request->item_id);
 
-		return redirect::back()->with('message','Updated Successfully.');
+		return redirect::back()->with('message','Actualizado con éxito.');
 	}
 
 	public function export()
@@ -225,6 +225,6 @@ class ItemController extends Controller {
 
 		$res->import($Request->all());
 
-		return Redirect::back()->with('message','Uploaded Successfully.');
+		return Redirect::back()->with('message','Cargado con éxito.');
 	}
 }

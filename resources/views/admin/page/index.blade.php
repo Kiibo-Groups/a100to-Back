@@ -9,13 +9,15 @@
 @endsection
 
 
+
 @section('content')
     <div class="content-page" id="div2">
-        @include('user.layout.alert')
+       
         <div class="content">
             <div class="container-fluid">
                 <div class="row ">
                     <div class="col-lg-11 mx-auto  mt-2">
+                        @include('user.layout.alert')
 
                         {!! Form::model($data, ['url' => [$form_url], 'files' => true], ['class' => 'col s12']) !!}
 
@@ -30,11 +32,8 @@
     </div>
 @endsection
 
-@section('js')
-    <script src="{{ Asset('assets/vendor/summernote/summernote-bs4.min.js') }}"></script>
-    <script src="{{ Asset('assets/js/summernote-data.js') }}"></script>
-@endsection
 
-@section('css')
-    <link rel="stylesheet" href="{{ Asset('assets/vendor/summernote/summernote-bs4.css') }}" />
-@endsection
+
+
+
+

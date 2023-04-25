@@ -1,15 +1,17 @@
-<div >
+<div>
 
 
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
-        <h4 style="color:#000">About Us Page</h4>
+        <h4 style="color:#000">Sobre nosotros</h4>
         <div class="card py-3 m-b-30">
             <div class="card-body">
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="inputEmail6">Description</label>
-                        <textarea id="summernote" name="about_us">{!! $data->about_us !!}</textarea>
+                        <textarea class="summernote" name="about_us">{!! $data->about_us !!}</textarea>
+
+
                     </div>
                 </div>
 
@@ -21,8 +23,8 @@
                         @if ($data->about_img)
                             <br><img src="{{ Asset('upload/page/' . $data->about_img) }}" height="60">
 
-                            <a href="{{ Asset($form_url . '/add?remove=about_img') }}"
-                                onclick="return confirm('Are you sure?')" style="color:red">Remove</a>
+                            <button type="button" class="btn btn-danger width-xs waves-effect waves-light"
+                                onclick="confirmAlert('{{ Asset($form_url . '/add?remove=about_img') }}')">Eliminar</button>
                         @endif
 
                     </div>
@@ -31,13 +33,13 @@
             </div>
         </div>
 
-        <h4 >How it Works</h4>
+        <h4>Cómo funciona</h4>
         <div class="card py-3 m-b-30">
             <div class="card-body">
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="inputEmail6">Description</label>
-                        <textarea id="summernote2" name="how">{!! $data->how !!}</textarea>
+                        <textarea class="summernote" name="how">{!! $data->how !!}</textarea>
                     </div>
                 </div>
 
@@ -50,8 +52,9 @@
                         @if ($data->how_img)
                             <br><img src="{{ Asset('upload/page/' . $data->how_img) }}" height="60">
 
-                            <a href="{{ Asset($form_url . '/add?remove=how_img') }}"
-                                onclick="return confirm('Are you sure?')" style="color:red">Remove</a>
+
+                            <button type="button" class="btn btn-danger width-xs waves-effect waves-light"
+                                onclick="confirmAlert('{{ Asset($form_url . '/add?remove=how_img') }}')">Eliminar</button>
                         @endif
 
                     </div>
@@ -60,26 +63,26 @@
             </div>
         </div>
 
-        <h4 >Faq's</h4>
+        <h4>Preguntas frecuentes</h4>
         <div class="card py-3 m-b-30">
             <div class="card-body">
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="inputEmail6">Description</label>
-                        <textarea id="summernote3" name="faq">{!! $data->faq !!}</textarea>
+                        <textarea class="summernote" name="faq">{!! $data->faq !!}</textarea>
                     </div>
                 </div>
 
             </div>
         </div>
 
-        <h4 >Contact Us</h4>
+        <h4>Contacta con nosotros</h4>
         <div class="card py-3 m-b-30">
             <div class="card-body">
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="inputEmail6">Description</label>
-                        <textarea id="summernote4" name="contact_us">{!! $data->contact_us !!}</textarea>
+                        <textarea class="summernote" name="contact_us">{!! $data->contact_us !!}</textarea>
                     </div>
                 </div>
 
@@ -88,4 +91,6 @@
     </div>
 </div>
 
-<button type="submit" class="btn btn-success btn-cta" >Save changes</button><br><br>
+
+<button type="submit" class="btn btn-success width-xl waves-effect waves-light btn-cta">Guardar
+    Cambios</button><br><br>

@@ -174,6 +174,6 @@ class OfferController extends Controller {
 
 		$res->addNew($Request->all());
 
-		return redirect(env('admin').'/offer')->with('message','Updated Successfully.');
+		return redirect(env('admin').'/offer')->with('message','Actualizado con éxito.');
 	}
 }

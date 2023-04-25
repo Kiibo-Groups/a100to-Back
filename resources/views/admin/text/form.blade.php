@@ -8,20 +8,20 @@
 
             <input type="hidden" name="lid[]" value="{{ $l['id'] }}">
 
-            <h4 style="color:#000">Welcome Page</h4>
+            <h4 style="color:#000">Pagina de bienvenida</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Skip Button</label>
+                            <label for="inputEmail6">Botón Saltar</label>
                             <input type="text" name="skip_button[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'skip_button') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">App Enter App</label>
+                            <label for="inputEmail6">Introducción</label>
                             <input type="text" name="enter_button[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'enter_button') }}">
                         </div>
@@ -31,26 +31,26 @@
             </div>
 
             <!--start-->
-            <h4 >Select City Page</h4>
+            <h4 >Seleccione la página de la ciudad</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Page Title</label>
+                            <label for="inputEmail6">Título de la página</label>
                             <input type="text" name="city_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'city_title') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Search Placeholder</label>
+                            <label for="inputEmail6">Buscar marcador de posición</label>
                             <input type="text" name="city_search[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'city_search') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Heading</label>
+                            <label for="inputEmail6">Título</label>
                             <input type="text" name="city_heading[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'city_heading') }}">
                         </div>
@@ -58,7 +58,7 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Button</label>
+                            <label for="inputEmail6">Botón</label>
                             <input type="text" name="city_button[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'city_button') }}">
                         </div>
@@ -69,26 +69,26 @@
             <!--End-->
 
             <!--start-->
-            <h4 >Home Page</h4>
+            <h4 >Página de inicio</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Search Placeholder</label>
+                            <label for="inputEmail6">Buscar marcador de posición</label>
                             <input type="text" name="home_search[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'home_search') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Offer Title Filter</label>
+                            <label for="inputEmail6">Filtro de título de oferta</label>
                             <input type="text" name="home_offer[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'home_offer') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Fast Delivery Filter</label>
+                            <label for="inputEmail6">Filtro de entrega rápida</label>
                             <input type="text" name="home_fast_delivery[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'home_fast_delivery') }}">
                         </div>
@@ -96,19 +96,19 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Trending Filter</label>
+                            <label for="inputEmail6">Filtro de tendencias</label>
                             <input type="text" name="home_trending[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'home_trending') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">New Arrival Filter</label>
+                            <label for="inputEmail6">Filtro de nueva llegada</label>
                             <input type="text" name="home_new_arrival[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'home_new_arrival') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">By Rating Filter</label>
+                            <label for="inputEmail6">Por filtro de calificación</label>
                             <input type="text" name="home_by_rating[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'home_by_rating') }}">
                         </div>
@@ -116,19 +116,19 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Coupon Text</label>
+                            <label for="inputEmail6">Texto del cupón</label>
                             <input type="text" name="home_coupon[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'home_coupon') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Per Person Cost</label>
+                            <label for="inputEmail6">Costo por persona</label>
                             <input type="text" name="home_per_person[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'home_per_person') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Tab Home</label>
+                            <label for="inputEmail6">Pestaña Inicio</label>
                             <input type="text" name="home_footer_name[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'home_footer_name') }}">
                         </div>
@@ -136,25 +136,25 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Tab Nearest</label>
+                            <label for="inputEmail6">Más cercano</label>
                             <input type="text" name="home_nearest[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'home_nearest') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Tab Cart</label>
+                            <label for="inputEmail6">Carrito</label>
                             <input type="text" name="home_cart[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'home_cart') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Tab Profile</label>
+                            <label for="inputEmail6">Perfil</label>
                             <input type="text" name="home_profile[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'home_profile') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Tab categroys</label>
+                            <label for="inputEmail6">Categorías</label>
                             <input type="text" name="home_cats[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'home_cats') }}">
                         </div>
@@ -165,26 +165,26 @@
             <!--End-->
 
             <!--start-->
-            <h4 >Side Menu</h4>
+            <h4 >Menú lateral</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Title</label>
+                            <label for="inputEmail6">Título</label>
                             <input type="text" name="menu_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'menu_title') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Pages Title</label>
+                            <label for="inputEmail6">Título de las páginas</label>
                             <input type="text" name="menu_page_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'menu_page_title') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">App Version</label>
+                            <label for="inputEmail6">Version de aplicacion</label>
                             <input type="text" name="menu_footer[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'menu_footer') }}">
                         </div>
@@ -195,32 +195,32 @@
             <!--End-->
 
             <!--start-->
-            <h4 >Item Page</h4>
+            <h4 >Página del artículo</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">View Info</label>
+                            <label for="inputEmail6">Ver información</label>
                             <input type="text" name="item_view_info[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'item_view_info') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Veg Only</label>
+                            <label for="inputEmail6">Solo vegetales</label>
                             <input type="text" name="item_veg_only[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'item_veg_only') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Add To Cart Button</label>
+                            <label for="inputEmail6">Botón Agregar al carrito</label>
                             <input type="text" name="item_add_button[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'item_add_button') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Addon Page Title</label>
+                            <label for="inputEmail6">Título de la página adicional</label>
                             <input type="text" name="item_addon_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'item_addon_title') }}">
                         </div>
@@ -228,37 +228,37 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Select Size Heading</label>
+                            <label for="inputEmail6">Seleccionar tamaño de encabezado</label>
                             <input type="text" name="item_size_heading[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'item_size_heading') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Small</label>
+                            <label for="inputEmail6">Pequeño</label>
                             <input type="text" name="item_small[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'item_small') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Medium</label>
+                            <label for="inputEmail6">Medio</label>
                             <input type="text" name="item_m[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'item_m') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Large</label>
+                            <label for="inputEmail6">Grande</label>
                             <input type="text" name="item_large[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'item_large') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Addon Add</label>
+                            <label for="inputEmail6">Agregar Complemento </label>
                             <input type="text" name="addon_add_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'addon_add_title') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Addon Heading</label>
+                            <label for="inputEmail6">Encabezado adicional</label>
                             <input type="text" name="item_addon_heading[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'item_addon_heading') }}">
                         </div>
@@ -275,26 +275,26 @@
             <!--End-->
 
             <!--start-->
-            <h4 >Info Page</h4>
+            <h4 >Página de información</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Title</label>
+                            <label for="inputEmail6">Título</label>
                             <input type="text" name="info_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'info_title') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Rating & Reviews Title</label>
+                            <label for="inputEmail6">Calificación y Reseñas Título</label>
                             <input type="text" name="info_rating_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'info_rating_title') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Opening Time</label>
+                            <label for="inputEmail6">Hora de apertura</label>
                             <input type="text" name="info_open[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'info_open') }}">
                         </div>
@@ -302,19 +302,19 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Closing Time</label>
+                            <label for="inputEmail6">Hora de cierre</label>
                             <input type="text" name="info_close[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'info_close') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Per Person Cost</label>
+                            <label for="inputEmail6">Costo por persona</label>
                             <input type="text" name="info_person[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'info_person') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Delivery Time</label>
+                            <label for="inputEmail6">El tiempo de entrega</label>
                             <input type="text" name="info_d_time[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'info_d_time') }}">
                         </div>
@@ -325,26 +325,26 @@
             <!--End-->
 
             <!--start-->
-            <h4 >Cart Page</h4>
+            <h4 >Página del carrito</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Heading</label>
+                            <label for="inputEmail6">Título</label>
                             <input type="text" name="cart_heading[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'cart_heading') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Total Amount</label>
+                            <label for="inputEmail6">Cantidad total</label>
                             <input type="text" name="cart_total[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'cart_total') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Delivery Charges</label>
+                            <label for="inputEmail6">Los gastos de envío</label>
                             <input type="text" name="cart_delivery[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'cart_delivery') }}">
                         </div>
@@ -352,19 +352,19 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Coupon Text</label>
+                            <label for="inputEmail6">Texto del cupón</label>
                             <input type="text" name="cart_coupon[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'cart_coupon') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Payable Amount</label>
+                            <label for="inputEmail6">Cantidad a pagar</label>
                             <input type="text" name="cart_payable[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'cart_payable') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Place Order Button</label>
+                            <label for="inputEmail6">Botón Realizar pedido</label>
                             <input type="text" name="cart_button[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'cart_button') }}">
                         </div>
@@ -372,19 +372,19 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Cart Empty</label>
+                            <label for="inputEmail6">Carrito Vacío</label>
                             <input type="text" name="cart_empty[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'cart_empty') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Start Ordering</label>
+                            <label for="inputEmail6">Empezar a ordenar</label>
                             <input type="text" name="cart_start_order[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'cart_start_order') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Cart Price</label>
+                            <label for="inputEmail6">Precio del carrito</label>
                             <input type="text" name="cart_price[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'cart_price') }}">
                         </div>
@@ -392,19 +392,19 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Cart Quantity</label>
+                            <label for="inputEmail6">Cantidad del carrito</label>
                             <input type="text" name="cart_qty[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'cart_qty') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Discount</label>
+                            <label for="inputEmail6">Descuento</label>
                             <input type="text" name="cart_discount[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'cart_discount') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Apply Coupon</label>
+                            <label for="inputEmail6">Aplicar cupón</label>
                             <input type="text" name="cart_apply[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'cart_apply') }}">
                         </div>
@@ -415,26 +415,26 @@
             <!--End-->
 
             <!--start-->
-            <h4 >Coupon Page</h4>
+            <h4 >Página de cupones</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Title</label>
+                            <label for="inputEmail6">Título</label>
                             <input type="text" name="coupon_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'coupon_title') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Heading</label>
+                            <label for="inputEmail6">Título</label>
                             <input type="text" name="coupon_heading[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'coupon_heading') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Button</label>
+                            <label for="inputEmail6">Botón</label>
                             <input type="text" name="coupon_button[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'coupon_button') }}">
                         </div>
@@ -445,26 +445,26 @@
             <!--End-->
 
             <!--start-->
-            <h4 >Login Page</h4>
+            <h4 >Página de inicio de sesión</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Title</label>
+                            <label for="inputEmail6">Título</label>
                             <input type="text" name="login_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'login_title') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Heading</label>
+                            <label for="inputEmail6">Encabezado</label>
                             <input type="text" name="login_heading[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'login_heading') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Login Button</label>
+                            <label for="inputEmail6">Botón de inicio de sesión</label>
                             <input type="text" name="login_button[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'login_button') }}">
                         </div>
@@ -472,19 +472,19 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Forgot Password</label>
+                            <label for="inputEmail6">Has olvidado tu contraseña</label>
                             <input type="text" name="login_forgot_password[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'login_forgot_password') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Reset Password</label>
+                            <label for="inputEmail6">Restablecer la contraseña</label>
                             <input type="text" name="login_reset_password[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'login_reset_password') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Signup Button</label>
+                            <label for="inputEmail6">Botón de registro</label>
                             <input type="text" name="login_signup[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'login_signup') }}">
                         </div>
@@ -495,26 +495,26 @@
             <!--End-->
 
             <!--start-->
-            <h4 >Forgot Password</h4>
+            <h4 >Has olvidado tu contraseña</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Title</label>
+                            <label for="inputEmail6">Título</label>
                             <input type="text" name="forgot_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'forgot_title') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Heading</label>
+                            <label for="inputEmail6">Encabezado</label>
                             <input type="text" name="forgot_heading[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'forgot_heading') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Text</label>
+                            <label for="inputEmail6">Texto</label>
                             <input type="text" name="forgot_text[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'forgot_text') }}">
                         </div>
@@ -526,26 +526,26 @@
             <!--End-->
 
             <!--start-->
-            <h4 >Signup</h4>
+            <h4 >Inscribirse</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Title</label>
+                            <label for="inputEmail6">Título</label>
                             <input type="text" name="signup_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'signup_title') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Heading</label>
+                            <label for="inputEmail6">Encabezado</label>
                             <input type="text" name="signup_heading[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'signup_heading') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Button</label>
+                            <label for="inputEmail6">Botón</label>
                             <input type="text" name="signup_button[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'signup_button') }}">
                         </div>
@@ -557,26 +557,26 @@
             <!--End-->
 
             <!--start-->
-            <h4 >Place Order</h4>
+            <h4 >Realizar pedido</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Title</label>
+                            <label for="inputEmail6">Título</label>
                             <input type="text" name="place_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'place_title') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Delivery Address Heading</label>
+                            <label for="inputEmail6">Encabezado de la dirección de entrega</label>
                             <input type="text" name="place_delivery_heading[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'place_delivery_heading') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Add New Address</label>
+                            <label for="inputEmail6">Agregar nueva dirección</label>
                             <input type="text" name="place_add_address[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'place_add_address') }}">
                         </div>
@@ -584,19 +584,19 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Extra notes</label>
+                            <label for="inputEmail6">Notas adicionales</label>
                             <input type="text" name="place_address_text[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'place_address_text') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Payment Heading</label>
+                            <label for="inputEmail6">Partida de pago</label>
                             <input type="text" name="place_payment_heading[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'place_payment_heading') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Place Order Button</label>
+                            <label for="inputEmail6">Botón Realizar pedido</label>
                             <input type="text" name="place_order_button[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'place_order_button') }}">
                         </div>

@@ -54,6 +54,6 @@ class TextController extends Controller {
 		
 		$data->addNew($Request->all());
 		
-		return redirect::back()->with('message','Updated Successfully.');
+		return redirect::back()->with('message','Actualizado con éxito.');
 	}
 }
