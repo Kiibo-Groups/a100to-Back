@@ -31,7 +31,7 @@
                             <div class="card-body">
                                 <table class="table table-hover ">
                                     <thead>
-                                        <tr>
+                                        <tr style="text-align: center">
                                             <th>QR</th>
                                             <th>Nombre</th>
                                             <th>Ciudad</th>
@@ -39,7 +39,7 @@
                                             <th>Trending</th>
                                             <th>Comentarios</th>
                                             <th>Saldos</th>
-                                            <th style="text-align: right">Opciones</th>
+                                            <th >Opciones</th>
                                         </tr>
 
                                     </thead>
@@ -77,11 +77,11 @@
                                                 </td>
                                                 <td>
                                                     @if ($row->trending == 0)
-                                                        <button type="button" class="btn btn-info width-xs waves-effect waves-light"
+                                                        <button type="button" class="btn btn-info width-md waves-effect waves-light"
                                                             onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id . '?type=trend') }}')">Activar</button>
                                                     @else
                                                         <button type="button"
-                                                        class="btn btn-success width-xs waves-effect waves-light" 
+                                                        class="btn btn-success width-md waves-effect waves-light" 
                                                             onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id . '?type=trend') }}')">Desactivar</button>
                                                     @endif
                                                 </td>

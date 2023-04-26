@@ -85,18 +85,18 @@
 
                                 <table class="table table-hover ">
                                     <thead>
-                                        <tr>
+                                        <tr style="text-align: center">
                                             <th>Categoria</th>
                                             <th>Nombre</th>
                                             <th>Precio</th>
-                                            <th style="text-align: right">Opciones</th>
+                                            <th >Opciones</th>
                                         </tr>
 
                                     </thead>
                                     <tbody>
 
                                         @foreach ($data as $row)
-                                            <tr>
+                                            <tr style="text-align: center">
                                                 <td width="25%">{{ $row->cate }}
                                                     @if ($row->id_element != '')
                                                         <small>({{ $row->id_element }})</small>
@@ -108,15 +108,15 @@
                                                 <td width="25%" style="text-align: right">
 
                                                     <a href="{{ Asset($link . $row->id . '/edit') }}"
-                                                        class="btn m-b-15 ml-2 mr-2 btn-md  btn-rounded-circle btn-success"
+                                                        class="btn m-b-15 ml-2 mr-2 btn-md   waves-effect waves-light btn-success"
                                                         data-toggle="tooltip" data-placement="top"
-                                                        data-original-title="Edit This Entry"><i
+                                                        data-original-title="Editar"><i
                                                             class="mdi mdi-border-color"></i></a>
 
                                                     <button type="button"
-                                                        class="btn m-b-15 ml-2 mr-2 btn-md  btn-rounded-circle btn-danger"
+                                                        class="btn m-b-15 ml-2 mr-2 btn-md   waves-effect waves-light btn-danger"
                                                         data-toggle="tooltip" data-placement="top"
-                                                        data-original-title="Delete This Entry"
+                                                        data-original-title="Eliminar"
                                                         onclick="deleteConfirm('{{ Asset($link . 'delete/' . $row->id) }}')"><i
                                                             class="mdi mdi-delete-forever"></i></button>
 

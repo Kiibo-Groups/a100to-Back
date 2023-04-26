@@ -42,7 +42,6 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     Route::post('login','ApiController@login');
     Route::post('Newlogin','ApiController@Newlogin');
     Route::post('loginfb','ApiController@loginfb');
-    //Route::post('login','ApiController@loginUser'); // Login User_name
     Route::post('forgot','ApiController@forgot');
     Route::post('verify','ApiController@verify');
     Route::post('updatePassword','ApiController@updatePassword');
