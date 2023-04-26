@@ -70,7 +70,7 @@
     <div id="wrapper">
         <!-- Topbar Start -->
         <div class="navbar-custom">
-        <ul class="list-unstyled topnav-menu float-end mb-0" style="margin-top: 10px; margin-right: 70px">
+            <ul class="list-unstyled topnav-menu float-end mb-0" style="margin-top: 10px; margin-right: 70px">
 
                 <li class="dropdown notification-list topbar-dropdown">
                     @php
@@ -112,7 +112,7 @@
                         A100TO
                     </span>
                     <span class="logo-lg" >
-                        <img src="{{ Asset('assets/img/logo.png') }}" alt="" height="86">
+                        <img src="{{ Asset('public/assets/img/logo.png') }}" alt="" height="86">
                     </span>
                 </a>
             </div>
@@ -126,11 +126,13 @@
                             </button>
                         </li>
                         <li>
-                            <h4 class="page-title-main"> Bienvenido(a) ! {{ Auth::guard('admin')->user()->name }} </h4>
+                           
+                            <h4 class="page-title-main" style="padding: 0 24px"> Bienvenido(a) ! {{ Auth::user()->name }} </h4>
                         </li>
                     </ul>
                 </div>
             </div>
+
             <div class="clearfix"></div>
 
         </div>
