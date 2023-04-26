@@ -1,7 +1,7 @@
 @extends('admin.layout.main')
 
 @section('title')
-    Reporting
+Informes
 @endsection
 
 @section('icon')
@@ -11,12 +11,13 @@
 
 @section('content')
     <div class="content-page" id="div2">
-        @include('user.layout.alert')
+       
         <div class="content">
             <div class="container-fluid">
 
                 <div class="row ">
-                    <div class="col-lg-10 mx-auto  mt-2">
+                    <div class="col-lg-11 mx-auto  mt-2">
+                        @include('user.layout.alert')
                         <div class="card py-3 m-b-30">
                             <div class="col-md-6" style="text-align: left;">
                                 <b style="margin-left:20px">@yield('title')</b>
@@ -26,9 +27,9 @@
 
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <label for="inputEmail4">Select Store</label>
+                                        <label for="inputEmail4">Seleccionar tienda</label>
                                         <select name="store_id" class="form-control">
-                                            <option value="">All Store</option>
+                                            <option value="">Toda la tienda</option>
                                             @foreach ($data as $user)
                                                 <option value="{{ $user->id }}">{{ $user->name }}</option>
                                             @endforeach
@@ -38,12 +39,12 @@
 
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label for="inputEmail4">From Date</label>
+                                        <label for="inputEmail4">Desde</label>
                                         {!! Form::text('from', null, ['class' => 'js-datepicker form-control datepicker', 'required' => 'required']) !!}
                                     </div>
 
                                     <div class="form-group col-md-6">
-                                        <label for="inputEmail4">To Date</label>
+                                        <label for="inputEmail4">Hasta</label>
                                         {!! Form::text('to', null, ['class' => 'js-datepicker form-control datepicker', 'required' => 'required']) !!}
                                     </div>
 

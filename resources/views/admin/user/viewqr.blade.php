@@ -11,13 +11,14 @@
 
 @section('content')
     <div class="content-page" id="div2">
-        @include('user.layout.alert')
+       
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-7">
+                    <div class="col-lg-11 mx-auto  mt-2">
+                        @include('user.layout.alert')
                         <div class="col-md-6" style="text-align: left;">
-                            <b style="margin-left:20px">@yield('title')</b>
+                            <b style="margin-left:10px">@yield('title')</b>
                         </div>
                         <div class="card-body">
                             <div style="background:#fff;"

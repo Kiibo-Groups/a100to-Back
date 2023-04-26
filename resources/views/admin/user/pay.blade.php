@@ -6,11 +6,12 @@
 
 @section('content')
     <div class="content-page" id="div2">
-        @include('user.layout.alert')
+     
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-10 mx-auto  mt-2">
+                    <div class="col-lg-11 mx-auto  mt-2">
+                        @include('user.layout.alert')
                         <div class="card py-3 m-b-30">
                             <div class="col-md-6" style="text-align: left;">
                                 <b style="margin-left:20px">@yield('title')</b>
@@ -48,9 +49,9 @@
                                             placeholder="Ingresa el monto del deposito" step="0.01" class="form-control">
                                     </div>
                                 </div>
-                                <a href="javascript::void()" class="btn btn-success"
+                                <a href="javascript::void()" class="btn btn-success width-xl waves-effect waves-light btn-cta"
                                     onclick="confirmAlert('{{ Asset($link . 'payAll/' . $data->id) }}')">Restablecer Saldo</a>
-                                <button type="submit" style="float:right;text-align:right;" class="btn btn-success">Agregar
+                                <button type="submit" style="float:right;text-align:right;" class="btn btn-success width-xl waves-effect waves-light btn-cta">Agregar
                                     Deposito</button>
                                 </form>
 

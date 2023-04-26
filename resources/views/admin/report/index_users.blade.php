@@ -11,11 +11,12 @@
 
 @section('content')
     <div class="content-page" id="div2">
-        @include('user.layout.alert')
+       
         <div class="content">
             <div class="container-fluid">
                 <div class="row ">
-                    <div class="col-lg-10 mx-auto  mt-2">
+                    <div class="col-lg-11 mx-auto  mt-2">
+                        @include('user.layout.alert')
                         <div class="card py-3 m-b-30">
                             <div class="col-md-6" style="text-align: left;">
                                 <b style="margin-left:20px">@yield('title')</b>
@@ -42,7 +43,8 @@
                                         </select>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-success btn-cta">Imprimir Reporte</button>
+                                <button type="submit" class="btn btn-success width-xl waves-effect waves-light btn-cta">Imprimir Reporte</button>
+                               
                                 </form>
                             </div>
                         </div>

@@ -107,6 +107,6 @@ class PushController extends Controller {
 
 		
 
-		return Redirect::back()->with('message','Notifications sent Successfully.');
+		return Redirect::back()->with('message','Notificaciones enviadas con éxito.');
 	}
 }

@@ -7,23 +7,24 @@
 
 @section('content')
     <div class="content-page" id="div2">
-        @include('user.layout.alert')
         <div class="content">
             <div class="container-fluid">
 
                 <div class="row">
-                    <div class="col-lg-10 mx-auto  mt-2">
-                        <div class="content-page" id="div2">
+                    <div class="col-lg-11 mx-auto  mt-2">
+                       
                             @include('user.layout.alert')
-                            <div class="content">
-                                <div class="container-fluid">
+                            <div class="card py-3 m-b-30">
+                                <div class="col-md-6" style="text-align: left;">
+                                    <b style="margin-left:0px">@yield('title')</b>
+                                </div>
                                     <div class="tab-content" id="myTabContent1" style="padding-top:20px;background:#fff;">
                                         <div class="tab-pane fade show active" id="home" role="tabpanel"
                                             aria-labelledby="home-tab">
 
-                                            <h3 style="font-size: 20px;padding-left:15px;"><small>Ingresa la ubicación del
+                                            <h3 style="font-size: 14px;padding-left:15px;">Ingresa la ubicación del
                                                     negocio en el
-                                                    mapa</small></h3>
+                                                    mapa</h3>
                                             <div class="card py-3 m-b-30">
                                                 <div class="card-body">
                                                     {!! Form::model($data, ['url' => [$form_url], 'files' => true, 'method' => 'PATCH'], ['class' => 'col s12']) !!}
@@ -49,15 +50,18 @@
                                                         <span id="place-id"></span><br>
                                                         <span id="place-address"></span>
                                                     </div>
-                                                    <button type="submit" class="btn btn-success btn-cta">Guardar
-                                                        Ubicación</button>
+                                                    <div class="form-row m-b-30">
+                                                        <button type="submit" style="margin-left: 5px"
+                                                            class="btn btn-success width-xl waves-effect waves-light btn-cta">Guardar Ubicación</button>
+                                                    </div>
+                                                   
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                               
+                      
                         </div>
                     </div>
                 </div>

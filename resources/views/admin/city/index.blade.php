@@ -71,12 +71,12 @@
                                                     <a href="{{ Asset($link . $row->id . '/edit') }}"
                                                         class="btn btn-success waves-effect waves-light btn m-b-15 ml-2 mr-2 btn-md"
                                                         data-toggle="tooltip" data-placement="top"
-                                                        data-original-title="Edit This Entry"><i
+                                                        data-original-title="Editar"><i
                                                             class="mdi mdi-border-color"></i></a>
                                                     <button type="button"
                                                         class="btn m-b-15 ml-2 mr-2 btn-md  btn btn-danger waves-effect waves-light"
                                                         data-toggle="tooltip" data-placement="top"
-                                                        data-original-title="Delete This Entry"
+                                                        data-original-title="Eliminar"
                                                         onclick="deleteConfirm('{{ Asset($link . 'delete/' . $row->id) }}')"><i
                                                             class="mdi mdi-delete-forever"></i></button>
                                                 </td>

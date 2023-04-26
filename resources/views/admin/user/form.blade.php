@@ -8,20 +8,8 @@
         </div>
         <div class="card-body" style="padding-top:80px;">
 
-            @if ($data->logo)
-                <img src="{{ Asset('upload/user/logo/' . $data->logo) }}"
-                    style="position:absolute;
-        max-height:150px;
-        top:-105px;
-        right:0px;
-        border-radius:15px;
-        z-index:1;">
-            @endif
 
-            @if ($data->img)
-                <img src="{{ Asset('upload/user/' . $data->img) }}" width="100px"
-                    style="position:absolute;top:-30px;right:15px;border-radius:15px;z-index:5;">
-            @endif
+
 
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -62,14 +50,14 @@
 
                     <div class="form-group col-md-6">
                         <label for="inputEmail4">Tipo de negocio</label>
-                        <select name="store_subtype" class="form-control" id="store_subtype" required="required">
+                        <select name="store_subtype" class="form-control" id="store_subtype" >
 
                         </select>
                     </div>
 
                     <div class="form-group col-md-6">
                         <label for="inputEmail4">SubTipo de negocio</label>
-                        <select name="subsubtype" class="form-control" id="subsubtype" required="required">
+                        <select name="subsubtype" class="form-control" id="subsubtype" >
 
                         </select>
                     </div>
@@ -223,11 +211,11 @@
         <input type="text" name="t_value" value="{{ $data->t_value }}" hidden>
     @endif
 
-    <h1 style="font-size: 20px;margin-left: 30px">Gastos y Tiempos de entrega</h1>
+    <h1 style="font-size: 20px;margin-left: 0px">Gastos y Tiempos de entrega</h1>
 
 
     <div class="card ">
-        
+
         <div class="card-body">
 
             <div class="form-row">
@@ -311,7 +299,7 @@
 
 
     <!--*********** Horario de Atencion *****************-->
-    <h1 style="font-size: 20px;margin-left: 30px">
+    <h1 style="font-size: 20px;margin-left: 0px">
         Horarios de atención
         <br /><small style="font-size:14px;">(Si algun día de la semana marcas como cerrado, deja en blanco el
             horario de atención)</small>
@@ -349,7 +337,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerLA" width="276" name="open_mon"
+                                    <input  id="timepickerLA" width="276" name="open_mon" class="form-control"
                                         @if ($tm->Mon != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Mon')['open_time'] }}" @endif>
                                 </div>
                             </div>
@@ -360,7 +348,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerLC" width="276" name="close_mon"
+                                    <input id="timepickerLC" width="276" name="close_mon" class="form-control"
                                         @if ($tm->Mon != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Mon')['close_time'] }}" @endif>
                                 </div>
                             </div>
@@ -396,7 +384,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerMA" width="276" name="open_tue"
+                                    <input id="timepickerMA" width="276" name="open_tue" class="form-control"
                                         @if ($tm->Tue != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Tue')['open_time'] }}" @endif>
 
                                 </div>
@@ -408,7 +396,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerMC" width="276" name="close_tue"
+                                    <input id="timepickerMC" width="276" name="close_tue" class="form-control"
                                         @if ($tm->Tue != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Tue')['close_time'] }}" @endif>
 
                                 </div>
@@ -445,7 +433,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerMierA" width="276" name="open_wed"
+                                    <input id="timepickerMierA" width="276" name="open_wed" class="form-control"
                                         @if ($tm->Wed != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Wed')['open_time'] }}" @endif>
 
                                 </div>
@@ -457,7 +445,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerMierC" width="276" name="close_wed"
+                                    <input id="timepickerMierC" width="276" name="close_wed" class="form-control"
                                         class="form-control without_ampm"
                                         @if ($tm->Wed != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Wed')['close_time'] }}" @endif>
 
@@ -496,7 +484,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerJA" width="276" name="open_thu"
+                                    <input id="timepickerJA" width="276" name="open_thu" class="form-control"
                                         @if ($tm->Thu != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Thu')['open_time'] }}" @endif>
 
                                 </div>
@@ -508,7 +496,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerJC" width="276" name="close_thu"
+                                    <input id="timepickerJC" width="276" name="close_thu" class="form-control"
                                         @if ($tm->Thu != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Thu')['close_time'] }}" @endif>
 
                                 </div>
@@ -545,7 +533,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerVA" width="276" name="open_fri"
+                                    <input id="timepickerVA" width="276" name="open_fri" class="form-control"
                                         @if ($tm->Fri != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Fri')['open_time'] }}" @endif>
 
                                 </div>
@@ -557,7 +545,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerVC" width="276" name="close_fri"
+                                    <input id="timepickerVC" width="276" name="close_fri" class="form-control"
                                         @if ($tm->Fri != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Fri')['close_time'] }}" @endif>
 
                                 </div>
@@ -594,7 +582,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerSA" width="276" name="open_sat"
+                                    <input id="timepickerSA" width="276" name="open_sat" class="form-control"
                                         @if ($tm->Sat != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Sat')['open_time'] }}" @endif>
 
                                 </div>
@@ -606,7 +594,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerSC" width="276" name="close_sat"
+                                    <input id="timepickerSC" width="276" name="close_sat" class="form-control"
                                         @if ($tm->Sat != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Sat')['close_time'] }}" @endif>
 
                                 </div>
@@ -643,7 +631,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerDA" width="276" name="open_sun"
+                                    <input id="timepickerDA" width="276" name="open_sun" class="form-control"
                                         @if ($tm->Sun != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Sun')['open_time'] }}" @endif>
 
                                 </div>
@@ -655,7 +643,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerDC" width="276" name="close_sun"
+                                    <input id="timepickerDC" width="276" name="close_sun" class="form-control"
                                         @if ($tm->Sun != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Sun')['close_time'] }}" @endif>
 
                                 </div>
@@ -668,93 +656,95 @@
     </div>
     <!--*********** Horario de Atencion *****************-->
 
-
-    <div class="card py-3 m-b-30">
-        <div class="card-body">
-            @if (isset($admin))
-                @if (!$data->id)
-                    @include('admin.user.newgoogle')
-                @else
-                    <a href="{{ Asset(env('admin') . '/user/viewmap/' . $data->id) }}"
-                        class="btn btn-success btn-cta">Cargar Mapa y Ubicaciones</a>
-                    <input name="address" value="{{ $data->address }}" type="hidden">
-                    <input type="hidden" name="lat" id="lat" value="{{ $data->lat }}">
-                    <input type="hidden" name="lng" id="lng" value="{{ $data->lng }}">
-                @endif
-            @else
-                <a class="btn btn-success btn-cta">Mapa y Ubicaciones seran cargadas desde Administración</a>
-                <input name="address" value="{{ $data->address }}" type="hidden">
-                <input type="hidden" name="lat" id="lat" value="{{ $data->lat }}">
-                <input type="hidden" name="lng" id="lng" value="{{ $data->lng }}">
-            @endif
-        </div>
-    </div>
+  
+     
+            <div class="card py-3 m-b-30">
+                <div class="card-body">
+                    @if (isset($admin))
+                        @if (!$data->id)
+                            @include('admin.user.newgoogle')
+                        @else
+                            <a href="{{ Asset(env('admin') . '/user/viewmap/' . $data->id) }}"
+                                class="btn btn-success width-xl waves-effect waves-light btn-cta">Cargar Mapa y
+                                Ubicaciones</a>
+                            <input name="address" value="{{ $data->address }}" type="hidden">
+                            <input type="hidden" name="lat" id="lat" value="{{ $data->lat }}">
+                            <input type="hidden" name="lng" id="lng" value="{{ $data->lng }}">
+                        @endif
+                    @else
+                        <a class="btn btn-success width-xl waves-effect waves-light btn-cta">Mapa y Ubicaciones seran
+                            cargadas desde Administración</a>
+                        <input name="address" value="{{ $data->address }}" type="hidden">
+                        <input type="hidden" name="lat" id="lat" value="{{ $data->lat }}">
+                        <input type="hidden" name="lng" id="lng" value="{{ $data->lng }}">
+                    @endif
+                </div>
+            </div>
+       
+   
 
 
 </div>
-<button type="submit" class="btn btn-success btn-cta" style="margin-left: 45px">Guardar Cambios</button><br><br>
+<div class="form-row m-b-30">
+    <button type="submit" style="margin-left: 20px"
+        class="btn btn-success width-xl waves-effect waves-light btn-cta">Guardar Cambios</button>
+</div>
+
+
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+
 <script>
     /** Funciones del horario */
     $('#timepickerLA').timepicker({
-        uiLibrary: 'bootstrap4',
-        format: 'HH:MM'
+        timeFormat: 'HH:mm',
+       
     });
     $('#timepickerLC').timepicker({
-        uiLibrary: 'bootstrap4',
-        format: 'HH:MM'
+        timeFormat: 'HH:mm',
     });
     $('#timepickerMA').timepicker({
-        uiLibrary: 'bootstrap4',
-        format: 'HH:MM'
+        timeFormat: 'HH:mm',
     });
     $('#timepickerMC').timepicker({
-        uiLibrary: 'bootstrap4',
-        format: 'HH:MM'
+        timeFormat: 'HH:mm',
     });
     $('#timepickerMierA').timepicker({
-        uiLibrary: 'bootstrap4',
-        format: 'HH:MM'
+        timeFormat: 'HH:mm',
     });
     $('#timepickerMierC').timepicker({
-        uiLibrary: 'bootstrap4',
-        format: 'HH:MM'
+        timeFormat: 'HH:mm',
     });
 
     $('#timepickerJA').timepicker({
-        uiLibrary: 'bootstrap4',
-        format: 'HH:MM'
+        timeFormat: 'HH:mm',
     });
     $('#timepickerJC').timepicker({
-        uiLibrary: 'bootstrap4',
-        format: 'HH:MM'
+        timeFormat: 'HH:mm',
     });
     $('#timepickerVA').timepicker({
-        uiLibrary: 'bootstrap4',
-        format: 'HH:MM'
+        timeFormat: 'HH:mm',
     });
     $('#timepickerVC').timepicker({
-        uiLibrary: 'bootstrap4',
-        format: 'HH:MM'
+        timeFormat: 'HH:mm',
     });
     $('#timepickerSA').timepicker({
-        uiLibrary: 'bootstrap4',
-        format: 'HH:MM'
+        timeFormat: 'HH:mm',
     });
     $('#timepickerSC').timepicker({
-        uiLibrary: 'bootstrap4',
-        format: 'HH:MM'
+        timeFormat: 'HH:mm',
     });
     $('#timepickerDA').timepicker({
-        uiLibrary: 'bootstrap4',
-        format: 'HH:MM'
+        timeFormat: 'HH:mm',
     });
     $('#timepickerDC').timepicker({
-        uiLibrary: 'bootstrap4',
-        format: 'HH:MM'
+        timeFormat: 'HH:mm',
     });
 
     /** Funciones del horario */

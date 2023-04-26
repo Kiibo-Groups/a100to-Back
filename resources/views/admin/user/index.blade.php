@@ -10,13 +10,12 @@
 
 @section('content')
     <div class="content-page" id="div2">
-        @include('user.layout.alert')
+       
         <div class="content">
             <div class="container-fluid">
-
-
                 <div class="row ">
-                    <div class="col-md-12">
+                    <div class="col-lg-11 mx-auto mt-2">
+                        @include('user.layout.alert')
                         <div class="card py-3 m-b-30">
                             <div class="col-md-6" style="text-align: left;">
                                 <b style="margin-left:20px">@yield('title')</b>
@@ -24,7 +23,7 @@
 
                             <div class="row">
                                 <div class="col-md-12" style="text-align: right;"><a href="{{ Asset($link . 'add') }}"
-                                        class="btn m-b-15 ml-2 mr-2 btn-rounded btn-warning">Agregar
+                                    class="btn btn-warning rounded-pill waves-effect waves-light">Agregar
                                         negocio</a>&nbsp;&nbsp;&nbsp;</div>
                             </div>
 
@@ -68,27 +67,27 @@
                                                 <td>{{ $row->city }}</td>
                                                 <td>
                                                     @if ($row->status == 0)
-                                                        <button type="button" class="btn btn-sm m-b-15 ml-2 mr-2 btn-info"
-                                                            onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Active</button>
+                                                        <button type="button"  class="btn btn-info width-xs waves-effect waves-light"
+                                                            onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Activo</button>
                                                     @else
                                                         <button type="button"
-                                                            class="btn btn-sm m-b-15 ml-2 mr-2 btn-danger"
-                                                            onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Disabled</button>
+                                                        class="btn btn-danger width-xs waves-effect waves-light"
+                                                            onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Inactivo</button>
                                                     @endif
                                                 </td>
                                                 <td>
                                                     @if ($row->trending == 0)
-                                                        <button type="button" class="btn btn-sm m-b-15 ml-2 mr-2 btn-info"
+                                                        <button type="button" class="btn btn-info width-xs waves-effect waves-light"
                                                             onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id . '?type=trend') }}')">Activar</button>
                                                     @else
                                                         <button type="button"
-                                                            class="btn btn-sm m-b-15 ml-2 mr-2 btn-success"
+                                                        class="btn btn-success width-xs waves-effect waves-light" 
                                                             onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id . '?type=trend') }}')">Desactivar</button>
                                                     @endif
                                                 </td>
                                                 <td>
                                                     <a href="{{ Asset($link . $row->id . '/rate') }}"
-                                                        class="btn m-b-15 ml-2 mr-2 btn-rounded-circle btn-md btn-success"
+                                                        class="btn m-b-15 ml-2 mr-2 btn btn-success waves-effect waves-light"
                                                         data-toggle="tooltip" data-placement="top"
                                                         data-original-title="Vista de comentarios"><i
                                                             class="mdi mdi-chart-line"></i></a>
