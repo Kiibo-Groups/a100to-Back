@@ -387,6 +387,14 @@ class ApiController extends Controller {
 		return response()->json($res->loginFb($Request->all()));
 	}
 
+
+	public function loginuser(Request $Request)
+	{
+		$res = new AppUser;
+
+		return response()->json($res->loginUser($Request->all()));
+	}
+
 	public function getAddress($id)
 	{
 		$address = new Address;

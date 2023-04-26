@@ -64,13 +64,13 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-1">
-                                                <button type="submit" class="btn btn-success m-b-15 ml-2 mr-2"
+                                            <div class="form-group col-md-2" style="text-align: center">
+                                                <button type="submit" class="btn btn-success waves-effect waves-light  width-md"
                                                     style="margin-top:30px;">Buscar</button>
                                             </div>
 
                                             <div class="form-group col-md-2">
-                                                <a href="{{ Asset($link) }}" class="btn btn-success m-b-15 ml-2 mr-2"
+                                                <a href="{{ Asset($link) }}" class="btn btn-success waves-effect waves-light  width-md"
                                                     style="margin-top:30px;">Ver todo</a>
                                             </div>
 

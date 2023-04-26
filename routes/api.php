@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,9 +39,10 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     Route::post('sendOTP','ApiController@sendOTP');
     Route::post('chkUser','ApiController@chkUser');
     Route::post('SignPhone','ApiController@SignPhone');
-    Route::post('login','ApiController@login');
+   // Route::post('login','ApiController@login');
     Route::post('Newlogin','ApiController@Newlogin');
     Route::post('loginfb','ApiController@loginfb');
+    Route::post('login','ApiController@loginUser'); // Login User_name
     Route::post('forgot','ApiController@forgot');
     Route::post('verify','ApiController@verify');
     Route::post('updatePassword','ApiController@updatePassword');

@@ -37,4 +37,4 @@
     </div>
 </div>
 
-<button type="submit" class="btn btn-success btn-cta">Save changes</button>
+<button type="submit" class="btn btn-success width-xl waves-effect waves-light btn-cta">Guardar</button>

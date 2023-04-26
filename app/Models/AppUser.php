@@ -179,6 +179,20 @@ class AppUser extends Authenticatable
     }
    }
 
+   public function loginUser($data)
+   {
+     $chk = AppUser::where('user_name',$data['user_name'])->where('password',$data['password'])->first();
+
+     if(isset($chk->id))
+     {
+        return ['msg' => 'done','user_id' => $chk->id];
+     }
+     else
+     {
+        return ['msg' => 'Opps! Detalles de acceso incorrectos'];
+     }
+   }
+
    public function updateInfo($data,$id)
    {
       $count = AppUser::where('id','!=',$id)->where('email',$data['email'])->count();
