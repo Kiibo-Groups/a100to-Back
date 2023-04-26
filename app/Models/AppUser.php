@@ -8,52 +8,50 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Validator;
 use Mail;
+
 class AppUser extends Authenticatable
 {
-   protected $table = 'app_user';
+    protected $table = 'app_user';
 
-   public function addNew($data)
-   {
-     $count = AppUser::where('email',$data['email'])->count();
+    public function addNew($data)
+    {
+        $count = AppUser::where('email', $data['email'])->count();
 
-     if($count == 0)
-     {
-        if (filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-            
-            $count_phone = AppUser::where('phone',$data['phone'])->count();
+        if ($count == 0) {
+            if (filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
 
-            if ($count_phone == 0) {
-                $add                = new AppUser;
-                $add->name          = $data['name'];
-                $add->email         = $data['email'];
-                $add->phone         = isset($data['phone']) ? $data['phone'] : 'null';
-                $add->password      = $data['password'];
-                $add->pswfacebook   = isset($data['pswfb']) ? $data['pswfb'] : 0;
-                $add->refered       = isset($data['refered']) ? $data['refered'] : '';
+                $count_phone = AppUser::where('phone', $data['phone'])->count();
 
-                $add->last_name     = isset($data['last_name']) ? $data['last_name'] : 'null';
-                $add->birthday      = isset($data['birthday']) ? $data['birthday'] : 'null';
-                $add->sex_type      = isset($data['sex_type']) ? $data['sex_type'] : 'null';
-                $add->user_name     = isset($data['user_name']) ? $data['user_name'] : 'null';
+                if ($count_phone == 0) {
+                    $add                = new AppUser;
+                    $add->name          = $data['name'];
+                    $add->email         = $data['email'];
+                    $add->phone         = isset($data['phone']) ? $data['phone'] : 'null';
+                    $add->password      = $data['password'];
+                    $add->pswfacebook   = isset($data['pswfb']) ? $data['pswfb'] : 0;
+                    $add->refered       = isset($data['refered']) ? $data['refered'] : '';
 
-                $add->save();
+                    $add->last_name     = isset($data['last_name']) ? $data['last_name'] : 'null';
+                    $add->birthday      = isset($data['birthday']) ? $data['birthday'] : 'null';
+                    $add->sex_type      = isset($data['sex_type']) ? $data['sex_type'] : 'null';
+                    $add->user_name     = isset($data['user_name']) ? $data['user_name'] : 'null';
 
-                return ['msg' => 'done','user_id' => $add->id];
-            }else {
-                return ['msg' => 'Opps! Este número telefonico ya existe.'];
+                    $add->save();
+
+                    return ['msg' => 'done', 'user_id' => $add->id];
+                } else {
+                    return ['msg' => 'Opps! Este número telefonico ya existe.'];
+                }
+            } else {
+                return ['msg' => 'Opps! El Formato del Email es invalido'];
             }
-        }else {
-            return ['msg' => 'Opps! El Formato del Email es invalido'];
+        } else {
+            return ['msg' => 'Opps! Este correo electrónico ya existe.'];
         }
-     }
-     else
-     {
-        return ['msg' => 'Opps! Este correo electrónico ya existe.'];
-     }
-   }
+    }
 
-   public function signupOP($data)
-   {
+    public function signupOP($data)
+    {
         $openPay = new OpenpayController;
         $addclientOP = $openPay->addClient($data);
 
@@ -61,12 +59,12 @@ class AppUser extends Authenticatable
         $user->customer_id  = $addclientOP['data']['id'];
         $user->save();
 
-        return ['msg' => 'done','data' => $addclientOP];
-   }
+        return ['msg' => 'done', 'data' => $addclientOP];
+    }
 
-   public function chkUser($data)
-   {
-        
+    public function chkUser($data)
+    {
+
         if (isset($data['user_id']) && $data['user_id'] != 'null') {
             // Intentamos con el id
             $res = AppUser::find($data['user_id']);
@@ -77,185 +75,180 @@ class AppUser extends Authenticatable
                  * y esta intentando registrarlo
                  * Comprobamos que el numero telefonico que intenta agregar no exista con otra cuenta
                  * en caso contrario se le pedira un nuevo numero telefonico
-                */
+                 */
 
-                $req = AppUser::where('phone',$data['phone'])->first();
+                $req = AppUser::where('phone', $data['phone'])->first();
                 if ($req) {
                     // El numero telefonico existe con otra cuenta
                     return ['msg' => 'phone_exist'];
-                }else {
+                } else {
                     // Si el numero telefonico no existe lo Registramos
                     $res->phone = $data['phone'];
                     $res->save();
                     return ['msg' => 'user_exist', 'user_id' => $res->id];
                 }
-
-            }else {
+            } else {
                 return ['msg' => 'not_exist'];
             }
-        }else {
+        } else {
             /**
              * Hasta este punto el usuario ya se registro previamente
              * ingreso un numero telefonico y lo comprobo con codigo SMS
              * verificamos si el numero de telefono existe
-            */
+             */
 
-            $res = AppUser::where('phone',$data['phone'])->first();
+            $res = AppUser::where('phone', $data['phone'])->first();
             if ($res) {
                 return ['msg' => 'user_exist', 'user_id' => $res->id];
-            }else {
+            } else {
                 return ['msg' => 'not_exist'];
             }
         }
-   }
+    }
 
-   public function SignPhone($data) 
-   {
-        $res = AppUser::where('id',$data['user_id'])->first();
+    public function SignPhone($data)
+    {
+        $res = AppUser::where('id', $data['user_id'])->first();
 
-        if($res->id)
-        {
+        if ($res->id) {
             $res->phone = $data['phone'];
             $res->save();
 
-            $return = ['msg' => 'done','user_id' => $res->id];
-        }
-        else
-        {
-            $return = ['msg' => 'error','error' => '¡Lo siento! Algo salió mal.'];
+            $return = ['msg' => 'done', 'user_id' => $res->id];
+        } else {
+            $return = ['msg' => 'error', 'error' => '¡Lo siento! Algo salió mal.'];
         }
 
         return $return;
-   }
+    }
 
-   public function login($data)
-   {
-     $chk = AppUser::where('email',$data['email'])->where('password',$data['password'])->first();
-
-     if(isset($chk->id))
-     {
-        return ['msg' => 'done','user_id' => $chk->id];
-     }
-     else
-     {
-        return ['msg' => 'Opps! Detalles de acceso incorrectos'];
-     }
-   }
-
-   public function Newlogin($data) 
-   {
-        $chk = AppUser::where('phone',$data['phone'])->first();
-
-        if(isset($chk->id))
-        {
-            return ['msg' => 'done','user_id' => $chk->id];
-        }
-        else
-        {
-            return ['msg' => 'error','error' => 'not_exist'];
-        }
-   }
-
-   public function loginfb($data) 
-   {
-    $chk = AppUser::where('email',$data['email'])->first();
-
-    if(isset($chk->id))
+    public function login($data)
     {
-        if ($chk->password == $data['password']) {
-            // Esta logeado con facebook
-            return ['msg' => 'done','user_id' => $chk->id];
-        }else {
-            // Esta logeado normal pero si existe se registra el FB - ID
-            $chk->pswfacebook = $data['password'];
-            $chk->save();
-            // Registramos
-            return ['msg' => 'done','user_id' => $chk->id];
+
+      
+        $chk = AppUser::where('email', $data['username'])->first();
+
+        $msg = "Detalles de acceso incorrectos";
+        $user = 0;
+        if (isset($chk->id)) // Validamos si existe el email
+        {
+            if ($chk->password == $data['password']) { // Validamos la contraseña
+                $msg = 'done';
+                $user = $chk->id;
+            }
+        } else {
+
+            $chk_username = AppUser::where('user_name', $data['username'])->first();
+            if (isset($chk_username->id)) {
+                if ($chk_username->password == $data['password']) { // Validamos la contraseña
+                    $msg = 'done';
+                    $user = $chk_username->id;
+                }
+            }
+        }
+
+
+        return ['msg' => $msg, 'user_id' => $user];
+    }
+
+    public function Newlogin($data)
+    {
+        $chk = AppUser::where('phone', $data['phone'])->first();
+
+        if (isset($chk->id)) {
+            return ['msg' => 'done', 'user_id' => $chk->id];
+        } else {
+            return ['msg' => 'error', 'error' => 'not_exist'];
         }
     }
-    else
+
+    public function loginfb($data)
     {
-       return ['msg' => 'Opps! Detalles de acceso incorrectos'];
-    }
-   }
+        $chk = AppUser::where('email', $data['email'])->first();
 
-   public function loginUser($data)
-   {
-     $chk = AppUser::where('user_name',$data['user_name'])->where('password',$data['password'])->first();
-
-     if(isset($chk->id))
-     {
-        return ['msg' => 'done','user_id' => $chk->id];
-     }
-     else
-     {
-        return ['msg' => 'Opps! Detalles de acceso incorrectos'];
-     }
-   }
-
-   public function updateInfo($data,$id)
-   {
-      $count = AppUser::where('id','!=',$id)->where('email',$data['email'])->count();
-
-     if($count == 0)
-     {
-        $add                = AppUser::find($id);
-        $add->name          = $data['name'];
-        $add->email         = $data['email'];
-        $add->phone         = $data['phone'];
-
-        $add->last_name     = $data['last_name'];
-        $add->birthday      = $data['birthday'];
-        $add->sex_type      = $data['sex_type'];
-        $add->user_name     = $data['user_name'];
-        
-        if(isset($data['password']))
-        {
-          $add->password    = $data['password'];
+        if (isset($chk->id)) {
+            if ($chk->password == $data['password']) {
+                // Esta logeado con facebook
+                return ['msg' => 'done', 'user_id' => $chk->id];
+            } else {
+                // Esta logeado normal pero si existe se registra el FB - ID
+                $chk->pswfacebook = $data['password'];
+                $chk->save();
+                // Registramos
+                return ['msg' => 'done', 'user_id' => $chk->id];
+            }
+        } else {
+            return ['msg' => 'Opps! Detalles de acceso incorrectos'];
         }
+    }
 
-        $add->save();
+    public function loginUser($data)
+    {
+        $chk = AppUser::where('user_name', $data['user_name'])->where('password', $data['password'])->first();
 
-        return ['msg' => 'done','user_id' => $add->id,'data' => $add];
-     }
-     else
-     {
-        return ['msg' => 'Opps! Este correo electrónico ya existe.'];
-     }
-   }
+        if (isset($chk->id)) {
+            return ['msg' => 'done', 'user_id' => $chk->id];
+        } else {
+            return ['msg' => 'Opps! Detalles de acceso incorrectos'];
+        }
+    }
+
+    public function updateInfo($data, $id)
+    {
+        $count = AppUser::where('id', '!=', $id)->where('email', $data['email'])->count();
+
+        if ($count == 0) {
+            $add                = AppUser::find($id);
+            $add->name          = $data['name'];
+            $add->email         = $data['email'];
+            $add->phone         = $data['phone'];
+
+            $add->last_name     = $data['last_name'];
+            $add->birthday      = $data['birthday'];
+            $add->sex_type      = $data['sex_type'];
+            $add->user_name     = $data['user_name'];
+
+            if (isset($data['password'])) {
+                $add->password    = $data['password'];
+            }
+
+            $add->save();
+
+            return ['msg' => 'done', 'user_id' => $add->id, 'data' => $add];
+        } else {
+            return ['msg' => 'Opps! Este correo electrónico ya existe.'];
+        }
+    }
 
     public function forgot($data)
     {
-        $res = AppUser::where('email',$data['email'])->first();
+        $res = AppUser::where('email', $data['email'])->first();
 
-        if(isset($res->id))
-        {
-            $otp = rand(1111,9999);
+        if (isset($res->id)) {
+            $otp = rand(1111, 9999);
 
             $res->otp = $otp;
             $res->save();
 
             $para       =   $data['email'];
             $asunto     =   'Codigo de acceso - A100TO';
-            $mensaje    =   "Hola ".$res->name." Un gusto saludarte, se ha pedido un codigo de recuperacion para acceder a tu cuenta en A100TO";
-            $mensaje    .=  ' '.'<br>';
+            $mensaje    =   "Hola " . $res->name . " Un gusto saludarte, se ha pedido un codigo de recuperacion para acceder a tu cuenta en A100TO";
+            $mensaje    .=  ' ' . '<br>';
             $mensaje    .=  "Tu codigo es: <br />";
-            $mensaje    .=  '# '.$otp;
+            $mensaje    .=  '# ' . $otp;
             $mensaje    .=  "<br /><hr />Recuerda, si no lo has solicitado tu has caso omiso a este mensaje y te recomendamos hacer un cambio en tu contrasena.";
             $mensaje    .=  "<br/ ><br /><br /> Te saluda el equipo de A100TO";
-        
+
             $cabeceras = 'From: A100TO' . "\r\n";
-            
+
             $cabeceras .= 'MIME-Version: 1.0' . "\r\n";
-            
+
             $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
             mail($para, $asunto, utf8_encode($mensaje), $cabeceras);
-        
-            $return = ['msg' => 'done','user_id' => $res->id];
-        }
-        else
-        {
-            $return = ['msg' => 'error','error' => '¡Lo siento! Este correo electrónico no está registrado con nosotros.'];
+
+            $return = ['msg' => 'done', 'user_id' => $res->id];
+        } else {
+            $return = ['msg' => 'error', 'error' => '¡Lo siento! Este correo electrónico no está registrado con nosotros.'];
         }
 
         return $return;
@@ -263,15 +256,12 @@ class AppUser extends Authenticatable
 
     public function verify($data)
     {
-        $res = AppUser::where('id',$data['user_id'])->where('otp',$data['otp'])->first();
+        $res = AppUser::where('id', $data['user_id'])->where('otp', $data['otp'])->first();
 
-        if(isset($res->id))
-        {
-            $return = ['msg' => 'done','user_id' => $res->id];
-        }
-        else
-        {
-            $return = ['msg' => 'error','error' => '¡Lo siento! OTP no coincide.'];
+        if (isset($res->id)) {
+            $return = ['msg' => 'done', 'user_id' => $res->id];
+        } else {
+            $return = ['msg' => 'error', 'error' => '¡Lo siento! OTP no coincide.'];
         }
 
         return $return;
@@ -279,18 +269,15 @@ class AppUser extends Authenticatable
 
     public function updatePassword($data)
     {
-        $res = AppUser::where('id',$data['user_id'])->first();
+        $res = AppUser::where('id', $data['user_id'])->first();
 
-        if(isset($res->id))
-        {
+        if (isset($res->id)) {
             $res->password = $data['password'];
             $res->save();
 
-            $return = ['msg' => 'done','user_id' => $res->id];
-        }
-        else
-        {
-            $return = ['msg' => 'error','error' => '¡Lo siento! Algo salió mal.'];
+            $return = ['msg' => 'done', 'user_id' => $res->id];
+        } else {
+            $return = ['msg' => 'error', 'error' => '¡Lo siento! Algo salió mal.'];
         }
 
         return $return;
@@ -298,10 +285,10 @@ class AppUser extends Authenticatable
 
     public function countOrder($id)
     {
-        return Order::where('user_id',$id)->where('status','>',0)->count();
+        return Order::where('user_id', $id)->where('status', '>', 0)->count();
     }
 
-     /*
+    /*
     |--------------------------------------
     |Get all data from db
     |--------------------------------------
@@ -314,18 +301,18 @@ class AppUser extends Authenticatable
     public function getAllUser($id)
     {
         $us = AppUser::find($id);
-        $transx = Order::where('user_id',$id)->get();
-        
+        $transx = Order::where('user_id', $id)->get();
+
         $data = [];
         $compras = 0;
         $cashback = 0;
         $transaction = [];
         foreach ($transx as $key) {
-                
+
             /******** Compras *********/
             $compras = $compras + $key->total;
             /******** Compras *********/
-            
+
             /******** CashBack *********/
             $cashback = $cashback + $key->monedero;
             /******** CashBack *********/
@@ -358,20 +345,17 @@ class AppUser extends Authenticatable
     */
     public function getReport($data)
     {
-        $res = AppUser::where(function($query) use($data) {
+        $res = AppUser::where(function ($query) use ($data) {
 
-            if($data['user_id'])
-            {
-                $query->where('app_user.id',$data['user_id']);
+            if ($data['user_id']) {
+                $query->where('app_user.id', $data['user_id']);
             }
-
         })->select('app_user.*')
-        ->orderBy('app_user.id','ASC')->get();
+            ->orderBy('app_user.id', 'ASC')->get();
 
-       $allData = [];
+        $allData = [];
 
-       foreach($res as $row)
-       {
+        foreach ($res as $row) {
 
             // Obtenemos el comercio
             $store = User::find($row->ord_store_id);
@@ -388,20 +372,20 @@ class AppUser extends Authenticatable
                 'sex_type'          => $row->sex_type,
                 'user_name'         => $row->user_name
             ];
-       }
+        }
 
-       return $allData;
+        return $allData;
     }
 
-    
-    public function addMoney($amount,$user,$use_mon)
+
+    public function addMoney($amount, $user, $use_mon)
     {
-        $res = AppUser::where('id',$user)->first(); 
-        
+        $res = AppUser::where('id', $user)->first();
+
         if ($use_mon == true) { // El usuario ha utilizado su dinero en monedero
             // Limpiamos primero
             $res->monedero = 0;
-            $res->save();   
+            $res->save();
         }
 
         // Agregamos el nuevo pedido al monedero
