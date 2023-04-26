@@ -47,12 +47,12 @@
 
 
 
-    <li>
+   {{-- <li>
         <a href="{{ Asset(env('user') . '/delivery') }}" class=" menu-link">
             <i class="mdi mdi-calendar"></i>
             <span> Personal de entrega </span>
         </a>
-    </li>
+    </li>--}}
     <li>
         <a href="#sidebarExpages" data-bs-toggle="collapse">
 

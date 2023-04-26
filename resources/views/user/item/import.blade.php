@@ -11,7 +11,8 @@
             <div class="container-fluid">
 
                 <div class="row ">
-                    <div class="col-lg-12 mt-2">
+                    <div class="col-lg-11 mx-auto  mt-2">
+                        @include('user.layout.alert')
                         <div class="card py-3 m-b-30">
                             <div class="card-body">
                                 {!! Form::open(['url' => [Asset('import')], 'files' => true], ['class' => 'col s12']) !!}
@@ -25,7 +26,8 @@
                                             required="required">
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-success btn-cta">Subir</button>
+                               
+                                <button type="submit" class="btn btn-success width-xl waves-effect waves-light btn-cta">Subir</button>
                                 </form>
                             </div>
                         </div>

@@ -17,7 +17,8 @@
             <div class="container-fluid">
 
                 <div class="row ">
-                    <div class="col-md-12">
+                    <div class="col-lg-11 mx-auto  mt-2">
+                        @include('user.layout.alert')
                         <div class="card py-3 m-b-30">
 
                             <div class="row">
@@ -26,10 +27,11 @@
                                 </div>
                                 <div class="col-md-6" style="text-align: right;">
                                     <a href="{{ Asset($link . 'add') }}"
-                                        class="btn m-b-15 ml-2 mr-2 btn-rounded btn-warning">
+                                        class="btn btn-warning rounded-pill waves-effect waves-light width-md">
                                         Agregar Nuevo
                                     </a>
-                                    <a href="{{ Asset('import') }}" class="btn m-b-15 ml-2 mr-2 btn-rounded btn-success">
+                                    <a style="margin-left:20px; margin-right:20px" href="{{ Asset('import') }}"
+                                        class="btn btn-success rounded-pill waves-effect waves-light width-md">
                                         Importar
                                     </a>&nbsp;&nbsp;&nbsp;
                                 </div>
@@ -63,13 +65,15 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-1">
-                                                <button type="submit" class="btn btn-success m-b-15 ml-2 mr-2"
+                                            <div class="form-group col-md-2" style="text-align: center">
+                                                <button type="submit"
+                                                    class="btn btn-success waves-effect waves-light  width-md"
                                                     style="margin-top:30px;">Buscar</button>
                                             </div>
 
                                             <div class="form-group col-md-2">
-                                                <a href="{{ Asset($link) }}" class="btn btn-success m-b-15 ml-2 mr-2"
+                                                <a href="{{ Asset($link) }}"
+                                                    class="btn btn-success waves-effect waves-light  width-md"
                                                     style="margin-top:30px;">Ver todo</a>
                                             </div>
 
@@ -81,52 +85,52 @@
 
                                 <table class="table table-hover ">
                                     <thead>
-                                        <tr>
+                                        <tr style="text-align: center">
                                             <th>Imagen</th>
                                             <th>Categoría</th>
                                             <th>Nombre</th>
                                             <th>Ordenamiento</th>
                                             <th>Estado</th>
-                                            <th style="text-align: right">Opciones</th>
+                                            <th>Opciones</th>
                                         </tr>
 
                                     </thead>
                                     <tbody>
 
                                         @foreach ($data as $row)
-                                            <tr>
+                                            <tr style="text-align: center">
                                                 <td width="15%">
                                                     @if ($row->img)
                                                         <img src="{{ Asset('upload/item/' . $row->img) }}" height="50">
                                                     @endif
                                                 </td>
                                                 <td width="12%">{{ $row->cate }}</td>
-                                                <td width="17%">{{ $row->name }}</td>
+                                                <td width="17%" style="text-align: left">{{ $row->name }}</td>
                                                 <td width="12%">{{ $row->sort_no }}</td>
-                                                <td width="12%">
+                                                <td width="10%">
 
                                                     @if ($row->status == 0)
                                                         <button type="button"
-                                                            class="btn btn-sm m-b-15 ml-2 mr-2 btn-success"
-                                                            onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Active</button>
+                                                            class="btn btn-success width-xs waves-effect waves-light"
+                                                            onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Activo</button>
                                                     @else
                                                         <button type="button"
-                                                            class="btn btn-sm m-b-15 ml-2 mr-2 btn-danger"
-                                                            onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Disabled</button>
+                                                            class="btn btn-danger width-xs waves-effect waves-light"
+                                                            onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Inactivo</button>
                                                     @endif
 
                                                 </td>
 
-                                                <td width="22%" style="text-align: right">
+                                                <td width="24%" style="text-align: right">
                                                     <!-- Complementos -->
                                                     <a href="javascript::void()"
-                                                        class="btn m-b-15 ml-2 mr-2 btn-md  btn-rounded-circle btn-info"
+                                                        class="btn m-b-15 ml-2 mr-2 btn-md  btn-info waves-effect waves-light"
                                                         data-toggle="modal"
                                                         data-target="#slideRightModal{{ $row->id }}"><i
                                                             class="mdi mdi-link"></i></a>
                                                     <!-- Tranding -->
                                                     <a href="javascript::void()"
-                                                        class="btn m-b-15 ml-2 mr-2 btn-md  btn-rounded-circle <?php if ($row->trending == 1) {
+                                                        class="btn m-b-15 ml-2 mr-2 btn-md  waves-effect waves-light <?php if ($row->trending == 1) {
                                                             echo 'btn-success';
                                                         } else {
                                                             echo 'btn-warning';
@@ -141,13 +145,13 @@
                                                             class="mdi mdi-trending-up"></i></a>
                                                     <!-- Editar -->
                                                     <a href="{{ Asset($link . $row->id . '/edit') }}"
-                                                        class="btn m-b-15 ml-2 mr-2 btn-md  btn-rounded-circle btn-success"
+                                                        class="btn m-b-15 ml-2 mr-2 btn-md  waves-effect waves-light btn-success"
                                                         data-toggle="tooltip" data-placement="top"
                                                         data-original-title="Edit This Entry"><i
                                                             class="mdi mdi-border-color"></i></a>
                                                     <!-- Eliminar -->
                                                     <button type="button"
-                                                        class="btn m-b-15 ml-2 mr-2 btn-md  btn-rounded-circle btn-danger"
+                                                        class="btn m-b-15 ml-2 mr-2 btn-md  waves-effect waves-light btn-danger"
                                                         data-toggle="tooltip" data-placement="top"
                                                         data-original-title="Delete This Entry"
                                                         onclick="deleteConfirm('{{ Asset($link . 'delete/' . $row->id) }}')"><i
