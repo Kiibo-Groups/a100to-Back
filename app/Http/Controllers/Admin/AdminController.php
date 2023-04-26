@@ -86,7 +86,7 @@ class AdminController extends Controller {
 	{
 		auth()->guard('admin')->logout();
 
-		return Redirect::to(env('admin').'/login')->with('message', 'Logout Successfully !');
+		return Redirect::to(env('admin').'/login')->with('message', '¡Cierre de sesión con éxito!');
 	}
 
 	/*

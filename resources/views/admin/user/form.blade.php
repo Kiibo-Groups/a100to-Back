@@ -17,7 +17,7 @@
                     {!! Form::text('name', null, ['required' => 'required', 'placeholder' => 'Name', 'class' => 'form-control']) !!}
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="inputEmail4">Email (<i>This will be username</i>)</label>
+                    <label for="inputEmail4">Email (<i>Este será el nombre de usuario</i>)</label>
                     {!! Form::email('email', null, [
                         'required' => 'required',
                         'placeholder' => 'Email Address',

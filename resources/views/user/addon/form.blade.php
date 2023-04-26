@@ -7,6 +7,7 @@
                         )</small></label>
                 <select name="cate_id" class="form-control" required="required">
                     <option value="">Select</option>
+                   
                     @foreach ($cates as $cate)
                         @if ($cate->type == 1)
                             <option value="{{ $cate->id }}" @if ($data->category_id == $cate->id) selected @endif>
