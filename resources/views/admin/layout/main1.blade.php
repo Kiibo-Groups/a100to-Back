@@ -24,30 +24,30 @@
 
 
     <!-- Plugins css -->
-    <link rel="stylesheet" href="{{ Asset('assets_admin/libs/spectrum-colorpicker2/spectrum.min.css') }}"
+    <link rel="stylesheet" href="{{Asset('public/assets_admin/libs/spectrum-colorpicker2/spectrum.min.css') }}"
         type="text/css">
-    <link rel="stylesheet" href="{{ Asset('assets_admin/libs/flatpickr/flatpickr.min.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ Asset('assets_admin/libs/clockpicker/bootstrap-clockpicker.min.css') }}"
+    <link rel="stylesheet" href="{{Asset('public/assets_admin/libs/flatpickr/flatpickr.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{Asset('public/assets_admin/libs/clockpicker/bootstrap-clockpicker.min.css') }}"
         type="text/css">
-    <link rel="stylesheet" href="{{ Asset('assets_admin/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}"
+    <link rel="stylesheet" href="{{Asset('public/assets_admin/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}"
         type="text/css">
-    <link rel="stylesheet" href="{{ Asset('assets_admin/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}"
+    <link rel="stylesheet" href="{{Asset('public/assets_admin/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}"
         type="text/css">
 
-    <link rel="stylesheet" type="text/css" href="{{ Asset('assets/css/atmos.css') }}">
-    <link rel="stylesheet" href="{{ Asset('assets_admin/css/config/default/bootstrap.min.css') }}" type="text/css"
+    <link rel="stylesheet" type="text/css" href="{{ Asset('public/assets/css/atmos.css') }}">
+    <link rel="stylesheet" href="{{Asset('public/assets_admin/css/config/default/bootstrap.min.css') }}" type="text/css"
         id="app-default-stylesheet">
 
-    <link rel="stylesheet" href="{{ Asset('assets_admin/css/config/default/app.min.css') }}" type="text/css"
+    <link rel="stylesheet" href="{{Asset('public/assets_admin/css/config/default/app.min.css') }}" type="text/css"
         id="bs-default-stylesheet">
 
-    <link rel="stylesheet" href="{{ Asset('assets_admin/css/config/default/bootstrap-dark.min.css') }}" type="text/css"
+    <link rel="stylesheet" href="{{Asset('public/assets_admin/css/config/default/bootstrap-dark.min.css') }}" type="text/css"
         id="bs-dark-stylesheet" disabled="disabled">
 
-    <link rel="stylesheet" href="{{ Asset('assets_admin/css/config/default/app-dark.min.css') }}" type="text/css"
+    <link rel="stylesheet" href="{{Asset('public/assets_admin/css/config/default/app-dark.min.css') }}" type="text/css"
         id="app-dark-stylesheet" disabled="disabled">
     <!-- icons -->
-    <link rel="stylesheet" href="{{ Asset('assets_admin/css/icons.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{Asset('public/assets_admin/css/icons.min.css') }}" type="text/css">
 
     @yield('css')
 
@@ -61,7 +61,6 @@
 
 
         <!-- Topbar Start -->
-
         <div class="navbar-custom">
 
             <!-- LOGO -->
@@ -78,11 +77,12 @@
                     <span class="logo-sm">
                         A100TO
                     </span>
-                    <span class="logo-lg">
-                        <img src="{{ Asset('assets/img/logo.png') }}" alt="" height="86">
+                    <span class="logo-lg" >
+                        <img src="{{ Asset('public/assets/img/logo.png') }}" alt="" height="86">
                     </span>
                 </a>
             </div>
+
             <div class="row ">
                 <div class="col-lg-11 mx-auto mt-2">
 
@@ -102,7 +102,6 @@
             <div class="clearfix"></div>
 
         </div>
-
         <!-- end Topbar -->
 
         <!-- ========== Left Sidebar Start ========== -->
@@ -127,28 +126,28 @@
 
     </div>
 
-    <script src="{{ Asset('assets/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/popper/popper.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/select2/js/select2.full.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
-    <script src="{{ Asset('assets/js/atmos.min.js?v=') }}<?php echo time(); ?>"></script>
+    <script src="{{ Asset('public/assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ Asset('public/assets/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script src="{{ Asset('public/assets/vendor/popper/popper.js') }}"></script>
+    <script src="{{ Asset('public/assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ Asset('public/assets/vendor/select2/js/select2.full.min.js') }}"></script>
+    <script src="{{ Asset('public/assets/vendor/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
+    <script src="{{ Asset('public/assets/js/atmos.min.js?v=') }}<?php echo time(); ?>"></script>
     <!-- Vendor js -->
-    <script src="{{ Asset('assets_admin/js/vendor.min.js') }}"></script>
+    <script src="{{Asset('public/assets_admin/js/vendor.min.js') }}"></script>
     <!-- Plugins js-->
-    <script src="{{ Asset('assets_admin/libs/flatpickr/flatpickr.min.js') }}"></script>
-    <script src="{{ Asset('assets_admin/libs/spectrum-colorpicker2/spectrum.min.js') }}"></script>
-    <script src="{{ Asset('assets_admin/libs/clockpicker/bootstrap-clockpicker.min.js') }}"></script>
-    <script src="{{ Asset('assets_admin/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{Asset('public/assets_admin/libs/flatpickr/flatpickr.min.js') }}"></script>
+    <script src="{{Asset('public/assets_admin/libs/spectrum-colorpicker2/spectrum.min.js') }}"></script>
+    <script src="{{Asset('public/assets_admin/libs/clockpicker/bootstrap-clockpicker.min.js') }}"></script>
+    <script src="{{Asset('public/assets_admin/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
     <!-- Init js-->
-    <script src="{{ Asset('assets_admin/js/pages/form-pickers.init.js') }}"></script>
+    <script src="{{Asset('public/assets_admin/js/pages/form-pickers.init.js') }}"></script>
     <!-- knob plugin -->
-    <script src="{{ Asset('assets_admin/libs/jquery-knob/jquery.knob.min.js') }}"></script>
+    <script src="{{Asset('public/assets_admin/libs/jquery-knob/jquery.knob.min.js') }}"></script>
     <!-- App js-->
-    <script src="{{ Asset('assets_admin/js/app.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/apexchart/apexcharts.min.js') }}"></script>
-    <script src="{{ Asset('assets/vendor/sweetalert/sweetalert2.all.min.js') }}"></script>
+    <script src="{{Asset('public/assets_admin/js/app.min.js') }}"></script>
+    <script src="{{ Asset('public/assets/vendor/apexchart/apexcharts.min.js') }}"></script>
+    <script src="{{ Asset('public/assets/vendor/sweetalert/sweetalert2.all.min.js') }}"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
@@ -157,8 +156,6 @@
             $(".datepicker").datepicker();
 
         });
-        
-
         $(document).ready(function() {
             $('.summernote').summernote();
         });
