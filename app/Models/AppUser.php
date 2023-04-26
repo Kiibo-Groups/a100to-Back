@@ -30,6 +30,11 @@ class AppUser extends Authenticatable
                 $add->password      = $data['password'];
                 $add->pswfacebook   = isset($data['pswfb']) ? $data['pswfb'] : 0;
                 $add->refered       = isset($data['refered']) ? $data['refered'] : '';
+
+                $add->last_name     = isset($data['last_name']) ? $data['last_name'] : 'null';
+                $add->birthday      = isset($data['birthday']) ? $data['birthday'] : 'null';
+                $add->sex_type      = isset($data['sex_type']) ? $data['sex_type'] : 'null';
+
                 $add->save();
 
                 return ['msg' => 'done','user_id' => $add->id];
@@ -183,6 +188,10 @@ class AppUser extends Authenticatable
         $add->name          = $data['name'];
         $add->email         = $data['email'];
         $add->phone         = $data['phone'];
+
+        $add->phone         = $data['last_name'];
+        $add->phone         = $data['birthday'];
+        $add->phone         = $data['sex_type'];
         
         if(isset($data['password']))
         {
@@ -357,7 +366,10 @@ class AppUser extends Authenticatable
                 'name'              => $row->name,
                 'email'             => $row->email,
                 'Telefono'          => $row->phone,
-                'refered'           => $row->refered
+                'refered'           => $row->refered,
+                'last_name'         => $row->last_name,
+                'birthday'          => $row->birthday,
+                'sex_type'          => $row->sex_type
             ];
        }
 
