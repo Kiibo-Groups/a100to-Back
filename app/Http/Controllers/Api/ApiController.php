@@ -347,7 +347,12 @@ class ApiController extends Controller {
 	{
 		$res = new AppUser;
 
-		return response()->json($res->login($Request->all()));
+		if ($Request->email != '') {
+			return response()->json($res->login($Request->all()));
+		} else {
+			return response()->json($res->loginUser($Request->all()));
+		}
+	
 	}
 
 	public function Newlogin(Request $Request)
@@ -388,12 +393,6 @@ class ApiController extends Controller {
 	}
 
 
-	public function loginuser(Request $Request)
-	{
-		$res = new AppUser;
-
-		return response()->json($res->loginUser($Request->all()));
-	}
 
 	public function getAddress($id)
 	{
