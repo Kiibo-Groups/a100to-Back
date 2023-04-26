@@ -1,4 +1,4 @@
-<div class="col-12">
+<div>
 
 
     <div class="card py-3 m-b-30">
@@ -685,8 +685,8 @@
 
 
 </div>
-<div class="form-row m-b-30">
-    <button type="submit" style="margin-left: 20px"
+<div class="form-row m-b-30" style="margin-left: 1px">
+    <button type="submit" 
         class="btn btn-success width-xl waves-effect waves-light btn-cta">Guardar Cambios</button>
 </div>
 

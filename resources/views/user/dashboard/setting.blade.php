@@ -14,15 +14,14 @@
 
 
     <div class="content-page" id="div2">
-        @include('user.layout.alert')
+ 
         <div class="content" >
             <!-- Start Content-->
             <div  class="container-fluid">
 
                 <div class="row ">
-                  
-                    <div class="col-12">
-                    
+                    <div class="col-lg-11 mx-auto mt-2">
+                        @include('user.layout.alert')
                         
                         {!! Form::model($data, ['url' => [$form_url], 'files' => true, 'method' => 'POST'], ['class' => 'col s12']) !!}
 
