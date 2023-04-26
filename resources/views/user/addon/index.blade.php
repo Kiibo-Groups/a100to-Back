@@ -18,15 +18,17 @@
 
 
                 <div class="row ">
-                    <div class="col-md-12">
+                    <div class="col-lg-11 mx-auto mt-2">
+                        @include('user.layout.alert')
                         <div class="card py-3 m-b-30">
 
                             <div class="row">
                                 <div class="col-md-6" style="text-align: left;">
                                     <b style="margin-left:20px">@yield('title')</b>
                                 </div>
-                                <div class="col-md-6" style="text-align: right;"><a href="{{ Asset($link . 'add') }}"
-                                        class="btn m-b-15 ml-2 mr-2 btn-rounded btn-warning">Add New</a>&nbsp;&nbsp;&nbsp;
+                                <div class="col-md-6" style="text-align: right;"><a style=" margin-right:20px" href="{{ Asset($link . 'add') }}"
+                                    class="btn btn-warning rounded-pill waves-effect waves-light width-md">
+                                    Agregar Nuevo</a>&nbsp;&nbsp;&nbsp;
                                 </div>
 
                             </div>

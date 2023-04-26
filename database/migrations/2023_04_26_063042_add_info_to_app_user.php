@@ -16,7 +16,8 @@ class AddInfoToAppUser extends Migration
         Schema::table('app_user', function (Blueprint $table) {
             $table->string('last_name')->nullable()->after('email');
             $table->string('birthday')->nullable()->after('last_name');    
-            $table->string('sex_type')->nullable()->after('birthday');   
+            $table->string('sex_type')->nullable()->after('birthday'); 
+            $table->string('user_name')->nullable()->after('sex_type');   
         });
     }
 

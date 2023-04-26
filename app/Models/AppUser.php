@@ -34,6 +34,7 @@ class AppUser extends Authenticatable
                 $add->last_name     = isset($data['last_name']) ? $data['last_name'] : 'null';
                 $add->birthday      = isset($data['birthday']) ? $data['birthday'] : 'null';
                 $add->sex_type      = isset($data['sex_type']) ? $data['sex_type'] : 'null';
+                $add->user_name     = isset($data['user_name']) ? $data['user_name'] : 'null';
 
                 $add->save();
 
@@ -189,9 +190,10 @@ class AppUser extends Authenticatable
         $add->email         = $data['email'];
         $add->phone         = $data['phone'];
 
-        $add->phone         = $data['last_name'];
-        $add->phone         = $data['birthday'];
-        $add->phone         = $data['sex_type'];
+        $add->last_name     = $data['last_name'];
+        $add->birthday      = $data['birthday'];
+        $add->sex_type      = $data['sex_type'];
+        $add->user_name     = $data['user_name'];
         
         if(isset($data['password']))
         {
@@ -369,7 +371,8 @@ class AppUser extends Authenticatable
                 'refered'           => $row->refered,
                 'last_name'         => $row->last_name,
                 'birthday'          => $row->birthday,
-                'sex_type'          => $row->sex_type
+                'sex_type'          => $row->sex_type,
+                'user_name'         => $row->user_name
             ];
        }
 
