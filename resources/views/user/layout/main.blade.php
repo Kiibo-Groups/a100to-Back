@@ -70,7 +70,7 @@
     <div id="wrapper">
         <!-- Topbar Start -->
         <div class="navbar-custom">
-            <ul class="list-unstyled topnav-menu float-end mb-0">
+        <ul class="list-unstyled topnav-menu float-end mb-0" style="margin-top: 10px; margin-right: 70px">
 
                 <li class="dropdown notification-list topbar-dropdown">
                     @php
@@ -116,16 +116,21 @@
                     </span>
                 </a>
             </div>
-            <ul class="list-unstyled topnav-menu topnav-menu-left mb-0">
-                <li>
-                    <button class="button-menu-mobile disable-btn waves-effect">
-                        <i class="fe-menu"></i>
-                    </button>
-                </li>
-                <li>
-                    <h4 class="page-title-main"> Bienvenido(a) ! {{ Auth::user()->name }} </h4>
-                </li>
-            </ul>
+            <div class="row ">
+                <div class="col-lg-11 mx-auto mt-2">
+
+                    <ul class="list-unstyled topnav-menu topnav-menu-left mb-0">
+                        <li>
+                            <button class="button-menu-mobile disable-btn waves-effect">
+                                <i class="fe-menu"></i>
+                            </button>
+                        </li>
+                        <li>
+                            <h4 class="page-title-main"> Bienvenido(a) ! {{ Auth::guard('admin')->user()->name }} </h4>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div class="clearfix"></div>
 
         </div>

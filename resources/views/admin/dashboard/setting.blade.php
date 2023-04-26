@@ -10,10 +10,10 @@
         <div class="content">
             <div class="container-fluid">
 
-                <div class="row " style="padding: 20px">
+                <div class="row ">
                     <div class="col-lg-11 mx-auto mt-2">
                         @include('user.layout.alert')
-                        <div class="tab-content" id="myTabContent1">
+                        <div>
 
                             <form action="{{ $form_url }}" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -277,9 +277,13 @@
                                         </div>
                                     </div>
 
-                                    <button type="submit"
-                                        class="btn btn-success width-xl waves-effect waves-light btn-cta">Guardar
-                                        Cambios</button>
+
+                                    <div class="form-row m-b-30" style="margin-left: 1px">
+                                        <button type="submit"
+                                            class="btn btn-success width-xl waves-effect waves-light btn-cta">Guardar
+                                            Cambios</button>
+                                    </div>
+
                             </form>
                         </div>
                     </div>
