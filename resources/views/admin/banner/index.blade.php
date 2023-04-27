@@ -21,7 +21,7 @@
                             <div class="row">
                                 <div class="col-md-12" style="text-align: right;">
                                     <a href="{{ Asset($link . 'add') }}"
-                                        class="btn btn-success rounded-pill waves-effect waves-light">
+                                        class="btn btn-success rounded-pill waves-effect waves-light" style=" margin-right:20px" >
 
                                         Agregar Banner</a>&nbsp;&nbsp;&nbsp;
                                 </div>

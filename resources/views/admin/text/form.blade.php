@@ -607,32 +607,32 @@
             <!--End-->
 
             <!--start-->
-            <h4 >Add New Address</h4>
+            <h4 >Agregar nueva dirección</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Title</label>
+                            <label for="inputEmail6">Título</label>
                             <input type="text" name="add_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'add_title') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Address</label>
+                            <label for="inputEmail6">Dirección</label>
                             <input type="text" name="add_address[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'add_address') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Landmark</label>
+                            <label for="inputEmail6">Punto de referencia</label>
                             <input type="text" name="add_landmark[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'add_landmark') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Button</label>
+                            <label for="inputEmail6">Botón</label>
                             <input type="text" name="add_button[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'add_button') }}">
                         </div>
@@ -644,26 +644,26 @@
 
 
             <!--start-->
-            <h4 >Order Confirm Page</h4>
+            <h4 >Página de confirmación del pedido</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Title</label>
+                            <label for="inputEmail6">Título</label>
                             <input type="text" name="confirm_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'confirm_title') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Heading</label>
+                            <label for="inputEmail6">Encabezado</label>
                             <input type="text" name="confirm_heading[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'confirm_heading') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">View Order Details</label>
+                            <label for="inputEmail6">Ver detalles de la orden</label>
                             <input type="text" name="confirm_view_order[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'confirm_view_order') }}">
                         </div>
@@ -671,7 +671,7 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Order ID</label>
+                            <label for="inputEmail6">Solicitar ID</label>
                             <input type="text" name="confirm_order_id[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'confirm_order_id') }}">
                         </div>
@@ -688,26 +688,26 @@
             <!--End-->
 
             <!--start-->
-            <h4 >My Account</h4>
+            <h4 >Mi cuenta</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Title</label>
+                            <label for="inputEmail6">Título</label>
                             <input type="text" name="profile_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'profile_title') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Heading</label>
+                            <label for="inputEmail6">Encabezado</label>
                             <input type="text" name="profile_heading[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'profile_heading') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Welcome Text</label>
+                            <label for="inputEmail6">Texto de bienvenida</label>
                             <input type="text" name="profile_welcome[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'profile_welcome') }}">
                         </div>
@@ -715,19 +715,19 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Order History</label>
+                            <label for="inputEmail6">Historial de pedidos</label>
                             <input type="text" name="profile_order_history[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'profile_order_history') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Settings</label>
+                            <label for="inputEmail6">Ajustes</label>
                             <input type="text" name="profile_setting[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'profile_setting') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Logout</label>
+                            <label for="inputEmail6">Cerrar sesión</label>
                             <input type="text" name="profile_logout[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'profile_logout') }}">
                         </div>
@@ -738,26 +738,26 @@
             <!--End-->
 
             <!--start-->
-            <h4 >Order History</h4>
+            <h4 >Historial de pedidos</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Title</label>
+                            <label for="inputEmail6">Título</label>
                             <input type="text" name="history_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'history_title') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Heading</label>
+                            <label for="inputEmail6">Encabezado</label>
                             <input type="text" name="history_heading[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'history_heading') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Date</label>
+                            <label for="inputEmail6">Fecha</label>
                             <input type="text" name="history_date[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'history_date') }}">
                         </div>
@@ -765,19 +765,19 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Status</label>
+                            <label for="inputEmail6">Estado</label>
                             <input type="text" name="history_status[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'history_status') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Item</label>
+                            <label for="inputEmail6">Artículo</label>
                             <input type="text" name="history_item[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'history_item') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Quantity</label>
+                            <label for="inputEmail6">Cantidad</label>
                             <input type="text" name="history_qty[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'history_qty') }}">
                         </div>
@@ -785,19 +785,19 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Price</label>
+                            <label for="inputEmail6">Precio</label>
                             <input type="text" name="history_price[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'history_price') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Rating Title</label>
+                            <label for="inputEmail6">Título de calificación</label>
                             <input type="text" name="history_rating[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'history_rating') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Cancel Order</label>
+                            <label for="inputEmail6">Cancelar orden</label>
                             <input type="text" name="history_cancel[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'history_cancel') }}">
                         </div>
@@ -808,26 +808,26 @@
             <!--End-->
 
             <!--start-->
-            <h4 >Rating & Info Pages</h4>
+            <h4 >Páginas de clasificación e información</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Title</label>
+                            <label for="inputEmail6">Título</label>
                             <input type="text" name="rating_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'rating_title') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Heading</label>
+                            <label for="inputEmail6">Encabezado</label>
                             <input type="text" name="rating_heading[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'rating_heading') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Rating Msg</label>
+                            <label for="inputEmail6">Mensaje de calificación</label>
                             <input type="text" name="rating_msg[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'rating_msg') }}">
                         </div>
@@ -835,19 +835,19 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Button</label>
+                            <label for="inputEmail6">Botón</label>
                             <input type="text" name="rating_button[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'rating_button') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">About Us Title</label>
+                            <label for="inputEmail6">Sobre nosotros Título</label>
                             <input type="text" name="about_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'about_title') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">How Works Title</label>
+                            <label for="inputEmail6">Título de cómo funciona</label>
                             <input type="text" name="how_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'how_title') }}">
                         </div>
@@ -855,43 +855,43 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Faq's Title</label>
+                            <label for="inputEmail6">Título de preguntas frecuentes</label>
                             <input type="text" name="faq_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'faq_title') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Contact Title</label>
+                            <label for="inputEmail6">Título del contacto</label>
                             <input type="text" name="contact_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'contact_title') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Language</label>
+                            <label for="inputEmail6">Idioma</label>
                             <input type="text" name="language[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'language') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Home</label>
+                            <label for="inputEmail6">Hogar</label>
                             <input type="text" name="home[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'home') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">City</label>
+                            <label for="inputEmail6">Ciudad</label>
                             <input type="text" name="city[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'city') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Account</label>
+                            <label for="inputEmail6">Cuenta</label>
                             <input type="text" name="account[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'account') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Order</label>
+                            <label for="inputEmail6">Orden</label>
                             <input type="text" name="order[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'order') }}">
                         </div>
@@ -903,26 +903,26 @@
             <!--End-->
 
             <!--start-->
-            <h4 >Delivery App</h4>
+            <h4 >Aplicación de entrega</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">No Order Found</label>
+                            <label for="inputEmail6">No se ha encontrado ningún pedido</label>
                             <input type="text" name="d_no_order[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'd_no_order') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">New Orders</label>
+                            <label for="inputEmail6">Nuevos pedidos</label>
                             <input type="text" name="d_new_order[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'd_new_order') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">View Detail</label>
+                            <label for="inputEmail6">Ver Detalle</label>
                             <input type="text" name="d_view_detail[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'd_view_detail') }}">
                         </div>
@@ -930,19 +930,19 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">User</label>
+                            <label for="inputEmail6">Usuario</label>
                             <input type="text" name="d_user[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'd_user') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Phone</label>
+                            <label for="inputEmail6">Teléfono</label>
                             <input type="text" name="d_phone[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'd_phone') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Address</label>
+                            <label for="inputEmail6">Dirección</label>
                             <input type="text" name="d_address[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'd_address') }}">
                         </div>
@@ -950,19 +950,19 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Start Ride</label>
+                            <label for="inputEmail6">Iniciar viaje</label>
                             <input type="text" name="d_start_ride[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'd_start_ride') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Complete Ride</label>
+                            <label for="inputEmail6">Paseo completo</label>
                             <input type="text" name="d_complete_ride[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'd_complete_ride') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Total Amount</label>
+                            <label for="inputEmail6">Cantidad total</label>
                             <input type="text" name="d_total_amount[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'd_total_amount') }}">
                         </div>
@@ -976,7 +976,7 @@
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Store Close</label>
+                            <label for="inputEmail6">Cerrar tienda</label>
                             <input type="text" name="close[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 'close') }}">
                         </div>
@@ -987,26 +987,26 @@
             <!--End-->
 
             <!--start-->
-            <h4 >Store App</h4>
+            <h4 >Tienda de aplicaciones</h4>
 
             <div class="card py-3 m-b-30">
                 <div class="card-body">
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Total Order</label>
+                            <label for="inputEmail6">Orden total</label>
                             <input type="text" name="s_total_order[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 's_total_order') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Completed Orders</label>
+                            <label for="inputEmail6">Pedidos completados</label>
                             <input type="text" name="s_complete_order[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 's_complete_order') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">New Orders</label>
+                            <label for="inputEmail6">Nuevos pedidos</label>
                             <input type="text" name="s_new_order[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 's_new_order') }}">
                         </div>
@@ -1014,19 +1014,19 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">New Order Status</label>
+                            <label for="inputEmail6">Estado del nuevo pedido</label>
                             <input type="text" name="s_new_status[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 's_new_status') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Confirmed Status</label>
+                            <label for="inputEmail6">Estado confirmado</label>
                             <input type="text" name="s_confirm_order[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 's_confirm_order') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Delivery Assign Status</label>
+                            <label for="inputEmail6">Estado de asignación de entrega</label>
                             <input type="text" name="s_assign_status[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 's_assign_status') }}">
                         </div>
@@ -1034,19 +1034,19 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Out For Delivery Status</label>
+                            <label for="inputEmail6">Fuera para estado de entrega</label>
                             <input type="text" name="s_out_delivery_status[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 's_out_delivery_status') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Complete Status</label>
+                            <label for="inputEmail6">Estado completo</label>
                             <input type="text" name="s_complete_status[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 's_complete_status') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Order Detail Title</label>
+                            <label for="inputEmail6">Título del detalle del pedido</label>
                             <input type="text" name="s_detail_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 's_detail_title') }}">
                         </div>
@@ -1054,19 +1054,19 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Menu Item Title</label>
+                            <label for="inputEmail6">Título del elemento del menú</label>
                             <input type="text" name="s_menu_title[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 's_menu_title') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Orders Overview</label>
+                            <label for="inputEmail6">Resumen de pedidos</label>
                             <input type="text" name="s_order_overview[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 's_order_overview') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Complete Order</label>
+                            <label for="inputEmail6">Orden completa</label>
                             <input type="text" name="s_c_order[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 's_c_order') }}">
                         </div>
@@ -1074,19 +1074,19 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Order Cancel Button</label>
+                            <label for="inputEmail6">Botón de cancelación de pedido</label>
                             <input type="text" name="s_cancel_button[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 's_cancel_button') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Order Confirm Button</label>
+                            <label for="inputEmail6">Botón de confirmación de pedido</label>
                             <input type="text" name="s_confirm_button[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 's_confirm_button') }}">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="inputEmail6">Assign Delivery</label>
+                            <label for="inputEmail6">Asignar entrega</label>
                             <input type="text" name="s_assign_button[]" class="form-control"
                                 value="{{ $data->getSData($l['id'], 's_assign_button') }}">
                         </div>

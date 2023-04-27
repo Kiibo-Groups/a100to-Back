@@ -1,7 +1,7 @@
 @extends('admin.layout.main')
 
 @section('title')
-    App Text
+    Texto de la aplicación
 @endsection
 
 @section('icon')

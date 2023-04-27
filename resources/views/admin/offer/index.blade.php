@@ -24,7 +24,7 @@
                                     <b style="margin-left:20px">@yield('title')</b>
                                 </div>
                                 <div class="col-md-6" style="text-align: right;"><a href="{{ Asset($link . 'add') }}"
-                                    class="btn btn-warning rounded-pill waves-effect waves-light">Agregar
+                                    class="btn btn-warning rounded-pill waves-effect waves-light" style=" margin-right:20px" >Agregar
                                     nuevo</a>&nbsp;&nbsp;&nbsp;
                                 </div>
 
