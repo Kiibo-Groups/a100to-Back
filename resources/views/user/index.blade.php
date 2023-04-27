@@ -83,12 +83,12 @@
                             <form class="needs-validation" action="{{ $form_url }}" method="post">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="mb-3">
-                                    <label for="emailaddress" class="form-label">Email address</label>
+                                    <label for="emailaddress" class="form-label">Dirección de correo electrónico</label>
                                     <input class="form-control" type="email" name="username" required="" placeholder="Enter your email">
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="password" class="form-label">Password</label>
+                                    <label for="password" class="form-label">Contraseña</label>
                                     <input class="form-control" type="password" name="password" placeholder="Contraseña" required="required">
                                 </div>
 

@@ -15,6 +15,7 @@ trait RedirectsUsers
             return $this->redirectTo();
         }
 
-        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/';
+        //return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
     }
 }

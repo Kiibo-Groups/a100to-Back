@@ -11,7 +11,7 @@ include("admin.php");
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::redirect('/home', '/');
 
 Route::group(['namespace' => 'App\Http\Controllers\User','prefix' => env('user')], function(){
 

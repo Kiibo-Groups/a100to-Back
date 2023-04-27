@@ -16,7 +16,7 @@
         W E L C O M E
     </h1>
     <h2>
-        API KIIBO PRUEBA
+        API KIIBO 
     </h2>
 
     <style>
