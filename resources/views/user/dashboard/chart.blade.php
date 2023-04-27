@@ -1,7 +1,7 @@
 <style>
     #chart-01 {
   max-width: 750px;
-  margin: 35px auto;
+  margin: 1px auto;
 }
 
 </style>
