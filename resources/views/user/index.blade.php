@@ -84,7 +84,7 @@
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="mb-3">
                                     <label for="emailaddress" class="form-label">Dirección de correo electrónico</label>
-                                    <input class="form-control" type="email" name="username" required="" placeholder="Enter your email">
+                                    <input class="form-control" type="email" name="username" required="" placeholder="Introduce tu correo electrónico">
                                 </div>
 
                                 <div class="mb-3">
