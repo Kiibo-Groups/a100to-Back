@@ -23,22 +23,29 @@ class AppUser extends Authenticatable
                 $count_phone = AppUser::where('phone', $data['phone'])->count();
 
                 if ($count_phone == 0) {
-                    $add                = new AppUser;
-                    $add->name          = $data['name'];
-                    $add->email         = $data['email'];
-                    $add->phone         = isset($data['phone']) ? $data['phone'] : 'null';
-                    $add->password      = $data['password'];
-                    $add->pswfacebook   = isset($data['pswfb']) ? $data['pswfb'] : 0;
-                    $add->refered       = isset($data['refered']) ? $data['refered'] : '';
 
-                    $add->last_name     = isset($data['last_name']) ? $data['last_name'] : 'null';
-                    $add->birthday      = isset($data['birthday']) ? $data['birthday'] : 'null';
-                    $add->sex_type      = isset($data['sex_type']) ? $data['sex_type'] : 'null';
-                    $add->user_name     = isset($data['user_name']) ? $data['user_name'] : 'null';
+                    $count_user_name = AppUser::where('user_name', $data['user_name'])->count();
 
-                    $add->save();
+                    if ($count_user_name == 0) {
+                        $add                = new AppUser;
+                        $add->name          = $data['name'];
+                        $add->email         = $data['email'];
+                        $add->phone         = isset($data['phone']) ? $data['phone'] : 'null';
+                        $add->password      = $data['password'];
+                        $add->pswfacebook   = isset($data['pswfb']) ? $data['pswfb'] : 0;
+                        $add->refered       = isset($data['refered']) ? $data['refered'] : '';
 
-                    return ['msg' => 'done', 'user_id' => $add->id];
+                        $add->last_name     = isset($data['last_name']) ? $data['last_name'] : 'null';
+                        $add->birthday      = isset($data['birthday']) ? $data['birthday'] : 'null';
+                        $add->sex_type      = isset($data['sex_type']) ? $data['sex_type'] : 'null';
+                        $add->user_name     = isset($data['user_name']) ? $data['user_name'] : 'null';
+
+                        $add->save();
+
+                        return ['msg' => 'done', 'user_id' => $add->id];
+                    } else {
+                        return ['msg' => 'Opps! Este User Name  ya existe.'];
+                    }
                 } else {
                     return ['msg' => 'Opps! Este número telefonico ya existe.'];
                 }
@@ -125,7 +132,7 @@ class AppUser extends Authenticatable
     public function login($data)
     {
 
-      
+
         $chk = AppUser::where('email', $data['username'])->first();
 
         $msg = "Detalles de acceso incorrectos";
