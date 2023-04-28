@@ -57,7 +57,7 @@
         // Specify just the place data fields that you need.
         autocomplete.setFields(['place_id', 'geometry', 'name', 'formatted_address']);
 
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
         var infowindow = new google.maps.InfoWindow();
         var infowindowContent = document.getElementById('infowindow-content');

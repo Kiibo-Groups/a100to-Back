@@ -1,15 +1,9 @@
 <div>
-
-
     <div class="card py-3 m-b-30">
-
         <div class="col-md-12" style="text-align: left;">
             <b style="margin-left:20px">@yield('title')</b>
         </div>
         <div class="card-body" style="padding-top:80px;">
-
-
-
 
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -187,20 +181,21 @@
             <div class="card-body">
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="purse_x_pickup">% a monedero electrónico en recoger en tienda:</label>
+                        <label for="purse_x_pickup">% a monedero electrónico en tienda:</label>
                         <input type="text" name="purse_x_pickup" id="purse_x_pickup"
                             value="{{ $data->purse_x_pickup }}" class="form-control">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="purse_x_delivery">% a monedero electrónico servicio a domicilio:</label>
-                        <input type="text" name="purse_x_delivery" id="purse_x_delivery"
-                            value="{{ $data->purse_x_delivery }}" class="form-control">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="purse_x_table">% a monedero electrónico en mesa:</label>
                         <input type="text" name="purse_x_table" id="purse_x_table"
                             value="{{ $data->purse_x_table }}" class="form-control">
                     </div>
+                    <!-- 
+                    <div class="form-group col-md-6">
+                        <label for="purse_x_delivery">% a monedero electrónico servicio a domicilio:</label>
+                        <input type="text" name="purse_x_delivery" id="purse_x_delivery"
+                            value="{{ $data->purse_x_delivery }}" class="form-control">
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -211,71 +206,9 @@
         <input type="text" name="t_value" value="{{ $data->t_value }}" hidden>
     @endif
 
-    <h1 style="font-size: 20px;margin-left: 0px">Gastos y Tiempos de entrega</h1>
-
-
+    <h1 style="font-size: 20px;margin-left: 0px">Tiempos de entrega</h1>
     <div class="card ">
-
         <div class="card-body">
-
-            <div class="form-row">
-                @if (isset($admin))
-                    <div class="form-group col-md-6">
-                        <label for="inputEmail6">Valor mínimo del carrito</label>
-                        {!! Form::text('min_cart_value', null, [
-                            'placeholder' => 'Después de esta cantidad, la entrega será gratuita',
-                            'class' => 'form-control',
-                        ]) !!}
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="inputEmail6">Tipo de cobro</label>
-                        <select name="type_charges_value" class="form-control">
-                            <option value="0" @if ($data->type_charges_value == 0) selected @endif>Por
-                                Kilometros</option>
-                            <option value="1" @if ($data->type_charges_value == 1) selected @endif>Valor Fijo
-                            </option>
-                        </select>
-                    </div>
-
-                    <div class="form-group col-md-12">
-                        <label for="inputEmail6">Cobro de envio Repartidores Externos ( <small>Cambiar en
-                                Dashboard/Configuraciones</small> )</label>
-                        {!! Form::number('delivery_charges_value', $costs_ship, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputEmail6">Alcance del servicio en KM <br /> <small style="font-size:12px;">(a
-                                cuantos kilometros de distancia realizas entregas a
-                                domiclio)</small></label>
-                        {!! Form::number('distance_max', null, ['class' => 'form-control']) !!}
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputEmail6">Alcance Minimo del servicio en KM <br />
-                            <small style="font-size:12px;">(Si la distancia es menor a esto, se cobrara una tarifa
-                                fija)</small></label>
-                        {!! Form::number('delivery_min_distance', null, ['class' => 'form-control']) !!}
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="inputEmail6">Cobro Minimo del servicio de envio <br />
-                            <small style="font-size:12px;">(Si la distancia es menor al <b>Alcance minimo del
-                                    serivicio</b> se realiza el cobro de esta tarifa fija)</small></label>
-                        {!! Form::number('delivery_min_charges_value', null, ['class' => 'form-control']) !!}
-                    </div>
-                @else
-                    <input type="text" name="service_del" value="{{ $data->service_del }}" hidden>
-                    <input type="text" name="pickup" value="{{ $data->pickup }}" hidden>
-                    <input type="text" name="min_cart_value" value="{{ $data->min_cart_value }}" hidden>
-                    <input type="text" name="type_charges_value" value="{{ $data->type_charges_value }}" hidden>
-                    <input type="text" name="delivery_charges_value" value="{{ $data->delivery_charges_value }}"
-                        hidden>
-                    <input type="text" name="distance_max" value="{{ $data->distance_max }}" hidden>
-                    <input type="text" name="delivery_min_distance" value="{{ $data->delivery_min_distance }}"
-                        hidden>
-                    <input type="text" name="delivery_min_charges_value"
-                        value="{{ $data->delivery_min_charges_value }}" hidden>
-                @endif
-            </div>
-
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputEmail6">Tiempo de entrega estimado <small>(solo en minutos)</small></label>
@@ -292,11 +225,44 @@
                     <input type="text" name="Cuenta_clave" value="0" hidden>
                     <input type="text" name="banco_name" value="0" hidden>
                 </div>
-
             </div>
         </div>
     </div>
 
+    @if (isset($admin))
+    <h1 style="font-size: 20px;margin-left: 0px">Valores extra</h1>
+    <div class="card ">
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail6">Valor mínimo del carrito<br /> <small style="font-size:12px;">
+                        (Si se declara un monto a partir de este monto el envio sera gratis.)</small></label>
+                    {!! Form::text('min_cart_value', null, [
+                        'placeholder' => 'Después de esta cantidad, la entrega será gratuita',
+                        'class' => 'form-control',
+                    ]) !!}
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputEmail6">Alcance del servicio en KM <br /> <small style="font-size:12px;">(a
+                            cuantos kilometros de distancia realizas entregas a
+                            domiclio)</small></label>
+                    {!! Form::number('distance_max', null, ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail6">Alcance Minimo del servicio en KM <br />
+                        <small style="font-size:12px;">(Si la distancia es menor a esto, se cobrara una tarifa
+                            fija)</small></label>
+                    {!! Form::number('delivery_min_distance', null, ['class' => 'form-control']) !!}
+                </div>
+            </div>
+        </div>
+    </div>
+    @else
+        <input type="text" name="min_cart_value" value="{{ $data->min_cart_value }}" hidden>
+        <input type="text" name="distance_max" value="{{ $data->distance_max }}" hidden>
+        <input type="text" name="delivery_min_distance" value="{{ $data->delivery_min_distance }}" hidden>
+    @endif
 
     <!--*********** Horario de Atencion *****************-->
     <h1 style="font-size: 20px;margin-left: 0px">
@@ -656,43 +622,37 @@
     </div>
     <!--*********** Horario de Atencion *****************-->
 
-  
-     
-            <div class="card py-3 m-b-30">
-                <div class="card-body">
-                    @if (isset($admin))
-                        @if (!$data->id)
-                            @include('admin.user.newgoogle')
-                        @else
-                            <a href="{{ Asset(env('admin') . '/user/viewmap/' . $data->id) }}"
-                                class="btn btn-success width-xl waves-effect waves-light btn-cta">Cargar Mapa y
-                                Ubicaciones</a>
-                            <input name="address" value="{{ $data->address }}" type="hidden">
-                            <input type="hidden" name="lat" id="lat" value="{{ $data->lat }}">
-                            <input type="hidden" name="lng" id="lng" value="{{ $data->lng }}">
-                        @endif
-                    @else
-                        <a class="btn btn-success width-xl waves-effect waves-light btn-cta">Mapa y Ubicaciones seran
-                            cargadas desde Administración</a>
-                        <input name="address" value="{{ $data->address }}" type="hidden">
-                        <input type="hidden" name="lat" id="lat" value="{{ $data->lat }}">
-                        <input type="hidden" name="lng" id="lng" value="{{ $data->lng }}">
-                    @endif
-                </div>
-            </div>
-       
-   
-
+    <!-- Carga de mapas y direcciones --> 
+    <div class="card py-3 m-b-30">
+        <div class="card-body">
+            @if (isset($admin))
+                @if (!$data->id)
+                    @include('admin.user.newgoogle')
+                @else
+                    <a href="{{ Asset(env('admin') . '/user/viewmap/' . $data->id) }}"
+                        class="btn btn-success width-xl waves-effect waves-light btn-cta">Cargar Mapa y
+                        Ubicaciones</a>
+                    <input name="address" value="{{ $data->address }}" type="hidden">
+                    <input type="hidden" name="lat" id="lat" value="{{ $data->lat }}">
+                    <input type="hidden" name="lng" id="lng" value="{{ $data->lng }}">
+                @endif
+            @else
+                <a class="btn btn-success width-xl waves-effect waves-light btn-cta">Mapa y Ubicaciones seran
+                    cargadas desde Administración</a>
+                <input name="address" value="{{ $data->address }}" type="hidden">
+                <input type="hidden" name="lat" id="lat" value="{{ $data->lat }}">
+                <input type="hidden" name="lng" id="lng" value="{{ $data->lng }}">
+            @endif
+        </div>
+    </div>
+    <!-- Carga de mapas y direcciones -->
 
 </div>
 <div class="form-row m-b-30" style="margin-left: 1px">
     <button type="submit" 
         class="btn btn-success width-xl waves-effect waves-light btn-cta">Guardar Cambios</button>
 </div>
-
-
-
-
+ 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 
@@ -701,7 +661,7 @@
 
 
 <script>
-    /** Funciones del horario */
+/** Funciones del horario */
     $('#timepickerLA').timepicker({
         timeFormat: 'HH:mm',
        
@@ -747,9 +707,9 @@
         timeFormat: 'HH:mm',
     });
 
-    /** Funciones del horario */
+/** Funciones del horario */
 
-    /** Funciones para las categorias */
+/** Funciones para las categorias */
     var store_type = document.querySelector('#store_type');
     var store_subtype = document.querySelector('#store_subtype');
     var subsubtype = document.querySelector('#subsubtype');
@@ -778,12 +738,12 @@
     });
 
 
-    // obtenemos Categorias
+// obtenemos Categorias
     const GetCats = ($id) => {
         $.ajax({
             async: true,
             type: 'GET',
-            url: 'https://acientos.xedik.com/api/getCategory/' + $id,
+            url: 'https://localhost/a100to-Back/api/getCategory/' + $id,
             success: function(resp) {
                 const request = resp.data;
                 // Limpiamos Select 
@@ -813,12 +773,12 @@
         });
     };
 
-    // obtenemos SubCategorias
+// obtenemos SubCategorias
     const GetSubCats = ($id) => {
         $.ajax({
             async: true,
             type: 'GET',
-            url: 'https://acientos.xedik.com/api/getSelectSubCat/' + $id,
+            url: 'https://localhost/a100to-Back/api/getSelectSubCat/' + $id,
             success: function(resp) {
                 const request = resp.data;
                 // Limpiamos Select 
@@ -838,11 +798,11 @@
         });
     };
 
-    // Limpiamos Select
+// Limpiamos Select
     const CleanSelect = ($select) => {
         for (let i = $select.options.length; i >= 0; i--) {
             $select.remove(i);
         }
     };
-    /** Funciones para las categorias */
+/** Funciones para las categorias */
 </script>

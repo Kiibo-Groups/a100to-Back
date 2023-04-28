@@ -49,7 +49,7 @@
                         }
                     );
 
-                    h3index = h3.geoToH3(lat, lng, 6);
+                    h3index = h3.latLngToCell(lat, lng, 6);
 
                     input.focus();
                     autocomplete.bindTo('bounds', map);
@@ -57,7 +57,7 @@
                     // Specify just the place data fields that you need.
                     autocomplete.setFields(['place_id', 'geometry', 'name', 'formatted_address']);
 
-                    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+                    // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
                     infowindow.setContent(infowindowContent);
 
@@ -90,7 +90,7 @@
                         }
                     );
 
-                    h3index = h3.geoToH3(lat, lng, 6);
+                    h3index = h3.latLngToCell(lat, lng, 6);
 
                     //input.focus();
                     autocomplete.bindTo('bounds', map);
@@ -143,7 +143,7 @@
 
                 infowindowContent.children['place-address'].textContent = results[0].formatted_address;
 
-                h3index = h3.geoToH3(results[0].geometry.location.lat(), results[0].geometry.location
+                h3index = h3.latLngToCell(results[0].geometry.location.lat(), results[0].geometry.location
                     .lng(), 6);
 
                 document.getElementById('lat').value = results[0].geometry.location.lat();

@@ -50,10 +50,11 @@ class City extends Authenticatable
         $add->h3index       = isset($data['h3index']) ? $data['h3index'] : 0;
         $add->max_distance  = isset($data['max_distance']) ? $data['max_distance'] : 0;
         $add->status        = isset($data['status']) ? $data['status'] : null;
-        //$add->c_type        = isset($data['c_type']) ? $data['c_type'] : 0; No hay Valor en BD
-        //$add->c_value       = isset($data['c_value']) ? $data['c_value'] : 0; ||
-        //$add->min_distance  = isset($data['min_distance']) ? $data['min_distance'] : 0;
-        //$add->min_value     = isset($data['min_value']) ? $data['min_value'] : 0;
+        $add->c_type        = isset($data['c_type']) ? $data['c_type'] : 0;
+        $add->c_value       = isset($data['c_value']) ? $data['c_value'] : 0; 
+        $add->min_distance  = isset($data['min_distance']) ? $data['min_distance'] : 0;
+        $add->min_value     = isset($data['min_value']) ? $data['min_value'] : 0;
+        $add->status        = 0; // Activo por defecto
         $add->s_data        = serialize($a);
         $add->save();
 

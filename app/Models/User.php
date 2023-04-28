@@ -77,18 +77,18 @@ class User extends Authenticatable
         $add->lat                   = isset($data['lat']) ? $data['lat'] : null;
         $add->lng                   = isset($data['lng']) ? $data['lng'] : null;
         $add->type                  = isset($data['store_type']) ? $data['store_type'] : 0;
-        //$add->subtype               = isset($data['store_subtype']) ? $data['store_subtype'] : 0;
-        //$add->subsubtype            = isset($data['subsubtype']) ? $data['subsubtype'] : 0; no esta en BD
-        //$add->type_menu             = isset($data['type_menu']) ? $data['type_menu'] : 0;
+        $add->subtype               = isset($data['store_subtype']) ? $data['store_subtype'] : 0;
+        $add->subsubtype            = isset($data['subsubtype']) ? $data['subsubtype'] : 0;
+        $add->type_menu             = isset($data['type_menu']) ? $data['type_menu'] : 0;
         $add->min_cart_value        = isset($data['min_cart_value']) ? $data['min_cart_value'] : null;
         
         $add->c_type                = isset($data['c_type']) ? $data['c_type'] : 0;
         $add->c_value               = isset($data['c_value']) ? $data['c_value'] : 0;
         $add->t_type                = isset($data['t_type']) ? $data['t_type'] : 0;
         $add->t_value               = isset($data['t_value']) ? $data['t_value'] : 0;
-        //$add->purse_x_table         = isset($data['purse_x_table']) ? $data['purse_x_table'] : 0 ;
-        //$add->purse_x_pickup        = isset($data['purse_x_pickup']) ? $data['purse_x_pickup'] : 0 ;
-        //$add->purse_x_delivery      = isset($data['purse_x_delivery']) ? $data['purse_x_delivery'] : 0 ;
+        $add->purse_x_table         = isset($data['purse_x_table']) ? $data['purse_x_table'] : 0 ;
+        $add->purse_x_pickup        = isset($data['purse_x_pickup']) ? $data['purse_x_pickup'] : 0 ;
+        $add->purse_x_delivery      = isset($data['purse_x_delivery']) ? $data['purse_x_delivery'] : 0 ;
 
         
         $add->p_staff               = isset($data['p_staff']) ? $data['p_staff'] : 1;
@@ -108,6 +108,7 @@ class User extends Authenticatable
         $add->stripe_pay            = isset($data['stripe_pay']) ? $data['stripe_pay'] : 0;
         $add->service_del           = isset($data['service_del']) ? $data['service_del'] : 1;
         $add->pickup                = isset($data['pickup']) ? $data['pickup'] : 0;
+
         if(isset($data['img']))
         {
             $filename   = time().rand(111,699).'.' .$data['img']->getClientOriginalExtension(); 
@@ -156,7 +157,8 @@ class User extends Authenticatable
              'sun' => $sun,
          ]);
 
-        
+        $add->qr_code = ''; // Vacio por defecto para guardar.
+        $add->saldo   = 0; // Valor por defecto para guardar.
         $add->save();
 
         if ($type == 'add') {

@@ -35,9 +35,7 @@
                                     <thead>
                                         <tr>
                                             <th>Ciudad</th>
-                                            <th>Cobro</th>
-                                            <th>Min/Distancia</th>
-                                            <th>Cobro Minimo</th>
+                                             
                                             <th>Status</th>
                                             <th style="text-align: right">Opciones</th>
                                         </tr>
@@ -47,15 +45,7 @@
 
                                         @foreach ($data as $row)
                                             <tr>
-                                                <td>{{ $row->name }}</td>
-                                                <td>${{ $row->c_value }} / @if ($row->c_type == 0)
-                                                        Kilometro
-                                                    @else
-                                                        Fijo
-                                                    @endif
-                                                </td>
-                                                <td>{{ $row->min_distance }}KM</td>
-                                                <td>${{ $row->min_value }}</td>
+                                                <td>{{ $row->name }}</td> 
                                                 <td>
                                                     @if ($row->status == 0)
                                                         <button type="button"

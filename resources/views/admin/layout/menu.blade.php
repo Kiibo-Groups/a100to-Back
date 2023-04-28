@@ -23,16 +23,13 @@
                         <a href="{{ Asset(env('admin') . '/setting') }}" class=" menu-link">Configuración</a>
                     </li>
                 @endif
-                @if ($admin->hasPerm('Dashboard - Categorias'))
-                    <li>
-                        <a href="{{ Asset(env('admin') . '/category') }}" class=" menu-link">Categorias</a>
-                    </li>
-                @endif
-                @if ($admin->hasPerm('Dashboard - Textos de la aplicacion'))
+               <!-- 
+                 @if ($admin->hasPerm('Dashboard - Textos de la aplicacion'))
                     <li>
                         <a href="{{ Asset(env('admin') . '/text/add') }}" class=" menu-link">Texto de la aplicación</a>
                     </li>
                 @endif
+                -->
                 @if ($admin->hasPerm('Paginas de la aplicacion'))
                     <li>
                         <a href="{{ Asset(env('admin') . '/page/add') }}" class=" menu-link">Páginas de aplicaciones</a>
@@ -69,14 +66,29 @@
     <!-- Negocios -->
     @if ($admin->hasPerm('Adminisrtar Restaurantes'))
         <li>
-            <a href="{{ Asset(env('admin') . '/user') }}" class=" menu-link">
+            <a href="#negocios" data-bs-toggle="collapse">
                 <i class="mdi mdi-home"></i>
                 <span>  Negocios </span>
+                <span class="menu-arrow"></span>
             </a>
+
+            <div class="collapse" id="negocios">
+                <!--submenu-->
+                <ul class="nav-second-level">
+                    @if ($admin->hasPerm('Dashboard - Categorias'))
+                        <li>
+                            <a href="{{ Asset(env('admin') . '/category') }}" class=" menu-link">Categorias</a>
+                        </li>
+                    @endif 
+                    <li>
+                        <a href="{{ Asset(env('admin') . '/user') }}">Listado</a>
+                    </li>
+                </ul>
+            </div>
         </li>
     @endif
     <!-- Negocios -->
-
+    
     <!-- Ofertas de descuento -->
     @if ($admin->hasPerm('Ofertas de descuento'))
         <li>
@@ -136,17 +148,17 @@
                     </li>
                     <!-- Pedidos en curso -->
 
-                    <!-- Pedidos cancelados -->
+                    <!-- Pedidos completos -->
                     <li>
-                        <a href="{{ Asset(env('admin') . '/order?status=2') }}">Cancelados</a>
+                        <a href="{{ Asset(env('admin') . '/order?status=5') }}" style="color:green;">Completos</a>
                     </li>
-                    <!-- Pedidos cancelados -->
+                    <!-- Pedidos completos -->
 
-                    <!-- Pedidos completos -->
+                    <!-- Pedidos cancelados -->
                     <li>
-                        <a href="{{ Asset(env('admin') . '/order?status=5') }}">Completos</a>
+                        <a href="{{ Asset(env('admin') . '/order?status=2') }}" style="color:red;">Cancelados</a>
                     </li>
-                    <!-- Pedidos completos -->
+                    <!-- Pedidos cancelados -->
                 </ul>
             </div>
         </li>
@@ -179,17 +191,14 @@
             <div class="collapse" id="usuarios">
                 <!--submenu-->
                 <ul class="nav-second-level">
-
-
-
                     <li>
                         <a href="{{ Asset(env('admin') . '/appUser') }}">Listado</a>
                     </li>
-
+                   <!--
                     <li>
                         <a href="{{ Asset(env('admin') . '/report_users') }}">Reportes</a>
-                    </li>
-
+                    </li> 
+                    -->
                 </ul>
             </div>
 

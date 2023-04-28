@@ -9,7 +9,7 @@
     </div>
 </div>
 
-<h1 style="font-size: 20px">Establecer Distancia de servicio</h1>
+{{-- <h1 style="font-size: 20px">Establecer Distancia de servicio</h1>
 <div class="card py-3 m-b-30">
     <div class="card-body">
         <div class="form-row">
@@ -63,7 +63,7 @@
         </div>
 
     </div>
-</div>
+</div> --}}
 
 <div class="form-row m-b-30">
     <button type="submit" class="btn btn-success width-xl waves-effect waves-light btn-cta">Guardar Cambios</button>

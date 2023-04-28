@@ -70,6 +70,7 @@ class CategoryController extends Controller {
 		$data = new CategoryStore;	
 		$dat  = $Request->all();
 		
+		// return response()->json($dat);
 		if($data->validate($Request->all(),'add'))
 		{
 			return redirect::back()->withErrors($data->validate($Request->all(),'add'))->withInput();
