@@ -1,7 +1,7 @@
 @extends('admin.layout.main')
 
 @section('title')
-    Manage City
+    Administrar Ciudad
 @endsection
 
 @section('icon')
@@ -23,7 +23,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12" style="text-align: right;"><a href="{{ Asset($link . 'add') }}"
-                                        class="btn btn-warning rounded-pill waves-effect waves-light" style=" margin-right:20px" >Agregar
+                                        class="btn btn-warning rounded-pill waves-effect waves-light"
+                                        style=" margin-right:20px">Agregar
                                         nuevo</a>&nbsp;&nbsp;&nbsp;
                                 </div>
 
@@ -35,7 +36,7 @@
                                     <thead>
                                         <tr>
                                             <th>Ciudad</th>
-                                             
+
                                             <th>Status</th>
                                             <th style="text-align: right">Opciones</th>
                                         </tr>
@@ -45,7 +46,7 @@
 
                                         @foreach ($data as $row)
                                             <tr>
-                                                <td>{{ $row->name }}</td> 
+                                                <td>{{ $row->name }}</td>
                                                 <td>
                                                     @if ($row->status == 0)
                                                         <button type="button"

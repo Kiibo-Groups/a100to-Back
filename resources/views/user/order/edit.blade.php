@@ -1,6 +1,6 @@
 @extends('user.layout.main')
 
-@section('title') Edit Order @endsection
+@section('title') Editar orden @endsection
 
 @section('icon') mdi-map-marker @endsection
 

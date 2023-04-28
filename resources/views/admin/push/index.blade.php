@@ -1,7 +1,7 @@
 @extends('admin.layout.main')
 
 @section('title')
-    Push Notifications
+Notificaciones push
 @endsection
 
 @section('icon')

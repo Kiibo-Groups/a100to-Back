@@ -1,7 +1,7 @@
 @extends('admin.layout.main')
 
 @section('title')
-    Manage Offers
+Administrar ofertas
 @endsection
 
 @section('icon')

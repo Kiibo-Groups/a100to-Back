@@ -1,7 +1,7 @@
 @extends('admin.layout.main')
 
 @section('title')
-    Manage Sub Accounts
+Administrar subcuentas
 @endsection
 
 @section('icon')
