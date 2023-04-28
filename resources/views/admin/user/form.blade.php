@@ -176,7 +176,7 @@
             </div>
         </div>
 
-        <h1 style="font-size: 20px">Monedero Electronico <small>(CashBack)</small> </h1>
+    {{--    <h1 style="font-size: 20px">Monedero Electronico <small>(CashBack)</small> </h1>
         <div class="card py-3 m-b-30">
             <div class="card-body">
                 <div class="form-row">
@@ -198,7 +198,8 @@
                     </div>-->
                 </div>
             </div>
-        </div>
+        </div>--}}
+
     @else
         <input type="text" name="c_type" value="{{ $data->c_type }}" hidden>
         <input type="text" name="c_value" value="{{ $data->c_value }}" hidden>
