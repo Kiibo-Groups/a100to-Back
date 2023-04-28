@@ -98,66 +98,7 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <h1 style="font-size: 20px">Establecer cargos de comisión por servicio de
-                                        mandaditos<br />
-                                        <small style="font-size:12px;">(dejar en 0 si no requiere cobrar comisión)</small>
-                                    </h1>
-                                    <div class="card py-3 m-b-30">
-                                        <div class="card-body">
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="inputEmail6">Tipo de Comision</label>
-                                                    <select name="t_type_comm" class="form-control">
-                                                        <option value="0"
-                                                            @if ($data->t_type_comm == 0) selected @endif>Valor fijo
-                                                        </option>
-                                                        <option value="1"
-                                                            @if ($data->t_type_comm == 1) selected @endif>Order %
-                                                        </option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="form-group col-md-6">
-                                                    <label for="inputEmail6">Valor de la comisión</label>
-                                                    <input type="text" name="t_value_comm"
-                                                        value="{{ $data->t_value_comm }}" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <h1 style="font-size: 20px">Establecer valor máximo para pago en efectivo</h1>
-                                    <div class="card py-3 m-b-30">
-                                        <div class="card-body">
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="inputEmail6">Valor máximo</label>
-                                                    <input type="text" name="max_cash" value="{{ $data->max_cash }}"
-                                                        class="form-control">
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <h1 style="font-size: 20px">Establecer distancia maxima para notificación de
-                                        repartidores.</h1>
-                                    <div class="card py-3 m-b-30">
-                                        <div class="card-body">
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="max_distance_staff">Distancia Maxima</label>
-                                                    <input type="text" name="max_distance_staff"
-                                                        value="{{ $data->max_distance_staff }}" class="form-control"
-                                                        id="max_distance_staff">
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
+   
                                     <h1 style="font-size: 20px">Establecer cargos de comisión por pago con tarjeta</h1>
                                     <div class="card py-3 m-b-30">
                                         <div class="card-body">

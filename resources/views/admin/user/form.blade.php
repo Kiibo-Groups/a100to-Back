@@ -743,7 +743,7 @@
         $.ajax({
             async: true,
             type: 'GET',
-            url: 'https://localhost/a100to-Back/api/getCategory/' + $id,
+            url: 'https://acientos.xedik.com/api/getCategory/' + $id,
             success: function(resp) {
                 const request = resp.data;
                 // Limpiamos Select 
@@ -778,7 +778,7 @@
         $.ajax({
             async: true,
             type: 'GET',
-            url: 'https://localhost/a100to-Back/api/getSelectSubCat/' + $id,
+            url: 'https://acientos.xedik.com/api/getSelectSubCat/' + $id,
             success: function(resp) {
                 const request = resp.data;
                 // Limpiamos Select 
