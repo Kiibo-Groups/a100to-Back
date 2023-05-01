@@ -94,7 +94,6 @@ class ApiController extends Controller
 	public function lang()
 	{
 		$res = new Language;
-
 		return response()->json(['data' => $res->getWithEng()]);
 	}
 
@@ -470,7 +469,6 @@ class ApiController extends Controller
 	public function updateInfo($id, Request $Request)
 	{
 		$res = new AppUser;
-
 		return response()->json($res->updateInfo($Request->all(), $id));
 	}
 
@@ -497,7 +495,6 @@ class ApiController extends Controller
 	public function pages()
 	{
 		$res = new Page;
-
 		return response()->json(['data' => $res->getAppData()]);
 	}
 
