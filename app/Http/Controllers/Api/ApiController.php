@@ -119,18 +119,14 @@ class ApiController extends Controller
 		$offer   = new Offer;
 		$cats    = new CategoryStore;
 		$cat     = isset($_GET['cat']) ? $_GET['cat'] : 0;
-		$l 		 = Language::find($_GET['lid']);
+		
 
 		$data = [
-			'admin'		=> Admin::find(1),
-			'banner'	=> $banner->getAppData($city_id, 0),
-			'middle'	=> $banner->getAppData($city_id, 1),
-			'bottom'	=> $banner->getAppData($city_id, 2),
+		
 			'store'		=> $store->getAppData($city_id),
 			'trending'	=> $store->InTrending($city_id), //$store->getAppData($city_id,true),
-			'Categorys' => $cats->getSelectSubCat($cat),
 			'offers'    => $offer->getAll(0),
-			'Tot_stores' => $store->getTotsStores($city_id)
+			
 		];
 
 		return response()->json(['data' => $data]);
@@ -171,7 +167,6 @@ class ApiController extends Controller
 			'store'		=> $store->getStoreOpen($city_id),
 			'admin'		=> Admin::find(1),
 		];
-
 		return response()->json(['data' => $data]);
 	}
 
