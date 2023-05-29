@@ -9,42 +9,32 @@
     <title>Panel de Administración</title>
 
     <link rel="icon" type="image/x-icon" href="{{ Asset('assets/img/logo.png') }}" />
-    <link rel="icon" href="{{ url('/assets/img/logo.png') }}" type="image/png" sizes="16x16">
+    <link rel="icon" href="{{ Asset('assets/img/logo.png') }}" type="image/png" sizes="16x16">
 
-    <!-- NewsStyles 11-->
-
-
-    {{-- <linkrel="stylesheet"href="Asset('public/assets_admin/css/config/default/bootstrap.min.css') }}" type="text/css"
-        id="app-default-stylesheet"> --}}
-    <link href="{{url('/assets_admin/css/config/default/bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="app-default-stylesheet">
-
-    {{-- <linkrel="stylesheet"href="Asset('public/assets_admin/css/config/default/app.min.css') }}" type="text/css"
-        id="bs-default-stylesheet">--}}
-
-    <link href="{{url('/assets_admin/css/config/default/app.min.css')}}" rel="stylesheet" type="text/css" id="bs-default-stylesheet">
-
-    {{-- <linkrel="stylesheet"href="Asset('public/assets_admin/css/config/default/bootstrap-dark.min.css') }}" type="text/css"
-        id="bs-dark-stylesheet" disabled="disabled"> --}}
-
-    <link href="{{url('/assets_admin/css/config/default/bootstrap-dark.min.css')}}" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" disabled="disabled">
+    <!-- NewsStyles -->
 
 
-   {{-- <linkrel="stylesheet"href="Asset('public/assets_admin/css/config/default/app-dark.min.css') }}" type="text/css"
-        id="app-dark-stylesheet" disabled="disabled"> --}}
+    <link rel="stylesheet" href="{{ Asset('public/assets_admin/css/config/default/bootstrap.min.css') }}" type="text/css"
+        id="app-default-stylesheet">
 
-    <link href="{{url('/assets_admin/css/config/default/app-dark.min.css')}}" rel="stylesheet" type="text/css" id="app-dark-stylesheet" disabled="disabled">
+    <link rel="stylesheet" href="{{ Asset('public/assets_admin/css/config/default/app.min.css') }}" type="text/css"
+        id="bs-default-stylesheet">
+
+    <link rel="stylesheet" href="{{ Asset('public/assets_admin/css/config/default/bootstrap-dark.min.css') }}" type="text/css"
+        id="bs-dark-stylesheet" disabled="disabled">
+
+    <link rel="stylesheet" href="{{ Asset('public/assets_admin/css/config/default/app-dark.min.css') }}" type="text/css"
+        id="app-dark-stylesheet" disabled="disabled">
 
     <!-- icons -->
-   {{-- <linkrel="stylesheet"href="Asset('public/assets_admin/css/icons.min.css') }}" type="text/css"> --}}
-
-    <link href="{{url('/assets_admin/css/icons.min.css')}}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ Asset('public/assets_admin/css/icons.min.css') }}" type="text/css">
 
 
 
 
 
 
-    <!-- NewsStyles 12 -->
+    <!-- NewsStyles -->
 
 </head>
 <body class="loading authentication-bg authentication-bg-pattern">
@@ -123,14 +113,15 @@
     <!-- end page -->
 
 
+
+
+
     <!--adress end-->
 
-    {{-- <scriptsrc="Asset('public/assets_admin/js/vendor.min.js') }}"></script>--}}
-
-    <script src="{{url('/assets_admin/js/vendor.min.js')}}"></script>
+    <script src="{{ Asset('public/assets_admin/js/vendor.min.js') }}"></script>
 
     <!-- App js -->
-    <script src="{{url('/assets_admin/js/app.min.js')}}"></script>
-   {{-- <scriptsrc="Asset('public/assets_admin/js/app.min.js') }}"></script>--}}
+
+    <script src="{{ Asset('public/assets_admin/js/app.min.js') }}"></script>
 </body>
 </html>

@@ -114,14 +114,24 @@ class ApiController extends Controller
 
 	public function homepage($city_id)
 	{
+		$banner  = new Banner;
 		$store   = new User;
+		$text    = new Text;
 		$offer   = new Offer;
+		$cats    = new CategoryStore;
+		$cat     = isset($_GET['cat']) ? $_GET['cat'] : 0;
+		$l 		 = Language::find($_GET['lid']);
+
 		$data = [
-			//'admin'		=> Admin::find(1),	
+			'admin'		=> Admin::find(1),
+			'banner'	=> $banner->getAppData($city_id, 0),
+			'middle'	=> $banner->getAppData($city_id, 1),
+			'bottom'	=> $banner->getAppData($city_id, 2),
 			'store'		=> $store->getAppData($city_id),
 			'trending'	=> $store->InTrending($city_id), //$store->getAppData($city_id,true),
+			'Categorys' => $cats->getSelectSubCat($cat),
 			'offers'    => $offer->getAll(0),
-
+			'Tot_stores' => $store->getTotsStores($city_id)
 		];
 
 		return response()->json(['data' => $data]);
@@ -129,7 +139,7 @@ class ApiController extends Controller
 
 	public function homepage_init($city_id)
 	{
-		
+		$text    = new Text;
 		$cats    = new CategoryStore;
 
 		$data = [
@@ -157,7 +167,6 @@ class ApiController extends Controller
 
 	public function getStoreOpen($city_id)
 	{
-		
 		$store   = new User;
 		$data = [
 			'store'		=> $store->getStoreOpen($city_id),
@@ -171,7 +180,6 @@ class ApiController extends Controller
 	{
 		try {
 			$store   = new User;
-			
 			return response()->json(['data' => $store->getStore($id)]);
 		} catch (\Exception $th) {
 			return response()->json(['data' => 'error', 'error' => $th->getMessage()]);
