@@ -32,7 +32,7 @@
         <div class="collapse" id="sidebarAuth">
             <ul class="nav-second-level">
                 <li>
-                    <a href="{{ Asset(env('user') . '/category') }}" class=" menu-link">Categoría</a>
+                    <a href="{{ Asset(env('user') . '/category') }}" class=" menu-link">Categorías</a>
                 </li>
                 <li>
                     <a href="{{ Asset(env('user') . '/item') }}" class=" menu-link">Productos</a>
@@ -44,15 +44,7 @@
             </ul>
         </div>
     </li>
-
-
-
-   {{-- <li>
-        <a href="{{ Asset(env('user') . '/delivery') }}" class=" menu-link">
-            <i class="mdi mdi-calendar"></i>
-            <span> Personal de entrega </span>
-        </a>
-    </li>--}}
+ 
     <li>
         <a href="#sidebarExpages" data-bs-toggle="collapse">
 
@@ -144,9 +136,7 @@
         </li>
     @endif
 
-
-
-    <li class="menu-title mt-2">USUARIO</li>
+ 
     <li>
         <a href="{{ Asset(env('user') . '/logout') }}" class="menu-link">
             <i class="icon-placeholder mdi mdi-logout"></i>
