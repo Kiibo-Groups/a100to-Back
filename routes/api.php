@@ -16,13 +16,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
 
+    //------------------------A100to ------------------------------
+    Route::get('homepage_init/{city}','ApiController@homepage_init');
+    Route::get('homepage/{city}','ApiController@homepage');
+    Route::get('getStore/{id}','ApiController@getStore');
+    Route::get('getStoreOpen/{city}','ApiController@getStoreOpen');
+
+
+    //--------------------------------------------------------------
+
+
     Route::get('welcome','ApiController@welcome');
     Route::get('getDataInit','ApiController@getDataInit');
     Route::get('city','ApiController@city');
     Route::get('GetNearbyCity','ApiController@GetNearbyCity');
-    Route::get('homepage/{city}','ApiController@homepage');
-    Route::get('homepage_init/{city}','ApiController@homepage_init');
-    Route::get('getStore/{id}','ApiController@getStore');
+  
     Route::get('getTypeDelivery/{id}','ApiController@getTypeDelivery');
     Route::get('search/{query}/{type}/{city}','ApiController@search');
     Route::get('SearchCat/{city}','ApiController@SearchCat');
@@ -69,7 +77,7 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     Route::get('updateCity','ApiController@updateCity');
     Route::get('GetInfiniteScroll/{id}','ApiController@GetInfiniteScroll');
     Route::post('deleteOrders','ApiController@deleteOrders');
-    Route::get('getStoreOpen/{city}','ApiController@getStoreOpen');
+   
     Route::get('deleteAll/{id}','ApiController@deleteAll'); 
     Route::get("setTableCustomer/{table}",'ApiController@setTableCustomer');
 
