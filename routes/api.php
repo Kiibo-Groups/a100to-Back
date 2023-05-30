@@ -16,102 +16,70 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
 
-    /**
-     * Bienvenida y datos iniciales
-     */
+
+    //------------------------A100to ------------------------------
+    Route::get('homepage_init/{city}','ApiController@homepage_init');
+    Route::get('homepage/{city}','ApiController@homepage');
+    Route::get('getStore/{id}','ApiController@getStore');
+   
+    Route::get('city','ApiController@city');
+
+
+    //--------------------------------------------------------------
+    // Route::get('getStoreOpen/{city}','ApiController@getStoreOpen');
     Route::get('welcome','ApiController@welcome');
     Route::get('getDataInit','ApiController@getDataInit');
-    
-    /**
-     * Obtencion de ciudades en que se tiene servicio
-     */
-    Route::get('city','ApiController@city');
     Route::get('GetNearbyCity','ApiController@GetNearbyCity');
-    Route::post('searchLocation','ApiController@searchLocation');
-    Route::get('getPolylines','ApiController@getPolylines');
-    Route::get('updateCity','ApiController@updateCity');
-
-    /**
-     * Datos iniciales para usuarios registrados
-     */
-    Route::get('homepage/{city}','ApiController@homepage');
-    Route::get('homepage_init/{city}','ApiController@homepage_init');
-    
-    /**
-     * Obtencion de informacion de negocios
-     */
-    Route::get('getStore/{id}','ApiController@getStore');
-    Route::get('getStoreOpen/{city}','ApiController@getStoreOpen');
     Route::get('getTypeDelivery/{id}','ApiController@getTypeDelivery');
-    Route::get('GetInfiniteScroll/{id}','ApiController@GetInfiniteScroll');
-    
-    /**
-     * Funciones de busqueda y Cagtegorias
-     */
     Route::get('search/{query}/{type}/{city}','ApiController@search');
     Route::get('SearchCat/{city}','ApiController@SearchCat');
     Route::get('SearchFilters/{city}','ApiController@SearchFilters');
     Route::get('ViewAllCats','ApiController@ViewAllCats');
-    
-    
-    /**
-     * Funciones de carrito de compras
-     */
-    Route::get('getCart/{cartNo}','ApiController@getCart');
     Route::post('addToCart','ApiController@addToCart');
     Route::get('cartCount/{cartNo}','ApiController@cartCount');
     Route::get('updateCart/{id}/{type}','ApiController@updateCart');
-    
-    /**
-     * Funciones de cupones de descuento
-     */
+    Route::get('getCart/{cartNo}','ApiController@getCart');
     Route::get('getOffer/{cartNo}','ApiController@getOffer');
     Route::get('applyCoupen/{id}/{cartNo}','ApiController@applyCoupen');
-    
-    /**
-     * Funciones de registro
-     */
     Route::post('signup','ApiController@signup');
     Route::post('signupOP','ApiController@signupOP');
     Route::post('sendOTP','ApiController@sendOTP');
+    Route::post('chkUser','ApiController@chkUser');
     Route::post('SignPhone','ApiController@SignPhone');
-    
-    /**
-     * Funciones de recuperacion de contraseña
-     */
+    Route::post('login','ApiController@login');
+    Route::post('Newlogin','ApiController@Newlogin');
+    Route::post('loginfb','ApiController@loginfb');
     Route::post('forgot','ApiController@forgot');
     Route::post('verify','ApiController@verify');
     Route::post('updatePassword','ApiController@updatePassword');
-    Route::post('updateInfo/{id}','ApiController@updateInfo');
-    
-    /**
-     * Funciones de inicio de sesion y validacion de usuario
-     */
-    Route::post('chkUser','ApiController@chkUser');
-    Route::post('login','ApiController@login');
-    Route::post('Newlogin','ApiController@Newlogin'); 
-    Route::post('loginFb','ApiController@loginFb');
-    Route::get('userinfo/{id}','ApiController@userinfo');
-    
-    /**
-     * Funciones de gestion de direcciones de entrega
-     */
     Route::get('getAddress/{id}','ApiController@getAddress');
     Route::get('getAllAdress/{id}','ApiController@getAllAdress');
     Route::post('addAddress','ApiController@addAddress');
     Route::get('removeAddress/{id}','ApiController@removeAddress');
-    
-    /**
-     * Funciones de pedidos 
-     */
+    Route::post('searchLocation','ApiController@searchLocation');
     Route::post('order','ApiController@order');
-    Route::get('myOrder/{id}','ApiController@myOrder');
-    Route::get('getStatus/{id}', 'ApiController@getStatus');
+    Route::get('userinfo/{id}','ApiController@userinfo');
+    Route::post('updateInfo/{id}','ApiController@updateInfo');
     Route::get('cancelOrder/{id}/{uid}','ApiController@cancelOrder');
+    Route::post('loginFb','ApiController@loginFb');
+    Route::post('sendChat','ApiController@sendChat');
+    Route::post('rate','ApiController@rate');
+    Route::get('pages','ApiController@pages');
+    Route::get('myOrder/{id}','ApiController@myOrder');
+    Route::get('lang','ApiController@lang');
+    Route::get('makeStripePayment', 'ApiController@stripe');
+    Route::get('getStatus/{id}', 'ApiController@getStatus');
+    Route::get('sendPushprueba/{id}', 'ApiController@sendPushprueba');
+    Route::get('getPolylines','ApiController@getPolylines');
+    Route::get('getChat/{id}','ApiController@getChat');
+    Route::get('getEventsDetails/{id}','ApiController@getEventsDetails');
+    Route::get('updateCity','ApiController@updateCity');
+    Route::get('GetInfiniteScroll/{id}','ApiController@GetInfiniteScroll');
     Route::post('deleteOrders','ApiController@deleteOrders');
-    Route::get('deleteAll/{id}','ApiController@deleteAll');
+    Route::get('getStoreOpen/{city}','ApiController@getStoreOpen');
+    Route::get('deleteAll/{id}','ApiController@deleteAll'); 
     Route::get("setTableCustomer/{table}",'ApiController@setTableCustomer');
- 
+
     /**
      * Categorias
      */
@@ -148,6 +116,7 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     /**
      * Mandaditos
      */
+
     Route::post('OrderComm','ApiController@OrderComm');
     Route::post('ViewCostShipCommanded','ApiController@ViewCostShipCommanded');
     Route::get('chkEvents_comm/{id}','ApiController@chkEvents_comm');
@@ -163,22 +132,6 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
      * Visitas
      */
     Route::get('SetNewVisitStore/{store}/{user}','ApiController@SetNewVisitStore');
-
-    // Calificaiones del pedido
-    Route::post('rate','ApiController@rate');
-    // Realziacion de cobros por Stripe
-    Route::get('makeStripePayment', 'ApiController@stripe');
-    // Paginas del negocio (Quienes somos, preguntas frecuentes, contactanos, etc.)
-    Route::get('pages','ApiController@pages');
-    // Obtencion de idiomas en que se trabaja (Sin funcionar)
-    Route::get('lang','ApiController@lang');
-
-    /**
-     * Funciones de Chat (Aun sin terminar)
-     */
-    Route::post('sendChat','ApiController@sendChat');
-    Route::get('getChat/{id}','ApiController@getChat');
-
 
     include("dboy.php");
     include("store.php");

@@ -61,12 +61,10 @@ class ApiController extends Controller
 	public function city()
 	{
 		$city = new City;
-		//$text = new Text;
-		//$lid =  isset($_GET['lid']) && $_GET['lid'] > 0 ? $_GET['lid'] : 0;
 
 		return response()->json([
 			'data' => $city->getAll(0),
-			//'text' => $text->getAppData($lid)
+			
 		]);
 	}
 
