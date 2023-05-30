@@ -21,12 +21,12 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     Route::get('homepage_init/{city}','ApiController@homepage_init');
     Route::get('homepage/{city}','ApiController@homepage');
     Route::get('getStore/{id}','ApiController@getStore');
-   
+    Route::get('getStoreOpen/{city}','ApiController@getStoreOpen');
     Route::get('city','ApiController@city');
 
-
+   
     //--------------------------------------------------------------
-    // Route::get('getStoreOpen/{city}','ApiController@getStoreOpen');
+  
     Route::get('welcome','ApiController@welcome');
     Route::get('getDataInit','ApiController@getDataInit');
     Route::get('GetNearbyCity','ApiController@GetNearbyCity');
@@ -76,7 +76,7 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     Route::get('updateCity','ApiController@updateCity');
     Route::get('GetInfiniteScroll/{id}','ApiController@GetInfiniteScroll');
     Route::post('deleteOrders','ApiController@deleteOrders');
-    Route::get('getStoreOpen/{city}','ApiController@getStoreOpen');
+   
     Route::get('deleteAll/{id}','ApiController@deleteAll'); 
     Route::get("setTableCustomer/{table}",'ApiController@setTableCustomer');
 

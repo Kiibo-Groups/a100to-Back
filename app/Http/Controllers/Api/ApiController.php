@@ -163,7 +163,7 @@ class ApiController extends Controller
 		$store   = new User;
 		$data = [
 			'store'		=> $store->getStoreOpen($city_id),
-			'admin'		=> Admin::find(1),
+		
 		];
 		return response()->json(['data' => $data]);
 	}
