@@ -21,15 +21,18 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     Route::get('homepage_init/{city}','ApiController@homepage_init');
     Route::get('homepage/{city}','ApiController@homepage');
     Route::get('getStore/{id}','ApiController@getStore');
-    Route::get('getStoreOpen/{city}','ApiController@getStoreOpen');
-    Route::get('city','ApiController@city');
+    Route::get('GetNearbyCity','ApiController@GetNearbyCity');
+
+
+    //Route::get('getStoreOpen/{city}','ApiController@getStoreOpen');
+    //Route::get('city','ApiController@city');
 
    
     //--------------------------------------------------------------
   
     Route::get('welcome','ApiController@welcome');
     Route::get('getDataInit','ApiController@getDataInit');
-    Route::get('GetNearbyCity','ApiController@GetNearbyCity');
+
     Route::get('getTypeDelivery/{id}','ApiController@getTypeDelivery');
     Route::get('search/{query}/{type}/{city}','ApiController@search');
     Route::get('SearchCat/{city}','ApiController@SearchCat');
