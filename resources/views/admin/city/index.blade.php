@@ -36,7 +36,7 @@
                                     <thead>
                                         <tr>
                                             <th>Ciudad</th>
-
+                                            <th>Distancia Maxima</th>
                                             <th>Status</th>
                                             <th style="text-align: right">Opciones</th>
                                         </tr>
@@ -47,6 +47,7 @@
                                         @foreach ($data as $row)
                                             <tr>
                                                 <td>{{ $row->name }}</td>
+                                                <td style="text-align: center">{{ $row->max_distance }}</td>
                                                 <td>
                                                     @if ($row->status == 0)
                                                         <button type="button"
