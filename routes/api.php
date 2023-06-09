@@ -55,6 +55,7 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     /**
      * Obtencion de informacion de negocios
      */
+    Route::get('getStores/{city}','ApiController@getStores');
     Route::get('getStore/{id}','ApiController@getStore');
     Route::get('getStoreOpen/{city}','ApiController@getStoreOpen');
     Route::get('getTypeDelivery/{id}','ApiController@getTypeDelivery');
