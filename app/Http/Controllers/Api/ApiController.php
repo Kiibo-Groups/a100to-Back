@@ -164,15 +164,14 @@ class ApiController extends Controller
 		}
 	}
 
-	public function getStoreOpen($city_id)
+	public function getStores($city_id)
 	{
-		$store   = new User;
-		$data = [
-			'store'		=> $store->getStoreOpen($city_id),
-			'admin'		=> Admin::find(1),
-		];
-
-		return response()->json(['data' => $data]);
+		try {
+			$store   = new User;
+			return response()->json(['status' => 200,'data' => $store->GetAllStores($city_id)]);
+		} catch (\Exception $th) {
+			return response()->json(['data' => 'error', 'error' => $th->getMessage()]);
+		}
 	}
 
 	public function getStore($id)
@@ -183,6 +182,17 @@ class ApiController extends Controller
 		} catch (\Exception $th) {
 			return response()->json(['data' => 'error', 'error' => $th->getMessage()]);
 		}
+	}
+	
+	public function getStoreOpen($city_id)
+	{
+		$store   = new User;
+		$data = [
+			'store'		=> $store->getStoreOpen($city_id),
+			'admin'		=> Admin::find(1),
+		];
+
+		return response()->json(['data' => $data]);
 	}
 
 	public function GetInfiniteScroll($city_id)

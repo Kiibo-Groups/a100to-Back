@@ -353,8 +353,8 @@ class User extends Authenticatable
                 * cos(radians(users.lng) - radians(" . $lon . ")) 
                 + sin(radians(" .$lat. ")) 
                 * sin(radians(users.lat))) AS distance"))
-        ->orderBy('id','DESC')->skip($init)->take(5)->get();
-        
+        ->orderBy('id','DESC')->get();
+        // ->skip($init)->take(5)
         
         return $this->SaveData($res,$lat,$lon);
     }
@@ -1071,13 +1071,15 @@ class User extends Authenticatable
             $data[] = [
                 'id'            => $row->id,
                 'title'         => $row->name,
-                'img'           => Asset('upload/user/'.$row->img),
-                'logo'           => Asset('upload/user/logo/'.$row->logo),
+                'lat'           => $row->lat,
+                'lng'           => $row->lng,
+                'img'           => asset('upload/user/'.$row->img),
+                'logo'           => asset('upload/user/logo/'.$row->logo),
                 'open'          => $open,
-                'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
+                'rating'        => $avg > 0 ? number_format($avg, 1) : 0,
                 'delivery_time' => $row->delivery_time,
                 'type'          => CategoryStore::find($row->type)->name,
-                'subtype'       => $row->subtype,
+                'subtype'       => CategoryStore::find($row->subtype)->name,
                 'delivery_charges_value' => $this->SetCommShip($row->id,$row->p_staff,$row->distance_max,$row->distance),
                 'max_distance'  => $this->GetMax_distance($row->id,$row->distance_max,$lat,$lon),
                 'favorite'      => $favorite

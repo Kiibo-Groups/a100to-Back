@@ -129,6 +129,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin','prefix' => env('admin
         Route::get('delivery/status/{id}','DeliveryController@status');
         Route::get('delivery/status_admin/{id}','DeliveryController@status_admin');
         Route::patch('delivery_pay/{id}','DeliveryController@delivery_pay');
+        
         /*
         |-------------------------------
         |Manage Orders
@@ -149,8 +150,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin','prefix' => env('admin
         Route::get('getUser/{id}','OrderController@getUser');
         Route::get('getCity/{id}/{type}','OrderController@getCity');
 
-
- 
 
         /*
         |-------------------------------
@@ -180,6 +179,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin','prefix' => env('admin
         Route::post('report_staff','ReportController@report_staff');
         Route::get('data_Staff_id/{id}','ReportController@data_Staff_id');
         Route::post('exportData_staff','ReportController@exportData_staff');
+
         /*
         |-------------------------------
         |Logs

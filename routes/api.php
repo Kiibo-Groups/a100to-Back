@@ -8,9 +8,13 @@ use Illuminate\Support\Facades\Route;
 | API Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
+|   Desarrollado por: kiibogroups@gmail.com
+|   Fecha de Inicio: 4/04/2023
+|
+| Aquí es donde puede registrar rutas API para su aplicación.
+| las rutas son cargadas por el RouteServiceProvider dentro de un grupo que
+| se le asigna el grupo de middleware "api". ¡Disfruta construyendo tu API!
+|
 |
 */
 
@@ -40,6 +44,7 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     /**
      * Obtencion de informacion de negocios
      */
+    Route::get('getStores/{city}','ApiController@getStores');
     Route::get('getStore/{id}','ApiController@getStore');
     Route::get('getStoreOpen/{city}','ApiController@getStoreOpen');
     Route::get('getTypeDelivery/{id}','ApiController@getTypeDelivery');
