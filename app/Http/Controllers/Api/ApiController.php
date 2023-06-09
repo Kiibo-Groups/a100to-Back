@@ -61,24 +61,20 @@ class ApiController extends Controller
 	public function city()
 	{
 		$city = new City;
-		$text = new Text;
-		$lid =  isset($_GET['lid']) && $_GET['lid'] > 0 ? $_GET['lid'] : 0;
 
 		return response()->json([
 			'data' => $city->getAll(0),
-			'text' => $text->getAppData($lid)
+			
 		]);
 	}
 
 	public function GetNearbyCity()
 	{
 		$city = new City;
-		$text = new Text;
-		$lid =  isset($_GET['lid']) && $_GET['lid'] > 0 ? $_GET['lid'] : 0;
-
+		
 		return response()->json([
 			'data' => $city->GetNearbyCity(0),
-			'text' => $text->getAppData($lid)
+			
 		]);
 	}
 
@@ -119,18 +115,14 @@ class ApiController extends Controller
 		$offer   = new Offer;
 		$cats    = new CategoryStore;
 		$cat     = isset($_GET['cat']) ? $_GET['cat'] : 0;
-		$l 		 = Language::find($_GET['lid']);
+		
 
 		$data = [
-			'admin'		=> Admin::find(1),
-			'banner'	=> $banner->getAppData($city_id, 0),
-			'middle'	=> $banner->getAppData($city_id, 1),
-			'bottom'	=> $banner->getAppData($city_id, 2),
+		
 			'store'		=> $store->getAppData($city_id),
 			'trending'	=> $store->InTrending($city_id), //$store->getAppData($city_id,true),
-			'Categorys' => $cats->getSelectSubCat($cat),
 			'offers'    => $offer->getAll(0),
-			'Tot_stores' => $store->getTotsStores($city_id)
+			
 		];
 
 		return response()->json(['data' => $data]);
@@ -166,12 +158,13 @@ class ApiController extends Controller
 
 	public function getStores($city_id)
 	{
-		try {
-			$store   = new User;
-			return response()->json(['status' => 200,'data' => $store->GetAllStores($city_id)]);
-		} catch (\Exception $th) {
-			return response()->json(['data' => 'error', 'error' => $th->getMessage()]);
-		}
+		$store   = new User;
+		$data = [
+			'store'		=> $store->getStoreOpen($city_id),
+			'admin'		=> Admin::find(1),
+		];
+
+		return response()->json(['data' => $data]);
 	}
 
 	public function getStore($id)
