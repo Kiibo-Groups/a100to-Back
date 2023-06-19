@@ -157,7 +157,7 @@ class User extends Authenticatable
              'sun' => $sun,
          ]);
 
-        $add->qr_code = ''; // Vacio por defecto para guardar.
+        
         $add->saldo   = 0; // Valor por defecto para guardar.
         $add->save();
 

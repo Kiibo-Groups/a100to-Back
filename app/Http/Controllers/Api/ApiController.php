@@ -118,11 +118,9 @@ class ApiController extends Controller
 		
 
 		$data = [
-		
 			'store'		=> $store->getAppData($city_id),
 			'trending'	=> $store->InTrending($city_id), //$store->getAppData($city_id,true),
 			'offers'    => $offer->getAll(0),
-			
 		];
 
 		return response()->json(['data' => $data]);
@@ -161,6 +159,7 @@ class ApiController extends Controller
 		$store   = new User;
 		$data = [
 			'store'		=> $store->getStoreOpen($city_id),
+			'trending'		=> $store->getStoreOpen($city_id,true),
 			'admin'		=> Admin::find(1),
 		];
 
