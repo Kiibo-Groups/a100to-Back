@@ -118,11 +118,9 @@ class ApiController extends Controller
 		
 
 		$data = [
-		
 			'store'		=> $store->getAppData($city_id),
 			'trending'	=> $store->InTrending($city_id), //$store->getAppData($city_id,true),
 			'offers'    => $offer->getAll(0),
-			
 		];
 
 		return response()->json(['data' => $data]);
@@ -156,13 +154,15 @@ class ApiController extends Controller
 		}
 	}
 
-	public function getStoreOpen($city_id)
+	public function getStores($city_id)
 	{
 		$store   = new User;
 		$data = [
 			'store'		=> $store->getStoreOpen($city_id),
-		
+			'trending'		=> $store->getStoreOpen($city_id,true),
+			'admin'		=> Admin::find(1),
 		];
+
 		return response()->json(['data' => $data]);
 	}
 
@@ -174,6 +174,17 @@ class ApiController extends Controller
 		} catch (\Exception $th) {
 			return response()->json(['data' => 'error', 'error' => $th->getMessage()]);
 		}
+	}
+	
+	public function getStoreOpen($city_id)
+	{
+		$store   = new User;
+		$data = [
+			'store'		=> $store->getStoreOpen($city_id),
+			'admin'		=> Admin::find(1),
+		];
+
+		return response()->json(['data' => $data]);
 	}
 
 	public function GetInfiniteScroll($city_id)

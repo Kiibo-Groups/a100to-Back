@@ -8,9 +8,13 @@ use Illuminate\Support\Facades\Route;
 | API Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
+|   Desarrollado por: kiibogroups@gmail.com
+|   Fecha de Inicio: 4/04/2023
+|
+| Aquí es donde puede registrar rutas API para su aplicación.
+| las rutas son cargadas por el RouteServiceProvider dentro de un grupo que
+| se le asigna el grupo de middleware "api". ¡Disfruta construyendo tu API!
+|
 |
 */
 
@@ -32,7 +36,28 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
   
     Route::get('welcome','ApiController@welcome');
     Route::get('getDataInit','ApiController@getDataInit');
+    
+    /**
+     * Obtencion de ciudades en que se tiene servicio
+     */
+    Route::get('city','ApiController@city');
+    Route::get('GetNearbyCity','ApiController@GetNearbyCity');
+    Route::post('searchLocation','ApiController@searchLocation');
+    Route::get('getPolylines','ApiController@getPolylines');
+    Route::get('updateCity','ApiController@updateCity');
 
+    /**
+     * Datos iniciales para usuarios registrados
+     */
+    Route::get('homepage/{city}','ApiController@homepage');
+    Route::get('homepage_init/{city}','ApiController@homepage_init');
+    
+    /**
+     * Obtencion de informacion de negocios
+     */
+    Route::get('getStores/{city}','ApiController@getStores');
+    Route::get('getStore/{id}','ApiController@getStore');
+    Route::get('getStoreOpen/{city}','ApiController@getStoreOpen');
     Route::get('getTypeDelivery/{id}','ApiController@getTypeDelivery');
     Route::get('search/{query}/{type}/{city}','ApiController@search');
     Route::get('SearchCat/{city}','ApiController@SearchCat');

@@ -15,20 +15,20 @@
     <!-- NewsStyles -->
 
 
-    <link rel="stylesheet" href="{{ Asset('public/assets_admin/css/config/default/bootstrap.min.css') }}"
+    <link rel="stylesheet" href="{{ Asset('assets_admin/css/config/default/bootstrap.min.css') }}"
         type="text/css" id="app-default-stylesheet">
 
-    <link rel="stylesheet" href="{{ Asset('public/assets_admin/css/config/default/app.min.css') }}" type="text/css"
+    <link rel="stylesheet" href="{{ Asset('assets_admin/css/config/default/app.min.css') }}" type="text/css"
         id="bs-default-stylesheet">
 
-    <link rel="stylesheet" href="{{ Asset('public/assets_admin/css/config/default/bootstrap-dark.min.css') }}"
+    <link rel="stylesheet" href="{{ Asset('assets_admin/css/config/default/bootstrap-dark.min.css') }}"
         type="text/css" id="bs-dark-stylesheet" disabled="disabled">
 
-    <link rel="stylesheet" href="{{ Asset('public/assets_admin/css/config/default/app-dark.min.css') }}" type="text/css"
+    <link rel="stylesheet" href="{{ Asset('assets_admin/css/config/default/app-dark.min.css') }}" type="text/css"
         id="app-dark-stylesheet" disabled="disabled">
 
     <!-- icons -->
-    <link rel="stylesheet" href="{{ Asset('public/assets_admin/css/icons.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ Asset('assets_admin/css/icons.min.css') }}" type="text/css">
 
 
 
@@ -120,11 +120,11 @@
 
     <!--adress end-->
 
-    <script src="{{ Asset('public/assets_admin/js/vendor.min.js') }}"></script>
+    <script src="{{ Asset('assets_admin/js/vendor.min.js') }}"></script>
 
     <!-- App js -->
 
-    <script src="{{ Asset('public/assets_admin/js/app.min.js') }}"></script>
+    <script src="{{ Asset('assets_admin/js/app.min.js') }}"></script>
 </body>
 
 </html>

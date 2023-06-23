@@ -100,71 +100,7 @@
         </li>
     @endif
     <!-- Ofertas de descuento -->
- 
-    <!-- Gestion de pedidos -->
-    <?php
-    $cOrder = DB::table('orders')
-        ->where('status', 0)
-        ->count();
-    $ROrder = DB::table('orders')
-        ->whereIn('status', [1, 1.5, 3, 4])
-        ->count();
-    ?>
-
-    @if ($admin->hasPerm('Gestion de pedidos'))
-        <li>
-            <a href="#pedidos" data-bs-toggle="collapse">
-                <i class="mdi mdi-cart"></i>
-                @if ($cOrder > 0)
-                    <span class="badge bg-success float-end" style="margin-right: 20px">{{ $cOrder }}</span>
-                @endif
-                <span> Pedidos </span>
-                <span class="menu-arrow"></span>
-            </a>
-            <div class="collapse" id="pedidos">
-                <!--submenu-->
-                <ul class="nav-second-level">
-                    <!-- Pedidos nuevos -->
-                    <li>
-                        <a href="{{ Asset(env('admin') . '/order?status=0') }}">
-                            @if ($cOrder > 0)
-                                <span class="badge bg-success float-end"
-                                    style="margin-right: 20px">{{ $cOrder }}</span>
-                            @endif
-                            Nuevos
-                        </a>
-                    </li>
-                    <!-- Pedidos nuevos -->
-
-                    <!-- Pedidos en curso -->
-                    <li>
-                        <a href="{{ Asset(env('admin') . '/order?status=1') }}">
-                            @if ($ROrder > 0)
-                                <span class="badge bg-success float-end"
-                                    style="margin-right: 20px">{{ $ROrder }}</span>
-                            @endif
-                            En Curso
-                        </a>
-                    </li>
-                    <!-- Pedidos en curso -->
-
-                    <!-- Pedidos completos -->
-                    <li>
-                        <a href="{{ Asset(env('admin') . '/order?status=5') }}" style="color:green;">Completos</a>
-                    </li>
-                    <!-- Pedidos completos -->
-
-                    <!-- Pedidos cancelados -->
-                    <li>
-                        <a href="{{ Asset(env('admin') . '/order?status=2') }}" style="color:red;">Cancelados</a>
-                    </li>
-                    <!-- Pedidos cancelados -->
-                </ul>
-            </div>
-        </li>
-    @endif
-    <!-- Gestion de pedidos -->
-
+   
     <!-- Notificaciones push -->
     @if ($admin->hasPerm('Notificaciones push'))
         <li>
@@ -176,8 +112,7 @@
         </li>
     @endif
     <!-- Notificaciones push -->
- 
-
+  
     <!-- Usuarios -->
     @if ($admin->hasPerm('Usuarios Registrados'))
         <li>
