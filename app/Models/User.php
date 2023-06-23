@@ -108,7 +108,7 @@ class User extends Authenticatable
         $add->stripe_pay            = isset($data['stripe_pay']) ? $data['stripe_pay'] : 0;
         $add->service_del           = isset($data['service_del']) ? $data['service_del'] : 1;
         $add->pickup                = isset($data['pickup']) ? $data['pickup'] : 0;
-
+        // ME MODIFICA EL public/
         if(isset($data['img']))
         {
             $filename   = time().rand(111,699).'.' .$data['img']->getClientOriginalExtension(); 
