@@ -46,6 +46,7 @@ use Redirect;
 use Excel;
 use Stripe;
 
+use DateTime;
 
 
 class ApiController extends Controller
@@ -115,7 +116,6 @@ class ApiController extends Controller
 		$offer   = new Offer;
 		$cats    = new CategoryStore;
 		$cat     = isset($_GET['cat']) ? $_GET['cat'] : 0;
-		
 
 		$data = [
 			'store'		=> $store->getAppData($city_id),

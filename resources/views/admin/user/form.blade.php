@@ -56,7 +56,6 @@
                         </select>
                     </div>
 
-
                     <div class="form-group col-md-6">
                         <label for="type_menu">Tipo de menú</label>
                         <select name="type_menu" id="type_menu" class="form-control">
@@ -72,6 +71,16 @@
                     <input type="hidden" name="store_subtype" value="{{ $data->subtype }}">
                     <input type="hidden" name="subsubtype" value="{{ $data->subsubtype }}">
                 @endif
+
+                <div class="form-group col-md-6">
+                    <label for="reservation_available">Reservaciones</label>
+                    <select name="reservation_available" id="reservation_available" class="form-control">
+                        <option value="1" @if ($data->reservation_available == 1) selected @endif>Disponibles
+                        </option>
+                        <option value="0" @if ($data->reservation_available == 0) selected @endif>NO Disponibles
+                        </option>
+                    </select>
+                </div>
             </div>
 
             <div class="form-row">

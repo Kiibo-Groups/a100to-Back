@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Validator;
 use Auth;
 use DB;
+use DateTime;
 
 class User extends Authenticatable
 {
@@ -80,6 +81,7 @@ class User extends Authenticatable
         $add->subtype               = isset($data['store_subtype']) ? $data['store_subtype'] : 0;
         $add->subsubtype            = isset($data['subsubtype']) ? $data['subsubtype'] : 0;
         $add->type_menu             = isset($data['type_menu']) ? $data['type_menu'] : 0;
+        $add->reservation_available = isset($data['reservation_available']) ? $data['reservation_available'] : 0;
         $add->min_cart_value        = isset($data['min_cart_value']) ? $data['min_cart_value'] : null;
         
         $add->c_type                = isset($data['c_type']) ? $data['c_type'] : 0;
@@ -263,6 +265,7 @@ class User extends Authenticatable
       
         return $this->SaveData($res,$lat,$lon);
     }
+ 
 
     function getUser($val, $type, $city_id)
     {
@@ -401,28 +404,32 @@ class User extends Authenticatable
                // $visits = Visits::where('user_id',$user_id)->where('store_id',$id)->first();
             /****** Obtenemos las visitas *******/
 
-            /****** Programa de lealtad *******/
-               // $loyalty = Loyalty::where("store_id",$row->id)->get();
-                // if ($loyalty) {
-                //     $itemsLoy = ItemLoyalty::where('loyalty_id',$loyalty->id)->get();
-                // }else {
-                //     $itemsLoy = [];
-                // }
-            /****** Programa de lealtad *******/
+             
 
             /****** Rating *******/
                 $totalRate    = Rate::where('store_id',$row->id)->count();
                 $totalRateSum = Rate::where('store_id',$row->id)->sum('star');
+
+                if($totalRate > 0)
+                {
+                    $avg          = $totalRateSum / $totalRate;
+                }
+                else
+                {
+                    $avg           = 0 ;
+                }
             /****** Rating *******/
 
-            if($totalRate > 0)
-            {
-                $avg          = $totalRateSum / $totalRate;
-            }
-            else
-            {
-                $avg           = 0 ;
-            }
+            /****** Validamos si el negocios es nuevo *******/
+                $user_time = new DateTime($row->created_at); // Tiempo de registro
+                $query_time = new DateTime(date("H:i")); // Tiempo de hoy
+                $diff = $user_time->diff($query_time); // Diferencia
+                $isNew = false;
+
+                if ($diff->days <= 15) { // El negocio aun tiene 15 dias de registro se considera NUEVO
+                    $isNew = true;
+                }
+            /****** Validamos si el negocios es nuevo *******/
 
             $data = [
                 'id'            => $row->id,
@@ -432,7 +439,8 @@ class User extends Authenticatable
                 'logo'           => Asset('upload/user/logo/'.$row->logo),
                 'address'       => $this->getLang($row->id)['address'],
                 'open'          => $open,
-               
+                'isNew'         => $isNew,
+                'reservation_available' => $row->reservation_available,
                 'type_menu'     => $row->type_menu,
                 'trending'      => $row->trending,
                 'phone'         => $row->phone,
@@ -446,10 +454,6 @@ class User extends Authenticatable
                 'currency'      => $currency,
                 'items'         => $this->menuItem($row->id,$row->c_type,$row->c_value),
                 'items_trend'   => $this->menuTrend($row->id),
-                'max_distance'  => $this->GetMax_distance($row->id,$row->distance_max,$lat,$lon),
-                'delivery_charges_value' => $this->SetCommShip($row->id,$row->p_staff,$row->distance_max,$row->distance),
-                // //'distance'      => bcdiv($row->distance,'1',2),
-                "distance_max"  => $row->distance_max,
                 'km'            => round($row->distance,2),
                 'favorite'      => $favorite
             ];
@@ -522,6 +526,17 @@ class User extends Authenticatable
                 }
             /****** Favorites ******/
            
+            /****** Validamos si el negocios es nuevo *******/
+                $user_time = new DateTime($row->created_at); // Tiempo de registro
+                $query_time = new DateTime(date("H:i")); // Tiempo de hoy
+                $diff = $user_time->diff($query_time); // Diferencia
+                $isNew = false;
+
+                if ($diff->days <= 15) { // El negocio aun tiene 15 dias de registro se considera NUEVO
+                    $isNew = true;
+                }
+            /****** Validamos si el negocios es nuevo *******/
+
             if ($open == true) {
                 $open_store[] = [
                     'id'            => $row->id,
@@ -535,9 +550,6 @@ class User extends Authenticatable
                     'delivery_time' => $row->delivery_time,
                     'type'          => CategoryStore::find($row->type)->name,
                     'subtype'       => $row->subtype,
-                    'delivery_charges_value' => $this->SetCommShip($row->id,$row->p_staff,$row->distance_max,$row->distance),
-                    'max_distance'  => $this->GetMax_distance($row->id,$row->distance_max,$lat,$lon),
-                    "distance_max"  => $row->distance_max,
                     'km'            => round($row->distance,2),
                     'favorite'      => $favorite
                 ];
@@ -549,14 +561,13 @@ class User extends Authenticatable
                     'logo'           => Asset('upload/user/logo/'.$row->logo),
                     'address'       => $this->getLang($row->id)['address'],
                     'open'          => $open,
+                    'isNew'         => $isNew,
+                    'reservation_available' => $row->reservation_available,
                     'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                     'person_cost'   => $row->person_cost,
                     'delivery_time' => $row->delivery_time,
                     'type'          => CategoryStore::find($row->type)->name,
                     'subtype'       => $row->subtype,
-                    'delivery_charges_value' => $this->SetCommShip($row->id,$row->p_staff,$row->distance_max,$row->distance),
-                    'max_distance'  => $this->GetMax_distance($row->id,$row->distance_max,$lat,$lon),
-                    "distance_max"  => $row->distance_max,
                     'km'            => round($row->distance,2),
                     'favorite'      => $favorite
                 ];
@@ -644,6 +655,17 @@ class User extends Authenticatable
                 }
             /****** Favorites ******/
 
+            /****** Validamos si el negocios es nuevo *******/
+                $user_time = new DateTime($row->created_at); // Tiempo de registro
+                $query_time = new DateTime(date("H:i")); // Tiempo de hoy
+                $diff = $user_time->diff($query_time); // Diferencia
+                $isNew = false;
+
+                if ($diff->days <= 15) { // El negocio aun tiene 15 dias de registro se considera NUEVO
+                    $isNew = true;
+                }
+            /****** Validamos si el negocios es nuevo *******/
+
             /****** Filtros de distancia y tipo de negocio *********/
                 if ($status_store == "true") {
                    // Agregamos solo comercios abiertos
@@ -657,14 +679,13 @@ class User extends Authenticatable
                                 'logo'           => Asset('upload/user/logo/'.$row->logo),
                                 'address'       => $this->getLang($row->id)['address'],
                                 'open'          => $open,
+                                'isNew'         => $isNew,
+                                'reservation_available' => $row->reservation_available,
                                 'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                 'delivery_time' => $row->delivery_time,
                                 'type'          => CategoryStore::find($row->type)->name,
                                 'subtype'       => $row->subtype,
                                 'delivery_type' => $row->service_del,
-                                'delivery_charges_value' => $this->SetCommShip($row->id,$row->p_staff,$row->distance_max,$row->distance),
-                                'max_distance'  => $this->GetMax_distance($row->id,$row->distance_max,$lat,$lon),
-                                "distance_max"  => $row->distance_max,
                                 'km'            => round($row->distance,2),
                                 'favorite'      => $favorite
                             ];
@@ -679,14 +700,13 @@ class User extends Authenticatable
                                     'logo'           => Asset('upload/user/logo/'.$row->logo),
                                     'address'       => $this->getLang($row->id)['address'],
                                     'open'          => $open,
+                                    'isNew'         => $isNew,
+                                    'reservation_available' => $row->reservation_available,
                                     'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                     'delivery_time' => $row->delivery_time,
                                     'type'          => CategoryStore::find($row->type)->name,
                                     'subtype'       => $row->subtype,
                                     'delivery_type' => $row->service_del,
-                                    'delivery_charges_value' => $this->SetCommShip($row->id,$row->p_staff,$row->distance_max,$row->distance),
-                                    'max_distance'  => $this->GetMax_distance($row->id,$row->distance_max,$lat,$lon),
-                                    "distance_max"  => $row->distance_max,
                                     'km'            => round($row->distance,2),
                                     'favorite'      => $favorite
                                 ];    
@@ -701,14 +721,13 @@ class User extends Authenticatable
                                     'logo'           => Asset('upload/user/logo/'.$row->logo),
                                     'address'       => $this->getLang($row->id)['address'],
                                     'open'          => $open,
+                                    'isNew'         => $isNew,
+                                    'reservation_available' => $row->reservation_available,
                                     'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                     'delivery_time' => $row->delivery_time,
                                     'type'          => CategoryStore::find($row->type)->name,
                                     'subtype'       => $row->subtype,
                                     'delivery_type' => $row->service_del,
-                                    'delivery_charges_value' => $this->SetCommShip($row->id,$row->p_staff,$row->distance_max,$row->distance),
-                                    'max_distance'  => $this->GetMax_distance($row->id,$row->distance_max,$lat,$lon),
-                                    "distance_max"  => $row->distance_max,
                                     'km'            => round($row->distance,2),
                                     'favorite'      => $favorite
                                 ];
@@ -721,14 +740,13 @@ class User extends Authenticatable
                                 'logo'           => Asset('upload/user/logo/'.$row->logo),
                                 'address'       => $this->getLang($row->id)['address'],
                                 'open'          => $open,
+                                'isNew'         => $isNew,
+                                'reservation_available' => $row->reservation_available,
                                 'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                 'delivery_time' => $row->delivery_time,
                                 'type'          => CategoryStore::find($row->type)->name,
                                 'subtype'       => $row->subtype,
                                 'delivery_type' => $row->service_del,
-                                'delivery_charges_value' => $this->SetCommShip($row->id,$row->p_staff,$row->distance_max,$row->distance),
-                                'max_distance'  => $this->GetMax_distance($row->id,$row->distance_max,$lat,$lon),
-                                "distance_max"  => $row->distance_max,
                                 'km'            => round($row->distance,2),
                                 'favorite'      => $favorite
                             ];
@@ -743,14 +761,13 @@ class User extends Authenticatable
                                     'logo'           => Asset('upload/user/logo/'.$row->logo),
                                     'address'       => $this->getLang($row->id)['address'],
                                     'open'          => $open,
+                                    'isNew'         => $isNew,
+                                    'reservation_available' => $row->reservation_available,
                                     'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                     'delivery_time' => $row->delivery_time,
                                     'type'          => CategoryStore::find($row->type)->name,
                                     'subtype'       => $row->subtype,
                                     'delivery_type' => $row->service_del,
-                                    'delivery_charges_value' => $this->SetCommShip($row->id,$row->p_staff,$row->distance_max,$row->distance),
-                                    'max_distance'  => $this->GetMax_distance($row->id,$row->distance_max,$lat,$lon),
-                                    "distance_max"  => $row->distance_max,
                                     'km'            => round($row->distance,2),
                                     'favorite'      => $favorite
                                 ];
@@ -765,14 +782,13 @@ class User extends Authenticatable
                                         'logo'           => Asset('upload/user/logo/'.$row->logo),
                                         'address'       => $this->getLang($row->id)['address'],
                                         'open'          => $open,
+                                        'isNew'         => $isNew,
+                                        'reservation_available' => $row->reservation_available,
                                         'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                         'delivery_time' => $row->delivery_time,
                                         'type'          => CategoryStore::find($row->type)->name,
                                         'subtype'       => $row->subtype,
                                         'delivery_type' => $row->service_del,
-                                        'delivery_charges_value' => $this->SetCommShip($row->id,$row->p_staff,$row->distance_max,$row->distance),
-                                        'max_distance'  => $this->GetMax_distance($row->id,$row->distance_max,$lat,$lon),
-                                        "distance_max"  => $row->distance_max,
                                         'km'            => round($row->distance,2),
                                         'favorite'      => $favorite
                                     ];    
@@ -787,14 +803,13 @@ class User extends Authenticatable
                                         'logo'           => Asset('upload/user/logo/'.$row->logo),
                                         'address'       => $this->getLang($row->id)['address'],
                                         'open'          => $open,
+                                        'isNew'         => $isNew,
+                                        'reservation_available' => $row->reservation_available,
                                         'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                         'delivery_time' => $row->delivery_time,
                                         'type'          => CategoryStore::find($row->type)->name,
                                         'subtype'       => $row->subtype,
                                         'delivery_type' => $row->service_del,
-                                        'delivery_charges_value' => $this->SetCommShip($row->id,$row->p_staff,$row->distance_max,$row->distance),
-                                        'max_distance'  => $this->GetMax_distance($row->id,$row->distance_max,$lat,$lon),
-                                        "distance_max"  => $row->distance_max,
                                         'km'            => round($row->distance,2),
                                         'favorite'      => $favorite
                                     ];
@@ -807,14 +822,13 @@ class User extends Authenticatable
                                     'logo'           => Asset('upload/user/logo/'.$row->logo),
                                     'address'       => $this->getLang($row->id)['address'],
                                     'open'          => $open,
+                                    'isNew'         => $isNew,
+                                    'reservation_available' => $row->reservation_available,
                                     'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                     'delivery_time' => $row->delivery_time,
                                     'type'          => CategoryStore::find($row->type)->name,
                                     'subtype'       => $row->subtype,
                                     'delivery_type' => $row->service_del,
-                                    'delivery_charges_value' => $this->SetCommShip($row->id,$row->p_staff,$row->distance_max,$row->distance),
-                                    'max_distance'  => $this->GetMax_distance($row->id,$row->distance_max,$lat,$lon),
-                                    "distance_max"  => $row->distance_max,
                                     'km'            => round($row->distance,2),
                                     'favorite'      => $favorite
                                 ];
@@ -833,14 +847,13 @@ class User extends Authenticatable
                                 'logo'           => Asset('upload/user/logo/'.$row->logo),
                                 'address'       => $this->getLang($row->id)['address'],
                                 'open'          => $open,
+                                'isNew'         => $isNew,
+                                'reservation_available' => $row->reservation_available,
                                 'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                 'delivery_time' => $row->delivery_time,
                                 'type'          => CategoryStore::find($row->type)->name,
                                 'subtype'       => $row->subtype,
                                 'delivery_type' => $row->service_del,
-                                'delivery_charges_value' => $this->SetCommShip($row->id,$row->p_staff,$row->distance_max,$row->distance),
-                                'max_distance'  => $this->GetMax_distance($row->id,$row->distance_max,$lat,$lon),
-                                "distance_max"  => $row->distance_max,
                                 'km'            => round($row->distance,2),
                                 'favorite'      => $favorite
                             ];
@@ -855,14 +868,13 @@ class User extends Authenticatable
                                     'logo'           => Asset('upload/user/logo/'.$row->logo),
                                     'address'       => $this->getLang($row->id)['address'],
                                     'open'          => $open,
+                                    'isNew'         => $isNew,
+                                    'reservation_available' => $row->reservation_available,
                                     'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                     'delivery_time' => $row->delivery_time,
                                     'type'          => CategoryStore::find($row->type)->name,
                                     'subtype'       => $row->subtype,
                                     'delivery_type' => $row->service_del,
-                                    'delivery_charges_value' => $this->SetCommShip($row->id,$row->p_staff,$row->distance_max,$row->distance),
-                                    'max_distance'  => $this->GetMax_distance($row->id,$row->distance_max,$lat,$lon),
-                                    "distance_max"  => $row->distance_max,
                                     'km'            => round($row->distance,2),
                                     'favorite'      => $favorite
                                 ];    
@@ -877,14 +889,13 @@ class User extends Authenticatable
                                     'logo'           => Asset('upload/user/logo/'.$row->logo),
                                     'address'       => $this->getLang($row->id)['address'],
                                     'open'          => $open,
+                                    'isNew'         => $isNew,
+                                    'reservation_available' => $row->reservation_available,
                                     'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                     'delivery_time' => $row->delivery_time,
                                     'type'          => CategoryStore::find($row->type)->name,
                                     'subtype'       => $row->subtype,
                                     'delivery_type' => $row->service_del,
-                                    'delivery_charges_value' => $this->SetCommShip($row->id,$row->p_staff,$row->distance_max,$row->distance),
-                                    'max_distance'  => $this->GetMax_distance($row->id,$row->distance_max,$lat,$lon),
-                                    "distance_max"  => $row->distance_max,
                                     'km'            => round($row->distance,2),
                                     'favorite'      => $favorite
                                 ];
@@ -898,14 +909,13 @@ class User extends Authenticatable
                                 'logo'           => Asset('upload/user/logo/'.$row->logo),
                                 'address'       => $this->getLang($row->id)['address'],
                                 'open'          => $open,
+                                'isNew'         => $isNew,
+                                'reservation_available' => $row->reservation_available,
                                 'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                 'delivery_time' => $row->delivery_time,
                                 'type'          => CategoryStore::find($row->type)->name,
                                 'subtype'       => $row->subtype,
                                 'delivery_type' => $row->service_del,
-                                'delivery_charges_value' => $this->SetCommShip($row->id,$row->p_staff,$row->distance_max,$row->distance),
-                                'max_distance'  => $this->GetMax_distance($row->id,$row->distance_max,$lat,$lon),
-                                "distance_max"  => $row->distance_max,
                                 'km'            => round($row->distance,2),
                                 'favorite'      => $favorite
                             ];
@@ -920,14 +930,13 @@ class User extends Authenticatable
                                     'logo'           => Asset('upload/user/logo/'.$row->logo),
                                     'address'       => $this->getLang($row->id)['address'],
                                     'open'          => $open,
+                                    'isNew'         => $isNew,
+                                    'reservation_available' => $row->reservation_available,
                                     'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                     'delivery_time' => $row->delivery_time,
                                     'type'          => CategoryStore::find($row->type)->name,
                                     'subtype'       => $row->subtype,
                                     'delivery_type' => $row->service_del,
-                                    'delivery_charges_value' => $this->SetCommShip($row->id,$row->p_staff,$row->distance_max,$row->distance),
-                                    'max_distance'  => $this->GetMax_distance($row->id,$row->distance_max,$lat,$lon),
-                                    "distance_max"  => $row->distance_max,
                                     'km'            => round($row->distance,2),
                                     'favorite'      => $favorite
                                 ];
@@ -942,14 +951,13 @@ class User extends Authenticatable
                                         'logo'           => Asset('upload/user/logo/'.$row->logo),
                                         'address'       => $this->getLang($row->id)['address'],
                                         'open'          => $open,
+                                        'isNew'         => $isNew,
+                                        'reservation_available' => $row->reservation_available,
                                         'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                         'delivery_time' => $row->delivery_time,
                                         'type'          => CategoryStore::find($row->type)->name,
                                         'subtype'       => $row->subtype,
                                         'delivery_type' => $row->service_del,
-                                        'delivery_charges_value' => $this->SetCommShip($row->id,$row->p_staff,$row->distance_max,$row->distance),
-                                        'max_distance'  => $this->GetMax_distance($row->id,$row->distance_max,$lat,$lon),
-                                        "distance_max"  => $row->distance_max,
                                         'km'            => round($row->distance,2),
                                         'favorite'      => $favorite
                                     ];    
@@ -964,14 +972,13 @@ class User extends Authenticatable
                                         'logo'           => Asset('upload/user/logo/'.$row->logo),
                                         'address'       => $this->getLang($row->id)['address'],
                                         'open'          => $open,
+                                        'isNew'         => $isNew,
+                                        'reservation_available' => $row->reservation_available,
                                         'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                         'delivery_time' => $row->delivery_time,
                                         'type'          => CategoryStore::find($row->type)->name,
                                         'subtype'       => $row->subtype,
                                         'delivery_type' => $row->service_del,
-                                        'delivery_charges_value' => $this->SetCommShip($row->id,$row->p_staff,$row->distance_max,$row->distance),
-                                        'max_distance'  => $this->GetMax_distance($row->id,$row->distance_max,$lat,$lon),
-                                        "distance_max"  => $row->distance_max,
                                         'km'            => round($row->distance,2),
                                         'favorite'      => $favorite
                                     ];
@@ -984,14 +991,13 @@ class User extends Authenticatable
                                     'logo'           => Asset('upload/user/logo/'.$row->logo),
                                     'address'       => $this->getLang($row->id)['address'],
                                     'open'          => $open,
+                                    'isNew'         => $isNew,
+                                    'reservation_available' => $row->reservation_available,
                                     'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                     'delivery_time' => $row->delivery_time,
                                     'type'          => CategoryStore::find($row->type)->name,
                                     'subtype'       => $row->subtype,
                                     'delivery_type' => $row->service_del,
-                                    'delivery_charges_value' => $this->SetCommShip($row->id,$row->p_staff,$row->distance_max,$row->distance),
-                                    'max_distance'  => $this->GetMax_distance($row->id,$row->distance_max,$lat,$lon),
-                                    "distance_max"  => $row->distance_max,
                                     'km'            => round($row->distance,2),
                                     'favorite'      => $favorite
                                 ];
@@ -1064,6 +1070,17 @@ class User extends Authenticatable
                     $favorite = false;
                 }
             /****** Favorites ******/
+ 
+            /****** Validamos si el negocios es nuevo *******/
+                $user_time = new DateTime($row->created_at); // Tiempo de registro
+                $query_time = new DateTime(date("H:i")); // Tiempo de hoy
+                $diff = $user_time->diff($query_time); // Diferencia
+                $isNew = false;
+
+                if ($diff->days <= 15) { // El negocio aun tiene 15 dias de registro se considera NUEVO
+                    $isNew = true;
+                }
+            /****** Validamos si el negocios es nuevo *******/
 
             $data[] = [
                 'id'            => $row->id,
@@ -1071,14 +1088,14 @@ class User extends Authenticatable
                 'lat'           => $row->lat,
                 'lng'           => $row->lng,
                 'img'           => asset('upload/user/'.$row->img),
-                'logo'           => asset('upload/user/logo/'.$row->logo),
+                'logo'          => asset('upload/user/logo/'.$row->logo),
                 'open'          => $open,
+                'isNew'         => $isNew,
+                'reservation_available' => $row->reservation_available,
                 'rating'        => $avg > 0 ? number_format($avg, 1) : 0,
                 'delivery_time' => $row->delivery_time,
                 'type'          => CategoryStore::find($row->type)->name,
-                'subtype'       => CategoryStore::find($row->subtype)->name,
-                'delivery_charges_value' => $this->SetCommShip($row->id,$row->p_staff,$row->distance_max,$row->distance),
-                'max_distance'  => $this->GetMax_distance($row->id,$row->distance_max,$lat,$lon),
+                'subtype'       => CategoryStore::find($row->subtype)->name, 
                 'favorite'      => $favorite
             ];
             
@@ -1748,30 +1765,7 @@ class User extends Authenticatable
     {
         return round($numero,2);
     }
-
-    public function GetMax_distance($store_id,$distance_max,$latD,$lngD)
-    { 
-        $usr = User::where('id',$store_id)
-            ->select('users.*',DB::raw("6371 * acos(cos(radians(" . $latD . "))
-            * cos(radians(users.lat))
-            * cos(radians(users.lng) - radians(" . $lngD . "))
-            + sin(radians(" .$latD. "))
-            * sin(radians(users.lat))) AS distance"))
-            ->orderBy('distance','ASC')->get();
-            
-        $max = 0;
-
-        foreach ($usr as $user) {
-            if ($user->distance > $distance_max) 
-            {
-                $max = 0;
-            }else {
-                $max = 1;
-            }
-        }
-
-        return $max;
-    }
+ 
 
     function Costs_shipKM($value,$min_distance,$min_value,$distance)
     {
