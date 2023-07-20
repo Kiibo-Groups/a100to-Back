@@ -100,6 +100,17 @@
         </li>
     @endif
     <!-- Ofertas de descuento -->
+        <!-- Tickets -->
+        @if ($admin->hasPerm('Tickets'))
+        <li>
+            <a href="{{ Asset(env('admin') . '/tickets') }}" class=" menu-link">
+                <i class="mdi mdi-ticket"></i>
+                <span>
+                    Tickets </span>
+            </a>
+        </li>
+    @endif
+    <!-- Tickets -->
    
     <!-- Notificaciones push -->
     @if ($admin->hasPerm('Notificaciones push'))
