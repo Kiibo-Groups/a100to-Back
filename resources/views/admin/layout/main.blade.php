@@ -207,6 +207,34 @@
             })
         }
 
+
+
+        function ticketsAlert(url) {
+            Swal.fire({
+                title: 'Estas seguro(a) Tick',
+                text: "",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, hazlo!',
+                cancelButtonText: "Cancelar",
+            }).then((result) => {
+                if (result.value) {
+                    Swal.fire(
+                        'Cambiado!',
+                        'Esta entrada ha sido modificada.',
+                        'success'
+                    )
+
+                    window.location = url;
+                }
+            })
+        }
+
+
+
+
         function showMsg(data) {
             Swal.fire(data);
         }

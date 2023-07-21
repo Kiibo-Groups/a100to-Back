@@ -23,23 +23,23 @@ Administrar tickets
                                 <div class="col-md-6" style="text-align: left;">
                                     <b style="margin-left:20px">@yield('title')</b>
                                 </div>
-                                <div class="col-md-6" style="text-align: right;"><a href="{{ Asset($link . 'add') }}"
+                               {{-- <divclass="col-md-6"style="text-align:right;"><ahref="Asset($link.'add')}}"
                                     class="btn btn-warning rounded-pill waves-effect waves-light" style=" margin-right:20px" >Agregar
                                     nuevo</a>&nbsp;&nbsp;&nbsp;
-                                </div>
+                                </div>--}}
 
                             </div>
 
 
                             <div class="card-body">
-                                <table class="table table-hover ">
+                                <table class="table table-hover " >
                                     <thead>
-                                        <tr>
+                                        <tr style="text-align: center">
                                             <th>Negocio</th>
                                             <th>Usuario</th>
                                             <th>Fecha</th>
                                             <th>Status</th>
-                                            <th style="text-align: right">Option</th>
+                                            <th >Option</th>
                                         </tr>
 
                                     </thead>
@@ -47,45 +47,51 @@ Administrar tickets
 
                                         @foreach ($data as $row)
                                             <tr>
-                                                <td width="17%">{{ $row->negocio->name  }}</td>
-                                                <td width="17%">{{ $row->usuario->name }}</td>
-                                                <td width="17%">{{ date('d-M-Y', strtotime($row->created_at)) }}</td>
-                                                <td width="12%">
-
-                                                    @if ($row->status == 0)
+                                                <td class="col-md-4">{{ $row->negocio->name }}</td>
+                                                <td class="col-md-3">{{ $row->usuario->name }}</td>
+                                                <td class="col-md-2"  style="text-align: center">{{ date('d-M-Y', strtotime($row->created_at)) }}</td>
+                                                <td class="col-md-1"  style="text-align: center">
+                                                    @if ($row->status == 1)
                                                         <button type="button"
-                                                        class="btn btn-success width-xs waves-effect waves-light"
-                                                            onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Activo</button>
-                                                    @else
+                                                            class="btn btn-warning width-xs waves-effect waves-light"
+                                                            onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Pendiente</button>
+                                                    @endif        
+                                                    @if($row->status == 2)
                                                         <button type="button"
-                                                        class="btn btn-danger width-xs waves-effect waves-light"
-                                                            onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Inactivo</button>
+                                                            class="btn btn-success width-xs waves-effect waves-light"
+                                                            onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Aceptada</button>
+                                                                                                                                                    
                                                     @endif
-
+                                                    @if($row->status == 3)
+                                                    <button type="button"
+                                                        class="btn btn-danger width-xs waves-effect waves-light"
+                                                        onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Rechazada</button>
+                                                                                                                                                
+                                                @endif
+                                            </td>
                                                 </td>
+                                                <td class="col-md-2"style="text-align: center">
 
-
-
-                                                <td width="15%" style="text-align: right">
+                                                    <a href="{{ url(env('admin') . '/tickets/file/' . $row->imagen) }}"
+                                                        class="btn btn-warning waves-effect waves-light btn m-b-15 ml-2 mr-2 btn-md"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        data-original-title="Descargar Imagen"><i
+                                                        class="mdi mdi-image"></i></a>
 
                                                     <a href="{{ Asset($link . $row->id . '/edit') }}"
                                                         class="btn btn-success waves-effect waves-light btn m-b-15 ml-2 mr-2 btn-md"
                                                         data-toggle="tooltip" data-placement="top"
                                                         data-original-title="Editar"><i
-                                                            class="mdi mdi-border-color"></i></a>
+                                                            class="mdi mdi-border-color"></i></a>    
 
-                                                    <button type="button"
-                                                    class="btn m-b-15 ml-2 mr-2 btn-md  btn btn-danger waves-effect waves-light"
+                                                  {{--  <button type="button"
+                                                        class="btn m-b-15 ml-2 mr-2 btn-md  btn btn-danger waves-effect waves-light"
                                                         data-toggle="tooltip" data-placement="top"
                                                         data-original-title="Eliminar"
                                                         onclick="deleteConfirm('{{ Asset($link . 'delete/' . $row->id) }}')"><i
-                                                            class="mdi mdi-delete-forever"></i></button>
-
-
+                                                        class="mdi mdi-delete-forever"></i></button>--}}
                                                 </td>
-                                            </tr>
-
-                                         
+                                            </tr>                                         
                                         @endforeach
 
                                     </tbody>
