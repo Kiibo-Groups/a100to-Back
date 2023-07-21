@@ -155,6 +155,11 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     Route::get('cancelComm_event/{id}','ApiController@cancelComm_event');
     Route::post('rateComm_event','ApiController@rateComm_event');
 
+    /** Tickets  */
+    Route::post('tickets','ApiController@Tickets');
+
+
+
 
     /**
      * Visitas

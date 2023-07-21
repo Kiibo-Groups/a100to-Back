@@ -39,7 +39,7 @@ use App\Models\Tables;
 
 use App\Models\Visits;
 use App\Models\Deposit;
-
+use App\Models\Tickets;
 use DB;
 use Validator;
 use Redirect;
@@ -915,4 +915,46 @@ class ApiController extends Controller
 			return response()->json(['data' => 'error', 'error' => $th->getMessage()]);
 		}
 	}
+
+
+// ---------------Tickets ----------------
+
+public function Tickets(Request $request)
+{
+	
+	try {
+		
+
+		$input         = $request->all();
+
+        if($request->file('imagen'))
+        {
+
+            $filename   = time().rand(1119,6999).'.' .$request->file('imagen')->getClientOriginalExtension();
+            $input['imagen']->move("assets/img/tickets", $filename);
+            $input['imagen'] = $filename;
+        }
+
+       //dd($filename);
+
+        $tickets   = Tickets::create([
+            'id_cliente'   => $request->id_cliente,
+            'id_negocio'   => $request->id_negocio,
+            'imagen'       => $filename,
+          
+        ]);
+
+        if(!$tickets){
+            return response()->json(['code' => 500, 'data'=> null, 'message' => 'Ha ocurrido un error al crear Tickets.']);
+        }
+
+        return response()->json(['code' => 200, 'data'=> $tickets, 'message' => 'Se ha creado el Tickets.']);
+
+
+	} catch (\Throwable $th) {
+		return response()->json(['data' => "error"]);
+	}
+}
+
+
 }

@@ -15,7 +15,13 @@ class CreateTicketsTable extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->string('id_cliente')->nullable();
+            $table->string('id_negocio')->nullable();
+            $table->string('descripcion')->nullable();
+            $table->string('imagen')->nullable();
+            $table->string('status')->default('1');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
