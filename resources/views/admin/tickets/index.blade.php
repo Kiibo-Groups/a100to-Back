@@ -54,18 +54,18 @@ Administrar tickets
                                                     @if ($row->status == 1)
                                                         <button type="button"
                                                             class="btn btn-warning width-xs waves-effect waves-light"
-                                                            onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Pendiente</button>
+                                                            >Pendiente</button>
                                                     @endif        
                                                     @if($row->status == 2)
                                                         <button type="button"
                                                             class="btn btn-success width-xs waves-effect waves-light"
-                                                            onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Aceptada</button>
+                                                            >Aceptada</button>
                                                                                                                                                     
                                                     @endif
                                                     @if($row->status == 3)
                                                     <button type="button"
                                                         class="btn btn-danger width-xs waves-effect waves-light"
-                                                        onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Rechazada</button>
+                                                        >Rechazada</button>
                                                                                                                                                 
                                                 @endif
                                             </td>

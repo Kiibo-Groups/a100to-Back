@@ -23,12 +23,12 @@
                         <a href="{{ Asset(env('admin') . '/setting') }}" class=" menu-link">Configuración</a>
                     </li>
                 @endif
-               <!-- 
+                <!--
                  @if ($admin->hasPerm('Dashboard - Textos de la aplicacion'))
-                    <li>
+<li>
                         <a href="{{ Asset(env('admin') . '/text/add') }}" class=" menu-link">Texto de la aplicación</a>
                     </li>
-                @endif
+@endif
                 -->
                 @if ($admin->hasPerm('Paginas de la aplicacion'))
                     <li>
@@ -39,7 +39,7 @@
             </ul>
         </div>
     </li>
-     
+
 
     <!-- Banners -->
     @if ($admin->hasPerm('Banners'))
@@ -68,7 +68,7 @@
         <li>
             <a href="#negocios" data-bs-toggle="collapse">
                 <i class="mdi mdi-home"></i>
-                <span>  Negocios </span>
+                <span> Negocios </span>
                 <span class="menu-arrow"></span>
             </a>
 
@@ -79,7 +79,7 @@
                         <li>
                             <a href="{{ Asset(env('admin') . '/category') }}" class=" menu-link">Categorias</a>
                         </li>
-                    @endif 
+                    @endif
                     <li>
                         <a href="{{ Asset(env('admin') . '/user') }}">Listado</a>
                     </li>
@@ -88,7 +88,7 @@
         </li>
     @endif
     <!-- Negocios -->
-    
+
     <!-- Ofertas de descuento -->
     @if ($admin->hasPerm('Ofertas de descuento'))
         <li>
@@ -99,9 +99,8 @@
             </a>
         </li>
     @endif
-    <!-- Ofertas de descuento -->
-        <!-- Tickets -->
-        @if ($admin->hasPerm('Tickets'))
+    <!-- Tickets -->
+    @if ($admin->hasPerm('Tickets'))
         <li>
             <a href="{{ Asset(env('admin') . '/tickets') }}" class=" menu-link">
                 <i class="mdi mdi-ticket"></i>
@@ -111,7 +110,20 @@
         </li>
     @endif
     <!-- Tickets -->
-   
+
+
+    <!-- Sociales -->
+    @if ($admin->hasPerm('Causas sociales'))
+        <li>
+            <a href="{{ Asset(env('admin') . '/sociales') }}" class=" menu-link">
+                <i class="mdi mdi-human"></i>
+                <span>
+                    Causas sociales </span>
+            </a>
+        </li>
+    @endif
+    <!-- Sociales -->
+
     <!-- Notificaciones push -->
     @if ($admin->hasPerm('Notificaciones push'))
         <li>
@@ -123,7 +135,7 @@
         </li>
     @endif
     <!-- Notificaciones push -->
-  
+
     <!-- Usuarios -->
     @if ($admin->hasPerm('Usuarios Registrados'))
         <li>
@@ -140,10 +152,10 @@
                     <li>
                         <a href="{{ Asset(env('admin') . '/appUser') }}">Listado</a>
                     </li>
-                   <!--
+                    <!--
                     <li>
                         <a href="{{ Asset(env('admin') . '/report_users') }}">Reportes</a>
-                    </li> 
+                    </li>
                     -->
                 </ul>
             </div>

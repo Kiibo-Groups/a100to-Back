@@ -794,6 +794,7 @@ class ComposerStaticInitedc0ba0ba2ba66b90f1da7e80a290d66
         'App\\Models\\Rate' => __DIR__ . '/../..' . '/app/Models/Rate.php',
         'App\\Models\\Rate_staff' => __DIR__ . '/../..' . '/app/Models/Rate_staff.php',
         'App\\Models\\Slider' => __DIR__ . '/../..' . '/app/Models/Slider.php',
+        'App\\Models\\Sociales' => __DIR__ . '/../..' . '/app/Models/Sociales.php',
         'App\\Models\\Tables' => __DIR__ . '/../..' . '/app/Models/Tables.php',
         'App\\Models\\Text' => __DIR__ . '/../..' . '/app/Models/Text.php',
         'App\\Models\\Tickets' => __DIR__ . '/../..' . '/app/Models/Tickets.php',

@@ -205,9 +205,19 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin','prefix' => env('admin
             Tickets
         |-------------------------------
         */
+        Route::resource('tickets','TicketsController');
         Route::get('tickets','TicketsController@index');
         Route::get('tickets/status/{id}','TicketsController@status');
         Route::get('tickets/file/{id}', 'TicketsController@verFiles');
+
+
+          /*
+        |------------------------------
+        |Causas Sociales
+        |------------------------------
+        */
+        Route::resource('sociales','SocialesController');
+        Route::get('sociales/delete/{id}','SocialesController@delete');
 
     });
 

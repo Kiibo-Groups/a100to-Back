@@ -111,6 +111,7 @@ return array(
     'App\\Models\\Rate' => $baseDir . '/app/Models/Rate.php',
     'App\\Models\\Rate_staff' => $baseDir . '/app/Models/Rate_staff.php',
     'App\\Models\\Slider' => $baseDir . '/app/Models/Slider.php',
+    'App\\Models\\Sociales' => $baseDir . '/app/Models/Sociales.php',
     'App\\Models\\Tables' => $baseDir . '/app/Models/Tables.php',
     'App\\Models\\Text' => $baseDir . '/app/Models/Text.php',
     'App\\Models\\Tickets' => $baseDir . '/app/Models/Tickets.php',
