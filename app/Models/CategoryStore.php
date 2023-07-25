@@ -156,6 +156,7 @@ class CategoryStore extends Authenticatable
 
     public function getCatID($id)
     {
+        
         return CategoryStore::find($id)->name;
     }
  

@@ -157,6 +157,7 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
 
     /** Tickets  */
     Route::post('tickets','ApiController@Tickets');
+    Route::get('causas_sociales','ApiController@getCausasSociales');
 
 
 

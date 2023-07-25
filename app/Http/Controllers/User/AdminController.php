@@ -12,6 +12,8 @@ use App\Models\Order;
 use App\Models\Admin;
 use App\Models\CategoryStore;
 use App\Models\Opening_times;
+use App\Models\Sociales;
+use App\Models\SocialesNegocios;
 use DB;
 use Validator;
 use Redirect;
@@ -97,10 +99,10 @@ class AdminController extends Controller {
 	*/
 	public function setting()
 	{
-		$city = new City;
-		$cats = new CategoryStore;
+		$city  = new City;
+		$cats  = new CategoryStore;
 		$times = new Opening_times;
-		$user 	= new User;
+		$user  = new User;
 		return View($this->folder.'dashboard.setting',[
 
 			'data' 		=> User::find(Auth::user()->id),
@@ -118,7 +120,9 @@ class AdminController extends Controller {
 			'times'     => $times->getAll(Auth::user()->id),
 			'opening_time' => $times,
 			'overview'	=> $user->overview(),
-			'currency'  => Admin::find(1)->currency
+			'currency'  => Admin::find(1)->currency,
+			'social'    => Sociales::get(),
+			'array'		=> SocialesNegocios::where('social_id', auth()->user()->id)->pluck('store_id')->toArray()
 		]);
 	}
 	
@@ -128,7 +132,8 @@ class AdminController extends Controller {
 	|------------------------------------------------------------------
 	*/
 	public function update(Request $Request)
-	{		
+	{	
+		//dd($Request);	
 		$data = new User;
 		$id   = Auth::user()->id;
 		
@@ -139,6 +144,9 @@ class AdminController extends Controller {
 		}
 
 		$data->addNew($Request->all(),$id);
+
+		
+
 
 		return Redirect::back()->with('message','Información actualizada con éxito.');
 	}

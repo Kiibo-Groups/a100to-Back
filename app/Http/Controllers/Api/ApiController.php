@@ -39,6 +39,7 @@ use App\Models\Tables;
 
 use App\Models\Visits;
 use App\Models\Deposit;
+use App\Models\Sociales;
 use App\Models\Tickets;
 use DB;
 use Validator;
@@ -65,17 +66,17 @@ class ApiController extends Controller
 
 		return response()->json([
 			'data' => $city->getAll(0),
-			
+
 		]);
 	}
 
 	public function GetNearbyCity()
 	{
 		$city = new City;
-		
+
 		return response()->json([
 			'data' => $city->GetNearbyCity(0),
-			
+
 		]);
 	}
 
@@ -159,7 +160,7 @@ class ApiController extends Controller
 		$store   = new User;
 		$data = [
 			'store'		=> $store->getStoreOpen($city_id),
-			'trending'		=> $store->getStoreOpen($city_id,true),
+			'trending'		=> $store->getStoreOpen($city_id, true),
 			'admin'		=> Admin::find(1),
 		];
 
@@ -175,7 +176,7 @@ class ApiController extends Controller
 			return response()->json(['data' => 'error', 'error' => $th->getMessage()]);
 		}
 	}
-	
+
 	public function getStoreOpen($city_id)
 	{
 		$store   = new User;
@@ -917,44 +918,69 @@ class ApiController extends Controller
 	}
 
 
-// ---------------Tickets ----------------
+	// ---------------Tickets ----------------
 
-public function Tickets(Request $request)
-{
-	
-	try {
-		
+	public function Tickets(Request $request)
+	{
 
-		$input         = $request->all();
-
-        if($request->file('imagen'))
-        {
-
-            $filename   = time().rand(1119,6999).'.' .$request->file('imagen')->getClientOriginalExtension();
-            $input['imagen']->move("assets/img/tickets", $filename);
-            $input['imagen'] = $filename;
-        }
-
-       //dd($filename);
-
-        $tickets   = Tickets::create([
-            'id_cliente'   => $request->id_cliente,
-            'id_negocio'   => $request->id_negocio,
-            'imagen'       => $filename,
-          
-        ]);
-
-        if(!$tickets){
-            return response()->json(['code' => 500, 'data'=> null, 'message' => 'Ha ocurrido un error al crear Tickets.']);
-        }
-
-        return response()->json(['code' => 200, 'data'=> $tickets, 'message' => 'Se ha creado el Tickets.']);
+		try {
 
 
-	} catch (\Throwable $th) {
-		return response()->json(['data' => "error"]);
+			$input         = $request->all();
+
+			if ($request->file('imagen')) {
+
+				$filename   = time() . rand(1119, 6999) . '.' . $request->file('imagen')->getClientOriginalExtension();
+				$input['imagen']->move("assets/img/tickets", $filename);
+				$input['imagen'] = $filename;
+			}
+
+			//dd($filename);
+
+			$tickets   = Tickets::create([
+				'id_cliente'   => $request->id_cliente,
+				'id_negocio'   => $request->id_negocio,
+				'imagen'       => $filename,
+
+			]);
+
+			if (!$tickets) {
+				return response()->json(['code' => 500, 'data' => null, 'message' => 'Ha ocurrido un error al crear Tickets.']);
+			}
+
+			return response()->json(['code' => 200, 'data' => $tickets, 'message' => 'Se ha creado el Tickets.']);
+		} catch (\Throwable $th) {
+			return response()->json(['data' => "error"]);
+		}
 	}
-}
 
 
+	public function getCausasSociales()
+	{
+		$social  = Sociales::orderBy('nombre', 'asc')->get();
+
+		$array = [];
+ 
+        foreach($social as $soc){
+            $array[] = array(
+                'nombre'=>$soc->nombre,
+                
+            );
+        }
+	
+		return response()->json(['data' => $array]);
+
+
+
+		// $empresas = Empresa::orderBy('nombre', 'asc')->get();
+        // $array = [];
+ 
+        // foreach($empresas as $empresa){
+        //     $array[] = array(
+        //         'label'=>$empresa->nombre,
+        //         'value'=> $empresa->id,
+        //     );
+        // }
+        // return json_encode($array);
+	}
 }

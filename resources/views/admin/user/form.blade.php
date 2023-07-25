@@ -129,6 +129,25 @@
                         <option value="1" @if ($data->status == 1) selected @endif>Disbaled</option>
                     </select>
                 </div>
+
+
+                <div class="form-group col-md-6">
+                    <label for="sociales">Causas Sociales</label>
+                    <select name="sociales[]" class="form-control js-select2" multiple="true">
+                        
+                        @foreach($social as $soc)
+                        <option value="{{ $soc->id }}" @if(in_array($soc->id,$array)) selected @endif>{{ $soc->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+
+
+
+
+
+
+
             </div>
         </div>
     </div>

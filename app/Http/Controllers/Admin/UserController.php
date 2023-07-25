@@ -1,23 +1,26 @@
 <?php namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use DB;
+use IMS;
 use Auth;
-use App\Models\User;
+use Redirect;
+use Validator;
 use App\Models\City;
-use App\Models\UserImage;
+use App\Models\Item;
+use App\Models\Rate;
+use App\Models\User;
+use App\Models\Addon;
 use App\Models\Admin;
+use App\Http\Requests;
+use App\Models\Sociales;
+use App\Models\ItemAddon;
+use App\Models\UserImage;
+use Illuminate\Http\Request;
 use App\Models\CategoryStore;
 use App\Models\Opening_times;
-use App\Models\Addon;
-use App\Models\Item;
-use App\Models\ItemAddon;
-use App\Models\Rate;
-use DB;
-use Validator;
-use Redirect;
-use IMS;
+use App\Models\SocialesNegocios;
+use App\Http\Controllers\Controller;
+
 class UserController extends Controller {
 
 	public $folder  = "admin/user.";
@@ -71,7 +74,9 @@ class UserController extends Controller {
 				'Update'    => false,
 				'times'     => $times->getAll(0),
 				'opening_time' => $times,
-				'cat_p'		=> $cats->getCatP()
+				'cat_p'		=> $cats->getCatP(),
+				'social'    => Sociales::get(),
+			    'array'		=> []
 			]);
 		}else {
 			return Redirect::to(env('admin').'/home')->with('error', 'No tienes permiso de ver la sección Adminisrtar Restaurantes');
@@ -103,7 +108,8 @@ class UserController extends Controller {
 	|---------------------------------------
 	*/
 	public function edit($id)
-	{				
+	{		
+			
 		$admin = new Admin;
 
 		if ($admin->hasperm('Adminisrtar Restaurantes')) {
@@ -123,7 +129,9 @@ class UserController extends Controller {
 				'cat_p'		=> $cats->getCatP(),
 				'Update'    => true,
 				'times'     => $times->getAll($id),
-				'opening_time' => $times
+				'opening_time' => $times,
+				'social'    => Sociales::get(),
+			    'array'		=> SocialesNegocios::where('social_id', $id)->pluck('store_id')->toArray()
 			]);
 		}else {
 			return Redirect::to(env('admin').'/home')->with('error', 'No tienes permiso de ver la sección Adminisrtar Restaurantes');
