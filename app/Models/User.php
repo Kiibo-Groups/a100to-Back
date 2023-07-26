@@ -228,9 +228,20 @@ class User extends Authenticatable
             }
 
             // Obtenemos las categorias
-            $get_c = CategoryStore::where('type_cat', 2)->where('id_c', $cat)->pluck('id')->toArray();
+            if ($cat == 0 ) {
+                $get_c = CategoryStore::where('type_cat', 2)->pluck('id')->toArray();
+            } else {
+                $get_c = CategoryStore::where('type_cat', 2)->where('id_c', $cat)->pluck('id')->toArray();
+            }
+            
+
+            
 
             $query->whereIn('users.subsubtype', $get_c);
+
+
+
+
         })->select('users.*', DB::raw("6371 * acos(cos(radians(" . $lat . ")) 
                 * cos(radians(users.lat)) 
                 * cos(radians(users.lng) - radians(" . $lon . ")) 
