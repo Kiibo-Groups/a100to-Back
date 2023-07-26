@@ -146,5 +146,16 @@ Route::group(['namespace' => 'App\Http\Controllers\User','prefix' => env('user')
         Route::post('order/add','OrderController@_add');
         Route::get('getUser/{id}','OrderController@getUser');
 
+
+
+          /*
+        |------------------------------
+        |Delivery Staff
+        |------------------------------
+        */
+        Route::resource('cashback','CashbackController');
+        Route::get('cashback/status/{id}','CashbackController@status');
+        Route::get('cashback/delete/{id}','CashbackController@delete');
+
     });
 });

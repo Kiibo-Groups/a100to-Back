@@ -20,6 +20,9 @@
                 <li>
                     <a href="{{ Asset(env('user') . '/setting') }}" class=" menu-link">Configuración</a>
                 </li>
+                <li>
+                    <a href="{{ Asset(env('user') . '/cashback') }}" class=" menu-link">CashBack</a>
+                </li>
             </ul>
         </div>
 

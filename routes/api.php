@@ -157,7 +157,15 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
 
     /** Tickets  */
     Route::post('tickets','ApiController@Tickets');
+     /** Causas Sociales  */
     Route::get('causas_sociales','ApiController@getCausasSociales');
+     /** CashBack  */
+    Route::get('cashback/{id}','ApiController@getCashback');
+
+    /**
+    * Reservas
+    */
+    Route::post('crear_reserva','ApiController@CrearReserva');
 
 
 

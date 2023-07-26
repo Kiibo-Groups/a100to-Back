@@ -34,11 +34,13 @@ use App\Models\Delivery;
 use App\Models\CategoryStore;
 use App\Models\Opening_times;
 use App\Models\CardsUser;
+use App\Models\Cashback;
 use App\Models\Favorites;
 use App\Models\Tables;
 
 use App\Models\Visits;
 use App\Models\Deposit;
+use App\Models\Reserva;
 use App\Models\Sociales;
 use App\Models\Tickets;
 use DB;
@@ -971,16 +973,54 @@ class ApiController extends Controller
 		return response()->json(['data' => $array]);
 
 
+	}
 
-		// $empresas = Empresa::orderBy('nombre', 'asc')->get();
-        // $array = [];
+
+	public function getCashback($id)
+	{
+		$cashback  = Cashback::where('store_id', $id)->where('status', 0)->orderBy('hora', 'asc')->get();
+
+		$array = [];
  
-        // foreach($empresas as $empresa){
-        //     $array[] = array(
-        //         'label'=>$empresa->nombre,
-        //         'value'=> $empresa->id,
-        //     );
-        // }
-        // return json_encode($array);
+        foreach($cashback as $cas){
+            $array[] = array(
+                'cashback'=>$cas->cashback,
+				'hora'    =>$cas->hora,
+                
+            );
+        }
+	
+		return response()->json(['data' => $array]);
+	}
+
+
+
+
+	// ----------------Reservas ----------------
+	public function CrearReserva(Request $request)
+	{
+		try {
+
+
+			$input         = $request->all();
+
+			$reserva   = Reserva::create([
+				'store_id'   => $request->store_id,
+				'user_id'    => $request->user_id,
+				'recompensa' => $request->recompensa,
+				'fecha'      => $request->fecha,
+				'hora'       => $request->hora,
+				
+
+			]);
+
+			if (!$reserva) {
+				return response()->json(['code' => 500, 'data' => null, 'message' => 'Ha ocurrido un error al crear la Reserva.']);
+			}
+
+			return response()->json(['code' => 200, 'data' => $reserva, 'message' => 'Se ha creado el Reserva.']);
+		} catch (\Throwable $th) {
+			return response()->json(['data' => "error"]);
+		}
 	}
 }
