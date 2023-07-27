@@ -1058,6 +1058,12 @@ class User extends Authenticatable
                 $subtype = null;
             }
 
+            if (CategoryStore::find($row->subsubtype)) {
+                $subsubtype = CategoryStore::find($row->subsubtype)->name;
+            } else {
+                $subsubtype = null;
+            }
+
             /* Causas Sociales   */
 
 
@@ -1084,8 +1090,9 @@ class User extends Authenticatable
                 'reservation_available' => $row->reservation_available,
                 'rating'        => $avg > 0 ? number_format($avg, 1) : 0,
                 'delivery_time' => $row->delivery_time,
-                'type'          => CategoryStore::find($row->type)->name,
-                'subtype'       => $subtype,
+                'categoria'     => CategoryStore::find($row->type)->name,
+                'type'          => $subtype,
+                'subtype'       => $subsubtype,
                 'favorite'      => $favorite,
                 'c_social'      => $arraySocial
             ];
