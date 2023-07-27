@@ -17,7 +17,9 @@ class CreateReservasTable extends Migration
             $table->id();
             $table->integer('store_id')->nullable();
             $table->integer('user_id')->nullable();
+            $table->integer('invitados')->nullable();
             $table->integer('recompensa')->nullable();
+            $table->string('primera')->nullable();
             $table->date('fecha')->nullable();
             $table->time('hora')->nullable();
             $table->boolean('status')->default('1');          

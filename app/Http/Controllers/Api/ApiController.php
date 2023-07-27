@@ -1001,13 +1001,14 @@ class ApiController extends Controller
 	{
 		try {
 
-
 			$input         = $request->all();
 
 			$reserva   = Reserva::create([
 				'store_id'   => $request->store_id,
 				'user_id'    => $request->user_id,
 				'recompensa' => $request->recompensa,
+				'invitados'  => $request->invitados,
+				'primera'    => $request->primera,
 				'fecha'      => $request->fecha,
 				'hora'       => $request->hora,
 				
@@ -1021,6 +1022,49 @@ class ApiController extends Controller
 			return response()->json(['code' => 200, 'data' => $reserva, 'message' => 'Se ha creado el Reserva.']);
 		} catch (\Throwable $th) {
 			return response()->json(['data' => "error"]);
+		}
+	}
+
+	public function CancelarReserva($id)
+	{
+		try {
+			
+
+			$res = Reserva::find($id);
+			$res->status = 3;
+			$res->save();
+
+			return response()->json(['data' => 'done', 'message' => 'Se ha cancelado la Reserva.']);
+		} catch (\Exception $th) {
+			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
+		}
+	}
+	public function HistorialReserva($id)
+	{
+		try {
+
+			$reserva  = Reserva::where('user_id', $id)->orderBy('status', 'asc')->get();
+
+			$array = [];
+	 
+			foreach($reserva as $res){
+				$array[] = array(
+					'store_id'    => $res->negocio->name,
+					'user_id'     => $res->usuario->name,
+					'invitados'   => $res->invitados,
+					'recompensa'  => $res->recompensa,
+					'fecha'       => $res->fecha,
+					'hora'        => $res->hora,
+					'status'      => $res->full_estado,
+					
+				);
+			}
+		
+			return response()->json(['data' => $array]);
+
+	
+		} catch (\Exception $th) {
+			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}
 	}
 }

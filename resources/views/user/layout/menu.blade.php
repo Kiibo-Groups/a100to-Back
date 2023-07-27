@@ -47,7 +47,17 @@
             </ul>
         </div>
     </li>
- 
+
+
+    <li>
+        <a href="{{ Asset(env('user') . '/reservas') }}" class=" menu-link">
+            <i class="mdi mdi-folder-outline"></i>
+            <span>
+                Reservas </span>
+        </a>
+    </li>
+
+
     <li>
         <a href="#sidebarExpages" data-bs-toggle="collapse">
 
@@ -108,13 +118,13 @@
                 </li>
                 <li>
                     <a href="{{ Asset('order?status=2') }}" class=" menu-link">
-                                            
+
                         Canceladas
                     </a>
                 </li>
                 <li>
                     <a href="{{ Asset('order?status=5') }}" class=" menu-link">
-                                            
+
                         Completadas
                     </a>
                 </li>
@@ -139,7 +149,7 @@
         </li>
     @endif
 
- 
+
     <li>
         <a href="{{ Asset(env('user') . '/logout') }}" class="menu-link">
             <i class="icon-placeholder mdi mdi-logout"></i>

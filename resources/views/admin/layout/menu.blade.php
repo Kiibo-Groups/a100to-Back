@@ -99,6 +99,18 @@
             </a>
         </li>
     @endif
+    <!-- Reservas -->
+    @if ($admin->hasPerm('Reservas'))
+        <li>
+            <a href="{{ Asset(env('admin') . '/reservas') }}" class=" menu-link">
+                <i class="mdi mdi-folder-outline"></i>
+                <span>
+                    Reservas </span>
+            </a>
+        </li>
+    @endif
+    <!-- Reservas -->
+
     <!-- Tickets -->
     @if ($admin->hasPerm('Tickets'))
         <li>
@@ -110,8 +122,6 @@
         </li>
     @endif
     <!-- Tickets -->
-
-
     <!-- Sociales -->
     @if ($admin->hasPerm('Causas sociales'))
         <li>

@@ -166,6 +166,8 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     * Reservas
     */
     Route::post('crear_reserva','ApiController@CrearReserva');
+    Route::get('cancelar_reserva/{id}','ApiController@CancelarReserva');
+    Route::get('historial_reserva/{id}','ApiController@HistorialReserva');
 
 
 

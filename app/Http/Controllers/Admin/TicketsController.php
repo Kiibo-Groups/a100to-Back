@@ -27,7 +27,7 @@ class TicketsController extends Controller
 		
 		return View($this->folder.'index',[
 
-			'data' 		=> Tickets::orderBy('status', 'asc')->get(),
+			'data' 		=> Tickets::orderBy('status', 'asc')->paginate(10),
             'link' 		=> env('admin').'/tickets/',
 			'form_url'	=> env('admin').'/tickets',
 			'users'		=> 1,

@@ -157,5 +157,14 @@ Route::group(['namespace' => 'App\Http\Controllers\User','prefix' => env('user')
         Route::get('cashback/status/{id}','CashbackController@status');
         Route::get('cashback/delete/{id}','CashbackController@delete');
 
+
+
+          /*
+        |------------------------------
+        |Reservas
+        |------------------------------
+        */
+        Route::resource('reservas','ReservasController');
+
     });
 });

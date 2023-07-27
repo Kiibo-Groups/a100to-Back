@@ -21,6 +21,8 @@ class Reserva extends Model
     'store_id',
     'user_id',
     'recompensa',
+    'invitados',
+    'primera',
     'fecha',
     'hora',
     'status',
@@ -29,4 +31,30 @@ class Reserva extends Model
     'deleted_at'
 
     ];
+
+    public function negocio(){
+        return $this->belongsTo(User::class, 'store_id' ,'id');
+    }
+    public function usuario(){
+        return $this->belongsTo(AppUser::class, 'user_id' ,'id');
+    }
+
+    public function getFullEstadoAttribute()
+    {
+        $status = $this->status;
+
+        if ($status == 1) {
+            $valor =  'Pendiente';
+        }
+        if ($status == 2) {
+            $valor =  'Cumplida';
+        }
+       
+        if ($status == 3) {
+            $valor =  'Cancelada';
+        }
+       
+        return $valor;
+    }
+
 }

@@ -219,6 +219,14 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin','prefix' => env('admin
         Route::resource('sociales','SocialesController');
         Route::get('sociales/delete/{id}','SocialesController@delete');
 
+        /*
+        |------------------------------
+        |Reservas
+        |------------------------------
+        */
+        Route::resource('reservas','ReservasController');
+        //Route::get('sociales/delete/{id}','SocialesController@delete');
+
     });
 
 });
