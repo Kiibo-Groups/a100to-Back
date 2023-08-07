@@ -122,6 +122,17 @@
                     </div>
                 @endif
 
+
+                <div class="form-group col-md-6">
+                    <label for="inputEmail6">Reward (%)</label>
+                    {!! Form::text('reward', null, [
+                        'placeholder' => '25 %',
+                        'class' => 'form-control',
+                    ]) !!}
+                </div>
+
+
+
                 <div class="form-group col-md-6">
                     <label for="inputEmail4">Status</label>
                     <select name="status" class="form-control">
@@ -141,8 +152,13 @@
                     </select>
                 </div>
 
+                <div class="form-group col-md-6">
+                    <label for="inputEmail6">Descripción</label>
+                    <textarea id="descripcion" name="descripcion"  class="form-control" rows="3" cols="50">{{ $data->descripcion }}</textarea>
+                </div>
 
 
+           
 
 
 

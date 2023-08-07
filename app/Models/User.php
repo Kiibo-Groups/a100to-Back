@@ -88,6 +88,9 @@ class User extends Authenticatable
         $add->purse_x_pickup        = isset($data['purse_x_pickup']) ? $data['purse_x_pickup'] : 0;
         $add->purse_x_delivery      = isset($data['purse_x_delivery']) ? $data['purse_x_delivery'] : 0;
 
+        $add->reward                = isset($data['reward']) ? $data['reward'] : null;
+        $add->descripcion           = isset($data['descripcion']) ? $data['descripcion'] : null;
+
 
         $add->p_staff               = isset($data['p_staff']) ? $data['p_staff'] : 1;
         if ($add->p_staff == 1) {
@@ -419,6 +422,23 @@ class User extends Authenticatable
             if ($diff->days <= 15) { // El negocio aun tiene 15 dias de registro se considera NUEVO
                 $isNew = true;
             }
+
+
+
+              /* CashBack   */
+
+
+              $cashback  = Cashback::where('store_id', $row->id)->where('status', 0)->get();
+
+              $arrayCash = [];
+  
+              foreach ($cashback as $cash) {
+                  $arrayCash[] = array(
+                      'valor' => $cash->cashback,
+                      'hora'  => date('h:i  A', strtotime($cash->hora)),
+                  );
+              }
+  
             /****** Validamos si el negocios es nuevo *******/
 
             $data = [
@@ -445,7 +465,10 @@ class User extends Authenticatable
                 'items'         => $this->menuItem($row->id, $row->c_type, $row->c_value),
                 'items_trend'   => $this->menuTrend($row->id),
                 'km'            => round($row->distance, 2),
-                'favorite'      => $favorite
+                'favorite'      => $favorite,
+                'reward'        => $row->reward,
+                'descripcion'   => $row->descripcion,
+                'cashback'      => $arrayCash
             ];
         }
 
@@ -643,6 +666,36 @@ class User extends Authenticatable
             if ($diff->days <= 15) { // El negocio aun tiene 15 dias de registro se considera NUEVO
                 $isNew = true;
             }
+
+            /* Causas Sociales   */
+
+
+            $social  = SocialesNegocios::where('social_id', $row->id)->get();
+
+            $arraySocial = [];
+
+            foreach ($social as $soc) {
+                $arraySocial[] = array(
+                    'nombre' => $soc->NombreSocial->nombre,
+                );
+            }
+
+                /* CashBack   */
+
+
+                $cashback  = Cashback::where('store_id', $row->id)->where('status', 0)->get();
+
+                $arrayCash = [];
+    
+                foreach ($cashback as $cash) {
+                    $arrayCash[] = array(
+                        'valor' => $cash->cashback,
+                        'hora'  => date('h:i  A', strtotime($cash->hora)),
+                    );
+                }
+    
+
+        
             /****** Validamos si el negocios es nuevo *******/
 
             /****** Filtros de distancia y tipo de negocio *********/
@@ -666,7 +719,11 @@ class User extends Authenticatable
                                 'subtype'       => $row->subtype,
                                 'delivery_type' => $row->service_del,
                                 'km'            => round($row->distance, 2),
-                                'favorite'      => $favorite
+                                'favorite'      => $favorite,
+                                'reward'        => $row->reward,
+                                'descripcion'   => $row->descripcion,
+                                'c_social'      => $arraySocial,
+                                'cashback'      => $arrayCash
                             ];
                         } else if ($type_filter == 4) { // Con Ofertas
                             // Realizamos una busqueda en la tabla de ofertas 
@@ -687,7 +744,11 @@ class User extends Authenticatable
                                     'subtype'       => $row->subtype,
                                     'delivery_type' => $row->service_del,
                                     'km'            => round($row->distance, 2),
-                                    'favorite'      => $favorite
+                                    'favorite'      => $favorite,
+                                    'reward'        => $row->reward,
+                                    'descripcion'   => $row->descripcion,
+                                    'c_social'      => $arraySocial,
+                                    'cashback'      => $arrayCash
                                 ];
                             }
                         } else if ($type_filter == 5) { // en tendencia
@@ -707,7 +768,11 @@ class User extends Authenticatable
                                     'subtype'       => $row->subtype,
                                     'delivery_type' => $row->service_del,
                                     'km'            => round($row->distance, 2),
-                                    'favorite'      => $favorite
+                                    'favorite'      => $favorite,
+                                    'reward'        => $row->reward,
+                                    'descripcion'   => $row->descripcion,
+                                    'c_social'      => $arraySocial,
+                                    'cashback'      => $arrayCash
                                 ];
                             }
                         } else {
@@ -726,7 +791,11 @@ class User extends Authenticatable
                                 'subtype'       => $row->subtype,
                                 'delivery_type' => $row->service_del,
                                 'km'            => round($row->distance, 2),
-                                'favorite'      => $favorite
+                                'favorite'      => $favorite,
+                                'reward'        => $row->reward,
+                                'descripcion'   => $row->descripcion,
+                                'c_social'      => $arraySocial,
+                                'cashback'      => $arrayCash
                             ];
                         }
                     } else { // Aplicamos condicional sobre la distancia minima
@@ -747,7 +816,11 @@ class User extends Authenticatable
                                     'subtype'       => $row->subtype,
                                     'delivery_type' => $row->service_del,
                                     'km'            => round($row->distance, 2),
-                                    'favorite'      => $favorite
+                                    'favorite'      => $favorite,
+                                    'reward'        => $row->reward,
+                                    'descripcion'   => $row->descripcion,
+                                    'c_social'      => $arraySocial,
+                                    'cashback'      => $arrayCash
                                 ];
                             } else if ($type_filter == 4) { // Con Ofertas
                                 // Realizamos una busqueda en la tabla de ofertas 
@@ -768,7 +841,11 @@ class User extends Authenticatable
                                         'subtype'       => $row->subtype,
                                         'delivery_type' => $row->service_del,
                                         'km'            => round($row->distance, 2),
-                                        'favorite'      => $favorite
+                                        'favorite'      => $favorite,
+                                        'reward'        => $row->reward,
+                                        'descripcion'   => $row->descripcion,
+                                        'c_social'      => $arraySocial,
+                                        'cashback'      => $arrayCash
                                     ];
                                 }
                             } else if ($type_filter == 5) { // en tendencia
@@ -788,7 +865,11 @@ class User extends Authenticatable
                                         'subtype'       => $row->subtype,
                                         'delivery_type' => $row->service_del,
                                         'km'            => round($row->distance, 2),
-                                        'favorite'      => $favorite
+                                        'favorite'      => $favorite,
+                                        'reward'        => $row->reward,
+                                        'descripcion'   => $row->descripcion,
+                                        'c_social'      => $arraySocial,
+                                        'cashback'      => $arrayCash
                                     ];
                                 }
                             } else {
@@ -807,7 +888,11 @@ class User extends Authenticatable
                                     'subtype'       => $row->subtype,
                                     'delivery_type' => $row->service_del,
                                     'km'            => round($row->distance, 2),
-                                    'favorite'      => $favorite
+                                    'favorite'      => $favorite,
+                                    'reward'        => $row->reward,
+                                    'descripcion'   => $row->descripcion,
+                                    'c_social'      => $arraySocial,
+                                    'cashback'      => $arrayCash
                                 ];
                             }
                         }
@@ -832,7 +917,11 @@ class User extends Authenticatable
                             'subtype'       => $row->subtype,
                             'delivery_type' => $row->service_del,
                             'km'            => round($row->distance, 2),
-                            'favorite'      => $favorite
+                            'favorite'      => $favorite,
+                            'reward'        => $row->reward,
+                            'descripcion'   => $row->descripcion,
+                            'c_social'      => $arraySocial,
+                            'cashback'      => $arrayCash
                         ];
                     } else if ($type_filter == 4) { // Con Ofertas
                         // Realizamos una busqueda en la tabla de ofertas 
@@ -853,7 +942,11 @@ class User extends Authenticatable
                                 'subtype'       => $row->subtype,
                                 'delivery_type' => $row->service_del,
                                 'km'            => round($row->distance, 2),
-                                'favorite'      => $favorite
+                                'favorite'      => $favorite,
+                                'reward'        => $row->reward,
+                                'descripcion'   => $row->descripcion,
+                                'c_social'      => $arraySocial,
+                                'cashback'      => $arrayCash
                             ];
                         }
                     } else if ($type_filter == 5) { // en tendencia
@@ -873,7 +966,11 @@ class User extends Authenticatable
                                 'subtype'       => $row->subtype,
                                 'delivery_type' => $row->service_del,
                                 'km'            => round($row->distance, 2),
-                                'favorite'      => $favorite
+                                'favorite'      => $favorite,
+                                'reward'        => $row->reward,
+                                'descripcion'   => $row->descripcion,
+                                'c_social'      => $arraySocial,
+                                'cashback'      => $arrayCash
                             ];
                         }
                     } else {
@@ -892,7 +989,11 @@ class User extends Authenticatable
                             'subtype'       => $row->subtype,
                             'delivery_type' => $row->service_del,
                             'km'            => round($row->distance, 2),
-                            'favorite'      => $favorite
+                            'favorite'      => $favorite,
+                            'reward'        => $row->reward,
+                            'descripcion'   => $row->descripcion,
+                            'c_social'      => $arraySocial,
+                            'cashback'      => $arrayCash
                         ];
                     }
                 } else { // Aplicamos condicional sobre la distancia minima
@@ -913,7 +1014,11 @@ class User extends Authenticatable
                                 'subtype'       => $row->subtype,
                                 'delivery_type' => $row->service_del,
                                 'km'            => round($row->distance, 2),
-                                'favorite'      => $favorite
+                                'favorite'      => $favorite,
+                                'reward'        => $row->reward,
+                                'descripcion'   => $row->descripcion,
+                                'c_social'      => $arraySocial,
+                                'cashback'      => $arrayCash
                             ];
                         } else if ($type_filter == 4) { // Con Ofertas
                             // Realizamos una busqueda en la tabla de ofertas 
@@ -934,7 +1039,11 @@ class User extends Authenticatable
                                     'subtype'       => $row->subtype,
                                     'delivery_type' => $row->service_del,
                                     'km'            => round($row->distance, 2),
-                                    'favorite'      => $favorite
+                                    'favorite'      => $favorite,
+                                    'reward'        => $row->reward,
+                                    'descripcion'   => $row->descripcion,
+                                    'c_social'      => $arraySocial,
+                                    'cashback'      => $arrayCash
                                 ];
                             }
                         } else if ($type_filter == 5) { // en tendencia
@@ -954,7 +1063,11 @@ class User extends Authenticatable
                                     'subtype'       => $row->subtype,
                                     'delivery_type' => $row->service_del,
                                     'km'            => round($row->distance, 2),
-                                    'favorite'      => $favorite
+                                    'favorite'      => $favorite,
+                                    'reward'        => $row->reward,
+                                    'descripcion'   => $row->descripcion,
+                                    'c_social'      => $arraySocial,
+                                    'cashback'      => $arrayCash
                                 ];
                             }
                         } else {
@@ -973,7 +1086,11 @@ class User extends Authenticatable
                                 'subtype'       => $row->subtype,
                                 'delivery_type' => $row->service_del,
                                 'km'            => round($row->distance, 2),
-                                'favorite'      => $favorite
+                                'favorite'      => $favorite,
+                                'reward'        => $row->reward,
+                                'descripcion'   => $row->descripcion,
+                                'c_social'      => $arraySocial,
+                                'cashback'      => $arrayCash
                             ];
                         }
                     }
@@ -1077,6 +1194,21 @@ class User extends Authenticatable
                 );
             }
 
+              /* CashBack   */
+
+
+              $cashback  = Cashback::where('store_id', $row->id)->where('status', 0)->get();
+
+              $arrayCash = [];
+  
+              foreach ($cashback as $cash) {
+                  $arrayCash[] = array(
+                      'valor' => $cash->cashback,
+                      'hora'  => date('h:i  A', strtotime($cash->hora)),
+                  );
+              }
+  
+
 
             $data[] = [
                 'id'            => $row->id,
@@ -1094,7 +1226,10 @@ class User extends Authenticatable
                 'type'          => $subtype,
                 'subtype'       => $subsubtype,
                 'favorite'      => $favorite,
-                'c_social'      => $arraySocial
+                'reward'        => $row->reward,
+                'descripcion'   => $row->descripcion,
+                'c_social'      => $arraySocial,
+                'cashback'      => $arrayCash
             ];
         }
 

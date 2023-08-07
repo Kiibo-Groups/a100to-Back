@@ -2,54 +2,55 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\OpenpayController;
-use App\Http\Controllers\NodejsServer;
-use App\Http\Controllers\WhatsAppCloud;
-
-use Illuminate\Http\Request;
-use Auth;
-use App\Models\City;
-use App\Models\OfferStore;
-use App\Models\Offer;
-use App\Models\User;
-use App\Models\Cart;
-use App\Models\CartCoupen;
-use App\Models\AppUser;
-use App\Models\Order;
-use App\Models\Order_staff;
-use App\Models\OrderAddon;
-use App\Models\OrderItem;
-use App\Models\Lang;
-use App\Models\Rate;
-use App\Models\Slider;
-use App\Models\Banner;
-use App\Models\Address;
-use App\Models\Admin;
-use App\Models\Page;
-use App\Models\Language;
-use App\Models\Text;
-use App\Models\Delivery;
-use App\Models\CategoryStore;
-use App\Models\Opening_times;
-use App\Models\CardsUser;
-use App\Models\Cashback;
-use App\Models\Favorites;
-use App\Models\Tables;
-
-use App\Models\Visits;
-use App\Models\Deposit;
-use App\Models\Reserva;
-use App\Models\Sociales;
-use App\Models\Tickets;
 use DB;
-use Validator;
-use Redirect;
+use Auth;
 use Excel;
 use Stripe;
-
 use DateTime;
+
+use Redirect;
+use Validator;
+use App\Models\Cart;
+use App\Models\City;
+use App\Models\Lang;
+use App\Models\Page;
+use App\Models\Rate;
+use App\Models\Text;
+use App\Models\User;
+use App\Models\Admin;
+use App\Models\Offer;
+use App\Models\Order;
+use App\Http\Requests;
+use App\Models\Banner;
+use App\Models\Slider;
+use App\Models\Tables;
+use App\Models\Visits;
+use App\Models\Address;
+use App\Models\AppUser;
+use App\Models\Deposit;
+use App\Models\Reserva;
+use App\Models\Tickets;
+use App\Models\Cashback;
+use App\Models\Delivery;
+use App\Models\Language;
+use App\Models\Sociales;
+use App\Models\CardsUser;
+use App\Models\Favorites;
+use App\Models\OrderItem;
+
+use App\Models\CartCoupen;
+use App\Models\OfferStore;
+use App\Models\OrderAddon;
+use App\Models\Order_staff;
+use Illuminate\Http\Request;
+use App\Models\CategoryStore;
+use App\Models\Opening_times;
+use App\Models\SocialesNegocios;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\NodejsServer;
+
+use App\Http\Controllers\WhatsAppCloud;
+use App\Http\Controllers\OpenpayController;
 
 
 class ApiController extends Controller
@@ -134,9 +135,22 @@ class ApiController extends Controller
 		$text    = new Text;
 		$cats    = new CategoryStore;
 
+		$social  = SocialesNegocios::get();
+
+		$arraySocial = [];
+
+		foreach ($social as $soc) {
+			$arraySocial[] = array(
+				'nombre' => $soc->NombreSocial->nombre,
+			);
+		}
+
+
 		$data = [
-			'admin'		=> Admin::find(1),
+			'admin'		=> Admin::where('id', 1)->get(['name','email','fb','insta','twitter', 'youtube']),
 			'Categorys' => $cats->ViewOrderCats(),
+			'c_sociales' =>  Sociales::get(['nombre', 'descripcion']),
+
 		];
 
 		return response()->json(['data' => $data]);
@@ -163,7 +177,7 @@ class ApiController extends Controller
 		$data = [
 			'store'		=> $store->getStoreOpen($city_id),
 			'trending'		=> $store->getStoreOpen($city_id, true),
-			'admin'		=> Admin::find(1),
+			'admin'		=> Admin::where('id', 1)->get(['name','email','fb','insta','twitter', 'youtube']),
 		];
 
 		return response()->json(['data' => $data]);
