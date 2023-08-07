@@ -120,6 +120,7 @@ class ApiController extends Controller
 		$offer   = new Offer;
 		$cats    = new CategoryStore;
 		$cat     = isset($_GET['cat']) ? $_GET['cat'] : 0;
+		
 
 		$data = [
 			'store'		=> $store->getAppData($city_id),
@@ -149,7 +150,7 @@ class ApiController extends Controller
 		$data = [
 			'admin'		=> Admin::where('id', 1)->get(['name','email','fb','insta','twitter', 'youtube']),
 			'Categorys' => $cats->ViewOrderCats(),
-			'c_sociales' =>  Sociales::get(['nombre', 'descripcion']),
+			'c_sociales' =>  Sociales::get(['id','nombre', 'descripcion']),
 
 		];
 

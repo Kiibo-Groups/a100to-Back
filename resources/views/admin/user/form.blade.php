@@ -141,6 +141,15 @@
                     </select>
                 </div>
 
+                <div class="form-group col-md-6">
+                    <label for="numero_reserva">Cupos Máximos de reserva </label>
+                    {!! Form::text('numero_reserva', null, [
+                        'placeholder' => '50',
+                        'class' => 'form-control',
+                        'required' => 'required',
+                    ]) !!}
+                </div>
+
 
                 <div class="form-group col-md-6">
                     <label for="sociales">Causas Sociales</label>

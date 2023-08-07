@@ -90,6 +90,7 @@ class User extends Authenticatable
 
         $add->reward                = isset($data['reward']) ? $data['reward'] : null;
         $add->descripcion           = isset($data['descripcion']) ? $data['descripcion'] : null;
+        $add->numero_reserva        = isset($data['numero_reserva']) ? $data['numero_reserva'] : 0;
 
 
         $add->p_staff               = isset($data['p_staff']) ? $data['p_staff'] : 1;
@@ -215,10 +216,12 @@ class User extends Authenticatable
 
     public function getAppData($city_id, $trending = false)
     {
-        
+
         $lat        = isset($_GET['lat']) ? $_GET['lat'] : 0;
         $lon        = isset($_GET['lng']) ? $_GET['lng'] : 0;
         $cat        = isset($_GET['cat']) ? $_GET['cat'] : 0;
+
+
 
         $res  = User::where(function ($query) use ($city_id, $trending, $cat) {
 
@@ -231,16 +234,13 @@ class User extends Authenticatable
             }
 
             // Obtenemos las categorias
-            if ($cat == 0 ) {
+            if ($cat == 0) {
                 //$get_c = CategoryStore::pluck('id')->toArray();
             } else {
                 $get_c = CategoryStore::where('type_cat', 2)->where('id_c', $cat)->pluck('id')->toArray();
 
                 $query->whereIn('users.subsubtype', $get_c);
             }
-            
-
-            
         })->select('users.*', DB::raw("6371 * acos(cos(radians(" . $lat . ")) 
                 * cos(radians(users.lat)) 
                 * cos(radians(users.lng) - radians(" . $lon . ")) 
@@ -425,20 +425,20 @@ class User extends Authenticatable
 
 
 
-              /* CashBack   */
+            /* CashBack   */
 
 
-              $cashback  = Cashback::where('store_id', $row->id)->where('status', 0)->get();
+            $cashback  = Cashback::where('store_id', $row->id)->where('status', 0)->get();
 
-              $arrayCash = [];
-  
-              foreach ($cashback as $cash) {
-                  $arrayCash[] = array(
-                      'valor' => $cash->cashback,
-                      'hora'  => date('h:i  A', strtotime($cash->hora)),
-                  );
-              }
-  
+            $arrayCash = [];
+
+            foreach ($cashback as $cash) {
+                $arrayCash[] = array(
+                    'valor' => $cash->cashback,
+                    'hora'  => date('h:i  A', strtotime($cash->hora)),
+                );
+            }
+
             /****** Validamos si el negocios es nuevo *******/
 
             $data = [
@@ -612,9 +612,20 @@ class User extends Authenticatable
         $lat                = isset($_GET['lat']) ? $_GET['lat'] : 0;
         $lon                = isset($_GET['lng']) ? $_GET['lng'] : 0;
 
-        $res  = User::where(function ($query) use ($city_id) {
+        $id_sociales        = isset($_GET['id_sociales']) ? $_GET['id_sociales'] : 0;
+        $reembolso          = isset($_GET['reembolso']) ? $_GET['reembolso'] : 0;
+        list($menor, $mayor) = explode("-", $reembolso);
+        $menorRango = $menor;
+        $mayorRango = $mayor;
 
-            $query->where('status', 0)->where('city_id', $city_id);
+        //dd( $mayorRango );
+
+
+
+        $res  = User::where(function ($query) use ($city_id, $menorRango,  $mayorRango) {
+
+
+            $query->where('status', 0)->where('city_id', $city_id)->whereBetween('reward', [$menorRango, $mayorRango]);
         })->select('users.*', DB::raw("6371 * acos(cos(radians(" . $lat . ")) 
         * cos(radians(users.lat)) 
         * cos(radians(users.lng) - radians(" . $lon . ")) 
@@ -627,58 +638,66 @@ class User extends Authenticatable
         $close_store = [];
 
         foreach ($res as $row) {
-            /****** Funcion para validar si el comercio esta abierto ******************/
-            $op_time      = new Opening_times;
 
-            if ($row->open == false) {
-                $open          = ($op_time->ViewTime($row->id)['status'] != 0) ? true : false;
-            } else {
-                $open = false;
-            }
-            /****** Funcion para validar si el comercio esta abierto ******************/
-
-            /****** Funcion para Obtener Ratings y Calificaciones *******/
-            $totalRate    = Rate::where('store_id', $row->id)->count();
-            $totalRateSum = Rate::where('store_id', $row->id)->sum('star');
-
-            if ($totalRate > 0) {
-                $avg          = $totalRateSum / $totalRate;
-            } else {
-                $avg           = 0;
-            }
-            /****** Funcion para Obtener Ratings y Calificaciones *******/
-
-            /****** Favorites ******/
-            $chk_favs = Favorites::where('store_id', $row->id)->where('user_id', $user_id)->first();
-            if ($chk_favs) {
-                $favorite = true;
-            } else {
-                $favorite = false;
-            }
-            /****** Favorites ******/
-
-            /****** Validamos si el negocios es nuevo *******/
-            $user_time = new DateTime($row->created_at); // Tiempo de registro
-            $query_time = new DateTime(date("H:i")); // Tiempo de hoy
-            $diff = $user_time->diff($query_time); // Diferencia
-            $isNew = false;
-
-            if ($diff->days <= 15) { // El negocio aun tiene 15 dias de registro se considera NUEVO
-                $isNew = true;
-            }
-
-            /* Causas Sociales   */
+            $social  = SocialesNegocios::where('social_id', $row->id)->where('store_id', $id_sociales)->count();
+         
+            if ($social >= 1) {
 
 
-            $social  = SocialesNegocios::where('social_id', $row->id)->get();
 
-            $arraySocial = [];
+                /****** Funcion para validar si el comercio esta abierto ******************/
+                $op_time      = new Opening_times();
 
-            foreach ($social as $soc) {
-                $arraySocial[] = array(
-                    'nombre' => $soc->NombreSocial->nombre,
-                );
-            }
+                if ($row->open == false) {
+                    $open          = ($op_time->ViewTime($row->id)['status'] != 0) ? true : false;
+                } else {
+                    $open = false;
+                }
+                /****** Funcion para validar si el comercio esta abierto ******************/
+
+                /****** Funcion para Obtener Ratings y Calificaciones *******/
+                $totalRate    = Rate::where('store_id', $row->id)->count();
+                $totalRateSum = Rate::where('store_id', $row->id)->sum('star');
+
+                if ($totalRate > 0) {
+                    $avg          = $totalRateSum / $totalRate;
+                } else {
+                    $avg           = 0;
+                }
+                /****** Funcion para Obtener Ratings y Calificaciones *******/
+
+                /****** Favorites ******/
+                $chk_favs = Favorites::where('store_id', $row->id)->where('user_id', $user_id)->first();
+                if ($chk_favs) {
+                    $favorite = true;
+                } else {
+                    $favorite = false;
+                }
+                /****** Favorites ******/
+
+                /****** Validamos si el negocios es nuevo *******/
+                $user_time = new DateTime($row->created_at); // Tiempo de registro
+                $query_time = new DateTime(date("H:i")); // Tiempo de hoy
+                $diff = $user_time->diff($query_time); // Diferencia
+                $isNew = false;
+
+                if ($diff->days <= 15) { // El negocio aun tiene 15 dias de registro se considera NUEVO
+                    $isNew = true;
+                }
+
+                /* Causas Sociales   */
+
+
+                $social  = SocialesNegocios::where('social_id', $row->id)->get();
+
+                $arraySocial = [];
+
+                foreach ($social as $soc) {
+                    $arraySocial[] = array(
+                        'nombre' => $soc->NombreSocial->nombre,
+                        'id' => $soc->NombreSocial->id,
+                    );
+                }
 
                 /* CashBack   */
 
@@ -686,49 +705,26 @@ class User extends Authenticatable
                 $cashback  = Cashback::where('store_id', $row->id)->where('status', 0)->get();
 
                 $arrayCash = [];
-    
+
                 foreach ($cashback as $cash) {
                     $arrayCash[] = array(
                         'valor' => $cash->cashback,
                         'hora'  => date('h:i  A', strtotime($cash->hora)),
                     );
                 }
-    
 
-        
-            /****** Validamos si el negocios es nuevo *******/
 
-            /****** Filtros de distancia y tipo de negocio *********/
-            if ($status_store == "true") {
-                // Agregamos solo comercios abiertos
-                if ($open) {
-                    if ($distance_max == 6) { // distancia mayor a 6km = todos los comercios
-                        if ($type_filter == 0) { // Mas Recientes
-                            $data[] = [
-                                'id'            => $row->id,
-                                'title'         => $this->getLang($row->id)['name'],
-                                'img'           => Asset('upload/user/' . $row->img),
-                                'logo'           => Asset('upload/user/logo/' . $row->logo),
-                                'address'       => $this->getLang($row->id)['address'],
-                                'open'          => $open,
-                                'isNew'         => $isNew,
-                                'reservation_available' => $row->reservation_available,
-                                'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
-                                'delivery_time' => $row->delivery_time,
-                                'type'          => CategoryStore::find($row->type)->name,
-                                'subtype'       => $row->subtype,
-                                'delivery_type' => $row->service_del,
-                                'km'            => round($row->distance, 2),
-                                'favorite'      => $favorite,
-                                'reward'        => $row->reward,
-                                'descripcion'   => $row->descripcion,
-                                'c_social'      => $arraySocial,
-                                'cashback'      => $arrayCash
-                            ];
-                        } else if ($type_filter == 4) { // Con Ofertas
-                            // Realizamos una busqueda en la tabla de ofertas 
-                            $offers = Offer::where("store_id", $row->id)->get();
-                            if ($offers->count() > 0) { // el comercio tiene ofertas
+
+                /****** Validamos si el negocios es nuevo *******/
+
+                /****** Filtros de distancia y tipo de negocio *********/
+                if ($status_store == "true") {
+
+                    // Agregamos solo comercios abiertos
+                    if ($open) {
+
+                        if ($distance_max == 6) { // distancia mayor a 6km = todos los comercios
+                            if ($type_filter == 0) { // Mas Recientes
                                 $data[] = [
                                     'id'            => $row->id,
                                     'title'         => $this->getLang($row->id)['name'],
@@ -737,7 +733,79 @@ class User extends Authenticatable
                                     'address'       => $this->getLang($row->id)['address'],
                                     'open'          => $open,
                                     'isNew'         => $isNew,
-                                    'reservation_available' => $row->reservation_available,
+                                    'reservation_available' => $row->numero_reserva,
+                                    'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
+                                    'delivery_time' => $row->delivery_time,
+                                    'type'          => CategoryStore::find($row->type)->name,
+                                    'subtype'       => $row->subtype,
+                                    'delivery_type' => $row->service_del,
+                                    'km'            => round($row->distance, 2),
+                                    'favorite'      => $favorite,
+                                    'reward'        => $row->reward,
+                                    'descripcion'   => $row->descripcion,
+                                    'c_social'      => $arraySocial,
+                                    'cashback'      => $arrayCash
+                                ];
+                            } elseif ($type_filter == 4) { // Con Ofertas
+                                // Realizamos una busqueda en la tabla de ofertas
+                                $offers = Offer::where("store_id", $row->id)->get();
+                                if ($offers->count() > 0) { // el comercio tiene ofertas
+                                    $data[] = [
+                                        'id'            => $row->id,
+                                        'title'         => $this->getLang($row->id)['name'],
+                                        'img'           => Asset('upload/user/' . $row->img),
+                                        'logo'           => Asset('upload/user/logo/' . $row->logo),
+                                        'address'       => $this->getLang($row->id)['address'],
+                                        'open'          => $open,
+                                        'isNew'         => $isNew,
+                                        'reservation_available' => $row->numero_reserva,
+                                        'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
+                                        'delivery_time' => $row->delivery_time,
+                                        'type'          => CategoryStore::find($row->type)->name,
+                                        'subtype'       => $row->subtype,
+                                        'delivery_type' => $row->service_del,
+                                        'km'            => round($row->distance, 2),
+                                        'favorite'      => $favorite,
+                                        'reward'        => $row->reward,
+                                        'descripcion'   => $row->descripcion,
+                                        'c_social'      => $arraySocial,
+                                        'cashback'      => $arrayCash
+                                    ];
+                                }
+                            } elseif ($type_filter == 5) { // en tendencia
+                                if ($row->trending) {
+                                    $data[] = [
+                                        'id'            => $row->id,
+                                        'title'         => $this->getLang($row->id)['name'],
+                                        'img'           => Asset('upload/user/' . $row->img),
+                                        'logo'           => Asset('upload/user/logo/' . $row->logo),
+                                        'address'       => $this->getLang($row->id)['address'],
+                                        'open'          => $open,
+                                        'isNew'         => $isNew,
+                                        'reservation_available' => $row->numero_reserva,
+                                        'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
+                                        'delivery_time' => $row->delivery_time,
+                                        'type'          => CategoryStore::find($row->type)->name,
+                                        'subtype'       => $row->subtype,
+                                        'delivery_type' => $row->service_del,
+                                        'km'            => round($row->distance, 2),
+                                        'favorite'      => $favorite,
+                                        'reward'        => $row->reward,
+                                        'descripcion'   => $row->descripcion,
+                                        'c_social'      => $arraySocial,
+                                        'cashback'      => $arrayCash
+                                    ];
+                                }
+                            } else {
+                                $data[] = [
+                                    'id'            => $row->id,
+                                    'title'         => $this->getLang($row->id)['name'],
+                                    'img'           => Asset('upload/user/' . $row->img),
+                                    'logo'           => Asset('upload/user/logo/' . $row->logo),
+                                    'address'       => $this->getLang($row->id)['address'],
+                                    'open'          => $open,
+                                    'isNew'         => $isNew,
+                                    'reservation_available' => $row->numero_reserva,
                                     'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                     'delivery_time' => $row->delivery_time,
                                     'type'          => CategoryStore::find($row->type)->name,
@@ -751,7 +819,158 @@ class User extends Authenticatable
                                     'cashback'      => $arrayCash
                                 ];
                             }
-                        } else if ($type_filter == 5) { // en tendencia
+                        } else { // Aplicamos condicional sobre la distancia minima
+                            if ($row->distance <= $distance_max) {
+                                if ($type_filter == 0) { // Mas Recientes
+                                    $data[] = [
+                                        'id'            => $row->id,
+                                        'title'         => $this->getLang($row->id)['name'],
+                                        'img'           => Asset('upload/user/' . $row->img),
+                                        'logo'           => Asset('upload/user/logo/' . $row->logo),
+                                        'address'       => $this->getLang($row->id)['address'],
+                                        'open'          => $open,
+                                        'isNew'         => $isNew,
+                                        'reservation_available' => $row->numero_reserva,
+                                        'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
+                                        'delivery_time' => $row->delivery_time,
+                                        'type'          => CategoryStore::find($row->type)->name,
+                                        'subtype'       => $row->subtype,
+                                        'delivery_type' => $row->service_del,
+                                        'km'            => round($row->distance, 2),
+                                        'favorite'      => $favorite,
+                                        'reward'        => $row->reward,
+                                        'descripcion'   => $row->descripcion,
+                                        'c_social'      => $arraySocial,
+                                        'cashback'      => $arrayCash
+                                    ];
+                                } elseif ($type_filter == 4) { // Con Ofertas
+                                    // Realizamos una busqueda en la tabla de ofertas
+                                    $offers = Offer::where("store_id", $row->id)->get();
+                                    if ($offers->count() > 0) { // el comercio tiene ofertas
+                                        $data[] = [
+                                            'id'            => $row->id,
+                                            'title'         => $this->getLang($row->id)['name'],
+                                            'img'           => Asset('upload/user/' . $row->img),
+                                            'logo'           => Asset('upload/user/logo/' . $row->logo),
+                                            'address'       => $this->getLang($row->id)['address'],
+                                            'open'          => $open,
+                                            'isNew'         => $isNew,
+                                            'reservation_available' => $row->numero_reserva,
+                                            'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
+                                            'delivery_time' => $row->delivery_time,
+                                            'type'          => CategoryStore::find($row->type)->name,
+                                            'subtype'       => $row->subtype,
+                                            'delivery_type' => $row->service_del,
+                                            'km'            => round($row->distance, 2),
+                                            'favorite'      => $favorite,
+                                            'reward'        => $row->reward,
+                                            'descripcion'   => $row->descripcion,
+                                            'c_social'      => $arraySocial,
+                                            'cashback'      => $arrayCash
+                                        ];
+                                    }
+                                } elseif ($type_filter == 5) { // en tendencia
+                                    if ($row->trending) {
+                                        $data[] = [
+                                            'id'            => $row->id,
+                                            'title'         => $this->getLang($row->id)['name'],
+                                            'img'           => Asset('upload/user/' . $row->img),
+                                            'logo'           => Asset('upload/user/logo/' . $row->logo),
+                                            'address'       => $this->getLang($row->id)['address'],
+                                            'open'          => $open,
+                                            'isNew'         => $isNew,
+                                            'reservation_available' => $row->numero_reserva,
+                                            'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
+                                            'delivery_time' => $row->delivery_time,
+                                            'type'          => CategoryStore::find($row->type)->name,
+                                            'subtype'       => $row->subtype,
+                                            'delivery_type' => $row->service_del,
+                                            'km'            => round($row->distance, 2),
+                                            'favorite'      => $favorite,
+                                            'reward'        => $row->reward,
+                                            'descripcion'   => $row->descripcion,
+                                            'c_social'      => $arraySocial,
+                                            'cashback'      => $arrayCash
+                                        ];
+                                    }
+                                } else {
+                                    $data[] = [
+                                        'id'            => $row->id,
+                                        'title'         => $this->getLang($row->id)['name'],
+                                        'img'           => Asset('upload/user/' . $row->img),
+                                        'logo'           => Asset('upload/user/logo/' . $row->logo),
+                                        'address'       => $this->getLang($row->id)['address'],
+                                        'open'          => $open,
+                                        'isNew'         => $isNew,
+                                        'reservation_available' => $row->numero_reserva,
+                                        'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
+                                        'delivery_time' => $row->delivery_time,
+                                        'type'          => CategoryStore::find($row->type)->name,
+                                        'subtype'       => $row->subtype,
+                                        'delivery_type' => $row->service_del,
+                                        'km'            => round($row->distance, 2),
+                                        'favorite'      => $favorite,
+                                        'reward'        => $row->reward,
+                                        'descripcion'   => $row->descripcion,
+                                        'c_social'      => $arraySocial,
+                                        'cashback'      => $arrayCash
+                                    ];
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    // Agregamos todo tipo de comercios
+                    if ($distance_max == 6) { // distancia mayor a 6km = todos los comercios
+                        if ($type_filter == 0) { // Mas Recientes
+                            $data[] = [
+                                'id'            => $row->id,
+                                'title'         => $this->getLang($row->id)['name'],
+                                'img'           => Asset('upload/user/' . $row->img),
+                                'logo'           => Asset('upload/user/logo/' . $row->logo),
+                                'address'       => $this->getLang($row->id)['address'],
+                                'open'          => $open,
+                                'isNew'         => $isNew,
+                                'reservation_available' => $row->numero_reserva,
+                                'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
+                                'delivery_time' => $row->delivery_time,
+                                'type'          => CategoryStore::find($row->type)->name,
+                                'subtype'       => $row->subtype,
+                                'delivery_type' => $row->service_del,
+                                'km'            => round($row->distance, 2),
+                                'favorite'      => $favorite,
+                                'reward'        => $row->reward,
+                                'descripcion'   => $row->descripcion,
+                                'c_social'      => $arraySocial,
+                                'cashback'      => $arrayCash
+                            ];
+                        } elseif ($type_filter == 4) { // Con Ofertas
+                            // Realizamos una busqueda en la tabla de ofertas
+                            $offers = Offer::where("store_id", $row->id)->get();
+                            if ($offers->count() > 0) { // el comercio tiene ofertas
+                                $data[] = [
+                                    'id'            => $row->id,
+                                    'title'         => $this->getLang($row->id)['name'],
+                                    'img'           => Asset('upload/user/' . $row->img),
+                                    'logo'           => Asset('upload/user/logo/' . $row->logo),
+                                    'address'       => $this->getLang($row->id)['address'],
+                                    'open'          => $open,
+                                    'isNew'         => $isNew,
+                                    'reservation_available' => $row->numero_reserva,
+                                    'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
+                                    'delivery_time' => $row->delivery_time,
+                                    'type'          => CategoryStore::find($row->type)->name,
+                                    'subtype'       => $row->subtype,
+                                    'delivery_type' => $row->service_del,
+                                    'km'            => round($row->distance, 2),
+                                    'favorite'      => $favorite,
+                                    'reward'        => $row->reward,
+                                    'descripcion'   => $row->descripcion,
+                                    'c_social'      => $arraySocial,
+                                    'cashback'      => $arrayCash
+                                ];
+                            }
+                        } elseif ($type_filter == 5) { // en tendencia
                             if ($row->trending) {
                                 $data[] = [
                                     'id'            => $row->id,
@@ -761,7 +980,7 @@ class User extends Authenticatable
                                     'address'       => $this->getLang($row->id)['address'],
                                     'open'          => $open,
                                     'isNew'         => $isNew,
-                                    'reservation_available' => $row->reservation_available,
+                                    'reservation_available' => $row->numero_reserva,
                                     'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                     'delivery_time' => $row->delivery_time,
                                     'type'          => CategoryStore::find($row->type)->name,
@@ -784,7 +1003,7 @@ class User extends Authenticatable
                                 'address'       => $this->getLang($row->id)['address'],
                                 'open'          => $open,
                                 'isNew'         => $isNew,
-                                'reservation_available' => $row->reservation_available,
+                                'reservation_available' => $row->numero_reserva,
                                 'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                 'delivery_time' => $row->delivery_time,
                                 'type'          => CategoryStore::find($row->type)->name,
@@ -809,7 +1028,7 @@ class User extends Authenticatable
                                     'address'       => $this->getLang($row->id)['address'],
                                     'open'          => $open,
                                     'isNew'         => $isNew,
-                                    'reservation_available' => $row->reservation_available,
+                                    'reservation_available' => $row->numero_reserva,
                                     'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                     'delivery_time' => $row->delivery_time,
                                     'type'          => CategoryStore::find($row->type)->name,
@@ -822,8 +1041,8 @@ class User extends Authenticatable
                                     'c_social'      => $arraySocial,
                                     'cashback'      => $arrayCash
                                 ];
-                            } else if ($type_filter == 4) { // Con Ofertas
-                                // Realizamos una busqueda en la tabla de ofertas 
+                            } elseif ($type_filter == 4) { // Con Ofertas
+                                // Realizamos una busqueda en la tabla de ofertas
                                 $offers = Offer::where("store_id", $row->id)->get();
                                 if ($offers->count() > 0) { // el comercio tiene ofertas
                                     $data[] = [
@@ -834,7 +1053,7 @@ class User extends Authenticatable
                                         'address'       => $this->getLang($row->id)['address'],
                                         'open'          => $open,
                                         'isNew'         => $isNew,
-                                        'reservation_available' => $row->reservation_available,
+                                        'reservation_available' => $row->numero_reserva,
                                         'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                         'delivery_time' => $row->delivery_time,
                                         'type'          => CategoryStore::find($row->type)->name,
@@ -848,7 +1067,7 @@ class User extends Authenticatable
                                         'cashback'      => $arrayCash
                                     ];
                                 }
-                            } else if ($type_filter == 5) { // en tendencia
+                            } elseif ($type_filter == 5) { // en tendencia
                                 if ($row->trending) {
                                     $data[] = [
                                         'id'            => $row->id,
@@ -858,7 +1077,7 @@ class User extends Authenticatable
                                         'address'       => $this->getLang($row->id)['address'],
                                         'open'          => $open,
                                         'isNew'         => $isNew,
-                                        'reservation_available' => $row->reservation_available,
+                                        'reservation_available' => $row->numero_reserva,
                                         'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                         'delivery_time' => $row->delivery_time,
                                         'type'          => CategoryStore::find($row->type)->name,
@@ -881,7 +1100,7 @@ class User extends Authenticatable
                                     'address'       => $this->getLang($row->id)['address'],
                                     'open'          => $open,
                                     'isNew'         => $isNew,
-                                    'reservation_available' => $row->reservation_available,
+                                    'reservation_available' => $row->numero_reserva,
                                     'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                     'delivery_time' => $row->delivery_time,
                                     'type'          => CategoryStore::find($row->type)->name,
@@ -898,205 +1117,8 @@ class User extends Authenticatable
                         }
                     }
                 }
-            } else {
-                // Agregamos todo tipo de comercios
-                if ($distance_max == 6) { // distancia mayor a 6km = todos los comercios
-                    if ($type_filter == 0) { // Mas Recientes
-                        $data[] = [
-                            'id'            => $row->id,
-                            'title'         => $this->getLang($row->id)['name'],
-                            'img'           => Asset('upload/user/' . $row->img),
-                            'logo'           => Asset('upload/user/logo/' . $row->logo),
-                            'address'       => $this->getLang($row->id)['address'],
-                            'open'          => $open,
-                            'isNew'         => $isNew,
-                            'reservation_available' => $row->reservation_available,
-                            'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
-                            'delivery_time' => $row->delivery_time,
-                            'type'          => CategoryStore::find($row->type)->name,
-                            'subtype'       => $row->subtype,
-                            'delivery_type' => $row->service_del,
-                            'km'            => round($row->distance, 2),
-                            'favorite'      => $favorite,
-                            'reward'        => $row->reward,
-                            'descripcion'   => $row->descripcion,
-                            'c_social'      => $arraySocial,
-                            'cashback'      => $arrayCash
-                        ];
-                    } else if ($type_filter == 4) { // Con Ofertas
-                        // Realizamos una busqueda en la tabla de ofertas 
-                        $offers = Offer::where("store_id", $row->id)->get();
-                        if ($offers->count() > 0) { // el comercio tiene ofertas
-                            $data[] = [
-                                'id'            => $row->id,
-                                'title'         => $this->getLang($row->id)['name'],
-                                'img'           => Asset('upload/user/' . $row->img),
-                                'logo'           => Asset('upload/user/logo/' . $row->logo),
-                                'address'       => $this->getLang($row->id)['address'],
-                                'open'          => $open,
-                                'isNew'         => $isNew,
-                                'reservation_available' => $row->reservation_available,
-                                'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
-                                'delivery_time' => $row->delivery_time,
-                                'type'          => CategoryStore::find($row->type)->name,
-                                'subtype'       => $row->subtype,
-                                'delivery_type' => $row->service_del,
-                                'km'            => round($row->distance, 2),
-                                'favorite'      => $favorite,
-                                'reward'        => $row->reward,
-                                'descripcion'   => $row->descripcion,
-                                'c_social'      => $arraySocial,
-                                'cashback'      => $arrayCash
-                            ];
-                        }
-                    } else if ($type_filter == 5) { // en tendencia
-                        if ($row->trending) {
-                            $data[] = [
-                                'id'            => $row->id,
-                                'title'         => $this->getLang($row->id)['name'],
-                                'img'           => Asset('upload/user/' . $row->img),
-                                'logo'           => Asset('upload/user/logo/' . $row->logo),
-                                'address'       => $this->getLang($row->id)['address'],
-                                'open'          => $open,
-                                'isNew'         => $isNew,
-                                'reservation_available' => $row->reservation_available,
-                                'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
-                                'delivery_time' => $row->delivery_time,
-                                'type'          => CategoryStore::find($row->type)->name,
-                                'subtype'       => $row->subtype,
-                                'delivery_type' => $row->service_del,
-                                'km'            => round($row->distance, 2),
-                                'favorite'      => $favorite,
-                                'reward'        => $row->reward,
-                                'descripcion'   => $row->descripcion,
-                                'c_social'      => $arraySocial,
-                                'cashback'      => $arrayCash
-                            ];
-                        }
-                    } else {
-                        $data[] = [
-                            'id'            => $row->id,
-                            'title'         => $this->getLang($row->id)['name'],
-                            'img'           => Asset('upload/user/' . $row->img),
-                            'logo'           => Asset('upload/user/logo/' . $row->logo),
-                            'address'       => $this->getLang($row->id)['address'],
-                            'open'          => $open,
-                            'isNew'         => $isNew,
-                            'reservation_available' => $row->reservation_available,
-                            'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
-                            'delivery_time' => $row->delivery_time,
-                            'type'          => CategoryStore::find($row->type)->name,
-                            'subtype'       => $row->subtype,
-                            'delivery_type' => $row->service_del,
-                            'km'            => round($row->distance, 2),
-                            'favorite'      => $favorite,
-                            'reward'        => $row->reward,
-                            'descripcion'   => $row->descripcion,
-                            'c_social'      => $arraySocial,
-                            'cashback'      => $arrayCash
-                        ];
-                    }
-                } else { // Aplicamos condicional sobre la distancia minima
-                    if ($row->distance <= $distance_max) {
-                        if ($type_filter == 0) { // Mas Recientes
-                            $data[] = [
-                                'id'            => $row->id,
-                                'title'         => $this->getLang($row->id)['name'],
-                                'img'           => Asset('upload/user/' . $row->img),
-                                'logo'           => Asset('upload/user/logo/' . $row->logo),
-                                'address'       => $this->getLang($row->id)['address'],
-                                'open'          => $open,
-                                'isNew'         => $isNew,
-                                'reservation_available' => $row->reservation_available,
-                                'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
-                                'delivery_time' => $row->delivery_time,
-                                'type'          => CategoryStore::find($row->type)->name,
-                                'subtype'       => $row->subtype,
-                                'delivery_type' => $row->service_del,
-                                'km'            => round($row->distance, 2),
-                                'favorite'      => $favorite,
-                                'reward'        => $row->reward,
-                                'descripcion'   => $row->descripcion,
-                                'c_social'      => $arraySocial,
-                                'cashback'      => $arrayCash
-                            ];
-                        } else if ($type_filter == 4) { // Con Ofertas
-                            // Realizamos una busqueda en la tabla de ofertas 
-                            $offers = Offer::where("store_id", $row->id)->get();
-                            if ($offers->count() > 0) { // el comercio tiene ofertas
-                                $data[] = [
-                                    'id'            => $row->id,
-                                    'title'         => $this->getLang($row->id)['name'],
-                                    'img'           => Asset('upload/user/' . $row->img),
-                                    'logo'           => Asset('upload/user/logo/' . $row->logo),
-                                    'address'       => $this->getLang($row->id)['address'],
-                                    'open'          => $open,
-                                    'isNew'         => $isNew,
-                                    'reservation_available' => $row->reservation_available,
-                                    'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
-                                    'delivery_time' => $row->delivery_time,
-                                    'type'          => CategoryStore::find($row->type)->name,
-                                    'subtype'       => $row->subtype,
-                                    'delivery_type' => $row->service_del,
-                                    'km'            => round($row->distance, 2),
-                                    'favorite'      => $favorite,
-                                    'reward'        => $row->reward,
-                                    'descripcion'   => $row->descripcion,
-                                    'c_social'      => $arraySocial,
-                                    'cashback'      => $arrayCash
-                                ];
-                            }
-                        } else if ($type_filter == 5) { // en tendencia
-                            if ($row->trending) {
-                                $data[] = [
-                                    'id'            => $row->id,
-                                    'title'         => $this->getLang($row->id)['name'],
-                                    'img'           => Asset('upload/user/' . $row->img),
-                                    'logo'           => Asset('upload/user/logo/' . $row->logo),
-                                    'address'       => $this->getLang($row->id)['address'],
-                                    'open'          => $open,
-                                    'isNew'         => $isNew,
-                                    'reservation_available' => $row->reservation_available,
-                                    'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
-                                    'delivery_time' => $row->delivery_time,
-                                    'type'          => CategoryStore::find($row->type)->name,
-                                    'subtype'       => $row->subtype,
-                                    'delivery_type' => $row->service_del,
-                                    'km'            => round($row->distance, 2),
-                                    'favorite'      => $favorite,
-                                    'reward'        => $row->reward,
-                                    'descripcion'   => $row->descripcion,
-                                    'c_social'      => $arraySocial,
-                                    'cashback'      => $arrayCash
-                                ];
-                            }
-                        } else {
-                            $data[] = [
-                                'id'            => $row->id,
-                                'title'         => $this->getLang($row->id)['name'],
-                                'img'           => Asset('upload/user/' . $row->img),
-                                'logo'           => Asset('upload/user/logo/' . $row->logo),
-                                'address'       => $this->getLang($row->id)['address'],
-                                'open'          => $open,
-                                'isNew'         => $isNew,
-                                'reservation_available' => $row->reservation_available,
-                                'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
-                                'delivery_time' => $row->delivery_time,
-                                'type'          => CategoryStore::find($row->type)->name,
-                                'subtype'       => $row->subtype,
-                                'delivery_type' => $row->service_del,
-                                'km'            => round($row->distance, 2),
-                                'favorite'      => $favorite,
-                                'reward'        => $row->reward,
-                                'descripcion'   => $row->descripcion,
-                                'c_social'      => $arraySocial,
-                                'cashback'      => $arrayCash
-                            ];
-                        }
-                    }
-                }
+                /****** Filtros de distancia y tipo de negocio *********/
             }
-            /****** Filtros de distancia y tipo de negocio *********/
         }
 
 
@@ -1124,6 +1146,11 @@ class User extends Authenticatable
     function SaveData($res, $lat, $lon) //Envio info Api
     {
         $user_id    = isset($_GET['user_id']) ? $_GET['user_id'] : 0;
+
+        $fecha      = isset($_GET['fecha']) ? $_GET['fecha'] : 0;
+        $hora       = isset($_GET['hora']) ? $_GET['hora'] : 0;
+
+
         $data = [];
 
         foreach ($res as $row) {
@@ -1191,23 +1218,38 @@ class User extends Authenticatable
             foreach ($social as $soc) {
                 $arraySocial[] = array(
                     'nombre' => $soc->NombreSocial->nombre,
+                    'id' => $soc->NombreSocial->id,
                 );
             }
 
-              /* CashBack   */
+            /* CashBack   */
 
 
-              $cashback  = Cashback::where('store_id', $row->id)->where('status', 0)->get();
+            $cashback  = Cashback::where('store_id', $row->id)->where('status', 0)->get();
 
-              $arrayCash = [];
-  
-              foreach ($cashback as $cash) {
-                  $arrayCash[] = array(
-                      'valor' => $cash->cashback,
-                      'hora'  => date('h:i  A', strtotime($cash->hora)),
-                  );
-              }
-  
+            $arrayCash = [];
+
+            foreach ($cashback as $cash) {
+                $arrayCash[] = array(
+                    'valor' => $cash->cashback,
+                    'hora'  => date('h:i  A', strtotime($cash->hora)),
+                );
+            }
+
+
+            /* reservation_available   */
+
+            // if ($fecha == 0 || $hora ==0) {
+            //     $reserva 
+            // } else {
+            //     # code...
+            // }
+
+            $numero_reserva =  $row->numero_reserva;
+            $reserva        = Reserva::where('store_id', $row->id)->where('status', 1)
+                ->where('hora', $hora)->where('fecha', $fecha)->sum('invitados');
+            $total_reserva  = $numero_reserva - $reserva;
+
 
 
             $data[] = [
@@ -1219,7 +1261,7 @@ class User extends Authenticatable
                 'logo'          => asset('upload/user/logo/' . $row->logo),
                 'open'          => $open,
                 'isNew'         => $isNew,
-                'reservation_available' => $row->reservation_available,
+                'reservation_available' =>  $total_reserva,
                 'rating'        => $avg > 0 ? number_format($avg, 1) : 0,
                 'delivery_time' => $row->delivery_time,
                 'categoria'     => CategoryStore::find($row->type)->name,
