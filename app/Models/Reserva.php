@@ -26,6 +26,7 @@ class Reserva extends Model
     'fecha',
     'hora',
     'status',
+    'reserva',
     'created_at',
     'updated_at',
     'deleted_at'

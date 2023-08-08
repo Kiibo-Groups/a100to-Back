@@ -40,6 +40,7 @@
                                             <th>Fecha</th>
                                             <th>hora</th>
                                             <th>Invitados</th>
+                                            <th>Reserva</th>
                                             <th>Status</th>
                                            
                                         </tr>
@@ -56,6 +57,17 @@
                                                 <td class="col-md-1" style="text-align: center">
                                                     {{ Carbon\Carbon::parse($row->hora)->format('h:i  A') }}</td>
                                                 <td class="col-md-1" style="text-align: center">{{ $row->invitados }}</td>
+                                                <td class="col-md-1" style="text-align: center">
+                                                    @if ($row->reserva == 1)
+                                                        <button type="button"
+                                                            class="btn btn-warning width-xs waves-effect waves-light">No</button>
+                                                    @endif
+                                                    @if ($row->reserva == 0)
+                                                        <button type="button"
+                                                            class="btn btn-success width-xs waves-effect waves-light">Si</button>
+                                                    @endif
+                                              
+                                                </td>
                                                 <td class="col-md-1" style="text-align: center">
                                                     @if ($row->status == 1)
                                                         <button type="button"

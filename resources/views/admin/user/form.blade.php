@@ -149,6 +149,14 @@
                         'required' => 'required',
                     ]) !!}
                 </div>
+                <div class="form-group col-md-6">
+                    <label for="numero_reserva">URL de productos</label>
+                    {!! Form::url('urlproductos', null, [
+                        'placeholder' => 'Url',
+                        'class' => 'form-control',
+                        'required' => 'required',
+                    ]) !!}
+                </div>
 
 
                 <div class="form-group col-md-6">

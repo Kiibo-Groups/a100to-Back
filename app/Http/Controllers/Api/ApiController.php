@@ -1026,6 +1026,7 @@ class ApiController extends Controller
 				'primera'    => $request->primera,
 				'fecha'      => $request->fecha,
 				'hora'       => $request->hora,
+				'reserva'    => $request->reserva,
 				
 
 			]);

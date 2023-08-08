@@ -91,7 +91,9 @@ class User extends Authenticatable
         $add->reward                = isset($data['reward']) ? $data['reward'] : null;
         $add->descripcion           = isset($data['descripcion']) ? $data['descripcion'] : null;
         $add->numero_reserva        = isset($data['numero_reserva']) ? $data['numero_reserva'] : 0;
+        $add->urlproductos          = isset($data['urlproductos']) ? $data['urlproductos'] : null;
 
+        
 
         $add->p_staff               = isset($data['p_staff']) ? $data['p_staff'] : 1;
         if ($add->p_staff == 1) {
@@ -468,6 +470,7 @@ class User extends Authenticatable
                 'favorite'      => $favorite,
                 'reward'        => $row->reward,
                 'descripcion'   => $row->descripcion,
+                'urlproductos'  => $row->urlproductos,
                 'cashback'      => $arrayCash
             ];
         }
@@ -733,7 +736,8 @@ class User extends Authenticatable
                                     'address'       => $this->getLang($row->id)['address'],
                                     'open'          => $open,
                                     'isNew'         => $isNew,
-                                    'reservation_available' => $row->numero_reserva,
+                                    'reservation_available' => $row->reservation_available,
+                                    'numero_reserva' => $row->numero_reserva,
                                     'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                     'delivery_time' => $row->delivery_time,
                                     'type'          => CategoryStore::find($row->type)->name,
@@ -758,7 +762,8 @@ class User extends Authenticatable
                                         'address'       => $this->getLang($row->id)['address'],
                                         'open'          => $open,
                                         'isNew'         => $isNew,
-                                        'reservation_available' => $row->numero_reserva,
+                                        'reservation_available' => $row->reservation_available,
+                                        'numero_reserva' => $row->numero_reserva,
                                         'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                         'delivery_time' => $row->delivery_time,
                                         'type'          => CategoryStore::find($row->type)->name,
@@ -782,7 +787,8 @@ class User extends Authenticatable
                                         'address'       => $this->getLang($row->id)['address'],
                                         'open'          => $open,
                                         'isNew'         => $isNew,
-                                        'reservation_available' => $row->numero_reserva,
+                                        'reservation_available' => $row->reservation_available,
+                                        'numero_reserva' => $row->numero_reserva,
                                         'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                         'delivery_time' => $row->delivery_time,
                                         'type'          => CategoryStore::find($row->type)->name,
@@ -830,7 +836,8 @@ class User extends Authenticatable
                                         'address'       => $this->getLang($row->id)['address'],
                                         'open'          => $open,
                                         'isNew'         => $isNew,
-                                        'reservation_available' => $row->numero_reserva,
+                                        'reservation_available' => $row->reservation_available,
+                                        'numero_reserva' => $row->numero_reserva,
                                         'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                         'delivery_time' => $row->delivery_time,
                                         'type'          => CategoryStore::find($row->type)->name,
@@ -879,7 +886,8 @@ class User extends Authenticatable
                                             'address'       => $this->getLang($row->id)['address'],
                                             'open'          => $open,
                                             'isNew'         => $isNew,
-                                            'reservation_available' => $row->numero_reserva,
+                                            'reservation_available' => $row->reservation_available,
+                                            'numero_reserva' => $row->numero_reserva,
                                             'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                             'delivery_time' => $row->delivery_time,
                                             'type'          => CategoryStore::find($row->type)->name,
@@ -931,7 +939,8 @@ class User extends Authenticatable
                                 'address'       => $this->getLang($row->id)['address'],
                                 'open'          => $open,
                                 'isNew'         => $isNew,
-                                'reservation_available' => $row->numero_reserva,
+                                'reservation_available' => $row->reservation_available,
+                                'numero_reserva' => $row->numero_reserva,
                                 'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                 'delivery_time' => $row->delivery_time,
                                 'type'          => CategoryStore::find($row->type)->name,
@@ -956,7 +965,8 @@ class User extends Authenticatable
                                     'address'       => $this->getLang($row->id)['address'],
                                     'open'          => $open,
                                     'isNew'         => $isNew,
-                                    'reservation_available' => $row->numero_reserva,
+                                    'reservation_available' => $row->reservation_available,
+                                    'numero_reserva' => $row->numero_reserva,
                                     'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                     'delivery_time' => $row->delivery_time,
                                     'type'          => CategoryStore::find($row->type)->name,
@@ -980,7 +990,8 @@ class User extends Authenticatable
                                     'address'       => $this->getLang($row->id)['address'],
                                     'open'          => $open,
                                     'isNew'         => $isNew,
-                                    'reservation_available' => $row->numero_reserva,
+                                    'reservation_available' => $row->reservation_available,
+                                    'numero_reserva' => $row->numero_reserva,
                                     'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                     'delivery_time' => $row->delivery_time,
                                     'type'          => CategoryStore::find($row->type)->name,
@@ -1028,7 +1039,8 @@ class User extends Authenticatable
                                     'address'       => $this->getLang($row->id)['address'],
                                     'open'          => $open,
                                     'isNew'         => $isNew,
-                                    'reservation_available' => $row->numero_reserva,
+                                    'reservation_available' => $row->reservation_available,
+                                    'numero_reserva' => $row->numero_reserva,
                                     'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                     'delivery_time' => $row->delivery_time,
                                     'type'          => CategoryStore::find($row->type)->name,
@@ -1053,7 +1065,8 @@ class User extends Authenticatable
                                         'address'       => $this->getLang($row->id)['address'],
                                         'open'          => $open,
                                         'isNew'         => $isNew,
-                                        'reservation_available' => $row->numero_reserva,
+                                        'reservation_available' => $row->reservation_available,
+                                        'numero_reserva' => $row->numero_reserva,
                                         'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                         'delivery_time' => $row->delivery_time,
                                         'type'          => CategoryStore::find($row->type)->name,
@@ -1077,7 +1090,8 @@ class User extends Authenticatable
                                         'address'       => $this->getLang($row->id)['address'],
                                         'open'          => $open,
                                         'isNew'         => $isNew,
-                                        'reservation_available' => $row->numero_reserva,
+                                        'reservation_available' => $row->reservation_available,
+                                        'numero_reserva' => $row->numero_reserva,
                                         'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                                         'delivery_time' => $row->delivery_time,
                                         'type'          => CategoryStore::find($row->type)->name,
@@ -1239,12 +1253,7 @@ class User extends Authenticatable
 
             /* reservation_available   */
 
-            // if ($fecha == 0 || $hora ==0) {
-            //     $reserva 
-            // } else {
-            //     # code...
-            // }
-
+         
             $numero_reserva =  $row->numero_reserva;
             $reserva        = Reserva::where('store_id', $row->id)->where('status', 1)
                 ->where('hora', $hora)->where('fecha', $fecha)->sum('invitados');
@@ -1261,7 +1270,8 @@ class User extends Authenticatable
                 'logo'          => asset('upload/user/logo/' . $row->logo),
                 'open'          => $open,
                 'isNew'         => $isNew,
-                'reservation_available' =>  $total_reserva,
+                'reservation_available' => $row->reservation_available,
+                'reserva_disponible'    => $total_reserva,
                 'rating'        => $avg > 0 ? number_format($avg, 1) : 0,
                 'delivery_time' => $row->delivery_time,
                 'categoria'     => CategoryStore::find($row->type)->name,
@@ -1270,6 +1280,7 @@ class User extends Authenticatable
                 'favorite'      => $favorite,
                 'reward'        => $row->reward,
                 'descripcion'   => $row->descripcion,
+                'urlproductos'  => $row->urlproductos,
                 'c_social'      => $arraySocial,
                 'cashback'      => $arrayCash
             ];
