@@ -441,6 +441,7 @@ class User extends Authenticatable
                 );
             }
 
+            $times = new Opening_times;
             /****** Validamos si el negocios es nuevo *******/
 
             $data = [
@@ -471,7 +472,8 @@ class User extends Authenticatable
                 'reward'        => $row->reward,
                 'descripcion'   => $row->descripcion,
                 'urlproductos'  => $row->urlproductos,
-                'cashback'      => $arrayCash
+                'cashback'      => $arrayCash,   
+                'times'         => $times->getAllApi($row->id),
             ];
         }
 
@@ -1259,7 +1261,12 @@ class User extends Authenticatable
                 ->where('hora', $hora)->where('fecha', $fecha)->sum('invitados');
             $total_reserva  = $numero_reserva - $reserva;
 
+            $usuarios_sinreserva  = Reserva::where('store_id', $row->id)->where('status', 1)->where('reserva', 1)
+            ->where('hora', $hora)->where('fecha', $fecha)->sum('invitados');
+            $usuarios_conreserva  = Reserva::where('store_id', $row->id)->where('status', 1)->where('reserva', 0)
+            ->where('hora', $hora)->where('fecha', $fecha)->sum('invitados');
 
+            $times = new Opening_times;
 
             $data[] = [
                 'id'            => $row->id,
@@ -1270,8 +1277,11 @@ class User extends Authenticatable
                 'logo'          => asset('upload/user/logo/' . $row->logo),
                 'open'          => $open,
                 'isNew'         => $isNew,
+                'numero_reserva' => $row->numero_reserva,
                 'reservation_available' => $row->reservation_available,
                 'reserva_disponible'    => $total_reserva,
+                'usuarios_con_reserva'   => $usuarios_conreserva,
+                'usuarios_sin_reserva'   => $usuarios_sinreserva,
                 'rating'        => $avg > 0 ? number_format($avg, 1) : 0,
                 'delivery_time' => $row->delivery_time,
                 'categoria'     => CategoryStore::find($row->type)->name,
@@ -1282,7 +1292,8 @@ class User extends Authenticatable
                 'descripcion'   => $row->descripcion,
                 'urlproductos'  => $row->urlproductos,
                 'c_social'      => $arraySocial,
-                'cashback'      => $arrayCash
+                'cashback'      => $arrayCash,
+                'times'         => $times->getAllApi($row->id),
             ];
         }
 

@@ -98,7 +98,7 @@ class CategoryStore extends Authenticatable
 
             // Obtenemos SubCategorias
             $subs = [];
-            
+     
             $sub_c = CategoryStore::where('type_cat',1)->where('id_cp',$row->id)->where('status',0)->get();
             foreach ($sub_c as $sc) {
                 
@@ -131,7 +131,8 @@ class CategoryStore extends Authenticatable
                 'img'           => $row->img ? Asset('upload/categorys/'.$row->img) : null,
                 'status'        => $row->status,
                 'sort_no'       => $row->sort_no,
-                'cats'          => $subs
+                'cats'          => $subs,
+           
             ];
         }
         

@@ -22,6 +22,7 @@ class Tickets extends Model
     'id_negocio',
     'status',
     'imagen',
+    'reserva',
     'descripcion',
     'created_at',
     'updated_at',

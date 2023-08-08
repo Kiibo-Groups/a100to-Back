@@ -944,6 +944,8 @@ class ApiController extends Controller
 
 
 			$input         = $request->all();
+			$res = Reserva::find($request->id_reserva);
+			
 
 			if ($request->file('imagen')) {
 
@@ -952,14 +954,20 @@ class ApiController extends Controller
 				$input['imagen'] = $filename;
 			}
 
-			//dd($filename);
+	
 
 			$tickets   = Tickets::create([
-				'id_cliente'   => $request->id_cliente,
-				'id_negocio'   => $request->id_negocio,
+				'id_cliente'   => $res->user_id,
+				'id_negocio'   => $res->store_id,
+				'reserva'      => $res->id,
 				'imagen'       => $filename,
 
 			]);
+
+
+			
+			$res->status = 2;
+			$res->save();
 
 			if (!$tickets) {
 				return response()->json(['code' => 500, 'data' => null, 'message' => 'Ha ocurrido un error al crear Tickets.']);

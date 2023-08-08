@@ -20,6 +20,16 @@ class Opening_times extends Authenticatable
             return $this->chkTimes();
         }
     }
+    public function getAllApi($id)
+    {
+        $times = Opening_times::where('store_id',$id)->get(['mon','tue','wed','thu','fri','sat','sun']);
+        
+        if ($times->count() > 0) {
+            return $times;
+        }else {
+            return $this->chkTimes();
+        }
+    }
 
     public function chkTimes()
     {
