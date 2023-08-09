@@ -13,6 +13,7 @@ class AppUser extends Authenticatable
 {
     protected $table = 'app_user';
 
+
     public function addNew($data)
     {
         $count = AppUser::where('email', $data['email'])->count();
@@ -39,6 +40,7 @@ class AppUser extends Authenticatable
                         $add->birthday      = isset($data['birthday']) ? $data['birthday'] : 'null';
                         $add->sex_type      = isset($data['sex_type']) ? $data['sex_type'] : 'null';
                         $add->user_name     = isset($data['user_name']) ? $data['user_name'] : 'null';
+                        $add->foto          = isset($data['foto']) ? $data['foto'] : 'null';
 
                         $add->save();
 
@@ -205,6 +207,7 @@ class AppUser extends Authenticatable
             $add->birthday      = $data['birthday'];
             $add->sex_type      = $data['sex_type'];
             $add->user_name     = $data['user_name'];
+            $add->foto          = $data['foto'];
 
             if (isset($data['password'])) {
                 $add->password    = $data['password'];

@@ -22,10 +22,17 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
 
 
     //------------------------A100to ------------------------------
-    Route::get('homepage_init/{city}','ApiController@homepage_init');
+
+      /**
+     * Datos iniciales para usuarios registrados
+     */
     Route::get('homepage/{city}','ApiController@homepage');
+    Route::get('homepage_init/{city}','ApiController@homepage_init');
+
     Route::get('getStore/{id}','ApiController@getStore');
     Route::get('GetNearbyCity','ApiController@GetNearbyCity');
+    Route::get('getStores/{city}','ApiController@getStores');
+    
 
 
     //Route::get('getStoreOpen/{city}','ApiController@getStoreOpen');
@@ -46,17 +53,41 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     Route::get('getPolylines','ApiController@getPolylines');
     Route::get('updateCity','ApiController@updateCity');
 
+    /*Usuario*/
+    Route::get('userinfo/{id}','ApiController@userinfo');
+
+    Route::post('usuarios_imagen','ApiController@ImagenUsuario');
+    Route::get('usuarios','ApiController@KardexUsuario');
+     /** Tickets  */
+     Route::post('tickets','ApiController@Tickets');
+     /** Causas Sociales  */
+    Route::get('causas_sociales','ApiController@getCausasSociales');
+     /** CashBack  */
+    Route::get('cashback/{id}','ApiController@getCashback');
+
     /**
-     * Datos iniciales para usuarios registrados
-     */
-    Route::get('homepage/{city}','ApiController@homepage');
-    Route::get('homepage_init/{city}','ApiController@homepage_init');
+    * Reservas
+    */
+    Route::post('crear_reserva','ApiController@CrearReserva');
+    Route::get('cancelar_reserva/{id}','ApiController@CancelarReserva');
+    Route::get('historial_reserva/{id}','ApiController@HistorialReserva');
+
+    /**
+    * Follow
+    */
+    Route::post('seguir_follow','ApiController@SeguirFollow');
+    Route::get('ver_seguidos_follow/{id}','ApiController@SeguirVerFollow');
+    Route::get('ver_seguidores_follow/{id}','ApiController@SeguidoresVerFollow');
+
+
+
+
+  
     
     /**
      * Obtencion de informacion de negocios
      */
-    Route::get('getStores/{city}','ApiController@getStores');
-    Route::get('getStore/{id}','ApiController@getStore');
+
     Route::get('getStoreOpen/{city}','ApiController@getStoreOpen');
     Route::get('getTypeDelivery/{id}','ApiController@getTypeDelivery');
     Route::get('search/{query}/{type}/{city}','ApiController@search');
@@ -86,7 +117,7 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     Route::get('removeAddress/{id}','ApiController@removeAddress');
     Route::post('searchLocation','ApiController@searchLocation');
     Route::post('order','ApiController@order');
-    Route::get('userinfo/{id}','ApiController@userinfo');
+   
     Route::post('updateInfo/{id}','ApiController@updateInfo');
     Route::get('cancelOrder/{id}/{uid}','ApiController@cancelOrder');
     Route::post('loginFb','ApiController@loginFb');
@@ -155,21 +186,7 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     Route::get('cancelComm_event/{id}','ApiController@cancelComm_event');
     Route::post('rateComm_event','ApiController@rateComm_event');
 
-    /** Tickets  */
-    Route::post('tickets','ApiController@Tickets');
-     /** Causas Sociales  */
-    Route::get('causas_sociales','ApiController@getCausasSociales');
-     /** CashBack  */
-    Route::get('cashback/{id}','ApiController@getCashback');
-
-    /**
-    * Reservas
-    */
-    Route::post('crear_reserva','ApiController@CrearReserva');
-    Route::get('cancelar_reserva/{id}','ApiController@CancelarReserva');
-    Route::get('historial_reserva/{id}','ApiController@HistorialReserva');
-
-
+   
 
 
     /**
