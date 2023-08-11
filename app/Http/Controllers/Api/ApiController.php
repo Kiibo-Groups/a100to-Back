@@ -1077,6 +1077,36 @@ class ApiController extends Controller
 		}
 	}
 
+	public function TicketsHistorial($id)
+	{
+		$social  = Tickets::where('id_cliente', $id)->orderBy('id', 'asc')->get();
+
+		$array = [];
+ 
+        foreach($social as $soc){
+            $array[] = array(
+                'reserva'=>$soc->reserva,
+				'id_cliente'=>$soc->id_cliente,
+				'id_negocio'=>$soc->id_negocio,
+				'descripcion'=>$soc->descripcion,
+				'imagen'=>asset("public/assets/img/tickets".$soc->imagen),
+				'status'=>$soc->status,
+                
+            );
+        }
+	
+		return response()->json(['data' => $array]);
+
+
+	}
+
+
+
+
+
+
+
+
 
 	public function getCausasSociales()
 	{
@@ -1087,6 +1117,7 @@ class ApiController extends Controller
         foreach($social as $soc){
             $array[] = array(
                 'nombre'=>$soc->nombre,
+				'id'=>$soc->id,
                 
             );
         }
@@ -1171,8 +1202,8 @@ class ApiController extends Controller
 	 
 			foreach($reserva as $res){
 				$array[] = array(
-					'store_id'    => $res->negocio->name,
-					'user_id'     => $res->usuario->name,
+					'store_id'    => $res->store_id,
+					'user_id'     => $res->user_id,
 					'invitados'   => $res->invitados,
 					'recompensa'  => $res->recompensa,
 					'fecha'       => $res->fecha,

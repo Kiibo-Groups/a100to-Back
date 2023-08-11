@@ -60,6 +60,7 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     Route::get('usuarios','ApiController@KardexUsuario');
      /** Tickets  */
      Route::post('tickets','ApiController@Tickets');
+     Route::get('tickets_historial/{id}','ApiController@TicketsHistorial');
      /** Causas Sociales  */
     Route::get('causas_sociales','ApiController@getCausasSociales');
      /** CashBack  */
