@@ -56,9 +56,9 @@ class TicketsController extends Controller
 
 
     public function verFiles($id){
-dd($id);
+
         $img  = Tickets::where('id', $id)->value('imagen');
-	
+		dd($img);
         $rutaDeArchivo = public_path().'/' .$img;
      
          return response()->download($rutaDeArchivo, $id);
