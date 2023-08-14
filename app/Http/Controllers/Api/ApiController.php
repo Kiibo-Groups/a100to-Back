@@ -1025,40 +1025,24 @@ class ApiController extends Controller
 		try {
 
 
-			// // Validamos la ruta
-			// $target_path = "public/upload/tickets/";
-			// if (!file_exists("public/upload/tickets/")) {
-			//   mkdir("public/upload/ticketstickets/", 0777, true);
-			// }
-		
-			// // Recibimos nombre del archivo y lo asociamos a la ruta
-			// $target_path = $target_path .basename($_FILES['file']['name']);
-			// // Movemos el archivo blob a la ruta especificada
-			// if (move_uploaded_file($_FILES['file']['tmp_name'], $target_path)) {
-			// 	echo true; // Retornamos valor
-			// } else {
-			// 	echo false; // Retornamos valor
-			// }
-
-
 			$input         = $request->all();
 			$res = Reserva::find($request->id_reserva);
-			
+
+
+			$target_path = "public/assets/img/tickets/";
 
 			if ($request->file('imagen')) {
 
 				$filename   = time() . rand(1119, 6999) . '.' . $request->file('imagen')->getClientOriginalExtension();
-				$input['imagen']->move("assets/img/tickets", $filename);
+				$input['imagen']->move($target_path, $filename);
 				$input['imagen'] = $filename;
 			}
-
-	
 
 			$tickets   = Tickets::create([
 				'id_cliente'   => $res->user_id,
 				'id_negocio'   => $res->store_id,
 				'reserva'      => $res->id,
-				'imagen'       => $filename,
+				'imagen'       => $target_path.$filename,
 
 			]);
 
@@ -1089,7 +1073,7 @@ class ApiController extends Controller
 				'id_cliente'=>$soc->id_cliente,
 				'id_negocio'=>$soc->id_negocio,
 				'descripcion'=>$soc->descripcion,
-				'imagen'=>asset("public/assets/img/tickets".$soc->imagen),
+				'imagen'=>asset($soc->imagen),
 				'status'=>$soc->status,
                 
             );
