@@ -72,7 +72,7 @@ Administrar tickets
                                                 </td>
                                                 <td class="col-md-2"style="text-align: center">
 
-                                                    <a href="{{ url(env('admin') . '/tickets/file/' . $row->imagen) }}"
+                                                    <a href="{{ url(env('admin') . '/tickets/file/' . $row->id) }}"
                                                         class="btn btn-warning waves-effect waves-light btn m-b-15 ml-2 mr-2 btn-md"
                                                         data-toggle="tooltip" data-placement="top"
                                                         data-original-title="Descargar Imagen"><i

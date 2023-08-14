@@ -57,9 +57,10 @@ class TicketsController extends Controller
 
     public function verFiles($id){
 
-        // $arc  = Arbitraje::where('id', $id)->first();
-         $rutaDeArchivo = public_path().'/assets/img/tickets/' .$id;
-         //dd($rutaDeArchivo);
+        $img  = Tickets::where('id', $id)->value('imagen');
+	
+        $rutaDeArchivo = public_path().'/' .$img;
+     
          return response()->download($rutaDeArchivo, $id);
      }
 
