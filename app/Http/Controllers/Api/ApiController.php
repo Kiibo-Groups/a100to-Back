@@ -1057,7 +1057,7 @@ class ApiController extends Controller
 
 			return response()->json(['code' => 200, 'data' => $tickets, 'message' => 'Se ha creado el Tickets.']);
 		} catch (\Throwable $th) {
-			return response()->json(['data' => "error"]);
+			return response()->json(['data' => $th]);
 		}
 	}
 
