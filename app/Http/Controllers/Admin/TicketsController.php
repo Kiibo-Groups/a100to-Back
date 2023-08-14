@@ -59,7 +59,7 @@ class TicketsController extends Controller
 
         $img  = Tickets::where('id', $id)->value('imagen');
 		
-        $rutaDeArchivo = public_path().'/' .$img;
+        $rutaDeArchivo = $img;
 		dd($rutaDeArchivo);
          return response()->download($rutaDeArchivo, $id);
      }
