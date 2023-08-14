@@ -93,7 +93,7 @@ class User extends Authenticatable
         $add->numero_reserva        = isset($data['numero_reserva']) ? $data['numero_reserva'] : 0;
         $add->urlproductos          = isset($data['urlproductos']) ? $data['urlproductos'] : null;
 
-        
+
 
         $add->p_staff               = isset($data['p_staff']) ? $data['p_staff'] : 1;
         if ($add->p_staff == 1) {
@@ -472,7 +472,7 @@ class User extends Authenticatable
                 'reward'        => $row->reward,
                 'descripcion'   => $row->descripcion,
                 'urlproductos'  => $row->urlproductos,
-                'cashback'      => $arrayCash,   
+                'cashback'      => $arrayCash,
                 'times'         => $times->getAllApi($row->id),
             ];
         }
@@ -605,7 +605,8 @@ class User extends Authenticatable
 
     function SearchFilters($city_id)
     {
-        $distance_max       = isset($_GET['distance_max']) ? $_GET['distance_max'] : 0;
+        $distance_max       = isset($_GET['distance_max']) ? $_GET['distance_max'] : 45;
+
         $type_filter        = isset($_GET['filter']) ? $_GET['filter'] : 0;
         $status_store       = isset($_GET['status']) ? $_GET['status'] : false;
         $distance_status    = isset($_GET['distance_status']) ? $_GET['distance_status'] : 1;
@@ -623,14 +624,21 @@ class User extends Authenticatable
         $menorRango = $menor;
         $mayorRango = $mayor;
 
-        //dd( $mayorRango );
+        $precios          = isset($_GET['precios']) ? $_GET['precios'] : 0;
+        list($menorP, $mayorP) = explode("-", $precios);
+        $menorPrecio = $menorP;
+        $mayorPrecio = $mayorP;
+
+  
 
 
 
-        $res  = User::where(function ($query) use ($city_id, $menorRango,  $mayorRango) {
+        $res  = User::where(function ($query) use ($city_id, $menorRango,  $mayorRango, $menorPrecio, $mayorPrecio) {
 
 
-            $query->where('status', 0)->where('city_id', $city_id)->whereBetween('reward', [$menorRango, $mayorRango]);
+            $query->where('status', 0)->where('city_id', $city_id)->whereBetween('reward', [$menorRango, $mayorRango])
+                    ->whereBetween('person_cost', [$menorPrecio, $mayorPrecio])                   
+                    ;
         })->select('users.*', DB::raw("6371 * acos(cos(radians(" . $lat . ")) 
         * cos(radians(users.lat)) 
         * cos(radians(users.lng) - radians(" . $lon . ")) 
@@ -641,14 +649,19 @@ class User extends Authenticatable
         $data = [];
         $open_store = [];
         $close_store = [];
-
+        //dd( $res );
         foreach ($res as $row) {
+            //dump($row);
+            $array_sociales = explode(",", $id_sociales);
+           // $valores_sociales = "'" . implode("','", $array) . "'";
 
-            $social  = SocialesNegocios::where('social_id', $row->id)->where('store_id', $id_sociales)->count();
-         
-            if ($social >= 1) {
 
+            $socialarray  = SocialesNegocios::where('social_id', $row->id)->whereIn('store_id', $array_sociales)->count();
 
+           
+            if ($socialarray >= 1) {
+             
+               
 
                 /****** Funcion para validar si el comercio esta abierto ******************/
                 $op_time      = new Opening_times();
@@ -929,9 +942,12 @@ class User extends Authenticatable
                             }
                         }
                     }
-                } else {
+                } else {                  
                     // Agregamos todo tipo de comercios
+                  
                     if ($distance_max == 6) { // distancia mayor a 6km = todos los comercios
+                      
+
                         if ($type_filter == 0) { // Mas Recientes
                             $data[] = [
                                 'id'            => $row->id,
@@ -1030,8 +1046,14 @@ class User extends Authenticatable
                                 'cashback'      => $arrayCash
                             ];
                         }
-                    } else { // Aplicamos condicional sobre la distancia minima
+                    } else { 
+                        // Aplicamos condicional sobre la distancia minima
+
+                       // dump($socialarray);
+                       // dump($row->distance.'$row->distance');
+                       // dump($distance_max.'$distance_max');
                         if ($row->distance <= $distance_max) {
+                           
                             if ($type_filter == 0) { // Mas Recientes
                                 $data[] = [
                                     'id'            => $row->id,
@@ -1049,7 +1071,8 @@ class User extends Authenticatable
                                     'subtype'       => $row->subtype,
                                     'delivery_type' => $row->service_del,
                                     'km'            => round($row->distance, 2),
-                                    'favorite'      => $favorite,
+                                    'cashback'      => $arrayCash,
+                                    'person_cost'   => $row->person_cost,
                                     'reward'        => $row->reward,
                                     'descripcion'   => $row->descripcion,
                                     'c_social'      => $arraySocial,
@@ -1076,6 +1099,7 @@ class User extends Authenticatable
                                         'delivery_type' => $row->service_del,
                                         'km'            => round($row->distance, 2),
                                         'favorite'      => $favorite,
+                                        'person_cost'   => $row->person_cost,
                                         'reward'        => $row->reward,
                                         'descripcion'   => $row->descripcion,
                                         'c_social'      => $arraySocial,
@@ -1101,6 +1125,7 @@ class User extends Authenticatable
                                         'delivery_type' => $row->service_del,
                                         'km'            => round($row->distance, 2),
                                         'favorite'      => $favorite,
+                                        'person_cost'   => $row->person_cost,
                                         'reward'        => $row->reward,
                                         'descripcion'   => $row->descripcion,
                                         'c_social'      => $arraySocial,
@@ -1108,6 +1133,7 @@ class User extends Authenticatable
                                     ];
                                 }
                             } else {
+                               
                                 $data[] = [
                                     'id'            => $row->id,
                                     'title'         => $this->getLang($row->id)['name'],
@@ -1124,6 +1150,7 @@ class User extends Authenticatable
                                     'delivery_type' => $row->service_del,
                                     'km'            => round($row->distance, 2),
                                     'favorite'      => $favorite,
+                                    'person_cost'   => $row->person_cost,
                                     'reward'        => $row->reward,
                                     'descripcion'   => $row->descripcion,
                                     'c_social'      => $arraySocial,
@@ -1255,16 +1282,16 @@ class User extends Authenticatable
 
             /* reservation_available   */
 
-         
+
             $numero_reserva =  $row->numero_reserva;
             $reserva        = Reserva::where('store_id', $row->id)->where('status', 1)
                 ->where('hora', $hora)->where('fecha', $fecha)->sum('invitados');
             $total_reserva  = $numero_reserva - $reserva;
 
             $usuarios_sinreserva  = Reserva::where('store_id', $row->id)->where('status', 1)->where('reserva', 1)
-            ->where('hora', $hora)->where('fecha', $fecha)->sum('invitados');
+                ->where('hora', $hora)->where('fecha', $fecha)->sum('invitados');
             $usuarios_conreserva  = Reserva::where('store_id', $row->id)->where('status', 1)->where('reserva', 0)
-            ->where('hora', $hora)->where('fecha', $fecha)->sum('invitados');
+                ->where('hora', $hora)->where('fecha', $fecha)->sum('invitados');
 
             $times = new Opening_times;
 

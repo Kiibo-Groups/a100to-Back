@@ -80,7 +80,9 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     Route::get('ver_seguidos_follow/{id}','ApiController@SeguirVerFollow');
     Route::get('ver_seguidores_follow/{id}','ApiController@SeguidoresVerFollow');
 
+    /* Filter */
 
+    Route::get('SearchFilters/{city}','ApiController@SearchFilters');
 
 
   
@@ -93,7 +95,7 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     Route::get('getTypeDelivery/{id}','ApiController@getTypeDelivery');
     Route::get('search/{query}/{type}/{city}','ApiController@search');
     Route::get('SearchCat/{city}','ApiController@SearchCat');
-    Route::get('SearchFilters/{city}','ApiController@SearchFilters');
+  
     Route::get('ViewAllCats','ApiController@ViewAllCats');
     Route::post('addToCart','ApiController@addToCart');
     Route::get('cartCount/{cartNo}','ApiController@cartCount');

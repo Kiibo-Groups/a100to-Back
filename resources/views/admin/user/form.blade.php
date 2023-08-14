@@ -280,7 +280,7 @@
                 <div class="form-group col-md-6">
                     <label for="inputEmail6">Costo aproximado por persona <small>(no incluya ningún signo de
                             moneda)</small></label>
-                    {!! Form::text('person_cost', null, ['placeholder' => 'e.g 200-250', 'class' => 'form-control']) !!}
+                    {!! Form::number('person_cost', null, ['placeholder' => 'e.g 200', 'class' => 'form-control']) !!}
                 </div>
 
                 <div class="form-group col-12">
