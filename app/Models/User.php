@@ -751,7 +751,7 @@ class User extends Authenticatable
                     );
                 }
 
-
+                $times = new Opening_times;
 
                 /****** Validamos si el negocios es nuevo *******/
 
@@ -785,7 +785,8 @@ class User extends Authenticatable
                                     'reward'        => $row->reward,
                                     'descripcion'   => $row->descripcion,
                                     'c_social'      => $arraySocial,
-                                    'cashback'      => $arrayCash
+                                    'cashback'      => $arrayCash,
+                                    'times'         => $times->getAllApi($row->id),
                                 ];
                             } elseif ($type_filter == 4) { // Con Ofertas
                                 // Realizamos una busqueda en la tabla de ofertas
@@ -813,7 +814,8 @@ class User extends Authenticatable
                                         'reward'        => $row->reward,
                                         'descripcion'   => $row->descripcion,
                                         'c_social'      => $arraySocial,
-                                        'cashback'      => $arrayCash
+                                        'cashback'      => $arrayCash,
+                                        'times'         => $times->getAllApi($row->id),
                                     ];
                                 }
                             } elseif ($type_filter == 5) { // en tendencia
@@ -840,7 +842,8 @@ class User extends Authenticatable
                                         'reward'        => $row->reward,
                                         'descripcion'   => $row->descripcion,
                                         'c_social'      => $arraySocial,
-                                        'cashback'      => $arrayCash
+                                        'cashback'      => $arrayCash,
+                                        'times'         => $times->getAllApi($row->id),
                                     ];
                                 }
                             } else {
@@ -865,7 +868,8 @@ class User extends Authenticatable
                                     'reward'        => $row->reward,
                                     'descripcion'   => $row->descripcion,
                                     'c_social'      => $arraySocial,
-                                    'cashback'      => $arrayCash
+                                    'cashback'      => $arrayCash,
+                                    'times'         => $times->getAllApi($row->id),
                                 ];
                             }
                         } else { // Aplicamos condicional sobre la distancia minima
@@ -893,7 +897,8 @@ class User extends Authenticatable
                                         'reward'        => $row->reward,
                                         'descripcion'   => $row->descripcion,
                                         'c_social'      => $arraySocial,
-                                        'cashback'      => $arrayCash
+                                        'cashback'      => $arrayCash,
+                                        'times'         => $times->getAllApi($row->id),
                                     ];
                                 } elseif ($type_filter == 4) { // Con Ofertas
                                     // Realizamos una busqueda en la tabla de ofertas
@@ -920,7 +925,8 @@ class User extends Authenticatable
                                             'reward'        => $row->reward,
                                             'descripcion'   => $row->descripcion,
                                             'c_social'      => $arraySocial,
-                                            'cashback'      => $arrayCash
+                                            'cashback'      => $arrayCash,
+                                            'times'         => $times->getAllApi($row->id),
                                         ];
                                     }
                                 } elseif ($type_filter == 5) { // en tendencia
@@ -947,7 +953,8 @@ class User extends Authenticatable
                                             'reward'        => $row->reward,
                                             'descripcion'   => $row->descripcion,
                                             'c_social'      => $arraySocial,
-                                            'cashback'      => $arrayCash
+                                            'cashback'      => $arrayCash,
+                                            'times'         => $times->getAllApi($row->id),
                                         ];
                                     }
                                 } else {
@@ -972,7 +979,8 @@ class User extends Authenticatable
                                         'reward'        => $row->reward,
                                         'descripcion'   => $row->descripcion,
                                         'c_social'      => $arraySocial,
-                                        'cashback'      => $arrayCash
+                                        'cashback'      => $arrayCash,
+                                        'times'         => $times->getAllApi($row->id),
                                     ];
                                 }
                             }
@@ -1007,7 +1015,8 @@ class User extends Authenticatable
                                 'reward'        => $row->reward,
                                 'descripcion'   => $row->descripcion,
                                 'c_social'      => $arraySocial,
-                                'cashback'      => $arrayCash
+                                'cashback'      => $arrayCash,
+                                'times'         => $times->getAllApi($row->id),
                             ];
                         } elseif ($type_filter == 4) { // Con Ofertas
                             // Realizamos una busqueda en la tabla de ofertas
@@ -1035,7 +1044,8 @@ class User extends Authenticatable
                                     'reward'        => $row->reward,
                                     'descripcion'   => $row->descripcion,
                                     'c_social'      => $arraySocial,
-                                    'cashback'      => $arrayCash
+                                    'cashback'      => $arrayCash,
+                                    'times'         => $times->getAllApi($row->id),
                                 ];
                             }
                         } elseif ($type_filter == 5) { // en tendencia
@@ -1062,7 +1072,8 @@ class User extends Authenticatable
                                     'reward'        => $row->reward,
                                     'descripcion'   => $row->descripcion,
                                     'c_social'      => $arraySocial,
-                                    'cashback'      => $arrayCash
+                                    'cashback'      => $arrayCash,
+                                    'times'         => $times->getAllApi($row->id),
                                 ];
                             }
                         } else {
@@ -1087,7 +1098,8 @@ class User extends Authenticatable
                                 'reward'        => $row->reward,
                                 'descripcion'   => $row->descripcion,
                                 'c_social'      => $arraySocial,
-                                'cashback'      => $arrayCash
+                                'cashback'      => $arrayCash,
+                                'times'         => $times->getAllApi($row->id),
                             ];
                         }
                     } else { 
@@ -1122,7 +1134,8 @@ class User extends Authenticatable
                                     'reward'        => $row->reward,
                                     'descripcion'   => $row->descripcion,
                                     'c_social'      => $arraySocial,
-                                    'cashback'      => $arrayCash
+                                    'cashback'      => $arrayCash,
+                                    'times'         => $times->getAllApi($row->id),
                                 ];
                             } elseif ($type_filter == 4) { // Con Ofertas
                                 // Realizamos una busqueda en la tabla de ofertas
@@ -1151,7 +1164,8 @@ class User extends Authenticatable
                                         'reward'        => $row->reward,
                                         'descripcion'   => $row->descripcion,
                                         'c_social'      => $arraySocial,
-                                        'cashback'      => $arrayCash
+                                        'cashback'      => $arrayCash,
+                                        'times'         => $times->getAllApi($row->id),
                                     ];
                                 }
                             } elseif ($type_filter == 5) { // en tendencia
@@ -1179,7 +1193,8 @@ class User extends Authenticatable
                                         'reward'        => $row->reward,
                                         'descripcion'   => $row->descripcion,
                                         'c_social'      => $arraySocial,
-                                        'cashback'      => $arrayCash
+                                        'cashback'      => $arrayCash,
+                                        'times'         => $times->getAllApi($row->id),
                                     ];
                                 }
                             } else {
@@ -1206,7 +1221,8 @@ class User extends Authenticatable
                                     'reward'        => $row->reward,
                                     'descripcion'   => $row->descripcion,
                                     'c_social'      => $arraySocial,
-                                    'cashback'      => $arrayCash
+                                    'cashback'      => $arrayCash,
+                                    'times'         => $times->getAllApi($row->id),
                                 ];
                             }
                         }
