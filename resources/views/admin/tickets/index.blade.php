@@ -47,7 +47,14 @@ Administrar tickets
 
                                         @foreach ($data as $row)
                                             <tr>
-                                                <td class="col-md-4">{{ $row->negocio->name }}</td>
+                                                <td class="col-md-4">
+                                                    @if (!$row->id_negocio)
+                                                  
+                                                    @else
+                                                    {{ $row->negocio->name }}
+                                                    @endif
+                                                    
+                                                    </td>
                                                 <td class="col-md-3">{{ $row->usuario->name }}</td>
                                                 <td class="col-md-2"  style="text-align: center">{{ date('d-M-Y', strtotime($row->created_at)) }}</td>
                                                 <td class="col-md-1"  style="text-align: center">

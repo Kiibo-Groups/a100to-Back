@@ -78,6 +78,7 @@ class TicketsController extends Controller
 		return View($this->folder.'edit',[
 
 			'data' 		=> Tickets::find($id),
+			'negocios'  => User::orderBy('name', 'asc')->get(),
 			'form_url' 	=> env('admin').'/tickets/'.$id,
 			'users' 	=> $u->getAll(),
 			//'array'		=> OfferStore::where('offer_id',$id)->pluck('store_id')->toArray()

@@ -9,11 +9,19 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="inputEmail6">Negocio</label>
-                        <p style="font-size: 20px">{{ $data->negocio->name }} </p>
+                        <p style="font-size: 20px">
+                            @if (!$data->id_negocio)
+                            @else
+                                {{ $data->negocio->name }}
+                            @endif
+                        </p>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputEmail6">Usuario</label>
-                        <p style="font-size: 20px">{{ $data->usuario->name }} </p>
+                        <p style="font-size: 20px">
+
+
+                            {{ $data->usuario->name }} </p>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputEmail6">Fecha registro</label>
@@ -24,9 +32,21 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
 
+                        <label class="form-label">Negocio</label>
+                   
+                        <select name="id_negocio" class="form-control" id="id_negocio" required="required">
+                            <option value="">Selecciona un Negocio</option>
+                            @foreach ($negocios as $type)
+                                <option value="{{ $type->id }}" @if ($data->id_negocio == $type->id) selected @endif>
+                                    {{ $type->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+
                         <label class="form-label">Estado</label>
-                        <select name="status" id="type" class="form-select js-example-basic-single">
-                            <option value="" selected></option>
+                        <select name="status" id="type" class="form-select js-example-basic-single" required="required">
+                            <option value="" selected>Selecciona un Estado</option>
                             <option value="1" @if ($data->status === '1') selected @endif>
                                 Pendiente</option>
                             <option value="2" @if ($data->status === '2') selected @endif>
@@ -37,7 +57,7 @@
                     </div>
 
                     <div class="form-group col-md-6">
-					
+
                     </div>
                 </div>
 

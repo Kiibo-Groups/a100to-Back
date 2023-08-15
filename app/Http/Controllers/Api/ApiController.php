@@ -1026,7 +1026,7 @@ class ApiController extends Controller
 
 
 			$input         = $request->all();
-			$res = Reserva::find($request->id_reserva);
+			//$res = Reserva::find($request->id_reserva);
 
 
 			$target_path = "public/assets/img/tickets/";
@@ -1039,17 +1039,17 @@ class ApiController extends Controller
 			}
 
 			$tickets   = Tickets::create([
-				'id_cliente'   => $res->user_id,
-				'id_negocio'   => $res->store_id,
-				'reserva'      => $res->id,
+				'id_cliente'   => $request->id_cliente,
+				//'id_negocio'   => $res->store_id,
+				//'reserva'      => $res->id,
 				'imagen'       => $target_path . $filename,
 
 			]);
 
 
 
-			$res->status = 2;
-			$res->save();
+			//$res->status = 2;
+			//$res->save();
 
 			if (!$tickets) {
 				return response()->json(['code' => 500, 'data' => null, 'message' => 'Ha ocurrido un error al crear Tickets.']);
@@ -1057,7 +1057,7 @@ class ApiController extends Controller
 
 			return response()->json(['code' => 200, 'data' => $tickets, 'message' => 'Se ha creado el Tickets.']);
 		} catch (\Throwable $th) {
-			return response()->json(['data' => 'error']);
+			return response()->json(['data' => $th]);
 		}
 	}
 
