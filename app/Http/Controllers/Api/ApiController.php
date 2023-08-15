@@ -1186,6 +1186,8 @@ class ApiController extends Controller
 	 
 			foreach($reserva as $res){
 				$array[] = array(
+					'id'          => $res->id,
+					'negocio'    => $res->negocio->name,
 					'store_id'    => $res->store_id,
 					'user_id'     => $res->user_id,
 					'invitados'   => $res->invitados,
