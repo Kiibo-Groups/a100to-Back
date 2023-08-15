@@ -778,6 +778,7 @@ class ComposerStaticInitedc0ba0ba2ba66b90f1da7e80a290d66
         'App\\Models\\CategoryStore' => __DIR__ . '/../..' . '/app/Models/CategoryStore.php',
         'App\\Models\\Category_addon' => __DIR__ . '/../..' . '/app/Models/Category_addon.php',
         'App\\Models\\City' => __DIR__ . '/../..' . '/app/Models/City.php',
+        'App\\Models\\Coleccion' => __DIR__ . '/../..' . '/app/Models/Coleccion.php',
         'App\\Models\\Delivery' => __DIR__ . '/../..' . '/app/Models/Delivery.php',
         'App\\Models\\Deposit' => __DIR__ . '/../..' . '/app/Models/Deposit.php',
         'App\\Models\\Favorites' => __DIR__ . '/../..' . '/app/Models/Favorites.php',

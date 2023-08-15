@@ -51,6 +51,7 @@ use App\Http\Controllers\NodejsServer;
 
 use App\Http\Controllers\WhatsAppCloud;
 use App\Http\Controllers\OpenpayController;
+use App\Models\Coleccion;
 use App\Models\Follow;
 
 class ApiController extends Controller
@@ -120,7 +121,7 @@ class ApiController extends Controller
 		$offer   = new Offer;
 		$cats    = new CategoryStore;
 		$cat     = isset($_GET['cat']) ? $_GET['cat'] : 0;
-		
+
 
 		$data = [
 			'store'		=> $store->getAppData($city_id),
@@ -148,9 +149,9 @@ class ApiController extends Controller
 
 
 		$data = [
-			'admin'		=> Admin::where('id', 1)->get(['name','email','fb','insta','twitter', 'youtube']),
+			'admin'		=> Admin::where('id', 1)->get(['name', 'email', 'fb', 'insta', 'twitter', 'youtube']),
 			'Categorys' => $cats->ViewOrderCats(),
-			'c_sociales' =>  Sociales::get(['id','nombre', 'descripcion']),
+			'c_sociales' =>  Sociales::get(['id', 'nombre', 'descripcion']),
 
 		];
 
@@ -178,7 +179,7 @@ class ApiController extends Controller
 		$data = [
 			'store'		=> $store->getStoreOpen($city_id),
 			'trending'		=> $store->getStoreOpen($city_id, true),
-			'admin'		=> Admin::where('id', 1)->get(['name','email','fb','insta','twitter', 'youtube']),
+			'admin'		=> Admin::where('id', 1)->get(['name', 'email', 'fb', 'insta', 'twitter', 'youtube']),
 		];
 
 		return response()->json(['data' => $data]);
@@ -467,7 +468,7 @@ class ApiController extends Controller
 			$user = new AppUser;
 			//$deposit = new Deposit;
 			return response()->json([
-				'data' => AppUser::where('id',$id)->get(['id','name', 'user_name', 'email', 'last_name','birthday','sex_type', 'phone', 'refered']),
+				'data' => AppUser::where('id', $id)->get(['id', 'name', 'user_name', 'email', 'last_name', 'birthday', 'sex_type', 'phone', 'refered']),
 				'cashback' => $user->getAllUser($id),
 				//'deposits' => $deposit->getDeposits($id)
 			]);
@@ -487,9 +488,9 @@ class ApiController extends Controller
 			$data = [];
 
 			foreach ($res as $row) {
-	
-		
-	
+
+
+
 				$data[] = [
 					'id'          => $row->id,
 					'name'        => $row->name,
@@ -497,12 +498,12 @@ class ApiController extends Controller
 					'email'       => $row->email,
 					'foto'        => asset($row->foto),
 					'last_name'   => $row->last_name,
-					'birthday'    => $row->birthday,				
+					'birthday'    => $row->birthday,
 					'sex_type'    => $row->sex_type,
 					'phone'       => $row->phone,
 					'refered'     => $row->refered,
-					
-					
+
+
 				];
 			}
 
@@ -512,7 +513,7 @@ class ApiController extends Controller
 
 			return response()->json([
 				'data' => $data,
-				
+
 			]);
 		} catch (\Exception $th) {
 			return response()->json(['data' => 'error', 'error' => $th->getMessage()]);
@@ -522,37 +523,36 @@ class ApiController extends Controller
 
 	public function ImagenUsuario(Request $request)
 	{
-			$input  = $request->all();
+		$input  = $request->all();
 
-			$id = $input['id'];
-	
-			$target_path = "public/upload/perfil/";
-			if (!file_exists("public/upload/perfil/")) {
-			  mkdir("public/upload/perfil/", 0777, true);
-			}	
-			$filename   = time() . rand(1119, 6999) . '.' . $request->file('foto')->getClientOriginalExtension();
-			// Recibimos nombre del archivo y lo asociamos a la ruta
-			//$target_path = $target_path .basename($_FILES['foto']['name']);
-			$target_path = $target_path .$filename ;
-						
-			// Movemos el archivo blob a la ruta especificada
-			if (move_uploaded_file($_FILES['foto']['tmp_name'], $target_path)) {
-				echo true; // Retornamos valor
-			} else {
-				echo false; // Retornamos valor
-			}
-	
-	
-			$res = AppUser::find($id);
-			$res->foto = $target_path ;
-			$res->save();
+		$id = $input['id'];
 
-			if (!$res) {
-				return response()->json(['code' => 500, 'data' => null, 'message' => 'Ha ocurrido un error al actualizar imagen.']);
-			}
+		$target_path = "public/upload/perfil/";
+		if (!file_exists("public/upload/perfil/")) {
+			mkdir("public/upload/perfil/", 0777, true);
+		}
+		$filename   = time() . rand(1119, 6999) . '.' . $request->file('foto')->getClientOriginalExtension();
+		// Recibimos nombre del archivo y lo asociamos a la ruta
+		//$target_path = $target_path .basename($_FILES['foto']['name']);
+		$target_path = $target_path . $filename;
 
-			return response()->json(['code' => 200, 'data' => $res->id, 'message' => 'Se ha actualizado imagen.']);
-		
+		// Movemos el archivo blob a la ruta especificada
+		if (move_uploaded_file($_FILES['foto']['tmp_name'], $target_path)) {
+			echo true; // Retornamos valor
+		} else {
+			echo false; // Retornamos valor
+		}
+
+
+		$res = AppUser::find($id);
+		$res->foto = $target_path;
+		$res->save();
+
+		if (!$res) {
+			return response()->json(['code' => 500, 'data' => null, 'message' => 'Ha ocurrido un error al actualizar imagen.']);
+		}
+
+		return response()->json(['code' => 200, 'data' => $res->id, 'message' => 'Se ha actualizado imagen.']);
 	}
 
 
@@ -1042,12 +1042,12 @@ class ApiController extends Controller
 				'id_cliente'   => $res->user_id,
 				'id_negocio'   => $res->store_id,
 				'reserva'      => $res->id,
-				'imagen'       => $target_path.$filename,
+				'imagen'       => $target_path . $filename,
 
 			]);
 
 
-			
+
 			$res->status = 2;
 			$res->save();
 
@@ -1066,22 +1066,20 @@ class ApiController extends Controller
 		$social  = Tickets::where('id_cliente', $id)->orderBy('id', 'asc')->get();
 
 		$array = [];
- 
-        foreach($social as $soc){
-            $array[] = array(
-                'reserva'=>$soc->reserva,
-				'id_cliente'=>$soc->id_cliente,
-				'id_negocio'=>$soc->id_negocio,
-				'descripcion'=>$soc->descripcion,
-				'imagen'=>asset($soc->imagen),
-				'status'=>$soc->status,
-                
-            );
-        }
-	
+
+		foreach ($social as $soc) {
+			$array[] = array(
+				'reserva' => $soc->reserva,
+				'id_cliente' => $soc->id_cliente,
+				'id_negocio' => $soc->id_negocio,
+				'descripcion' => $soc->descripcion,
+				'imagen' => asset($soc->imagen),
+				'status' => $soc->status,
+
+			);
+		}
+
 		return response()->json(['data' => $array]);
-
-
 	}
 
 
@@ -1097,18 +1095,16 @@ class ApiController extends Controller
 		$social  = Sociales::orderBy('nombre', 'asc')->get();
 
 		$array = [];
- 
-        foreach($social as $soc){
-            $array[] = array(
-                'nombre'=>$soc->nombre,
-				'id'=>$soc->id,
-                
-            );
-        }
-	
+
+		foreach ($social as $soc) {
+			$array[] = array(
+				'nombre' => $soc->nombre,
+				'id' => $soc->id,
+
+			);
+		}
+
 		return response()->json(['data' => $array]);
-
-
 	}
 
 
@@ -1117,15 +1113,15 @@ class ApiController extends Controller
 		$cashback  = Cashback::where('store_id', $id)->where('status', 0)->orderBy('hora', 'asc')->get();
 
 		$array = [];
- 
-        foreach($cashback as $cas){
-            $array[] = array(
-                'cashback'=>$cas->cashback,
-				'hora'    =>$cas->hora,
-                
-            );
-        }
-	
+
+		foreach ($cashback as $cas) {
+			$array[] = array(
+				'cashback' => $cas->cashback,
+				'hora'    => $cas->hora,
+
+			);
+		}
+
 		return response()->json(['data' => $array]);
 	}
 
@@ -1148,7 +1144,7 @@ class ApiController extends Controller
 				'fecha'      => $request->fecha,
 				'hora'       => $request->hora,
 				'reserva'    => $request->reserva,
-				
+
 
 			]);
 
@@ -1165,7 +1161,7 @@ class ApiController extends Controller
 	public function CancelarReserva($id)
 	{
 		try {
-			
+
 
 			$res = Reserva::find($id);
 			$res->status = 3;
@@ -1183,8 +1179,8 @@ class ApiController extends Controller
 			$reserva  = Reserva::where('user_id', $id)->orderBy('status', 'asc')->get();
 
 			$array = [];
-	 
-			foreach($reserva as $res){
+
+			foreach ($reserva as $res) {
 				$array[] = array(
 					'id'          => $res->id,
 					'negocio'    => $res->negocio->name,
@@ -1195,91 +1191,152 @@ class ApiController extends Controller
 					'fecha'       => $res->fecha,
 					'hora'        => $res->hora,
 					'status'      => $res->full_estado,
-					
+
 				);
 			}
-		
-			return response()->json(['data' => $array]);
 
-	
+			return response()->json(['data' => $array]);
 		} catch (\Exception $th) {
 			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}
 	}
 
 
-		// ----------------Follow ----------------
-		public function SeguirFollow(Request $request)
-		{
-			try {
-	
-				$input         = $request->all();
-	
-				$reserva   = Follow::create([
-					'seguido_id'   => $request->seguido_id,
-					'seguidor_id'  => $request->user_id,
-				]);
-	
-				if (!$reserva) {
-					return response()->json(['code' => 500, 'data' => null, 'message' => 'Ha ocurrido un error al crear Follow.']);
-				}
-	
-				return response()->json(['code' => 200, 'data' => $reserva, 'message' => 'Se ha creado el Follow.']);
-			} catch (\Throwable $th) {
-				return response()->json(['data' => "error"]);
+	// ----------------Follow ----------------
+	public function SeguirFollow(Request $request)
+	{
+		try {
+
+			$input         = $request->all();
+
+			$reserva   = Follow::create([
+				'seguido_id'   => $request->seguido_id,
+				'seguidor_id'  => $request->user_id,
+			]);
+
+			if (!$reserva) {
+				return response()->json(['code' => 500, 'data' => null, 'message' => 'Ha ocurrido un error al crear Follow.']);
 			}
+
+			return response()->json(['code' => 200, 'data' => $reserva, 'message' => 'Se ha creado el Follow.']);
+		} catch (\Throwable $th) {
+			return response()->json(['data' => "error"]);
 		}
+	}
 
-		public function SeguirVerFollow($id)
-		{
-			try {
+	public function SeguirVerFollow($id)
+	{
+		try {
 
-				$reserva  = Follow::where('seguidor_id', $id)->get();
-				$cantidad = $reserva->count();
-				$array = [];
-		 
-				foreach($reserva as $res){
-					$array[] = array(
-						'id'       => $res->usuario->id,
-						'name'     => $res->usuario->name,
-						'usuario'  => $res->usuario->user_name,
-						
-						
-					);
-				}
+			$reserva  = Follow::where('seguidor_id', $id)->get();
+			$cantidad = $reserva->count();
+			$array = [];
+
+			foreach ($reserva as $res) {
+				$array[] = array(
+					'id'       => $res->usuario->id,
+					'name'     => $res->usuario->name,
+					'usuario'  => $res->usuario->user_name,
+
+
+				);
+			}
+
+			return response()->json(['cantidad' => $cantidad, 'data' => $array]);
+		} catch (\Exception $th) {
+			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
+		}
+	}
+
+	public function SeguidoresVerFollow($id)
+	{
+		try {
+
+			$reserva  = Follow::where('seguido_id', $id)->get();
+			$cantidad = $reserva->count();
+			$array = [];
+
+			foreach ($reserva as $res) {
+				$array[] = array(
+					'id'       => $res->seguidor->id,
+					'name'     => $res->seguidor->name,
+					'usuario'  => $res->seguidor->user_name,
+
+
+				);
+			}
+
+			return response()->json(['cantidad' => $cantidad, 'data' => $array]);
+		} catch (\Exception $th) {
+			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
+		}
+	}
+
+
+
+	// ----------------Coleccion ----------------
+
+	public function CrearColeccion(Request $request)
+	{
+		try {
+
 			
-				return response()->json(['cantidad' => $cantidad,'data' => $array]);
-	
-		
-			} catch (\Exception $th) {
-				return response()->json(['data' => "error", 'error' => $th->getMessage()]);
+
+			$coleccion   = Coleccion::create([
+				'store_id'   => $request->store_id,
+				'user_id'      => $request->user_id,
+				
+
+
+			]);
+
+			if (!$coleccion) {
+				return response()->json(['code' => 500, 'data' => null, 'message' => 'Ha ocurrido un error al crear la Coleccion.']);
 			}
+
+			return response()->json(['code' => 200, 'data' => $coleccion, 'message' => 'Se ha creado la Coleccion.']);
+		} catch (\Throwable $th) {
+			return response()->json(['data' => "error"]);
 		}
+	}
 
-		public function SeguidoresVerFollow($id)
-		{
-			try {
+	public function CancelarColeccion($id)
+	{
+		try {
 
-				$reserva  = Follow::where('seguido_id', $id)->get();
-				$cantidad = $reserva->count();
-				$array = [];
-		 
-				foreach($reserva as $res){
-					$array[] = array(
-						'id'       => $res->seguidor->id,
-						'name'     => $res->seguidor->name,
-						'usuario'  => $res->seguidor->user_name,
-						
-						
-					);
-				}
+			$res = Coleccion::find($id)->delete();
+		
+			return response()->json(['data' => 'done', 'message' => 'Se ha cancelado la Coleccion.']);
+		} catch (\Exception $th) {
+			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
+		}
+	}
+
+
+	public function HistorialColeccion($id)
+	{
+		try {
+
+			$reserva  = Coleccion::where('user_id', $id)->get();
+
+			$array = [];
+
+			foreach ($reserva as $res) {
+				$array[] = array(
+					'id'          => $res->id,
+					'negocio'    => $res->negocio->name,
+					'store_id'    => $res->store_id,
+					'user_id'     => $res->user_id,
+					'usuario'    => $res->usuario->name,
 			
-				return response()->json(['cantidad' => $cantidad,'data' => $array]);
-	
-		
-			} catch (\Exception $th) {
-				return response()->json(['data' => "error", 'error' => $th->getMessage()]);
+
+				);
 			}
+
+			return response()->json(['data' => $array]);
+		} catch (\Exception $th) {
+			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}
-	
+	}
+
 }
