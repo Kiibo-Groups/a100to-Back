@@ -625,20 +625,40 @@ class User extends Authenticatable
         $mayorRango = $mayor;
 
         $precios          = isset($_GET['precios']) ? $_GET['precios'] : 0;
-        list($menorP, $mayorP) = explode("-", $precios);
-        $menorPrecio = $menorP;
-        $mayorPrecio = $mayorP;
+        
+        if ( $precios >= 1000) {
+            $menorPrecio =  $precios ;
+            $mayorPrecio =  0;
+        } else {
+            list($menorP, $mayorP) = explode("-", $precios);
+            $menorPrecio = $menorP;
+            $mayorPrecio = $mayorP;
+        }
+        
+       
 
   
 
 
-
         $res  = User::where(function ($query) use ($city_id, $menorRango,  $mayorRango, $menorPrecio, $mayorPrecio) {
 
-
-            $query->where('status', 0)->where('city_id', $city_id)->whereBetween('reward', [$menorRango, $mayorRango])
+            if ($menorPrecio >= 1000) {
+             
+                $query->where('status', 0)->where('person_cost', '>=', $menorPrecio) 
+                       ->where('city_id', $city_id)->whereBetween('reward', [$menorRango, $mayorRango])
+                                  
+                ;
+            } else {
+               
+                $query->where('status', 0)->where('city_id', $city_id)->whereBetween('reward', [$menorRango, $mayorRango])
                     ->whereBetween('person_cost', [$menorPrecio, $mayorPrecio])                   
                     ;
+            }
+            
+           
+
+
+
         })->select('users.*', DB::raw("6371 * acos(cos(radians(" . $lat . ")) 
         * cos(radians(users.lat)) 
         * cos(radians(users.lng) - radians(" . $lon . ")) 
