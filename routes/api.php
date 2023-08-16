@@ -88,6 +88,7 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     Route::post('coleccion','ApiController@Coleccion');
     Route::get('colecciones/{id}','ApiController@Colecciones');
     Route::get('coleccion_eliminar/{id}','ApiController@ColeccionEliminar');
+    //Route::get('coleccion_ver/{id}','ApiController@Colecciones'); 
 
 
 
