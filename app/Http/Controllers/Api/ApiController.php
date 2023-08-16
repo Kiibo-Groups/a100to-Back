@@ -1025,7 +1025,7 @@ class ApiController extends Controller
 
 		try {
 
-dd($request);
+
 			$input         = $request->all();
 			//$res = Reserva::find($request->id_reserva);
 
@@ -1035,18 +1035,30 @@ dd($request);
 				mkdir("public/assets/img/tickets/", 0777, true);
 			}
 
+			$filename   = time() . rand(1119, 6999) ;
+	
+				// Obtener el contenido binario de la imagen
+				$imageData = file_get_contents($_FILES["imagen"]["tmp_name"]);
 
-				$filename   = time() . rand(1119, 6999) . '.' . $request->file('imagen')->getClientOriginalExtension();
-				//$input['imagen']->move($target_path, $filename);
-				//$input['imagen'] = $filename;
+				// Ruta donde deseas guardar la imagen en el servidor
+				$rutaImagen = "public/assets/img/tickets/".$filename.".jpg";
+
+				// Guardar los datos binarios en un archivo
+				if (file_put_contents($rutaImagen, $imageData)) {
+					dump("Imagen guardada en el servidor exitosamente.");
+				} else {
+					dump ("Error al guardar la imagen en el servidor.");
+				}
 		
 
-			// Movemos el archivo blob a la ruta especificada
-			if (move_uploaded_file($_FILES['imagen']['tmp_name'], $target_path)) {
-				//echo true; // Retornamos valor
-			} else {
-				//echo false; // Retornamos valor
-			}
+		
+
+			// // Movemos el archivo blob a la ruta especificada
+			// if (move_uploaded_file($_FILES['imagen']['tmp_name'], $target_path)) {
+			// 	//echo true; // Retornamos valor
+			// } else {
+			// 	//echo false; // Retornamos valor
+			// }
 
 			$tickets   = Tickets::create([
 				'id_cliente'   => $request->id_cliente,		
