@@ -1023,6 +1023,8 @@ class ApiController extends Controller
 	public function Tickets(Request $request)
 	{
 
+		$imagen = $request->file('imagen');
+dd($imagen);
 		try {
 
 
