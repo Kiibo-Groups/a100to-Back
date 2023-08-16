@@ -52,6 +52,7 @@ use App\Http\Controllers\NodejsServer;
 use App\Http\Controllers\WhatsAppCloud;
 use App\Http\Controllers\OpenpayController;
 use App\Models\Coleccion;
+use App\Models\Coleccioninit;
 use App\Models\Follow;
 
 class ApiController extends Controller
@@ -1275,6 +1276,40 @@ class ApiController extends Controller
 
 
 	// ----------------Coleccion ----------------
+
+	public function Coleccion(Request $request)
+	{
+		try {
+
+
+			$input         = $request->all();
+		
+			$target_path = "public/assets/img/coleccion/";
+
+			if ($request->file('imagen')) {
+
+				$filename   = time() . rand(1119, 6999) . '.' . $request->file('imagen')->getClientOriginalExtension();
+				$input['imagen']->move($target_path, $filename);
+				$input['imagen'] = $filename;
+			}
+
+			$coleccion   = Coleccioninit::create([
+				'nombre'   => $request->nombre,
+				'id_user'  => $request->id_user,
+				'imagen'   => $target_path . $filename,
+
+			]);
+
+
+			if (!$coleccion) {
+				return response()->json(['code' => 500, 'data' => null, 'message' => 'Ha ocurrido un error al crear Coleccion.']);
+			}
+
+			return response()->json(['code' => 200, 'data' => $coleccion, 'message' => 'Se ha creado la Coleccion.']);
+		} catch (\Throwable $th) {
+			return response()->json(['data' => $th]);
+		}
+	}
 
 	public function CrearColeccion(Request $request)
 	{

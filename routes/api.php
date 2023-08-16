@@ -85,6 +85,10 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     Route::get('SearchFilters/{city}','ApiController@SearchFilters');
 
     /** * Colecciones  */
+    Route::post('coleccion','ApiController@Coleccion');
+
+
+
     Route::post('crear_coleccion','ApiController@CrearColeccion');
     Route::get('cancelar_coleccion/{id}','ApiController@CancelarColeccion');
     Route::get('historial_coleccion/{id}','ApiController@HistorialColeccion');

@@ -96,6 +96,7 @@ return array(
     'App\\Models\\Category_addon' => $baseDir . '/app/Models/Category_addon.php',
     'App\\Models\\City' => $baseDir . '/app/Models/City.php',
     'App\\Models\\Coleccion' => $baseDir . '/app/Models/Coleccion.php',
+    'App\\Models\\Coleccioninit' => $baseDir . '/app/Models/Coleccioninit.php',
     'App\\Models\\Delivery' => $baseDir . '/app/Models/Delivery.php',
     'App\\Models\\Deposit' => $baseDir . '/app/Models/Deposit.php',
     'App\\Models\\Favorites' => $baseDir . '/app/Models/Favorites.php',

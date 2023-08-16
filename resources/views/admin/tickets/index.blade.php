@@ -54,7 +54,7 @@ Administrar tickets
                                                     {{ $row->negocio->name }}
                                                     @endif
                                                     
-                                                    </td>
+                                                </td>
                                                 <td class="col-md-3">{{ $row->usuario->name }}</td>
                                                 <td class="col-md-2"  style="text-align: center">{{ date('d-M-Y', strtotime($row->created_at)) }}</td>
                                                 <td class="col-md-1"  style="text-align: center">
