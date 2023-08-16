@@ -1023,44 +1023,55 @@ class ApiController extends Controller
 	public function Tickets(Request $request)
 	{
 
-		$imagen = $request->file('imagen');
-dd($imagen);
 		try {
+		
 
+			//$input  = $request->all();
+			//$imagen = $input['imagen'];
+			$imagen = $request->imagen;
 
-			$input         = $request->all();
-			//$res = Reserva::find($request->id_reserva);
-
+			//
 
 			$target_path = "public/assets/img/tickets/";
 			if (!file_exists("public/assets/img/tickets/")) {
 				mkdir("public/assets/img/tickets/", 0777, true);
 			}
+			//dd('requestxxx');
 
-			$filename   = time() . rand(1119, 6999) ;
+			// Cadena base64 de la imagen
+			//$base64Image = "data:image/jpeg;base64,/9j/4AAQSk..."; // 
+
+			//$base64Image ="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAApgAAAKYB3X3/OAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAANCSURBVEiJtZZPbBtFFMZ/M7ubXdtdb1xSFyeilBapySVU8h8OoFaooFSqiihIVIpQBKci6KEg9Q6H9kovIHoCIVQJJCKE1ENFjnAgcaSGC6rEnxBwA04Tx43t2FnvDAfjkNibxgHxnWb2e/u992bee7tCa00YFsffekFY+nUzFtjW0LrvjRXrCDIAaPLlW0nHL0SsZtVoaF98mLrx3pdhOqLtYPHChahZcYYO7KvPFxvRl5XPp1sN3adWiD1ZAqD6XYK1b/dvE5IWryTt2udLFedwc1+9kLp+vbbpoDh+6TklxBeAi9TL0taeWpdmZzQDry0AcO+jQ12RyohqqoYoo8RDwJrU+qXkjWtfi8Xxt58BdQuwQs9qC/afLwCw8tnQbqYAPsgxE1S6F3EAIXux2oQFKm0ihMsOF71dHYx+f3NND68ghCu1YIoePPQN1pGRABkJ6Bus96CutRZMydTl+TvuiRW1m3n0eDl0vRPcEysqdXn+jsQPsrHMquGeXEaY4Yk4wxWcY5V/9scqOMOVUFthatyTy8QyqwZ+kDURKoMWxNKr2EeqVKcTNOajqKoBgOE28U4tdQl5p5bwCw7BWquaZSzAPlwjlithJtp3pTImSqQRrb2Z8PHGigD4RZuNX6JYj6wj7O4TFLbCO/Mn/m8R+h6rYSUb3ekokRY6f/YukArN979jcW+V/S8g0eT/N3VN3kTqWbQ428m9/8k0P/1aIhF36PccEl6EhOcAUCrXKZXXWS3XKd2vc/TRBG9O5ELC17MmWubD2nKhUKZa26Ba2+D3P+4/MNCFwg59oWVeYhkzgN/JDR8deKBoD7Y+ljEjGZ0sosXVTvbc6RHirr2reNy1OXd6pJsQ+gqjk8VWFYmHrwBzW/n+uMPFiRwHB2I7ih8ciHFxIkd/3Omk5tCDV1t+2nNu5sxxpDFNx+huNhVT3/zMDz8usXC3ddaHBj1GHj/As08fwTS7Kt1HBTmyN29vdwAw+/wbwLVOJ3uAD1wi/dUH7Qei66PfyuRj4Ik9is+hglfbkbfR3cnZm7chlUWLdwmprtCohX4HUtlOcQjLYCu+fzGJH2QRKvP3UNz8bWk1qMxjGTOMThZ3kvgLI5AzFfo379UAAAAASUVORK5CYII="; // 
+
+
+			$base64Image =$imagen ; // 
+
+			// Obtener el tipo y los datos binarios desde la cadena base64
+			list($type, $data) = explode(';', $base64Image);
+			list(, $data)      = explode(',', $data);
+
+			// Decodificar los datos binarios de base64
+			$filename   = time() . rand(1119, 6999).'.jpg' ;
+			$imageData = base64_decode($data);
+			$rutaImagenJPG = "public/assets/img/tickets/".$filename;
+
+			file_put_contents($rutaImagenJPG, $imageData);
+
+			// $filename   = time() . rand(1119, 6999) ;
 	
-				// Obtener el contenido binario de la imagen
-				$imageData = file_get_contents($_FILES["imagen"]["tmp_name"]);
+			// 	// Obtener el contenido binario de la imagen
+			// 	$imageData = file_get_contents($_FILES["imagen"]["tmp_name"]);
 
-				// Ruta donde deseas guardar la imagen en el servidor
-				$rutaImagen = "public/assets/img/tickets/".$filename.".jpg";
+			// 	// Ruta donde deseas guardar la imagen en el servidor
+			// 	$rutaImagen = "public/assets/img/tickets/".$filename.".jpg";
 
-				// Guardar los datos binarios en un archivo
-				if (file_put_contents($rutaImagen, $imageData)) {
-					dump("Imagen guardada en el servidor exitosamente.");
-				} else {
-					dump ("Error al guardar la imagen en el servidor.");
-				}
-		
+			// 	// Guardar los datos binarios en un archivo
+			// 	if (file_put_contents($rutaImagen, $imageData)) {
+			// 		dump("Imagen guardada en el servidor exitosamente.");
+			// 	} else {
+			// 		dump ("Error al guardar la imagen en el servidor.");
+			// 	}
 
-		
-
-			// // Movemos el archivo blob a la ruta especificada
-			// if (move_uploaded_file($_FILES['imagen']['tmp_name'], $target_path)) {
-			// 	//echo true; // Retornamos valor
-			// } else {
-			// 	//echo false; // Retornamos valor
-			// }
 
 			$tickets   = Tickets::create([
 				'id_cliente'   => $request->id_cliente,		

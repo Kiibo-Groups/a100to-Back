@@ -20,13 +20,13 @@
                 <li>
                     <a href="{{ Asset(env('user') . '/setting') }}" class=" menu-link">Configuración</a>
                 </li>
-                <li>
+               {{-- <li>
                     <a href="{{ Asset(env('user') . '/cashback') }}" class=" menu-link">CashBack</a>
-                </li>
+                </li>--}}
             </ul>
         </div>
 
-    <li>
+ {{--   <li>
         <a href="#sidebarAuth" data-bs-toggle="collapse">
             <i class="mdi mdi-file-multiple"></i>
             <span> Catálogo </span>
@@ -47,8 +47,15 @@
             </ul>
         </div>
     </li>
+--}}
 
-
+    <li>
+        <a href="{{ Asset(env('user') . '/cashback') }}" class=" menu-link">
+            <i class="mdi mdi-file"></i>
+            <span>
+                CashBack </span>
+        </a>
+    </li>
     <li>
         <a href="{{ Asset(env('user') . '/reservas') }}" class=" menu-link">
             <i class="mdi mdi-folder-outline"></i>
@@ -58,7 +65,7 @@
     </li>
 
 
-    <li>
+   {{-- <li>
         <a href="#sidebarExpages" data-bs-toggle="collapse">
 
             <i class="icon-placeholder mdi mdi-cart"></i>
@@ -130,9 +137,9 @@
                 </li>
             </ul>
         </div>
-    </li>
+    </li>--}}
 
-
+{{--
     @if (Auth::user()->d_repo == 0)
         <li>
             <a href="{{ Asset('report') }}" class=" menu-link">
@@ -147,7 +154,7 @@
                 <span> Reportes </span>
             </a>
         </li>
-    @endif
+    @endif--}}
 
 
     <li>
