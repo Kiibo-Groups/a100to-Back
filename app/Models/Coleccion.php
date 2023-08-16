@@ -20,6 +20,7 @@ class Coleccion extends Model
     'id',
     'store_id',
     'user_id',
+    'id_coleccion',
  
     'created_at',
     'updated_at',
@@ -33,5 +34,9 @@ class Coleccion extends Model
 
     public function negocio(){
         return $this->belongsTo(User::class, 'store_id' ,'id');
+    }
+
+    public function coleccion(){
+        return $this->belongsTo(Coleccioninit::class, 'id_coleccion' ,'id');
     }
 }

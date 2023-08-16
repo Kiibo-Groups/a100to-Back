@@ -26,4 +26,7 @@ class Coleccioninit extends Model
     'deleted_at'
 
     ];
+    public function usuario(){
+        return $this->belongsTo(AppUser::class, 'id_user' ,'id');
+    }
 }

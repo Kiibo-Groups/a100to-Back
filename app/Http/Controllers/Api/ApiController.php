@@ -1031,26 +1031,31 @@ class ApiController extends Controller
 
 
 			$target_path = "public/assets/img/tickets/";
+			if (!file_exists("public/assets/img/tickets/")) {
+				mkdir("public/assets/img/tickets/", 0777, true);
+			}
 
-			if ($request->file('imagen')) {
 
 				$filename   = time() . rand(1119, 6999) . '.' . $request->file('imagen')->getClientOriginalExtension();
-				$input['imagen']->move($target_path, $filename);
-				$input['imagen'] = $filename;
+				//$input['imagen']->move($target_path, $filename);
+				//$input['imagen'] = $filename;
+		
+
+			// Movemos el archivo blob a la ruta especificada
+			if (move_uploaded_file($_FILES['imagen']['tmp_name'], $target_path)) {
+				//echo true; // Retornamos valor
+			} else {
+				//echo false; // Retornamos valor
 			}
 
 			$tickets   = Tickets::create([
-				'id_cliente'   => $request->id_cliente,
-				//'id_negocio'   => $res->store_id,
-				//'reserva'      => $res->id,
+				'id_cliente'   => $request->id_cliente,		
 				'imagen'       => $target_path . $filename,
 
 			]);
 
 
-
-			//$res->status = 2;
-			//$res->save();
+			
 
 			if (!$tickets) {
 				return response()->json(['code' => 500, 'data' => null, 'message' => 'Ha ocurrido un error al crear Tickets.']);
@@ -1311,17 +1316,55 @@ class ApiController extends Controller
 		}
 	}
 
-	public function CrearColeccion(Request $request)
+	public function Colecciones($id)
 	{
 		try {
 
-			
+			$coleccion  = Coleccioninit::where('id_user', $id)->get();
+
+			$array = [];
+
+			foreach ($coleccion as $res) {
+				$array[] = array(
+					'id'          => $res->id,
+					'nombre'    => $res->nombre,
+					'id_user'     => $res->id_user,
+					'usuario'    => $res->usuario->name,
+				);
+			}
+
+			return response()->json(['data' => $array]);
+		} catch (\Exception $th) {
+			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
+		}
+	}
+
+
+	public function ColeccionEliminar($id)
+	{
+		try {
+
+			$res = Coleccioninit::find($id)->delete();
+		
+			return response()->json(['data' => 'done', 'message' => 'Se ha Eliminado la Coleccion.']);
+		} catch (\Exception $th) {
+			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
+		}
+	}
+
+
+
+
+
+	public function CrearColeccion(Request $request)
+	{
+		try {
+	
 
 			$coleccion   = Coleccion::create([
-				'store_id'   => $request->store_id,
+				'store_id'     => $request->store_id,
 				'user_id'      => $request->user_id,
-				
-
+				'id_coleccion' => $request->id_coleccion,
 
 			]);
 
@@ -1358,11 +1401,13 @@ class ApiController extends Controller
 
 			foreach ($reserva as $res) {
 				$array[] = array(
-					'id'          => $res->id,
-					'negocio'    => $res->negocio->name,
-					'store_id'    => $res->store_id,
-					'user_id'     => $res->user_id,
-					'usuario'    => $res->usuario->name,
+					'id'           => $res->id,
+					'negocio'      => $res->negocio->name,
+					'store_id'     => $res->store_id,
+					'user_id'      => $res->user_id,
+					'usuario'      => $res->usuario->name,
+					'id_coleccion' => $res->id_coleccion,
+					'coleccion'    => $res->coleccion->nombre,
 			
 
 				);
