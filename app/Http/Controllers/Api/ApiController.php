@@ -1025,7 +1025,7 @@ class ApiController extends Controller
 
 		try {
 
-
+dd($request);
 			$input         = $request->all();
 			//$res = Reserva::find($request->id_reserva);
 
