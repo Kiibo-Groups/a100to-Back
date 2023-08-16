@@ -1026,9 +1026,9 @@ class ApiController extends Controller
 		try {
 		
 
-			//$input  = $request->all();
-			//$imagen = $input['imagen'];
-			$imagen = $request->imagen;
+			$input  = $request->all();
+			$imagen = $input['imagen'];
+			//$imagen = $request->imagen;
 
 			//
 
@@ -1051,7 +1051,7 @@ class ApiController extends Controller
 			list(, $data)      = explode(',', $data);
 
 			// Decodificar los datos binarios de base64
-			$filename   = time() . rand(1119, 6999).'.jpg' ;
+			$filename   = time() . rand(1119, 6999).'.png' ;
 			$imageData = base64_decode($data);
 			$rutaImagenJPG = "public/assets/img/tickets/".$filename;
 
