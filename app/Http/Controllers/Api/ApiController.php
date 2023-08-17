@@ -54,6 +54,7 @@ use App\Http\Controllers\OpenpayController;
 use App\Models\Coleccion;
 use App\Models\Coleccioninit;
 use App\Models\Follow;
+use App\Models\Follownegocios;
 
 class ApiController extends Controller
 {
@@ -1423,13 +1424,6 @@ class ApiController extends Controller
 
 
 
-
-
-
-
-
-
-
 	public function CrearColeccion(Request $request)
 	{
 		try {
@@ -1492,4 +1486,69 @@ class ApiController extends Controller
 			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}
 	}
+
+
+
+
+	// ----------------Follow ----------------
+	public function FollowNegocio(Request $request)
+	{
+		try {
+
+			$follow   = Follownegocios::create([
+				'store_id'   => $request->store_id,
+				'user_id'    => $request->user_id,
+			]);
+
+			if (!$follow) {
+				return response()->json(['code' => 500, 'data' => null, 'message' => 'Ha ocurrido un error al crear Follow.']);
+			}
+
+			return response()->json(['code' => 200, 'data' => $follow, 'message' => 'Se ha creado el Follow.']);
+		} catch (\Throwable $th) {
+			return response()->json(['data' => "error"]);
+		}
+	}
+
+
+	public function FollowNegocioVer($id)
+	{
+		try {
+
+			$follow  = Follownegocios::where('user_id', $id)->get();
+			//$cantidad = $reserva->count();
+			$array = [];
+
+			foreach ($follow as $res) {
+				$array[] = array(
+					'id'       => $res->id,
+					'name'     => $res->usuario->name,
+					'user_id'  => $res->usuario->id,
+					'store'  => $res->negocio->name,
+					'store_id'  => $res->negocio->id,
+
+
+				);
+			}
+
+			return response()->json(['code' => 200,  'data' => $array]);
+		} catch (\Exception $th) {
+			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
+		}
+	}
+
+
+	public function FollowNegocioEliminar($id)
+	{
+		try {
+
+			$res = Follownegocios::find($id)->delete();
+
+			return response()->json(['data' => 'done', 'message' => 'Se ha Eliminado el Follow.']);
+		} catch (\Exception $th) {
+			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
+		}
+	}
+
+
 }

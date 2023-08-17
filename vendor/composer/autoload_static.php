@@ -784,6 +784,7 @@ class ComposerStaticInitedc0ba0ba2ba66b90f1da7e80a290d66
         'App\\Models\\Deposit' => __DIR__ . '/../..' . '/app/Models/Deposit.php',
         'App\\Models\\Favorites' => __DIR__ . '/../..' . '/app/Models/Favorites.php',
         'App\\Models\\Follow' => __DIR__ . '/../..' . '/app/Models/Follow.php',
+        'App\\Models\\Follownegocios' => __DIR__ . '/../..' . '/app/Models/Follownegocios.php',
         'App\\Models\\Item' => __DIR__ . '/../..' . '/app/Models/Item.php',
         'App\\Models\\ItemAddon' => __DIR__ . '/../..' . '/app/Models/ItemAddon.php',
         'App\\Models\\ItemLoyalty' => __DIR__ . '/../..' . '/app/Models/ItemLoyalty.php',

@@ -101,6 +101,7 @@ return array(
     'App\\Models\\Deposit' => $baseDir . '/app/Models/Deposit.php',
     'App\\Models\\Favorites' => $baseDir . '/app/Models/Favorites.php',
     'App\\Models\\Follow' => $baseDir . '/app/Models/Follow.php',
+    'App\\Models\\Follownegocios' => $baseDir . '/app/Models/Follownegocios.php',
     'App\\Models\\Item' => $baseDir . '/app/Models/Item.php',
     'App\\Models\\ItemAddon' => $baseDir . '/app/Models/ItemAddon.php',
     'App\\Models\\ItemLoyalty' => $baseDir . '/app/Models/ItemLoyalty.php',
