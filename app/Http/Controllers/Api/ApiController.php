@@ -1022,7 +1022,7 @@ class ApiController extends Controller
 
 	public function Tickets(Request $request)
 	{
-
+//dd($request->imagen);
 		try {
 		
 
@@ -1036,7 +1036,7 @@ class ApiController extends Controller
 			if (!file_exists("public/assets/img/tickets/")) {
 				mkdir("public/assets/img/tickets/", 0777, true);
 			}
-			//dd('requestxxx');
+		
 
 			// Cadena base64 de la imagen
 			//$base64Image = "data:image/jpeg;base64,/9j/4AAQSk..."; // 
@@ -1056,21 +1056,6 @@ class ApiController extends Controller
 			$rutaImagenJPG = "public/assets/img/tickets/".$filename;
 
 			file_put_contents($rutaImagenJPG, $imageData);
-
-			// $filename   = time() . rand(1119, 6999) ;
-	
-			// 	// Obtener el contenido binario de la imagen
-			// 	$imageData = file_get_contents($_FILES["imagen"]["tmp_name"]);
-
-			// 	// Ruta donde deseas guardar la imagen en el servidor
-			// 	$rutaImagen = "public/assets/img/tickets/".$filename.".jpg";
-
-			// 	// Guardar los datos binarios en un archivo
-			// 	if (file_put_contents($rutaImagen, $imageData)) {
-			// 		dump("Imagen guardada en el servidor exitosamente.");
-			// 	} else {
-			// 		dump ("Error al guardar la imagen en el servidor.");
-			// 	}
 
 
 			$tickets   = Tickets::create([
@@ -1312,16 +1297,36 @@ class ApiController extends Controller
 		try {
 
 
-			$input         = $request->all();
+			$input  = $request->all();
+			$imagen = $input['imagen'];
 		
 			$target_path = "public/assets/img/coleccion/";
 
-			if ($request->file('imagen')) {
-
-				$filename   = time() . rand(1119, 6999) . '.' . $request->file('imagen')->getClientOriginalExtension();
-				$input['imagen']->move($target_path, $filename);
-				$input['imagen'] = $filename;
+			if (!file_exists("public/assets/img/coleccion/")) {
+				mkdir("public/assets/img/coleccion/", 0777, true);
 			}
+
+			// if ($request->file('imagen')) {
+
+			// 	$filename   = time() . rand(1119, 6999) . '.' . $request->file('imagen')->getClientOriginalExtension();
+			// 	$input['imagen']->move($target_path, $filename);
+			// 	$input['imagen'] = $filename;
+			// }
+
+		
+			$base64Image =$imagen ; // 
+
+			// Obtener el tipo y los datos binarios desde la cadena base64
+			list($type, $data) = explode(';', $base64Image);
+			list(, $data)      = explode(',', $data);
+
+			// Decodificar los datos binarios de base64
+			$filename   = time() . rand(1119, 6999).'.png' ;
+			$imageData = base64_decode($data);
+			$rutaImagenJPG = "public/assets/img/coleccion/".$filename;
+
+			file_put_contents($rutaImagenJPG, $imageData);
+
 
 			$coleccion   = Coleccioninit::create([
 				'nombre'   => $request->nombre,
@@ -1351,10 +1356,11 @@ class ApiController extends Controller
 
 			foreach ($coleccion as $res) {
 				$array[] = array(
-					'id'          => $res->id,
+					'id'        => $res->id,
 					'nombre'    => $res->nombre,
-					'id_user'     => $res->id_user,
-					'usuario'    => $res->usuario->name,
+					'id_user'   => $res->id_user,
+					'usuario'   => $res->usuario->name,
+					'imagen'    => asset($res->imagen),
 				);
 			}
 
@@ -1376,6 +1382,44 @@ class ApiController extends Controller
 			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}
 	}
+
+
+	public function ColeccionesVer($id)
+	{
+		try {
+
+			$reserva  = Coleccion::where('id_coleccion', $id)->get();
+
+			$array = [];
+
+			foreach ($reserva as $res) {
+				$array[] = array(
+					'id'           => $res->id,
+					'negocio'      => $res->negocio->name,
+					'store_id'     => $res->store_id,
+					'user_id'      => $res->user_id,
+					'usuario'      => $res->usuario->name,
+					'id_coleccion' => $res->id_coleccion,
+					'coleccion'    => $res->coleccion->nombre,
+			
+
+				);
+			}
+
+			return response()->json(['data' => $array]);
+		} catch (\Exception $th) {
+			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
+		}
+	}
+
+
+
+
+
+
+
+
+
 
 
 
