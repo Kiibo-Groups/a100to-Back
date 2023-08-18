@@ -525,29 +525,62 @@ class ApiController extends Controller
 
 	public function ImagenUsuario(Request $request)
 	{
+			
 		$input  = $request->all();
-
-		$id = $input['id'];
+		$imagen = $input['imagen'];
+		$tipo   = $input['tipo'];
+		$id     = $input['id_user'];
 
 		$target_path = "public/upload/perfil/";
+
+
 		if (!file_exists("public/upload/perfil/")) {
 			mkdir("public/upload/perfil/", 0777, true);
 		}
-		$filename   = time() . rand(1119, 6999) . '.' . $request->file('foto')->getClientOriginalExtension();
-		// Recibimos nombre del archivo y lo asociamos a la ruta
-		//$target_path = $target_path .basename($_FILES['foto']['name']);
-		$target_path = $target_path . $filename;
 
-		// Movemos el archivo blob a la ruta especificada
-		if (move_uploaded_file($_FILES['foto']['tmp_name'], $target_path)) {
-			echo true; // Retornamos valor
+
+		// $filename   = time() . rand(1119, 6999) . '.' . $request->file('foto')->getClientOriginalExtension();
+		// // Recibimos nombre del archivo y lo asociamos a la ruta
+		// //$target_path = $target_path .basename($_FILES['foto']['name']);
+		// $target_path = $target_path . $filename;
+
+		// // Movemos el archivo blob a la ruta especificada
+		// if (move_uploaded_file($_FILES['foto']['tmp_name'], $target_path)) {
+		// 	echo true; // Retornamos valor
+		// } else {
+		// 	echo false; // Retornamos valor
+		// }
+
+
+		if ($tipo == 1) {
+			if ($request->file('imagen')) {
+
+				$filename   = time() . rand(1119, 6999) . '.' . $request->file('imagen')->getClientOriginalExtension();
+				$input['imagen']->move($target_path, $filename);
+				$input['imagen'] = $filename;
+			}
 		} else {
-			echo false; // Retornamos valor
+			$base64Image = $imagen; // 
+
+			// Obtener el tipo y los datos binarios desde la cadena base64
+			list($type, $data) = explode(';', $base64Image);
+			list(, $data)      = explode(',', $data);
+
+			// Decodificar los datos binarios de base64
+			$filename   = time() . rand(1119, 6999) . '.png';
+			$imageData = base64_decode($data);
+			$rutaImagenJPG = "public/assets/img/coleccion/" . $filename;
+
+			file_put_contents($rutaImagenJPG, $imageData);
 		}
 
 
+
+
+
+
 		$res = AppUser::find($id);
-		$res->foto = $target_path;
+		$res->foto = $target_path . $filename;
 		$res->save();
 
 		if (!$res) {
