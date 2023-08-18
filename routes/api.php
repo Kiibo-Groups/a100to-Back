@@ -94,7 +94,7 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
 
     Route::post('asignar_coleccion','ApiController@CrearColeccion');
     Route::get('cancelar_coleccion/{id}','ApiController@CancelarColeccion');
-    Route::get('historial_coleccion/{id}','ApiController@HistorialColeccion');
+    Route::get('historial_coleccion_asignadas/{id}','ApiController@HistorialColeccion');
 
     /*** Follow  */
     Route::post('follow','ApiController@FollowNegocio');
