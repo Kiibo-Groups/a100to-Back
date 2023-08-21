@@ -1559,7 +1559,8 @@ class ApiController extends Controller
 					'user_id'  => $res->usuario->id,
 					'store'  => $res->negocio->name,
 					'store_id'  => $res->negocio->id,
-					'imagen'    => asset($res->negocio->img),
+					'imagen'    => asset('upload/user/' .$res->negocio->img),
+				
 
 
 				);
