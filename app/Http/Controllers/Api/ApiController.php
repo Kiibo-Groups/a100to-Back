@@ -1332,12 +1332,12 @@ class ApiController extends Controller
 		
 		try {
 			
-
+			return response()->json(['code' => 200, 'data' => $request, 'message' => 'Se holaa.']);
 			$input  = $request->all();
 			$imagen = $input['imagen'];
 			$tipo   = $input['tipo'];
 
-			return response()->json(['code' => 200, 'data' => 'input', 'message' => 'Se holaa.']);
+			
 			$target_path = "public/assets/img/coleccion/";
 		
 			if (!file_exists("public/assets/img/coleccion/")) {
