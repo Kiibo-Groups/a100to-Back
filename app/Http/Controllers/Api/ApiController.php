@@ -1328,7 +1328,7 @@ class ApiController extends Controller
 
 	public function Coleccion(Request $request)
 	{
-		dd( $request);
+		return response()->json(['code' => 200, 'data' => 'coleccion', 'message' => 'Se holaa.']);
 		
 		try {
 
@@ -1343,7 +1343,7 @@ class ApiController extends Controller
 			if (!file_exists("public/assets/img/coleccion/")) {
 				mkdir("public/assets/img/coleccion/", 0777, true);
 			}
-			return response()->json(['code' => 200, 'data' => 'coleccion', 'message' => 'Se holaa.']);
+
 			if ($tipo == 'a') {
 
 				dd('dentro');
