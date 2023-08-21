@@ -1345,6 +1345,8 @@ class ApiController extends Controller
 
 			if ($tipo == 'a') {
 
+				dd('dentro');
+
 				if ($request->file('imagen')) {
 
 					$filename   = time() . rand(1119, 6999) . '.' . $request->file('imagen')->getClientOriginalExtension();
