@@ -1343,7 +1343,8 @@ class ApiController extends Controller
 				mkdir("public/assets/img/coleccion/", 0777, true);
 			}
 
-			if ($tipo == 1) {
+			if ($tipo == 'a') {
+
 				if ($request->file('imagen')) {
 
 					$filename   = time() . rand(1119, 6999) . '.' . $request->file('imagen')->getClientOriginalExtension();
