@@ -1328,6 +1328,7 @@ class ApiController extends Controller
 
 	public function Coleccion(Request $request)
 	{
+		dd( $request);
 		
 		try {
 
