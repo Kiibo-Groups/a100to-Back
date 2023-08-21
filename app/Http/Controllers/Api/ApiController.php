@@ -1331,9 +1331,9 @@ class ApiController extends Controller
 		
 		
 		try {
-			
-			return response()->json(['code' => 200, 'data' => $request->all(), 'message' => 'Se holaa.']);
-			$input  = $request->all();
+			$input  = $request->get('tipo');
+			return response()->json(['code' => 200, 'data' => $input , 'message' => 'Se holaa.']);
+			$input  = $request->get('tipo');
 			$imagen = $input['imagen'];
 			$tipo   = $input['tipo'];
 
