@@ -1331,9 +1331,9 @@ class ApiController extends Controller
 		
 		
 		try {
-			$input  = $request->get('tipo');
-			return response()->json(['code' => 200, 'data' => $input , 'message' => 'Se holaa.']);
-			$input  = $request->get('tipo');
+			
+			return response()->json(['code' => 200, 'data' => $request->all, 'message' => 'Se holaa.']);
+			$input  = $request->all();
 			$imagen = $input['imagen'];
 			$tipo   = $input['tipo'];
 
@@ -1346,7 +1346,7 @@ class ApiController extends Controller
 
 			if ($tipo == 1) {
 
-				
+				dd('dentro');
 
 				if ($request->file('imagen')) {
 
