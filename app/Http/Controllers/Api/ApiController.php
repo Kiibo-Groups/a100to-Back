@@ -1344,9 +1344,9 @@ class ApiController extends Controller
 				mkdir("public/assets/img/coleccion/", 0777, true);
 			}
 
-			if ($tipo == 'a') {
+			if ($tipo == 1) {
 
-				dd('dentro');
+				
 
 				if ($request->file('imagen')) {
 
