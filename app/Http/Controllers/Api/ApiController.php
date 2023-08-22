@@ -509,10 +509,6 @@ class ApiController extends Controller
 				];
 			}
 
-
-
-
-
 			return response()->json([
 				'data' => $data,
 
@@ -539,19 +535,6 @@ class ApiController extends Controller
 		}
 
 
-		// $filename   = time() . rand(1119, 6999) . '.' . $request->file('foto')->getClientOriginalExtension();
-		// // Recibimos nombre del archivo y lo asociamos a la ruta
-		// //$target_path = $target_path .basename($_FILES['foto']['name']);
-		// $target_path = $target_path . $filename;
-
-		// // Movemos el archivo blob a la ruta especificada
-		// if (move_uploaded_file($_FILES['foto']['tmp_name'], $target_path)) {
-		// 	echo true; // Retornamos valor
-		// } else {
-		// 	echo false; // Retornamos valor
-		// }
-
-
 		if ($tipo == 1) {
 			if ($request->file('imagen')) {
 
@@ -569,13 +552,10 @@ class ApiController extends Controller
 			// Decodificar los datos binarios de base64
 			$filename   = time() . rand(1119, 6999) . '.png';
 			$imageData = base64_decode($data);
-			$rutaImagenJPG = "public/assets/img/coleccion/" . $filename;
+			$rutaImagenJPG = $target_path . $filename;
 
 			file_put_contents($rutaImagenJPG, $imageData);
 		}
-
-
-
 
 
 
@@ -1432,18 +1412,19 @@ class ApiController extends Controller
 		try {
 
 			$reserva  = Coleccion::where('id_coleccion', $id)->get();
-
+			$store   = new User;
 			$array = [];
 
 			foreach ($reserva as $res) {
 				$array[] = array(
-					'id'           => $res->id,
-					'negocio'      => $res->negocio->name,
-					'store_id'     => $res->store_id,
+					'id'           => $res->id,				
 					'user_id'      => $res->user_id,
 					'usuario'      => $res->usuario->name,
 					'id_coleccion' => $res->id_coleccion,
 					'coleccion'    => $res->coleccion->nombre,
+					'negocio'      => $res->negocio->name,
+					'store_id'     => $res->store_id,
+					'data'         => $store->getStore($res->store_id),
 
 
 				);
@@ -1554,6 +1535,8 @@ class ApiController extends Controller
 
 			$follow  = Follownegocios::where('user_id', $id)->get();
 			//$cantidad = $reserva->count();
+
+			$store   = new User;
 			$array = [];
 
 			foreach ($follow as $res) {
@@ -1564,6 +1547,7 @@ class ApiController extends Controller
 					'store'  => $res->negocio->name,
 					'store_id'  => $res->negocio->id,
 					'imagen'    => asset('upload/user/' .$res->negocio->img),
+					'data'      => $store->getStore($res->negocio->id),
 				
 
 
