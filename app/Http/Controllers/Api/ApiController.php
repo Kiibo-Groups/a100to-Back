@@ -1267,8 +1267,8 @@ class ApiController extends Controller
 					'id'       => $res->usuario->id,
 					'name'     => $res->usuario->name,
 					'usuario'  => $res->usuario->user_name,
-
-
+					'foto'      => asset($res->usuario->foto),
+					'siguiendo' => $res->seg_seguidor,
 				);
 			}
 
@@ -1288,10 +1288,13 @@ class ApiController extends Controller
 
 			foreach ($reserva as $res) {
 				$array[] = array(
-					'id'       => $res->seguidor->id,
-					'name'     => $res->seguidor->name,
-					'usuario'  => $res->seguidor->user_name,
+					'id'        => $res->seguidor->id,
+					'name'      => $res->seguidor->name,
+					'usuario'   => $res->seguidor->user_name,
+					'foto'      => asset($res->seguidor->foto),
+					'siguiendo' => $res->siguiendo,
 
+					
 
 				);
 			}

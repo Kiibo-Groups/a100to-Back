@@ -34,4 +34,31 @@ class Follow extends Model
     public function seguidor(){
         return $this->belongsTo(AppUser::class, 'seguidor_id' ,'id');
     }
+
+
+  
+    public function getSiguiendoAttribute()
+    {
+        $seguido_id  = $this->seguido_id;
+        $seguidor_id = $this->seguidor_id;
+
+        $reserva  = Follow::where('seguidor_id', $seguido_id)->where('seguido_id', $seguidor_id)->get();
+		$cantidad = $reserva->count();
+      
+
+      //  $valor = Cuentas::where('concepto', $concepto)->where('tienda_id', $tienda_id)->value('detallepago');
+        return $cantidad;
+    }
+    public function getSegSeguidorAttribute()
+    {
+        $seguido_id  = $this->seguido_id;
+        $seguidor_id = $this->seguidor_id;
+
+        $reserva  = Follow::where('seguidor_id', $seguido_id)->where('seguido_id', $seguidor_id)->get();
+		$cantidad = $reserva->count();
+      
+
+      //  $valor = Cuentas::where('concepto', $concepto)->where('tienda_id', $tienda_id)->value('detallepago');
+        return $cantidad;
+    }
 }
