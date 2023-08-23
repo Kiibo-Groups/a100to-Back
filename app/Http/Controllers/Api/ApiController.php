@@ -1305,6 +1305,20 @@ class ApiController extends Controller
 		}
 	}
 
+	public function Eliminarfollow(Request $request)
+	{
+		try {
+
+			$follow  = Follow::where('seguidor_id', $request->seguidor_id)->where('seguido_id', $request->seguido_id)->value('id');
+		
+			$res = Follow::find($follow)->delete();
+
+			return response()->json(['data' => 'done', 'message' => 'Se ha Cancelado el Follow.']);
+		} catch (\Exception $th) {
+			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
+		}
+	}
+
 
 
 	// ----------------Coleccion ----------------

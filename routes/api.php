@@ -79,6 +79,7 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     Route::post('seguir_follow','ApiController@SeguirFollow');
     Route::get('ver_seguidos_follow/{id}','ApiController@SeguirVerFollow');
     Route::get('ver_seguidores_follow/{id}','ApiController@SeguidoresVerFollow');
+    Route::get('cancelar_follow','ApiController@Eliminarfollow');
 
     /* Filter */
 
