@@ -71,7 +71,7 @@
         <!-- Topbar Start -->
         <div class="navbar-custom">
             <ul class="list-unstyled topnav-menu float-end mb-0" style="margin-top: 10px; margin-right: 70px">
-
+{{--
                 <li class="dropdown notification-list topbar-dropdown">
                     @php
                         $user 	= new App\Models\User;
@@ -95,7 +95,7 @@
                                 <i class="mdi mdi-trending-up"></i></span>
                         </div>
                     @endif
-                </li>
+                </li>--}}
             </ul>
             <!-- LOGO -->
             <div class="logo-box">

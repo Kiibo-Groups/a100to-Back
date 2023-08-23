@@ -1,7 +1,7 @@
 @extends('user.layout.main')
 
 @section('title')
-    Editar Tickets
+    Editar Reserva
 @endsection
 
 
@@ -15,7 +15,7 @@
                         @include('user.layout.alert')
                         {!! Form::model($data, ['url' => [$form_url], 'files' => true, 'method' => 'PATCH'], ['class' => 'col s12']) !!}
 
-                        @include('admin.reservas.form')
+                        @include('user.reservas.form')
 
                         </form>
                     </div>

@@ -17,19 +17,18 @@ class ReservasController extends Controller
      */
     public function index()
     {
-      
-            $res = new Reserva();
-        
-            $id  = auth()->user()->id;	
-            return View($this->folder.'index', [
 
-                'data' 		=> $res->where('store_id', $id)->orderBy('status', 'asc')->paginate(10),
-                'link' 		=> env('user').'/reservas/',
-                'form_url'	=> env('user').'/reservas/assign',
-               
+        $res = new Reserva();
 
-                ]);
+        $id  = auth()->user()->id;
+        return View($this->folder . 'index', [
 
+            'data'         => $res->where('store_id', $id)->orderBy('status', 'asc')->paginate(10),
+            'link'         => env('user') . '/reservas/',
+            'form_url'    => env('user') . '/reservas/assign',
+
+
+        ]);
     }
 
     /**
@@ -72,7 +71,13 @@ class ReservasController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        return View($this->folder . 'edit', [
+
+            'data'         => Reserva::find($id),
+            'form_url'     => env('user') . '/reservas/' . $id,
+
+        ]);
     }
 
     /**
@@ -82,10 +87,17 @@ class ReservasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    public function update(Request $request,$id)
+	{	
+
+     
+		$input         = $request->all();
+		$requests_data = Reserva::find($id);
+       // dd($requests_data);
+		$requests_data->update($input);
+		
+		return redirect(env('user').'/reservas')->with('message','Registro actualizado con éxito.');
+	}
 
     /**
      * Remove the specified resource from storage.
