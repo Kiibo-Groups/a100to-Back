@@ -101,6 +101,10 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     Route::get('follownegocio/{id}','ApiController@FollowNegocioVer');
     Route::get('follow_eliminar/{id}','ApiController@FollowNegocioEliminar');
 
+    /*** Top  */
+ 
+    Route::get('top_restaurantes/{id}','ApiController@topRestaurantes');
+
 
 
   

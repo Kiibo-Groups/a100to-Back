@@ -1573,5 +1573,35 @@ class ApiController extends Controller
 		}
 	}
 
+	//--------------  Top Restaurantes
+
+	public function topRestaurantes($id)
+	{
+		try {
+
+			//$reserva  = Reserva::where('user_id', $id)->orderBy('status', 'asc')->distinct()->count('store_id');
+			$reserva  =  Reserva::where('user_id', $id)->where('status', 2)->select('store_id', DB::raw('COUNT(store_id) as cantidad'))
+						->groupBy('store_id')
+						->orderBy('cantidad', 'desc')
+						->get();
+			$store   = new User;
+			$array = [];
+
+			foreach ($reserva as $res) {
+				$array[] = array(
+					'cantidad'   => $res->cantidad,
+					'store_id'   => $res->store_id,
+					'data'       => $store->getStore($res->store_id),			
+
+				);
+			}
+
+			return response()->json(['data' => $array]);
+		} catch (\Exception $th) {
+			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
+		}
+	}
+
+
 
 }
