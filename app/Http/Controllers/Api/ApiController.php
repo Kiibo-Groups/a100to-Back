@@ -53,6 +53,7 @@ use App\Models\Follownegocios;
 use Illuminate\Support\Carbon;
 use App\Models\SocialesNegocios;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\NodejsServer;
 use App\Http\Controllers\WhatsAppCloud;
 use App\Http\Controllers\OpenpayController;
@@ -522,7 +523,7 @@ class ApiController extends Controller
 
 	public function ImagenUsuario(Request $request)
 	{
-			
+
 		$input  = $request->all();
 		$imagen = $input['imagen'];
 		$tipo   = $input['tipo'];
@@ -576,7 +577,7 @@ class ApiController extends Controller
 	public function EliminarCuenta($id)
 	{
 		try {
-			
+
 			AppUser::find($id)->delete();
 
 			return response()->json(['data' => 'done', 'message' => 'Se ha Eliminada cuenta de Usuario.']);
@@ -589,19 +590,18 @@ class ApiController extends Controller
 	public function editarNombre(Request $request, $id)
 	{
 		try {
-			
-			$count  = AppUser::whereRaw('LOWER(user_name) LIKE(?)','%'.$request->nombre.'%')->count();
+
+			$count  = AppUser::whereRaw('LOWER(user_name) LIKE(?)', '%' . $request->nombre . '%')->count();
 			if ($count > 0) {
 
 				return response()->json(['data' => 'done', 'message' => 'Ya existe ese usuario, intenta uno diferente.']);
-
 			} else {
 
 				$res          = AppUser::find($id);
 				$fecha_cambio = Carbon::parse($res->fecha_cambio)->age;
 
 				if ($fecha_cambio > 0) {
-					
+
 					$res->user_name = $request->nombre;
 					$res->save();
 
@@ -609,13 +609,66 @@ class ApiController extends Controller
 				} else {
 					return response()->json(['data' => 'done', 'message' => 'No es posible cambiar el nombre del usuario por el momento.']);
 				}
-					
 			}
-						
 		} catch (\Exception $th) {
 			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}
 	}
+
+
+	public function cambiarPassword(Request $request)
+	{
+
+		$request->validate([
+			'password_actual' => ['required', 'string'],
+			'password_nuevo' => ['required', 'string',  'confirmed'],
+		]);
+
+		$user = AppUser::find($request->user_id);
+
+		if ($request->input('password_actual') !== $user->password) {
+			return response()->json(['error' => 'La contraseña actual es incorrecta.'], 401);
+		}
+
+		// $user->update([
+		//     'password' => $request->input('password_nuevo'),
+		// ]);
+		$user->password = $request->input('password_nuevo');
+		$user->save();
+
+		return response()->json(['message' => 'Contraseña cambiada exitosamente.']);
+	}
+
+	public function updateInformacion($id, Request $request)
+	{
+		
+		try {
+			$count = AppUser::where('id', '!=', $id)->where('email', $request->input('email'))->count();
+
+			if ($count == 0) {
+				$add                = AppUser::find($id);
+				$add->name          = $request->input('name');
+				$add->email         = $request->input('email');
+				$add->phone         = $request->input('phone');
+
+				$add->last_name     = $request->input('last_name');
+				$add->birthday      = $request->input('birthday');
+				$add->sex_type      = $request->input('sex_type');
+				
+			
+
+
+				$add->save();
+
+				return ['msg' => 'done', 'user_id' => $add->id];
+			} else {
+				return ['msg' => 'Este email ya existe!.'];
+			}
+		} catch (\Exception $th) {
+			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
+		}
+	}
+
 
 
 
@@ -1341,7 +1394,7 @@ class ApiController extends Controller
 					'foto'      => asset($res->seguidor->foto),
 					'siguiendo' => $res->siguiendo,
 
-					
+
 
 				);
 			}
@@ -1357,7 +1410,7 @@ class ApiController extends Controller
 		try {
 
 			$follow  = Follow::where('seguidor_id', $request->seguidor_id)->where('seguido_id', $request->seguido_id)->value('id');
-		
+
 			$res = Follow::find($follow)->delete();
 
 			return response()->json(['data' => 'done', 'message' => 'Se ha Cancelado el Follow.']);
@@ -1372,25 +1425,25 @@ class ApiController extends Controller
 
 	public function Coleccion(Request $request)
 	{
-		
-		
+
+
 		try {
-			
+
 			//return response()->json(['code' => 200, 'data' => $request, 'message' => 'Se holaa.']);
 			$input  = $request->all();
 			$imagen = $input['imagen'];
 			$tipo   = $input['tipo'];
 
-			
+
 			$target_path = "public/assets/img/coleccion/";
-		
+
 			if (!file_exists("public/assets/img/coleccion/")) {
 				mkdir("public/assets/img/coleccion/", 0777, true);
 			}
 
 			if ($tipo == 1) {
 
-				
+
 
 				if ($request->file('imagen')) {
 
@@ -1481,7 +1534,7 @@ class ApiController extends Controller
 
 			foreach ($reserva as $res) {
 				$array[] = array(
-					'id'           => $res->id,				
+					'id'           => $res->id,
 					'user_id'      => $res->user_id,
 					'usuario'      => $res->usuario->name,
 					'id_coleccion' => $res->id_coleccion,
@@ -1610,9 +1663,9 @@ class ApiController extends Controller
 					'user_id'  => $res->usuario->id,
 					'store'  => $res->negocio->name,
 					'store_id'  => $res->negocio->id,
-					'imagen'    => asset('upload/user/' .$res->negocio->img),
+					'imagen'    => asset('upload/user/' . $res->negocio->img),
 					'data'      => $store->getStore($res->negocio->id),
-				
+
 
 
 				);
@@ -1645,9 +1698,9 @@ class ApiController extends Controller
 
 			//$reserva  = Reserva::where('user_id', $id)->orderBy('status', 'asc')->distinct()->count('store_id');
 			$reserva  =  Reserva::where('user_id', $id)->where('status', 2)->select('store_id', DB::raw('COUNT(store_id) as cantidad'))
-						->groupBy('store_id')
-						->orderBy('cantidad', 'desc')
-						->get();
+				->groupBy('store_id')
+				->orderBy('cantidad', 'desc')
+				->get();
 			$store   = new User;
 			$array = [];
 
@@ -1655,7 +1708,7 @@ class ApiController extends Controller
 				$array[] = array(
 					'cantidad'   => $res->cantidad,
 					'store_id'   => $res->store_id,
-					'data'       => $store->getStore($res->store_id),			
+					'data'       => $store->getStore($res->store_id),
 
 				);
 			}
@@ -1665,7 +1718,4 @@ class ApiController extends Controller
 			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}
 	}
-
-
-
 }
