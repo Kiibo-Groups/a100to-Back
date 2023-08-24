@@ -115,7 +115,8 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
  
     Route::get('top_restaurantes/{id}','ApiController@topRestaurantes');
 
-
+    /*** Follow  */
+    Route::post('reportar','ApiController@ReportarUsuario');
 
   
     

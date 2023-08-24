@@ -119,6 +119,7 @@ return array(
     'App\\Models\\Page' => $baseDir . '/app/Models/Page.php',
     'App\\Models\\Rate' => $baseDir . '/app/Models/Rate.php',
     'App\\Models\\Rate_staff' => $baseDir . '/app/Models/Rate_staff.php',
+    'App\\Models\\Reportar' => $baseDir . '/app/Models/Reportar.php',
     'App\\Models\\Reserva' => $baseDir . '/app/Models/Reserva.php',
     'App\\Models\\Slider' => $baseDir . '/app/Models/Slider.php',
     'App\\Models\\Sociales' => $baseDir . '/app/Models/Sociales.php',

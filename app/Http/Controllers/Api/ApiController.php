@@ -57,6 +57,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\NodejsServer;
 use App\Http\Controllers\WhatsAppCloud;
 use App\Http\Controllers\OpenpayController;
+use App\Models\Reportar;
 
 class ApiController extends Controller
 {
@@ -1718,4 +1719,27 @@ class ApiController extends Controller
 			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}
 	}
+
+
+
+		// ----------------Follow ----------------
+		public function ReportarUsuario(Request $request)
+		{
+			try {
+	
+				$reporte   = Reportar::create([
+					'seguido_id'   => $request->seguido_id,
+					'seguidor_id'  => $request->user_id,
+					'detalle'  => $request->detalle,
+				]);
+	
+				if (!$reporte) {
+					return response()->json(['code' => 500, 'data' => null, 'message' => 'Ha ocurrido un error al crear Reporte.']);
+				}
+	
+				return response()->json(['code' => 200, 'data' => $reporte, 'message' => 'Se ha creado el Reporte.']);
+			} catch (\Throwable $th) {
+				return response()->json(['data' => $th]);
+			}
+		}
 }

@@ -802,6 +802,7 @@ class ComposerStaticInitedc0ba0ba2ba66b90f1da7e80a290d66
         'App\\Models\\Page' => __DIR__ . '/../..' . '/app/Models/Page.php',
         'App\\Models\\Rate' => __DIR__ . '/../..' . '/app/Models/Rate.php',
         'App\\Models\\Rate_staff' => __DIR__ . '/../..' . '/app/Models/Rate_staff.php',
+        'App\\Models\\Reportar' => __DIR__ . '/../..' . '/app/Models/Reportar.php',
         'App\\Models\\Reserva' => __DIR__ . '/../..' . '/app/Models/Reserva.php',
         'App\\Models\\Slider' => __DIR__ . '/../..' . '/app/Models/Slider.php',
         'App\\Models\\Sociales' => __DIR__ . '/../..' . '/app/Models/Sociales.php',
