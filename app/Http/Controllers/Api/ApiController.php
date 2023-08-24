@@ -22,6 +22,7 @@ use App\Models\Offer;
 use App\Models\Order;
 use App\Http\Requests;
 use App\Models\Banner;
+use App\Models\Follow;
 use App\Models\Slider;
 use App\Models\Tables;
 use App\Models\Visits;
@@ -35,26 +36,26 @@ use App\Models\Delivery;
 use App\Models\Language;
 use App\Models\Sociales;
 use App\Models\CardsUser;
+use App\Models\Coleccion;
+
 use App\Models\Favorites;
 use App\Models\OrderItem;
-
 use App\Models\CartCoupen;
 use App\Models\OfferStore;
 use App\Models\OrderAddon;
 use App\Models\Order_staff;
 use Illuminate\Http\Request;
 use App\Models\CategoryStore;
+use App\Models\Coleccioninit;
 use App\Models\Opening_times;
+
+use App\Models\Follownegocios;
+use Illuminate\Support\Carbon;
 use App\Models\SocialesNegocios;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\NodejsServer;
-
 use App\Http\Controllers\WhatsAppCloud;
 use App\Http\Controllers\OpenpayController;
-use App\Models\Coleccion;
-use App\Models\Coleccioninit;
-use App\Models\Follow;
-use App\Models\Follownegocios;
 
 class ApiController extends Controller
 {
@@ -584,6 +585,37 @@ class ApiController extends Controller
 		}
 	}
 
+
+	public function editarNombre(Request $request, $id)
+	{
+		try {
+			
+			$count  = AppUser::whereRaw('LOWER(user_name) LIKE(?)','%'.$request->nombre.'%')->count();
+			if ($count > 0) {
+
+				return response()->json(['data' => 'done', 'message' => 'Ya existe ese usuario, intenta uno diferente.']);
+
+			} else {
+
+				$res          = AppUser::find($id);
+				$fecha_cambio = Carbon::parse($res->fecha_cambio)->age;
+
+				if ($fecha_cambio > 0) {
+					
+					$res->user_name = $request->nombre;
+					$res->save();
+
+					return response()->json(['data' => 'done', 'message' => '¡Tu usuario ha sido modificado exitosamente!.']);
+				} else {
+					return response()->json(['data' => 'done', 'message' => 'No es posible cambiar el nombre del usuario por el momento.']);
+				}
+					
+			}
+						
+		} catch (\Exception $th) {
+			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
+		}
+	}
 
 
 

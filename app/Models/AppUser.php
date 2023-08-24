@@ -5,6 +5,7 @@ namespace App\Models;
 use Mail;
 
 use Validator;
+use Illuminate\Support\Carbon;
 use Illuminate\Notifications\Notifiable;
 use App\Http\Controllers\OpenpayController;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -18,6 +19,7 @@ class AppUser extends Authenticatable
     public function addNew($data)
     {
         $count = AppUser::where('email', $data['email'])->count();
+        $date  = Carbon::now();
 
         if ($count == 0) {
             if (filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
@@ -31,6 +33,7 @@ class AppUser extends Authenticatable
                     if ($count_user_name == 0) {
                         $add                = new AppUser;
                         $add->name          = $data['name'];
+                        $add->fecha_cambio  = $date->format('Y-m-d');
                         $add->email         = $data['email'];
                         $add->phone         = isset($data['phone']) ? $data['phone'] : 'null';
                         $add->password      = $data['password'];
