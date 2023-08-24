@@ -2,17 +2,18 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\OpenpayController;
-
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Validator;
 use Mail;
+
+use Validator;
+use Illuminate\Notifications\Notifiable;
+use App\Http\Controllers\OpenpayController;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class AppUser extends Authenticatable
 {
     protected $table = 'app_user';
-
+    use SoftDeletes;
 
     public function addNew($data)
     {

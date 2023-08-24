@@ -572,6 +572,21 @@ class ApiController extends Controller
 
 
 
+	public function EliminarCuenta($id)
+	{
+		try {
+			
+			AppUser::find($id)->delete();
+
+			return response()->json(['data' => 'done', 'message' => 'Se ha Eliminada cuenta de Usuario.']);
+		} catch (\Exception $th) {
+			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
+		}
+	}
+
+
+
+
 
 	public function signupOP(Request $Request)
 	{
