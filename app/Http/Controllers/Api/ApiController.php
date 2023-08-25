@@ -471,9 +471,25 @@ class ApiController extends Controller
 	{
 		try {
 			$user = new AppUser;
+			$row  = AppUser::where('id', $id)->first(['id', 'name', 'user_name', 'email', 'last_name', 'birthday', 'sex_type', 'phone', 'refered', 'foto']);
+
+			$data[] = [
+				'id'          => $row->id,
+				'name'        => $row->name,
+				'user_name'   => $row->user_name,
+				'email'       => $row->email,
+				'foto'        => asset($row->foto),
+				'last_name'   => $row->last_name,
+				'birthday'    => $row->birthday,
+				'sex_type'    => $row->sex_type,
+				'phone'       => $row->phone,
+				'refered'     => $row->refered,
+
+
+			];
 			//$deposit = new Deposit;
 			return response()->json([
-				'data' => AppUser::where('id', $id)->get(['id', 'name', 'user_name', 'email', 'last_name', 'birthday', 'sex_type', 'phone', 'refered']),
+				'data' => $data,
 				'cashback' => $user->getAllUser($id),
 				//'deposits' => $deposit->getDeposits($id)
 			]);

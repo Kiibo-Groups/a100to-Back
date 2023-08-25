@@ -33,6 +33,7 @@
                                             <th>Edad</th>
                                             <th>Tickets</th>
                                             <th>6Meses</th>
+                                            <th>Reportes</th>
                                             <th>Estado</th>
                                             <th>Eliminar</th>
                                         </tr>
@@ -42,7 +43,7 @@
 
                                         @foreach ($data as $row)
                                             <tr>
-                                                <td class="col-md-1">{{ $row->name }} {{ $row->last_name }}</td>
+                                                <td class="col-md-1">{{ $row->name }} </td>
                                                 <td class="col-md-1">{{ $row->email }}</td>
                                                 <td class="col-md-1">{{ $row->phone }}</td>
                                                
@@ -50,6 +51,7 @@
                                                 <td class="col-md-1" style="text-align: center">{{ $row->Edad($row->birthday)}}</td>
                                                 <td class="col-md-1" style="text-align: center">{{ $row->Tickets($row->id) }}</td>
                                                 <td class="col-md-1" style="text-align: center">{{ $row->Tickets6Meses($row->id) }}</td>
+                                                <td class="col-md-1" style="text-align: center">{{ $row->Reportes($row->id) }}</td>
 
 
 

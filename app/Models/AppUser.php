@@ -299,17 +299,23 @@ class AppUser extends Authenticatable
     }
     public function Tickets($id)
     {
-        return Tickets::where('id_cliente', $id)->where('status', 2)->count();
+        return Tickets::where('id_cliente', $id)->whereIn('status', [1,2])->count();
     }
 
     public function Tickets6Meses($id)
     {
-        $fechaActual = Carbon::now();
-        $fechaHace6Meses = $fechaActual->subMonths(6);
+        $fecha = Carbon::now();
+        $fechaActual = $fecha->format('Y-m-d');
+        $fechaHace6Meses = $fecha->subMonths(6);
 
-        return Tickets::where('id_cliente', $id)->where('status', 2)
-                        ->where('created_at', '>=', $fechaHace6Meses)
-                        ->where('created_at', '<=', $fechaActual)->get();
+        return Tickets::where('id_cliente', $id)->whereIn('status', [1,2])
+                        ->whereBetween('fecha', [$fechaHace6Meses, $fechaActual])
+                        ->count();
+    }
+
+    public function Reportes($id)
+    {
+        return Reportar::where('seguido_id', $id)->count();
     }
 
     /*
