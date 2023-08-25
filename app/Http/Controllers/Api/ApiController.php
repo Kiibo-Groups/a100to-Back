@@ -546,53 +546,56 @@ class ApiController extends Controller
 
 	public function ImagenUsuario(Request $request)
 	{
+		try {
+			$input  = $request->all();
+			$imagen = $input['imagen'];
+			$tipo   = $input['tipo'];
+			$id     = $input['id_user'];
 
-		$input  = $request->all();
-		$imagen = $input['imagen'];
-		$tipo   = $input['tipo'];
-		$id     = $input['id_user'];
-
-		$target_path = "public/upload/perfil/";
-
-
-		if (!file_exists("public/upload/perfil/")) {
-			mkdir("public/upload/perfil/", 0777, true);
-		}
+			$target_path = "public/upload/perfil/";
 
 
-		if ($tipo == 1) {
-			if ($request->file('imagen')) {
-
-				$filename   = time() . rand(1119, 6999) . '.' . $request->file('imagen')->getClientOriginalExtension();
-				$input['imagen']->move($target_path, $filename);
-				$input['imagen'] = $filename;
+			if (!file_exists("public/upload/perfil/")) {
+				mkdir("public/upload/perfil/", 0777, true);
 			}
-		} else {
-			$base64Image = $imagen; // 
 
-			// Obtener el tipo y los datos binarios desde la cadena base64
-			list($type, $data) = explode(';', $base64Image);
-			list(, $data)      = explode(',', $data);
 
-			// Decodificar los datos binarios de base64
-			$filename   = time() . rand(1119, 6999) . '.png';
-			$imageData = base64_decode($data);
-			$rutaImagenJPG = $target_path . $filename;
+			if ($tipo == 1) {
+				if ($request->file('imagen')) {
 
-			file_put_contents($rutaImagenJPG, $imageData);
+					$filename   = time() . rand(1119, 6999) . '.' . $request->file('imagen')->getClientOriginalExtension();
+					$input['imagen']->move($target_path, $filename);
+					$input['imagen'] = $filename;
+				}
+			} else {
+				$base64Image = $imagen; // 
+
+				// Obtener el tipo y los datos binarios desde la cadena base64
+				list($type, $data) = explode(';', $base64Image);
+				list(, $data)      = explode(',', $data);
+
+				// Decodificar los datos binarios de base64
+				$filename   = time() . rand(1119, 6999) . '.png';
+				$imageData = base64_decode($data);
+				$rutaImagenJPG = $target_path . $filename;
+
+				file_put_contents($rutaImagenJPG, $imageData);
+			}
+
+
+
+			$res = AppUser::find($id);
+			$res->foto = $target_path . $filename;
+			$res->save();
+
+			// if (!$res) {
+			// 	return response()->json(['code' => 500, 'data' => null, 'message' => 'Ha ocurrido un error al actualizar imagen.']);
+			// }
+
+			return response()->json(['code' => 200, 'data' => $res->id, 'message' => 'Se ha actualizado imagen.']);
+		} catch (\Exception $th) {
+			return response()->json(['data' => "Ha ocurrido un error al actualizar imagen", 'error' => $th->getMessage()]);
 		}
-
-
-
-		$res = AppUser::find($id);
-		$res->foto = $target_path . $filename;
-		$res->save();
-
-		if (!$res) {
-			return response()->json(['code' => 500, 'data' => null, 'message' => 'Ha ocurrido un error al actualizar imagen.']);
-		}
-
-		return response()->json(['code' => 200, 'data' => $res->id, 'message' => 'Se ha actualizado imagen.']);
 	}
 
 
