@@ -1198,9 +1198,11 @@ class ApiController extends Controller
 		}
 	}
 
+
+
 	public function TicketsHistorial($id)
 	{
-		$social  = Tickets::where('id_cliente', $id)->whereIn('status', [2,3])->orderBy('id', 'asc')->get();
+		$social  = Tickets::where('id_cliente', $id)->whereIn('status', [1,2,3])->orderBy('id', 'asc')->get();
 
 		$array = [];
 

@@ -19,7 +19,7 @@ class CreateTicketsTable extends Migration
             $table->string('id_negocio')->nullable();
             $table->longText('descripcion')->nullable();
             $table->string('imagen')->nullable();
-            $table->string('status')->default('1');
+            $table->string('status')->default('0');
             $table->timestamps();
             $table->softDeletes();
         });
