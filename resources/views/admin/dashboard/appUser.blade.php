@@ -23,9 +23,9 @@
                             </div>
 
                             <div class="card-body">
-                                <table class="table table-hover ">
+                                <table class="table table-hover " >
                                     <thead>
-                                        <tr>
+                                        <tr style="font-size: 14px">
                                             <th>Usuario</th>
                                             <th>Email</th>
                                             <th>Telefono</th>
@@ -34,7 +34,7 @@
                                             <th>Tickets</th>
                                             <th>6Meses</th>
                                             <th>Reportes</th>
-                                            <th>Estado</th>
+                                           {{-- <th>Estado</th> --}}
                                             <th>Eliminar</th>
                                         </tr>
 
@@ -42,12 +42,12 @@
                                     <tbody>
 
                                         @foreach ($data as $row)
-                                            <tr>
-                                                <td class="col-md-1">{{ $row->name }} </td>
-                                                <td class="col-md-1">{{ $row->email }}</td>
+                                            <tr style="font-size: 14px">
+                                                <td class="col-md-3">{{ $row->name }} </td>
+                                                <td class="col-md-2">{{ $row->email }}</td>
                                                 <td class="col-md-1">{{ $row->phone }}</td>
                                                
-                                                <td class="col-md-1" style="font-size: 13px">{{ date('d-M-Y', strtotime($row->created_at)) }}</td>
+                                                <td class="col-md-1" style="font-size: 13px">{{ date('d-m-Y', strtotime($row->created_at)) }}</td>
                                                 <td class="col-md-1" style="text-align: center">{{ $row->Edad($row->birthday)}}</td>
                                                 <td class="col-md-1" style="text-align: center">{{ $row->Tickets($row->id) }}</td>
                                                 <td class="col-md-1" style="text-align: center">{{ $row->Tickets6Meses($row->id) }}</td>
@@ -57,24 +57,28 @@
 
 
 
-                                                <td class="col-md-1">
+                                            {{--    <td class="col-md-1">
                                                     @if ($row->status == 0)
                                                         <button type="button"
-                                                        class="btn btn-success width-md waves-effect waves-light"
+                                                        class="btn btn-success width-md waves-effect waves-light " title="Usuario Activo"
                                                             onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Activo</button>
                                                     @else
                                                         <button type="button"
-                                                        class="btn btn-danger width-md waves-effect waves-light"
-                                                            onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Bloqueado</button>
+                                                        class="btn btn-danger width-md waves-effect waves-light" title="Usuario Bloqueado"
+                                                            onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')"> <i class="mdi mdi-mdi-block-helper" ></i></button>
                                                     @endif
-                                                </td>
+                                                </td>--}}
                                                 <td class="col-md-1">
-                                                    <button type="button" class="btn m-b-15 ml-2 mr-2 btn-md  btn btn-danger waves-effect waves-light"
-                                                        onclick="confirmAlert('{{ Asset($link . 'trash/' . $row->id) }}')"
-                                                        data-original-title="Eliminar">
-                                                        
-                                                        <i class="mdi mdi-delete-forever" ></i>
-                                                    </button>
+                                                  
+
+                                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                                        <button type="button" class="btn btn-success"><i class="mdi mdi-pencil" ></i></button>
+                                                  
+                                                        <button type="button" class="btn btn-danger" 
+                                                            onclick="confirmAlert('{{ Asset($link . 'trash/' . $row->id) }}')"
+                                                            data-original-title="Eliminar"> <i class="mdi mdi-delete-forever" ></i></button>
+                                                    </div>
+                                                    
 
                                                    
                                                 </td>

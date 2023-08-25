@@ -623,7 +623,7 @@ class ApiController extends Controller
 			$count  = AppUser::whereRaw('LOWER(user_name) LIKE(?)', '%' . $request->nombre . '%')->count();
 			if ($count > 0) {
 
-				return response()->json(['data' => 'done', 'message' => 'Ya existe ese usuario, intenta uno diferente.']);
+				return response()->json(['data' => 'done', 'message' => 'Ya existe ese user name, intenta uno diferente.']);
 			} else {
 
 				$res          = AppUser::find($id);
@@ -636,7 +636,7 @@ class ApiController extends Controller
 
 					return response()->json(['data' => 'done', 'message' => '¡Tu usuario ha sido modificado exitosamente!.']);
 				} else {
-					return response()->json(['data' => 'done', 'message' => 'No es posible cambiar el nombre del usuario por el momento.']);
+					return response()->json(['data' => 'done', 'message' => 'No es posible cambiar el username por el momento.']);
 				}
 			}
 		} catch (\Exception $th) {

@@ -1,19 +1,23 @@
 <?php namespace App\Http\Controllers\Admin;
 
+use DB;
+use Auth;
+
+use Redirect;
+use Validator;
+use App\Models\User;
+use App\Models\Admin;
+use App\Models\Order;
 use App\Http\Requests;
+use App\Models\Follow;
+use App\Models\AppUser;
+use App\Models\Reserva;
+use App\Models\Tickets;
+use App\Models\Delivery;
+use App\Models\OrderItem;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use Illuminate\Http\Request;
-use Auth;
-use App\Models\Admin;
-use App\Models\User;
-use App\Models\AppUser;
-use App\Models\Order;
-use App\Models\OrderItem;
-use App\Models\Delivery;
-use DB;
-use Validator;
-use Redirect;
 class AdminController extends Controller {
 
 	public $folder = "admin.";
@@ -168,6 +172,9 @@ class AdminController extends Controller {
 	public function trash($id)
 	{
 		AppUser::where('id',$id)->delete();
+		Follow::where('seguido_id', $id)->delete();
+		Tickets::where('id_cliente', $id)->delete();
+		Reserva::where('user_id', $id)->delete();
 
 		return redirect(env('admin').'/appUser')->with('message','Usuario Eliminado.');
 	}
