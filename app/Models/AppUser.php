@@ -292,6 +292,25 @@ class AppUser extends Authenticatable
     {
         return Order::where('user_id', $id)->where('status', '>', 0)->count();
     }
+    public function Edad($id)
+    {
+        return  Carbon::parse($id)->age;
+
+    }
+    public function Tickets($id)
+    {
+        return Tickets::where('id_cliente', $id)->where('status', 2)->count();
+    }
+
+    public function Tickets6Meses($id)
+    {
+        $fechaActual = Carbon::now();
+        $fechaHace6Meses = $fechaActual->subMonths(6);
+
+        return Tickets::where('id_cliente', $id)->where('status', 2)
+                        ->where('created_at', '>=', $fechaHace6Meses)
+                        ->where('created_at', '<=', $fechaActual)->get();
+    }
 
     /*
     |--------------------------------------

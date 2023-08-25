@@ -578,8 +578,14 @@ class ApiController extends Controller
 	public function EliminarCuenta($id)
 	{
 		try {
-
+			// se debe eliminar Reservas, Tickets, Follow
 			AppUser::find($id)->delete();
+			Follow::where('seguido_id', $id)->delete();
+			Tickets::where('id_cliente', $id)->delete();
+			Reserva::where('user_id', $id)->delete();
+
+
+
 
 			return response()->json(['data' => 'done', 'message' => 'Se ha Eliminada cuenta de Usuario.']);
 		} catch (\Exception $th) {
@@ -1194,7 +1200,7 @@ class ApiController extends Controller
 
 	public function TicketsHistorial($id)
 	{
-		$social  = Tickets::where('id_cliente', $id)->orderBy('id', 'asc')->get();
+		$social  = Tickets::where('id_cliente', $id)->whereIn('status', [2,3])->orderBy('id', 'asc')->get();
 
 		$array = [];
 
@@ -1203,6 +1209,7 @@ class ApiController extends Controller
 				'reserva' => $soc->reserva,
 				'id_cliente' => $soc->id_cliente,
 				'id_negocio' => $soc->id_negocio,
+				'imagen_negocio'  => asset('upload/user/' . $soc->negocio->img),
 				'descripcion' => $soc->descripcion,
 				'imagen' => asset($soc->imagen),
 				'status' => $soc->status,

@@ -29,8 +29,10 @@
                                             <th>Usuario</th>
                                             <th>Email</th>
                                             <th>Telefono</th>
-                                            <th>Fecha de registro</th>
-                                            <th>Pedidos</th>
+                                            <th>Registro</th>
+                                            <th>Edad</th>
+                                            <th>Tickets</th>
+                                            <th>6Meses</th>
                                             <th>Estado</th>
                                             <th>Eliminar</th>
                                         </tr>
@@ -40,12 +42,20 @@
 
                                         @foreach ($data as $row)
                                             <tr>
-                                                <td width="15%">{{ $row->name }}</td>
-                                                <td width="20%">{{ $row->email }}</td>
-                                                <td width="10%">{{ $row->phone }}</td>
-                                                <td width="15%">{{ date('d-M-Y', strtotime($row->created_at)) }}</td>
-                                                <td width="10%">{{ $row->countOrder($row->id) }}</td>
-                                                <td width="10%">
+                                                <td class="col-md-1">{{ $row->name }} {{ $row->last_name }}</td>
+                                                <td class="col-md-1">{{ $row->email }}</td>
+                                                <td class="col-md-1">{{ $row->phone }}</td>
+                                               
+                                                <td class="col-md-1">{{ date('d-M-Y', strtotime($row->created_at)) }}</td>
+                                                <td class="col-md-1" style="text-align: center">{{ $row->Edad($row->birthday)}}</td>
+                                                <td class="col-md-1" style="text-align: center">{{ $row->Tickets($row->id) }}</td>
+                                                <td class="col-md-1" style="text-align: center">{{ $row->Tickets6Meses($row->id) }}</td>
+
+
+
+
+
+                                                <td class="col-md-1">
                                                     @if ($row->status == 0)
                                                         <button type="button"
                                                         class="btn btn-success width-md waves-effect waves-light"
@@ -56,7 +66,7 @@
                                                             onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Bloqueado</button>
                                                     @endif
                                                 </td>
-                                                <td width="10%">
+                                                <td class="col-md-1">
                                                     <button type="button" class="btn m-b-15 ml-2 mr-2 btn-md  btn btn-danger waves-effect waves-light"
                                                         onclick="confirmAlert('{{ Asset($link . 'trash/' . $row->id) }}')"
                                                         data-original-title="Eliminar">

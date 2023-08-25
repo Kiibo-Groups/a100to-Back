@@ -39,59 +39,63 @@
                                             <th>Usuario</th>
                                             <th>Fecha</th>
                                             <th>hora</th>
+                                            <th>Cashback</th>
                                             <th>Invitados</th>
                                             <th>Reserva</th>
                                             <th>Status</th>
-                                           
+
                                         </tr>
 
                                     </thead>
                                     <tbody>
 
                                         @foreach ($data as $row)
-                                            <tr>
-                                                <td class="col-md-3">{{ $row->negocio->name }}</td>
-                                                <td class="col-md-3">{{ $row->usuario->name }}</td>
-                                                <td class="col-md-2" style="text-align: center;">
-                                                    {{ date('d-m-Y', strtotime($row->fecha)) }}</td>
-                                                <td class="col-md-1" style="text-align: center">
-                                                    {{ Carbon\Carbon::parse($row->hora)->format('h:i  A') }}</td>
-                                                <td class="col-md-1" style="text-align: center">{{ $row->invitados }}</td>
-                                                <td class="col-md-1" style="text-align: center">
-                                                    @if ($row->reserva == 1)
-                                                        <button type="button"
-                                                            class="btn btn-warning width-xs waves-effect waves-light">No</button>
-                                                    @endif
-                                                    @if ($row->reserva == 0)
-                                                        <button type="button"
-                                                            class="btn btn-success width-xs waves-effect waves-light">Si</button>
-                                                    @endif
-                                              
-                                                </td>
-                                                <td class="col-md-1" style="text-align: center">
-                                                    @if ($row->status == 1)
-                                                        <button type="button"
-                                                            class="btn btn-warning width-xs waves-effect waves-light">Pendiente</button>
-                                                    @endif
-                                                    @if ($row->status == 2)
-                                                        <button type="button"
-                                                            class="btn btn-success width-xs waves-effect waves-light">Cumplida</button>
-                                                    @endif
-                                                    @if ($row->status == 3)
-                                                        <button type="button"
-                                                            class="btn btn-danger width-xs waves-effect waves-light">Cancelada</button>
-                                                    @endif
-                                                </td>
-                                                
+                                            @if ($row->usuario)
+                                                <tr>
+                                                    <td class="col-md-3">{{ $row->negocio->name }}</td>
+                                                    <td class="col-md-2">{{ $row->usuario->name }}</td>
+                                                    <td class="col-md-2" style="text-align: center;">
+                                                        {{ date('d-m-Y', strtotime($row->fecha)) }}</td>
+                                                    <td class="col-md-1" style="text-align: center">
+                                                        {{ Carbon\Carbon::parse($row->hora)->format('h:i  A') }}</td>
+                                                    <td class="col-md-1" style="text-align: center">{{ $row->recompensa }} %</td>
+                                                    <td class="col-md-1" style="text-align: center">{{ $row->invitados }}
+                                                    </td>
+                                                    <td class="col-md-1" style="text-align: center">
+                                                        @if ($row->reserva == 1)
+                                                            <button type="button"
+                                                                class="btn btn-warning width-xs waves-effect waves-light">No</button>
+                                                        @endif
+                                                        @if ($row->reserva == 0)
+                                                            <button type="button"
+                                                                class="btn btn-success width-xs waves-effect waves-light">Si</button>
+                                                        @endif
 
-                                            </tr>
+                                                    </td>
+                                                    <td class="col-md-1" style="text-align: center">
+                                                        @if ($row->status == 1)
+                                                            <button type="button"
+                                                                class="btn btn-warning width-xs waves-effect waves-light">Pendiente</button>
+                                                        @endif
+                                                        @if ($row->status == 2)
+                                                            <button type="button"
+                                                                class="btn btn-success width-xs waves-effect waves-light">Cumplida</button>
+                                                        @endif
+                                                        @if ($row->status == 3)
+                                                            <button type="button"
+                                                                class="btn btn-danger width-xs waves-effect waves-light">Cancelada</button>
+                                                        @endif
+                                                    </td>
+
+                                                </tr>
+                                            @endif
                                         @endforeach
 
                                     </tbody>
                                 </table>
 
                             </div>
-                           
+
                         </div>
                         {!! $data->links() !!}
                     </div>
