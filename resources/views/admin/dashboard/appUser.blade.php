@@ -47,7 +47,7 @@
                                                 <td class="col-md-1">{{ $row->email }}</td>
                                                 <td class="col-md-1">{{ $row->phone }}</td>
                                                
-                                                <td class="col-md-1">{{ date('d-M-Y', strtotime($row->created_at)) }}</td>
+                                                <td class="col-md-1" style="font-size: 13px">{{ date('d-M-Y', strtotime($row->created_at)) }}</td>
                                                 <td class="col-md-1" style="text-align: center">{{ $row->Edad($row->birthday)}}</td>
                                                 <td class="col-md-1" style="text-align: center">{{ $row->Tickets($row->id) }}</td>
                                                 <td class="col-md-1" style="text-align: center">{{ $row->Tickets6Meses($row->id) }}</td>
