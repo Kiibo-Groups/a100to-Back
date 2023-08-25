@@ -636,7 +636,7 @@ class ApiController extends Controller
 
 					return response()->json(['data' => 'done', 'message' => '¡Tu usuario ha sido modificado exitosamente!.']);
 				} else {
-					return response()->json(['data' => 'done', 'message' => 'No es posible cambiar el username por el momento.']);
+					return response()->json(['data' => 'done', 'message' => 'No es posible cambiar el user name por el momento.']);
 				}
 			}
 		} catch (\Exception $th) {
