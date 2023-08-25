@@ -72,11 +72,11 @@
                                                   
 
                                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                                        <button type="button" class="btn btn-success"><i class="mdi mdi-pencil" ></i></button>
+                                                        <button type="button" class="btn btn-success" title="Editar Cuenta de Usuario"><i class="mdi mdi-pencil" ></i></button>
                                                   
                                                         <button type="button" class="btn btn-danger" 
                                                             onclick="confirmAlert('{{ Asset($link . 'trash/' . $row->id) }}')"
-                                                            data-original-title="Eliminar"> <i class="mdi mdi-delete-forever" ></i></button>
+                                                            data-original-title="Eliminar" title="Eliminar Cuenta de Usuario"> <i class="mdi mdi-delete-forever" ></i></button>
                                                     </div>
                                                     
 

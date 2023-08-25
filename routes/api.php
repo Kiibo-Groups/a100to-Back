@@ -61,6 +61,7 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     Route::get('editar_nombre/{id}','ApiController@editarNombre');
     Route::post('cambiar_password', 'ApiController@cambiarPassword');
     Route::get('editar_informacion/{id}','ApiController@updateInformacion');
+    Route::get('editar_ciudad/{id}','ApiController@updateCiudad');
 
 
 

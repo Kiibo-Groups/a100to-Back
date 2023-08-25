@@ -477,7 +477,7 @@ class ApiController extends Controller
 			} else {
 				$foto = null;
 			}
-			
+
 
 			$data[] = [
 				'id'          => $row->id,
@@ -670,7 +670,7 @@ class ApiController extends Controller
 
 	public function updateInformacion($id, Request $request)
 	{
-		
+
 		try {
 			$count = AppUser::where('id', '!=', $id)->where('email', $request->input('email'))->count();
 
@@ -679,12 +679,9 @@ class ApiController extends Controller
 				$add->name          = $request->input('name');
 				$add->email         = $request->input('email');
 				$add->phone         = $request->input('phone');
-
 				$add->last_name     = $request->input('last_name');
 				$add->birthday      = $request->input('birthday');
 				$add->sex_type      = $request->input('sex_type');
-				
-			
 
 
 				$add->save();
@@ -697,6 +694,21 @@ class ApiController extends Controller
 			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}
 	}
+
+	public function updateCiudad($id, Request $request)
+	{
+
+		$res = AppUser::find($id);
+		$res->last_city = $request->last_city;
+		$res->save();
+
+		if (!$res) {
+			return response()->json(['code' => 500, 'data' => null, 'message' => 'Ha ocurrido un error al actualizar Ciudad.']);
+		}
+
+		return response()->json(['code' => 200, 'data' => $res->id, 'message' => 'Se ha actualizado la Ciudad.']);
+	}
+
 
 
 
@@ -1224,7 +1236,7 @@ class ApiController extends Controller
 
 	public function TicketsHistorial($id)
 	{
-		$social  = Tickets::where('id_cliente', $id)->whereIn('status', [1,2,3])->orderBy('id', 'asc')->get();
+		$social  = Tickets::where('id_cliente', $id)->whereIn('status', [1, 2, 3])->orderBy('id', 'asc')->get();
 
 		$array = [];
 
@@ -1753,24 +1765,24 @@ class ApiController extends Controller
 
 
 
-		// ----------------Follow ----------------
-		public function ReportarUsuario(Request $request)
-		{
-			try {
-	
-				$reporte   = Reportar::create([
-					'seguido_id'   => $request->seguido_id,
-					'seguidor_id'  => $request->user_id,
-					'detalle'  => $request->detalle,
-				]);
-	
-				if (!$reporte) {
-					return response()->json(['code' => 500, 'data' => null, 'message' => 'Ha ocurrido un error al crear Reporte.']);
-				}
-	
-				return response()->json(['code' => 200, 'data' => $reporte, 'message' => 'Se ha creado el Reporte.']);
-			} catch (\Throwable $th) {
-				return response()->json(['data' => $th]);
+	// ----------------Follow ----------------
+	public function ReportarUsuario(Request $request)
+	{
+		try {
+
+			$reporte   = Reportar::create([
+				'seguido_id'   => $request->seguido_id,
+				'seguidor_id'  => $request->user_id,
+				'detalle'  => $request->detalle,
+			]);
+
+			if (!$reporte) {
+				return response()->json(['code' => 500, 'data' => null, 'message' => 'Ha ocurrido un error al crear Reporte.']);
 			}
+
+			return response()->json(['code' => 200, 'data' => $reporte, 'message' => 'Se ha creado el Reporte.']);
+		} catch (\Throwable $th) {
+			return response()->json(['data' => $th]);
 		}
+	}
 }
