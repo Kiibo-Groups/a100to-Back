@@ -36,4 +36,8 @@ class Tickets extends Model
         return $this->belongsTo(AppUser::class, 'id_cliente' ,'id');
     }
 
+    public function reservacion(){
+        return $this->belongsTo(Reserva::class, 'reserva' ,'id');
+    }
+
 }

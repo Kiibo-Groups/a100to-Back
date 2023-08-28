@@ -37,6 +37,7 @@ Administrar tickets
                                         <tr style="text-align: center">
                                             <th>Negocio</th>
                                             <th>Usuario</th>
+                                            <th>Cashback</th>
                                             <th>Fecha</th>
                                             <th>Status</th>
                                             <th >Option</th>
@@ -47,7 +48,7 @@ Administrar tickets
 
                                         @foreach ($data as $row)
                                             <tr>
-                                                <td class="col-md-4">
+                                                <td class="col-md-3">
                                                     @if (!$row->id_negocio)
                                                   
                                                     @else
@@ -56,6 +57,14 @@ Administrar tickets
                                                     
                                                 </td>
                                                 <td class="col-md-3">{{ $row->usuario->name }}</td>
+                                                <td class="col-md-1">
+                                                    @if (!$row->reserva)
+                                                  
+                                                    @else
+                                                    {{ $row->reservacion->recompensa }} %
+                                                    @endif
+                                                    
+                                                </td>
                                                 <td class="col-md-2"  style="text-align: center">{{ date('d-M-Y', strtotime($row->created_at)) }}</td>
                                                 <td class="col-md-1"  style="text-align: center">
                                                     @if ($row->status == 1)
