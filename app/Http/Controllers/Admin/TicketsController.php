@@ -10,6 +10,7 @@ use App\Models\OfferStore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use App\Models\AppUser;
 use Illuminate\Support\Facades\Redirect;
 
 class TicketsController extends Controller
@@ -21,19 +22,51 @@ class TicketsController extends Controller
 	|@Showing all records
 	|---------------------------------------
 	*/
-	public function index()
+	public function index(Request $request)
 	{
+		//dd($request);
+		$from    = $request->filter_from;
+        $even    = $request->filter_even;
+		$status  = $request->filter_status;
+        $filter_negocio = $request->filter_negocio;
+        $filter_usuario = $request->filter_usuario;
+		
+
+		$tickest = Tickets::orderBy('status', 'asc')->orderBy('fecha', 'asc');
+
+		if(!is_null($filter_negocio)) {
+            $tickest = $tickest->where('id_negocio', $filter_negocio);
+        }
+		if(!is_null($filter_usuario)) {
+            $tickest = $tickest->where('id_cliente', $filter_usuario);
+        }
+		if(!is_null($status)) {
+            $tickest = $tickest->where('status', $status);
+        }
+
+		if(!is_null($from)) {
+          
+            $tickest = $tickest->whereBetween('fecha',[$from,$even]);
+        }
+
 		$admin = new Admin;
 		if ($admin->hasperm('Tickets')) {
 
 		
 		return View($this->folder.'index',[
 
-			'data' 		=> Tickets::orderBy('status', 'asc')->paginate(10),
+			'data' 		=> $tickest->paginate(10),
             'link' 		=> env('admin').'/tickets/',
 			'form_url'	=> env('admin').'/tickets',
 			'users'		=> 1,
-			'assign'	=>1
+			'usuarios'  => AppUser::orderBy('name', 'asc')->get(),
+			'negocios'	=> User::orderBy('name', 'asc')->get(),
+			'assign'	=>1,
+			'filter_from'	  => $from ,
+			'filter_even'     => $even ,
+			'filter_negocio'  => $filter_negocio,
+			'filter_usuario'  =>$filter_usuario,
+			'status'          =>$status
 			
 			]);
 
