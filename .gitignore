@@ -13,5 +13,7 @@ yarn-error.log
 /.idea
 /.vscode
 .env
+/.env
 /public/assets/img/tickets
 /public/public/upload
+/public/public/assets/img

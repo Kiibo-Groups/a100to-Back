@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Reserva;
 use App\Models\Tickets;
 use App\Models\OfferStore;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 
@@ -58,11 +60,30 @@ class TicketsController extends Controller
     public function verFiles($id){
 
         $img  = Tickets::where('id', $id)->value('imagen');
-		
-        $rutaDeArchivo = $img;
 	
-         return response()->download($rutaDeArchivo, $id);
+		$partes = explode(".", $img);
+		$rutaDeArchivo = $img;
+	
+        return response()->download($rutaDeArchivo, 'imagen.'.$partes[1]);
      }
+
+	 public function SelectReserva(Request $request){
+
+
+		$reservas = Reserva::where('store_id', $request->negocio_id)->where('user_id', $request->user_id)->where('status', 1)->get();
+	
+		$arrayName[] = array('id' => '','valor' =>'Seleccione');
+		foreach ($reservas as $d) {
+			$hora = Carbon::parse($d->hora)->format('h:i  A'); 
+			$arrayName[] = array('id' => $d->id,
+							'valor' => 'Fecha:  '.$d->fecha.' - Hora:  '.$hora .' - Invitados:  '.  $d->invitados .' - Recompensa:  '.  $d->recompensa . ' %'  );
+
+		}
+
+	return $arrayName;
+
+
+}
 
 
 	 public function edit($id)
@@ -91,10 +112,17 @@ class TicketsController extends Controller
 
 	public function update(Request $request,$id)
 	{	
+
+	
 		$input         = $request->all();
 		$requests_data = Tickets::find($id);
 
 		$requests_data->update($input);
+
+
+		$res 			= Reserva::find($request->reserva);
+		$res->status 	= $request->status ;
+		$res->save();
 		
 		return redirect(env('admin').'/tickets')->with('message','Registro actualizado con éxito.');
 	}

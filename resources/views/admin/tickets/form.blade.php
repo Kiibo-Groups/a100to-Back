@@ -4,7 +4,7 @@
             <div class="col-md-6" style="text-align: left;">
                 <b style="margin-left:20px">@yield('title')</b>
             </div>
-
+            <input value="{{ $data->id_cliente}}" type="hidden" name="id_user" id="id"   />
             <div class="card-body">
                 <div class="form-row">
                     <div class="form-group col-md-4">
@@ -32,20 +32,9 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
 
-                        <label class="form-label">Negocio</label>
-                   
-                        <select name="id_negocio" class="form-control" id="id_negocio" required="required">
-                            <option value="">Selecciona un Negocio</option>
-                            @foreach ($negocios as $type)
-                                <option value="{{ $type->id }}" @if ($data->id_negocio == $type->id) selected @endif>
-                                    {{ $type->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-
                         <label class="form-label">Estado</label>
-                        <select name="status" id="type" class="form-select js-example-basic-single" required="required">
+                        <select name="status" id="type" class="form-select "
+                            required="required">
                             <option value="" selected>Selecciona un Estado</option>
                             <option value="1" @if ($data->status === '1') selected @endif>
                                 Pendiente</option>
@@ -58,7 +47,32 @@
 
                     <div class="form-group col-md-6">
 
+                        <label class="form-label">Negocio</label>
+
+                        <select name="id_negocio" class="form-select" id="id_negocio" required="required">
+                            <option value="">Selecciona un Negocio</option>
+                            @foreach ($negocios as $type)
+                                <option value="{{ $type->id }}" @if ($data->id_negocio == $type->id) selected @endif>
+                                    {{ $type->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
+
+
+                    <div class="form-group col-md-6">
+
+                    </div>
+                </div>
+
+
+                <div id="reservas" class="form-row" style="display: none">
+                    <div class="form-group col-md-12">
+
+                        <label class="form-label">Reserva</label>
+                        <select name="reserva" id="id_reserva" class="form-control id_reserva  ">
+                        </select>
+                    </div>
+
                 </div>
 
                 <div class="form-row">
