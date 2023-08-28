@@ -23,7 +23,7 @@ class ReservasController extends Controller
         $id  = auth()->user()->id;
         return View($this->folder . 'index', [
 
-            'data'         => $res->where('store_id', $id)->orderBy('status', 'asc')->paginate(10),
+            'data'         => $res->where('store_id', $id)->where('status', 1)->orderBy('status', 'asc')->paginate(10),
             'link'         => env('user') . '/reservas/',
             'form_url'    => env('user') . '/reservas/assign',
 
