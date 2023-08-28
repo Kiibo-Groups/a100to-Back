@@ -96,6 +96,7 @@
                                             <th>Usuario</th>
                                             <th>Cashback</th>
                                             <th>Fecha</th>
+                                            <th>Días</th>
                                             <th>Status</th>
                                             <th>Option</th>
                                         </tr>
@@ -113,15 +114,17 @@
 
                                                 </td>
                                                 <td class="col-md-3">{{ $row->usuario->name }}</td>
-                                                <td class="col-md-1">
+                                                <td class="col-md-1" style="text-align: center">
                                                     @if (!$row->reserva)
                                                     @else
                                                         {{ $row->reservacion->recompensa }} %
                                                     @endif
 
                                                 </td>
-                                                <td class="col-md-2" style="text-align: center">
-                                                    {{ date('d-M-Y', strtotime($row->created_at)) }}</td>
+                                                <td class="col-md-1" style="text-align: center">
+                                                    {{ date('d-m-y', strtotime($row->created_at)) }}</td>
+                                                <td class="col-md-1" style="text-align: center">
+                                                        {{ $row->num_dias }}</td>
                                                 <td class="col-md-1" style="text-align: center">
                                                     @if ($row->status == 0)
                                                         <button type="button"

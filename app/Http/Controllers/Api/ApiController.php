@@ -1219,6 +1219,7 @@ class ApiController extends Controller
 			$tickets   = Tickets::create([
 				'id_cliente'   => $request->id_cliente,
 				'imagen'       => $target_path . $filename,
+				'fecha'        => Carbon::now()->format('Y-m-d'),
 
 			]);
 
