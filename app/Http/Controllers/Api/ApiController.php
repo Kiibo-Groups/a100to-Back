@@ -610,11 +610,9 @@ class ApiController extends Controller
 			Reserva::where('user_id', $id)->delete();
 
 
-
-
-			return response()->json(['data' => 'done', 'message' => 'Se ha Eliminada cuenta de Usuario.']);
+			return response()->json(['code' => 200,'data' => 'done', 'message' => 'Se ha Eliminada cuenta de Usuario.']);
 		} catch (\Exception $th) {
-			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
+			return response()->json(['code' => 500,'data' => "error", 'message' => $th->getMessage()]);
 		}
 	}
 
