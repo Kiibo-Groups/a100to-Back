@@ -600,8 +600,10 @@ class ApiController extends Controller
 
 
 
-	public function EliminarCuenta($id)
+	public function EliminarCuenta(Request $request)
 	{
+		$id = $request->id;
+	
 		try {
 			// se debe eliminar Reservas, Tickets, Follow
 			AppUser::find($id)->delete();
