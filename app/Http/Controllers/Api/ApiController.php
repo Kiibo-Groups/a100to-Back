@@ -1251,6 +1251,7 @@ class ApiController extends Controller
 				'fecha' => $soc->fecha,
 				'id_cliente' => $soc->id_cliente,
 				'id_negocio' => $soc->id_negocio,
+				'nombre' => $soc->negocio->name,
 				'imagen_negocio'  => asset('upload/user/' . $soc->negocio->img),
 				'descripcion' => $soc->descripcion,
 				'imagen' => asset($soc->imagen),
