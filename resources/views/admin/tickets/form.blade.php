@@ -5,6 +5,9 @@
                 <b style="margin-left:20px">@yield('title')</b>
             </div>
             <input value="{{ $data->id_cliente}}" type="hidden" name="id_user" id="id"   />
+            <input value="{{ $data->reserva}}" type="hidden" id="reserva"   />
+
+
             <div class="card-body">
                 <div class="form-row">
                     <div class="form-group col-md-4">
@@ -49,7 +52,7 @@
 
                         <label class="form-label">Negocio</label>
 
-                        <select name="id_negocio" class="form-select" id="id_negocio" required="required">
+                        <select name="id_negocio" class="form-select id_negocio" id="id_negocio" required="required">
                             <option value="">Selecciona un Negocio</option>
                             @foreach ($negocios as $type)
                                 <option value="{{ $type->id }}" @if ($data->id_negocio == $type->id) selected @endif>

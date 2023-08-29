@@ -210,6 +210,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin','prefix' => env('admin
         Route::get('tickets/status/{id}','TicketsController@status');
         Route::get('tickets/file/{id}', 'TicketsController@verFiles');
         Route::get('select_reserva', 'TicketsController@SelectReserva')->name('select_reserva');
+        Route::get('select_reserva_select', 'TicketsController@SelectReservaSelect')->name('select_reserva_select');
 
 
           /*
