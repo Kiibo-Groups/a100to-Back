@@ -73,7 +73,7 @@
 
                     <div class="form-group col-md-6">
                         <label class="form-label">Valor recibido</label>
-                        <input class="form-control" type="number" name="valor" min="0" step="0.1" />
+                        <input class="form-control" type="number" name="valor" min="0" step="0.1"  value="{{ $data->valor }}" required/>
                     </div>
 
 

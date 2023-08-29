@@ -659,7 +659,7 @@ class ApiController extends Controller
 		$user = AppUser::find($request->user_id);
 
 		if ($request->input('password_actual') !== $user->password) {
-			return response()->json(['error' => 'La contraseña actual es incorrecta.'], 401);
+			return response()->json(['code' => 401,'message' => 'La contraseña actual es incorrecta.'], 401);
 		}
 
 		// $user->update([
@@ -668,7 +668,7 @@ class ApiController extends Controller
 		$user->password = $request->input('password_nuevo');
 		$user->save();
 
-		return response()->json(['message' => 'Contraseña cambiada exitosamente.']);
+		return response()->json(['code' => 200,'message' => 'Contraseña cambiada exitosamente.']);
 	}
 
 	public function updateInformacion($id, Request $request)
