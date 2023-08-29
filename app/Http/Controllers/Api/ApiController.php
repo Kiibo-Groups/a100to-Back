@@ -1245,8 +1245,17 @@ class ApiController extends Controller
 		$array = [];
 
 		foreach ($social as $soc) {
+
+			if ($soc->reserva) {
+				$datos_reserva = Reserva::where('id', $soc->reserva)->first(['invitados','recompensa','fecha','hora']);
+			} else {
+				$datos_reserva = null;
+			}
+			
+
 			$array[] = array(
 				'reserva' => $soc->reserva,
+				'datos_reserva' => $datos_reserva,
 				'valor' => $soc->valor,
 				'fecha' => $soc->fecha,
 				'id_cliente' => $soc->id_cliente,
