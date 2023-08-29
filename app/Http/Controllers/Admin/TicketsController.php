@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use App\Models\AppUser;
+use App\Models\Recompensa;
 use Illuminate\Support\Facades\Redirect;
 
 class TicketsController extends Controller
@@ -151,14 +152,14 @@ class TicketsController extends Controller
 			} else {
 				$negocios = User::orderBy('name', 'asc')->get();
 			}
-			
+
 
 			return View($this->folder . 'edit', [
 
 				'data' 		=> $tickets,
 				'negocios'  => $negocios,
 				'form_url' 	=> env('admin') . '/tickets/' . $id,
-			
+
 
 			]);
 		} else {
@@ -172,13 +173,20 @@ class TicketsController extends Controller
 
 		$input         = $request->all();
 		$requests_data = Tickets::find($id);
-
 		$requests_data->update($input);
-
 
 		$res 			= Reserva::find($request->reserva);
 		$res->status 	= $request->status;
 		$res->save();
+
+		if ($request->status == 2) {
+
+			$data = new Recompensa();	
+			$data->addNew($request->all(),"add");
+		}
+
+
+
 
 		return redirect(env('admin') . '/tickets')->with('message', 'Registro actualizado con éxito.');
 	}

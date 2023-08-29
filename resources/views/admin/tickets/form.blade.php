@@ -4,8 +4,8 @@
             <div class="col-md-6" style="text-align: left;">
                 <b style="margin-left:20px">@yield('title')</b>
             </div>
-            <input value="{{ $data->id_cliente}}" type="hidden" name="id_user" id="id"   />
-            <input value="{{ $data->reserva}}" type="hidden" id="reserva"   />
+            <input value="{{ $data->id_cliente }}" type="hidden" name="id_user" id="id" />
+            <input value="{{ $data->reserva }}" type="hidden" id="reserva" />
 
 
             <div class="card-body">
@@ -36,8 +36,7 @@
                     <div class="form-group col-md-6">
 
                         <label class="form-label">Estado</label>
-                        <select name="status" id="type" class="form-select "
-                            required="required">
+                        <select name="status" id="type" class="form-select " required="required">
                             <option value="" selected>Selecciona un Estado</option>
                             <option value="1" @if ($data->status === '1') selected @endif>
                                 Pendiente</option>
@@ -59,7 +58,7 @@
                                     {{ $type->name }}</option>
                             @endforeach
                         </select>
-                    </div>                  
+                    </div>
                 </div>
 
                 <div class="form-row">
@@ -72,8 +71,9 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label class="form-label">Valor recibido</label>
-                        <input class="form-control" type="number" name="valor" min="0" step="0.1"  value="{{ $data->valor }}" required/>
+                        <label class="form-label">Valor recompensa que recibe el usuario</label>
+                        <input class="form-control" type="number" name="valor" min="0" step="0.1"
+                            value="{{ $data->valor }}" required />
                     </div>
 
 
@@ -92,5 +92,14 @@
 </div>
 
 <div class="form-row m-b-30">
+   
+
+
+    @if ($data->status  == 2 || $data->status  == 3)
+        <a href="javascript:history.back()" class="btn btn-success width-xl waves-effect waves-light btn-cta">
+            Volver Atrás
+        </a>
+    @else
     <button type="submit" class="btn btn-success width-xl waves-effect waves-light btn-cta">Guardar Cambios</button>
+    @endif
 </div>
