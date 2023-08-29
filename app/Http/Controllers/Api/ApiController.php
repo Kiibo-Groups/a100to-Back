@@ -1247,6 +1247,8 @@ class ApiController extends Controller
 		foreach ($social as $soc) {
 			$array[] = array(
 				'reserva' => $soc->reserva,
+				'valor' => $soc->valor,
+				'fecha' => $soc->fecha,
 				'id_cliente' => $soc->id_cliente,
 				'id_negocio' => $soc->id_negocio,
 				'imagen_negocio'  => asset('upload/user/' . $soc->negocio->img),

@@ -25,6 +25,7 @@ class Tickets extends Model
     'imagen',
     'reserva',
     'fecha',
+    'valor',
     'descripcion',
     'created_at',
     'updated_at',

@@ -95,6 +95,7 @@
                                             <th>Negocio</th>
                                             <th>Usuario</th>
                                             <th>Cashback</th>
+                                            <th>Valor</th>
                                             <th>Fecha</th>
                                             <th>Días</th>
                                             <th>Status</th>
@@ -106,7 +107,7 @@
 
                                         @foreach ($data as $row)
                                             <tr>
-                                                <td class="col-md-3">
+                                                <td class="col-md-2">
                                                     @if (!$row->id_negocio)
                                                     @else
                                                         {{ $row->negocio->name }}
@@ -118,6 +119,13 @@
                                                     @if (!$row->reserva)
                                                     @else
                                                         {{ $row->reservacion->recompensa }} %
+                                                    @endif
+
+                                                </td>
+                                                <td class="col-md-1" style="text-align: center">
+                                                    @if (!$row->valor)
+                                                    @else
+                                                       $ {{ $row->valor }} 
                                                     @endif
 
                                                 </td>

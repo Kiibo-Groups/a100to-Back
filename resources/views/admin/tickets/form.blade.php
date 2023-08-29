@@ -59,24 +59,26 @@
                                     {{ $type->name }}</option>
                             @endforeach
                         </select>
-                    </div>
-
-
-                    <div class="form-group col-md-6">
-
-                    </div>
+                    </div>                  
                 </div>
 
+                <div class="form-row">
 
-                <div id="reservas" class="form-row" style="display: none">
-                    <div class="form-group col-md-12">
+                    <div id="reservas" class="form-group col-md-6" style="display: none">
 
                         <label class="form-label">Reserva</label>
                         <select name="reserva" id="id_reserva" class="form-control id_reserva  ">
                         </select>
                     </div>
 
+                    <div class="form-group col-md-6">
+                        <label class="form-label">Valor recibido</label>
+                        <input class="form-control" type="number" name="valor" min="0" step="0.1" />
+                    </div>
+
+
                 </div>
+
 
                 <div class="form-row">
                     <div class="form-group col-md-12">
