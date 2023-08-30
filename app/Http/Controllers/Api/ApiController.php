@@ -57,6 +57,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\NodejsServer;
 use App\Http\Controllers\WhatsAppCloud;
 use App\Http\Controllers\OpenpayController;
+use App\Models\Recompensa;
 use App\Models\Reportar;
 
 class ApiController extends Controller
@@ -1800,6 +1801,38 @@ class ApiController extends Controller
 			return response()->json(['code' => 200, 'data' => $reporte, 'message' => 'Se ha creado el Reporte.']);
 		} catch (\Throwable $th) {
 			return response()->json(['data' => $th]);
+		}
+	}
+
+
+
+	public function RecompensasUsuario($id)
+	{
+		try {
+
+			$res     = Recompensa::where('id_cliente', $id)->first();
+			$recomp  = Recompensa::where('id_cliente', $id)->where('status', 0);
+			$valor   = Recompensa::where('id_cliente', $id)->where('status', 0)->where('primaria', 0)->sum('valor');
+			$valor_primera   = $recomp->where('primaria', 1)->sum('valor');
+			$array = [];
+
+			
+				$array[] = array(
+					
+					'id'          => $res->usuario->id,
+					'name'        => $res->usuario->name,
+					'usuario'     => $res->usuario->user_name,
+					'foto'        => asset($res->usuario->foto),
+					'adquiriste'  => $valor,
+					'adq_primera_compra'  => $valor_primera,
+					'adq_total'  => $valor_primera + $valor,
+
+				);
+			
+			//return response()->json(['cantidad' => $cantidad, 'data' => $array]);
+			return response()->json(['code' => 200, 'data' => $array, 'message' => 'Información encontrada.']);
+		} catch (\Exception $th) {
+			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}
 	}
 }

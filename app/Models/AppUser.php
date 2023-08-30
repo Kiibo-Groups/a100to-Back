@@ -60,7 +60,7 @@ class AppUser extends Authenticatable
                             $add2->valor            = $valor->recompensa_nuevo;
                             $add2->descripcion      = 'Referencia de nuevo usuario :'.$data['refered'];
                             $add2->fecha            = Carbon::now()->format('Y-m-d');   
-                            $add2->primaria         = 1;              
+                            $add2->primaria         = 0;              
                             $add2->save();
                             
                         }

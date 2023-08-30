@@ -66,9 +66,7 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
 
 
 
-
-
-     /** Tickets  */
+    /** Tickets  */
      Route::post('tickets','ApiController@Tickets');
      Route::get('tickets_historial/{id}','ApiController@TicketsHistorial');
      /** Causas Sociales  */
@@ -118,6 +116,11 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
 
     /*** Follow  */
     Route::post('reportar','ApiController@ReportarUsuario');
+
+
+    /*** Recompensas  */
+    Route::get('recompensa/{id}','ApiController@RecompensasUsuario');
+
 
   
     
