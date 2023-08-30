@@ -94,8 +94,8 @@ class Admin extends Authenticatable
 
 		$update->send_terminal      = isset($data['send_terminal']) ? $data['send_terminal'] : 0;
 		$update->max_cash 			= isset($data['max_cash']) ? $data['max_cash'] : 0;
-		//$update->v_count 		    = isset($data['v_count']) ? $data['v_count'] : 0;
-		//$update->v_value 		    = isset($data['v_value']) ? $data['v_value'] : 0;
+		$update->recompensa_nuevo   = isset($data['recompensa_nuevo']) ? $data['recompensa_nuevo'] : 0;
+		$update->recompensa_compra 	= isset($data['recompensa_compra']) ? $data['recompensa_compra'] : 0;
 		$update->s_data 			= serialize($a);
 
 		if(isset($data['new_password']))

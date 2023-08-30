@@ -182,9 +182,10 @@ class ApiController extends Controller
 	{
 		$store   = new User;
 		$data = [
-			'store'		=> $store->getStoreOpen($city_id),
-			'trending'		=> $store->getStoreOpen($city_id, true),
-			'admin'		=> Admin::where('id', 1)->get(['name', 'email', 'fb', 'insta', 'twitter', 'youtube']),
+			'recompensa' => $store->getStoreOpen($city_id),
+			'store'		 => $store->getStoreOpen($city_id),
+			'trending'	 => $store->getStoreOpen($city_id, true),
+			'admin'		 => Admin::where('id', 1)->get(['name', 'email', 'fb', 'insta', 'twitter', 'youtube']),
 		];
 
 		return response()->json(['data' => $data]);

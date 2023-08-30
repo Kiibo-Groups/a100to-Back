@@ -68,6 +68,20 @@
                                                     @endif
                                                 </div>
                                             </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="asd">Recompensas por nuevo usuario </label>
+                                                    <input type="number" class="form-control" id="recompensa_nuevo"
+                                                        name="recompensa_nuevo" step="0.01" value="{{ $data->recompensa_nuevo }}" required="required">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="asd">Extra  por cada nueva
+                                                        referencia en su primera comida. </label>
+                                                    <input type="number" class="form-control" id="recompensa_compra"
+                                                        name="recompensa_compra" step="0.01" value="{{ $data->recompensa_compra }}" required="required">
+
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 

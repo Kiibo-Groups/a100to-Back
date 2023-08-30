@@ -111,6 +111,18 @@
     @endif
     <!-- Reservas -->
 
+        <!-- Reservas -->
+        @if ($admin->hasPerm('Recompensas'))
+        <li>
+            <a href="{{ Asset(env('admin') . '/recompensas') }}" class=" menu-link">
+                <i class="mdi mdi-file-outline"></i>
+                <span>
+                    Recompensas </span>
+            </a>
+        </li>
+    @endif
+    <!-- Reservas -->
+
     <!-- Tickets -->
     @if ($admin->hasPerm('Tickets'))
         <li>

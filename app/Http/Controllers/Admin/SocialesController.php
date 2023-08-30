@@ -35,7 +35,7 @@ class SocialesController extends Controller
                 ]);
 
         } else {
-            return Redirect::to(env('admin').'/home')->with('error', 'No tienes permiso de ver la sección Ofertas de descuento');
+            return Redirect::to(env('admin').'/home')->with('error', 'No tienes permiso de ver la sección Causas sociales');
         }
     }
 

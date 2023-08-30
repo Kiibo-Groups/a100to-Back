@@ -48,6 +48,12 @@ class AppUser extends Authenticatable
 
                         $add->save();
 
+                        if ($data['refered']) {
+                            # code...
+                        }
+
+
+
                         return ['msg' => 'done', 'user_id' => $add->id];
                     } else {
                         return ['msg' => 'Opps! Este User Name  ya existe.'];

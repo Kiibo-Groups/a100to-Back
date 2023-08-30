@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Reserva;
+use App\Models\Recompensa;
 
-class ReservasController extends Controller
+class RecompensasController extends Controller
 {
-    public $folder  = "admin/reservas.";
+    public $folder  = "admin/recompensas.";
     /**
      * Display a listing of the resource.
      *
@@ -19,22 +19,22 @@ class ReservasController extends Controller
     {
         $admin = new Admin();
 
-        if ($admin->hasperm('Reservas')) {
+        if ($admin->hasperm('Recompensas')) {
 
-            $res = new Reserva();
+            $res = Recompensa::orderBy('status', 'asc')->orderBy('fecha', 'asc')->paginate(10);
         
 
             return View($this->folder.'index', [
 
-                'data' 		=> $res->orderBy('status', 'asc')->paginate(10),
-                'link' 		=> env('admin').'/reservas/',
-                'form_url'	=> env('admin').'/reservas/assign',
+                'data' 		=> $res,
+                'link' 		=> env('admin').'/recompensas/',
+                'form_url'	=> env('admin').'/recompensas/assign',
                
 
                 ]);
 
         } else {
-            return Redirect::to(env('admin').'/home')->with('error', 'No tienes permiso de ver la sección Reservas');
+            return Redirect::to(env('admin').'/home')->with('error', 'No tienes permiso de ver la sección Recompensas');
         }
     }
 

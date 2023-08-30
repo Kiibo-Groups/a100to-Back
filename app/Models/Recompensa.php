@@ -50,4 +50,32 @@ class Recompensa extends Model
             $add->save();
         }
     }
+
+    public function negocio(){
+        return $this->belongsTo(User::class, 'id_negocio' ,'id');
+    }
+    public function usuario(){
+        return $this->belongsTo(AppUser::class, 'id_cliente' ,'id');
+    }
+    public function reservas(){
+        return $this->belongsTo(Reserva::class, 'reserva' ,'id');
+    }
+
+    public function getFullEstadoAttribute()
+    {
+        $status = $this->status;
+
+        if ($status == 0) {
+            $valor =  'Pendiente';
+        }
+        if ($status == 1) {
+            $valor =  'Cumplida';
+        }
+       
+        if ($status == 3) {
+            $valor =  'Cancelada';
+        }
+       
+        return $valor;
+    }
 }
