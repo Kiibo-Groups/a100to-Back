@@ -1,7 +1,7 @@
 @extends('admin.layout.main')
 
 @section('title')
-    Administrar  recompensas
+    Administrar recompensas
 @endsection
 
 @section('icon')
@@ -41,7 +41,7 @@
                                             <th>hora</th>
                                             <th>Cashback</th>
                                             <th>Invitados</th>
-                                         
+
                                             <th>Status</th>
 
                                         </tr>
@@ -50,35 +50,45 @@
                                     <tbody>
 
                                         @foreach ($data as $row)
-                                           
-                                                <tr>
-                                                    <td class="col-md-3">{{ $row->negocio->name }}</td>
-                                                    <td class="col-md-2">{{ $row->usuario->name }}</td>
-                                                    <td class="col-md-2" style="text-align: center;">
-                                                        {{ date('d-m-Y', strtotime($row->fecha)) }}</td>
-                                                    <td class="col-md-1" style="text-align: center">
-                                                        {{ Carbon\Carbon::parse($row->hora)->format('h:i  A') }}</td>
-                                                    <td class="col-md-1" style="text-align: center">$ {{ $row->valor }} </td>
-                                                    <td class="col-md-1" style="text-align: center">{{ $row->reservas->invitados }}
-                                                    </td>
-                                            
-                                                    <td class="col-md-1" style="text-align: center">
-                                                        @if ($row->status == 0)
-                                                            <button type="button"
-                                                                class="btn btn-warning width-xs waves-effect waves-light">Pendiente</button>
-                                                        @endif
-                                                        @if ($row->status == 1)
-                                                            <button type="button"
-                                                                class="btn btn-success width-xs waves-effect waves-light">Cumplida</button>
-                                                        @endif
-                                                        @if ($row->status == 3)
-                                                            <button type="button"
-                                                                class="btn btn-danger width-xs waves-effect waves-light">Cancelada</button>
-                                                        @endif
-                                                    </td>
+                                            <tr>
+                                                <td class="col-md-3">
+                                                    @if ($row->id_negocio)
+                                                        {{ $row->negocio->name }}
+                                                    @else
+                                                    {{ $row->descripcion }}
+                                                    @endif
+                                                </td>
+                                                <td class="col-md-2">{{ $row->usuario->name }}</td>
+                                                <td class="col-md-2" style="text-align: center;">
+                                                    {{ date('d-m-Y', strtotime($row->fecha)) }}</td>
+                                                <td class="col-md-1" style="text-align: center">
+                                                    {{ Carbon\Carbon::parse($row->hora)->format('h:i  A') }}</td>
+                                                <td class="col-md-1" style="text-align: center">$ {{ $row->valor }} </td>
+                                                <td class="col-md-1" style="text-align: center">
 
-                                                </tr>
-                                          
+                                                    @if ($row->reserva)
+                                                        {{ $row->reservas->invitados }}
+                                                    @else
+                                                        0
+                                                    @endif
+                                                </td>
+
+                                                <td class="col-md-1" style="text-align: center">
+                                                    @if ($row->status == 0)
+                                                        <button type="button"
+                                                            class="btn btn-warning width-xs waves-effect waves-light">Pendiente</button>
+                                                    @endif
+                                                    @if ($row->status == 1)
+                                                        <button type="button"
+                                                            class="btn btn-success width-xs waves-effect waves-light">Cumplida</button>
+                                                    @endif
+                                                    @if ($row->status == 3)
+                                                        <button type="button"
+                                                            class="btn btn-danger width-xs waves-effect waves-light">Cancelada</button>
+                                                    @endif
+                                                </td>
+
+                                            </tr>
                                         @endforeach
 
                                     </tbody>

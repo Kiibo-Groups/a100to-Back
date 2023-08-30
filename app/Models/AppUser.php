@@ -48,10 +48,22 @@ class AppUser extends Authenticatable
 
                         $add->save();
 
-                        if ($data['refered']) {
-                            # code...
-                        }
+                        if ($data['refered'] && $add->save()) {
+                           
+                            $user  = AppUser::where('user_name', $data['refered'])->first();
+                            $valor = Admin::find(1)->first();
 
+                            $add2                   = new Recompensa();
+                            $add2->id_cliente       = $user->id;
+                            $add2->id_negocio       = null;
+                            $add2->reserva          = null;
+                            $add2->valor            = $valor->recompensa_nuevo;
+                            $add2->descripcion      = 'Referencia de nuevo usuario';
+                            $add2->fecha            = Carbon::now()->format('Y-m-d');   
+                            $add2->primaria         = 1;              
+                            $add2->save();
+                            
+                        }
 
 
                         return ['msg' => 'done', 'user_id' => $add->id];
