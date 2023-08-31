@@ -1844,9 +1844,9 @@ class ApiController extends Controller
 					'name'        => $res->usuario->name,
 					'usuario'     => $res->usuario->user_name,
 					'foto'        => asset($res->usuario->foto),
-					'adquiriste'  => $valor,
-					'adq_primera_compra'  => $valor_primera,
-					'adq_total'    => $valor_primera + $valor,
+					'saldo'  => $valor,
+					'saldo_primera_compra'  => $valor_primera,
+					//'adq_total'    => $valor_primera + $valor,
 				
 	
 				);
