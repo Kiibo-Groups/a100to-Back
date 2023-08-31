@@ -26,6 +26,7 @@ return array(
     'App\\Http\\Controllers\\Admin\\PageController' => $baseDir . '/app/Http/Controllers/Admin/PageController.php',
     'App\\Http\\Controllers\\Admin\\PushController' => $baseDir . '/app/Http/Controllers/Admin/PushController.php',
     'App\\Http\\Controllers\\Admin\\RatingsController' => $baseDir . '/app/Http/Controllers/Admin/RatingsController.php',
+    'App\\Http\\Controllers\\Admin\\RecompensasController' => $baseDir . '/app/Http/Controllers/Admin/RecompensasController.php',
     'App\\Http\\Controllers\\Admin\\ReportController' => $baseDir . '/app/Http/Controllers/Admin/ReportController.php',
     'App\\Http\\Controllers\\Admin\\ReservasController' => $baseDir . '/app/Http/Controllers/Admin/ReservasController.php',
     'App\\Http\\Controllers\\Admin\\SliderController' => $baseDir . '/app/Http/Controllers/Admin/SliderController.php',

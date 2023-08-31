@@ -605,7 +605,7 @@ class ApiController extends Controller
 	public function EliminarCuenta(Request $request)
 	{
 		$id = $request->id;
-	
+
 		try {
 			// se debe eliminar Reservas, Tickets, Follow
 			AppUser::find($id)->delete();
@@ -614,9 +614,9 @@ class ApiController extends Controller
 			Reserva::where('user_id', $id)->delete();
 
 
-			return response()->json(['code' => 200,'data' => 'done', 'message' => 'Se ha Eliminada cuenta de Usuario.']);
+			return response()->json(['code' => 200, 'data' => 'done', 'message' => 'Se ha Eliminada cuenta de Usuario.']);
 		} catch (\Exception $th) {
-			return response()->json(['code' => 500,'data' => "error", 'message' => $th->getMessage()]);
+			return response()->json(['code' => 500, 'data' => "error", 'message' => $th->getMessage()]);
 		}
 	}
 
@@ -661,7 +661,7 @@ class ApiController extends Controller
 		$user = AppUser::find($request->user_id);
 
 		if ($request->input('password_actual') !== $user->password) {
-			return response()->json(['code' => 401,'message' => 'La contraseña actual es incorrecta.'], 401);
+			return response()->json(['code' => 401, 'message' => 'La contraseña actual es incorrecta.'], 401);
 		}
 
 		// $user->update([
@@ -670,7 +670,7 @@ class ApiController extends Controller
 		$user->password = $request->input('password_nuevo');
 		$user->save();
 
-		return response()->json(['code' => 200,'message' => 'Contraseña cambiada exitosamente.']);
+		return response()->json(['code' => 200, 'message' => 'Contraseña cambiada exitosamente.']);
 	}
 
 	public function updateInformacion($id, Request $request)
@@ -1249,11 +1249,11 @@ class ApiController extends Controller
 		foreach ($social as $soc) {
 
 			if ($soc->reserva) {
-				$datos_reserva = Reserva::where('id', $soc->reserva)->first(['invitados','recompensa','fecha','hora']);
+				$datos_reserva = Reserva::where('id', $soc->reserva)->first(['invitados', 'recompensa', 'fecha', 'hora']);
 			} else {
 				$datos_reserva = null;
 			}
-			
+
 
 			$array[] = array(
 				'reserva' => $soc->reserva,
@@ -1810,26 +1810,37 @@ class ApiController extends Controller
 	{
 		try {
 
-			$res     = Recompensa::where('id_cliente', $id)->first();
-			$recomp  = Recompensa::where('id_cliente', $id)->where('status', 0);
-			$valor   = Recompensa::where('id_cliente', $id)->where('status', 0)->where('primaria', 0)->sum('valor');
+
+
+			$res     = Recompensa::where('id_cliente', $id)->where('visto', 0)->first();
+			$recomp  = Recompensa::where('id_cliente', $id)->where('status', 0)->where('visto', 0);
+			$valor   = Recompensa::where('id_cliente', $id)->where('status', 0)->where('visto', 0)->where('primaria', 0)->sum('valor');
 			$valor_primera   = $recomp->where('primaria', 1)->sum('valor');
 			$array = [];
 
-			
-				$array[] = array(
-					
-					'id'          => $res->usuario->id,
-					'name'        => $res->usuario->name,
-					'usuario'     => $res->usuario->user_name,
-					'foto'        => asset($res->usuario->foto),
-					'adquiriste'  => $valor,
-					'adq_primera_compra'  => $valor_primera,
-					'adq_total'  => $valor_primera + $valor,
 
-				);
-			
-			//return response()->json(['cantidad' => $cantidad, 'data' => $array]);
+			$array[] = array(
+
+				'id'          => $res->usuario->id,
+				'name'        => $res->usuario->name,
+				'usuario'     => $res->usuario->user_name,
+				'foto'        => asset($res->usuario->foto),
+				'adquiriste'  => $valor,
+				'adq_primera_compra'  => $valor_primera,
+				'adq_total'  => $valor_primera + $valor,
+
+			);
+
+
+			$recompensa =  Recompensa::where('id_cliente', $id)->where('visto', 0)->where('status', 0)->get(['id', 'visto']);
+			foreach ($recompensa as $res) {
+
+				$res = Recompensa::find($res->id);
+				$res->visto = 1;
+				$res->save();
+			}
+
+
 			return response()->json(['code' => 200, 'data' => $array, 'message' => 'Información encontrada.']);
 		} catch (\Exception $th) {
 			return response()->json(['data' => "error", 'error' => $th->getMessage()]);

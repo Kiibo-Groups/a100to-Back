@@ -709,6 +709,7 @@ class ComposerStaticInitedc0ba0ba2ba66b90f1da7e80a290d66
         'App\\Http\\Controllers\\Admin\\PageController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PageController.php',
         'App\\Http\\Controllers\\Admin\\PushController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PushController.php',
         'App\\Http\\Controllers\\Admin\\RatingsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/RatingsController.php',
+        'App\\Http\\Controllers\\Admin\\RecompensasController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/RecompensasController.php',
         'App\\Http\\Controllers\\Admin\\ReportController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ReportController.php',
         'App\\Http\\Controllers\\Admin\\ReservasController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ReservasController.php',
         'App\\Http\\Controllers\\Admin\\SliderController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/SliderController.php',
