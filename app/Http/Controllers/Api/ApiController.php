@@ -473,7 +473,7 @@ class ApiController extends Controller
 	{
 		try {
 			$user = new AppUser;
-			$row  = AppUser::where('id', $id)->first(['id', 'name', 'user_name', 'email', 'last_name', 'birthday', 'sex_type', 'phone', 'refered', 'foto', 'saldo']);
+			$row  = AppUser::where('id', $id)->first(['id', 'name', 'user_name', 'email', 'last_name', 'birthday', 'sex_type', 'phone', 'refered', 'foto', 'saldo', 'tickets']);
 			if ($row->foto) {
 				$foto = asset($row->foto);
 			} else {
@@ -493,6 +493,7 @@ class ApiController extends Controller
 				'phone'       => $row->phone,
 				'refered'     => $row->refered,
 				'saldo'       => $row->saldo,
+				'tickets6m'   => $row->tickets,
 
 
 			];
@@ -1226,7 +1227,20 @@ class ApiController extends Controller
 
 			]);
 
+			//numero de tickets en 6 meses
 
+			$fecha = Carbon::now();
+			$fechaActual = $fecha->format('Y-m-d');
+			$fechaHace6Meses = $fecha->subMonths(6);
+
+			$tickets6m = Tickets::where('id_cliente', $request->id_cliente)->whereIn('status', [0,1, 2])
+				->whereBetween('fecha', [$fechaHace6Meses, $fechaActual])
+				->count();
+
+				
+			$resus          = AppUser::find($request->id_cliente);
+			$resus->tickets = $tickets6m;
+			$resus->save();	
 
 
 			if (!$tickets) {
@@ -1816,31 +1830,29 @@ class ApiController extends Controller
 
 			if ($res == null) {
 				$res     = AppUser::where('id', $id)->first();
-			
+
 				$array[] = array(
-	
+
 					'id'          => $res->id,
 					'name'        => $res->name,
 					'usuario'     => $res->user_name,
 					'foto'        => asset($res->foto),
-				
-	
+
+
 				);
 
-	
-				return response()->json(['code' => 201, 'data' => $array, 'message' => 'Usuario sin información encontrada.']);
 
-			
+				return response()->json(['code' => 201, 'data' => $array, 'message' => 'Usuario sin información encontrada.']);
 			} else {
 				$recomp  = Recompensa::where('id_cliente', $id)->where('status', 0)->where('visto', 0);
 				$valor   = Recompensa::where('id_cliente', $id)->where('status', 0)->where('visto', 0)->where('primaria', 0)->sum('valor');
 				$valor_primera   = $recomp->where('primaria', 1)->sum('valor');
 				//$recompensa =  Recompensa::where('id_cliente', $id)->where('visto', 0)->where('status', 0)->get(['id', 'valor']);
 				$array = [];
-	
-	
+
+
 				$array[] = array(
-	
+
 					'id'          => $res->usuario->id,
 					'name'        => $res->usuario->name,
 					'usuario'     => $res->usuario->user_name,
@@ -1848,17 +1860,14 @@ class ApiController extends Controller
 					'saldo'  => $valor,
 					'saldo_primera_compra'  => $valor_primera,
 					//'adq_total'    => $valor_primera + $valor,
-				
-	
-				);
-	
 
-	
+
+				);
+
+
+
 				return response()->json(['code' => 200, 'data' => $array, 'message' => 'Información encontrada.']);
 			}
-			
-
-		
 		} catch (\Exception $th) {
 			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}
@@ -1872,7 +1881,7 @@ class ApiController extends Controller
 			$id_user  = $input['id_user'];
 			$divide   = $input['divide'];
 			$usuarios = $input['usuarios'];
-		
+
 
 			$res     = AppUser::where('id', $id_user)->first();
 			$usuario = $res->user_name;
@@ -1883,7 +1892,7 @@ class ApiController extends Controller
 				'name'        => $res->name,
 				'usuario'     => $res->user_name,
 				'foto'        => asset($res->foto),
-			
+
 			);
 
 			if ($divide == 1) {
@@ -1895,7 +1904,7 @@ class ApiController extends Controller
 				$adq_total     = $valor_primera + $valor;
 				$cantidad      = $adq_total / ($numeroDeElementos + 1);
 
-			
+
 				foreach ($usuarios as $res => $valor) {
 					$id = $valor['id'];
 
@@ -1907,13 +1916,13 @@ class ApiController extends Controller
 					$add2->valor            = $cantidad;
 					$add2->visto            = 1;
 					$add2->divide           = $id_user;
-					$add2->descripcion      = 'División de recompensa : ' .$usuario;
-					$add2->fecha            = Carbon::now()->format('Y-m-d');   
-					$add2->primaria         = 0;              
+					$add2->descripcion      = 'División de recompensa : ' . $usuario;
+					$add2->fecha            = Carbon::now()->format('Y-m-d');
+					$add2->primaria         = 0;
 					$add2->save();
 
 					// Notificamos al usuario
-					app('App\Http\Controllers\Controller')->sendPush("Recompensa recibida","Haz recibido". $cantidad." pesos de @".$usuario.".",$usuario_id);
+					app('App\Http\Controllers\Controller')->sendPush("Recompensa recibida", "Haz recibido" . $cantidad . " pesos de @" . $usuario . ".", $usuario_id);
 
 					// Actualizacion del saldo
 
@@ -1921,17 +1930,13 @@ class ApiController extends Controller
 					$res        = AppUser::find($id);
 					$res->saldo = $saldo;
 					$res->save();
-
-
-					
-
 				}
 
 				$delete   = Recompensa::where('id_cliente', $id_user)->where('status', 0)->where('visto', 0)->get();
-				
-				foreach ($delete as $res ) {
 
-					Recompensa::find($res->id)->delete();				
+				foreach ($delete as $res) {
+
+					Recompensa::find($res->id)->delete();
 				}
 
 				$add1                   = new Recompensa();
@@ -1942,8 +1947,8 @@ class ApiController extends Controller
 				$add1->valor            = $cantidad;
 				$add1->divide            = $id_user;
 				$add1->descripcion      = 'División de recompensa';
-				$add1->fecha            = Carbon::now()->format('Y-m-d');   
-				$add1->primaria         = 0;              
+				$add1->fecha            = Carbon::now()->format('Y-m-d');
+				$add1->primaria         = 0;
 				$add1->save();
 
 				$saldousu     = Recompensa::where('id_cliente', $id_user)->where('status', 0)->sum('valor');
@@ -1953,22 +1958,19 @@ class ApiController extends Controller
 
 				return response()->json(['code' => 200, 'data' => $array, 'message' => 'Se ha dividido la recompensa.']);
 			} else {
-				
+
 				$recomprensa   = Recompensa::where('id_cliente', $id_user)->where('status', 0)->where('visto', 0)->get();
-				
-				foreach ($recomprensa as $res ) {
+
+				foreach ($recomprensa as $res) {
 
 					$res = Recompensa::find($res->id);
 					$res->visto = 1;
-					$res->save();			
+					$res->save();
 				}
 
 
 				return response()->json(['code' => 200, 'data' => $array, 'message' => 'No se ha dividido la recompensa.']);
 			}
-			
-
-			
 		} catch (\Exception $th) {
 			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}

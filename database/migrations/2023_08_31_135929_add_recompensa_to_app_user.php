@@ -14,7 +14,7 @@ class AddRecompensaToAppUser extends Migration
     public function up()
     {
         Schema::table('app_user', function (Blueprint $table) {
-            $table->integer('recompensas')->nullable()->after('saldo')->comment('suma recompensas 6 meses'); 
+            $table->integer('tickets')->nullable()->after('saldo')->comment('suma tickets 6 meses'); 
         });
     }
 
