@@ -473,7 +473,7 @@ class ApiController extends Controller
 	{
 		try {
 			$user = new AppUser;
-			$row  = AppUser::where('id', $id)->first(['id', 'name', 'user_name', 'email', 'last_name', 'birthday', 'sex_type', 'phone', 'refered', 'foto']);
+			$row  = AppUser::where('id', $id)->first(['id', 'name', 'user_name', 'email', 'last_name', 'birthday', 'sex_type', 'phone', 'refered', 'foto', 'saldo']);
 			if ($row->foto) {
 				$foto = asset($row->foto);
 			} else {
@@ -492,6 +492,7 @@ class ApiController extends Controller
 				'sex_type'    => $row->sex_type,
 				'phone'       => $row->phone,
 				'refered'     => $row->refered,
+				'saldo'       => $row->saldo,
 
 
 			];
