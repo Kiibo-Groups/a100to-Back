@@ -1812,37 +1812,52 @@ class ApiController extends Controller
 
 
 			$res     = Recompensa::where('id_cliente', $id)->where('visto', 0)->first();
-			$recomp  = Recompensa::where('id_cliente', $id)->where('status', 0)->where('visto', 0);
-			$valor   = Recompensa::where('id_cliente', $id)->where('status', 0)->where('visto', 0)->where('primaria', 0)->sum('valor');
-			$valor_primera   = $recomp->where('primaria', 1)->sum('valor');
-			//$recompensa =  Recompensa::where('id_cliente', $id)->where('visto', 0)->where('status', 0)->get(['id', 'valor']);
-			$array = [];
 
+			if ($res == null) {
+				$res     = AppUser::where('id', $id)->first();
+			
+				$array[] = array(
+	
+					'id'          => $res->id,
+					'name'        => $res->name,
+					'usuario'     => $res->user_name,
+					'foto'        => asset($res->foto),
+				
+	
+				);
 
-			$array[] = array(
+	
+				return response()->json(['code' => 201, 'data' => $array, 'message' => 'Usuario sin información encontrada.']);
 
-				'id'          => $res->usuario->id,
-				'name'        => $res->usuario->name,
-				'usuario'     => $res->usuario->user_name,
-				'foto'        => asset($res->usuario->foto),
-				'adquiriste'  => $valor,
-				'adq_primera_compra'  => $valor_primera,
-				'adq_total'    => $valor_primera + $valor,
-				//'recompensas'  => $recompensa,
+			
+			} else {
+				$recomp  = Recompensa::where('id_cliente', $id)->where('status', 0)->where('visto', 0);
+				$valor   = Recompensa::where('id_cliente', $id)->where('status', 0)->where('visto', 0)->where('primaria', 0)->sum('valor');
+				$valor_primera   = $recomp->where('primaria', 1)->sum('valor');
+				//$recompensa =  Recompensa::where('id_cliente', $id)->where('visto', 0)->where('status', 0)->get(['id', 'valor']);
+				$array = [];
+	
+	
+				$array[] = array(
+	
+					'id'          => $res->usuario->id,
+					'name'        => $res->usuario->name,
+					'usuario'     => $res->usuario->user_name,
+					'foto'        => asset($res->usuario->foto),
+					'adquiriste'  => $valor,
+					'adq_primera_compra'  => $valor_primera,
+					'adq_total'    => $valor_primera + $valor,
+				
+	
+				);
+	
 
-			);
+	
+				return response()->json(['code' => 200, 'data' => $array, 'message' => 'Información encontrada.']);
+			}
+			
 
-
-			// $recompensa =  Recompensa::where('id_cliente', $id)->where('visto', 0)->where('status', 0)->get(['id', 'visto', 'valor']);
-			// foreach ($recompensa as $res) {
-
-			// 	$res = Recompensa::find($res->id);
-			// 	$res->visto = 1;
-			// 	$res->save();
-			// }
-
-
-			return response()->json(['code' => 200, 'data' => $array, 'message' => 'Información encontrada.']);
+		
 		} catch (\Exception $th) {
 			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}
@@ -1856,6 +1871,7 @@ class ApiController extends Controller
 			$id_user  = $input['id_user'];
 			$divide   = $input['divide'];
 			$usuarios = $input['usuarios'];
+		
 
 			$res     = AppUser::where('id', $id_user)->first();
 
@@ -1870,10 +1886,30 @@ class ApiController extends Controller
 
 			if ($divide == 1) {
 
-				foreach ($usuarios as $res => $valor) {
-					$id_cliente = $valor['id'];
-					//dump($id_cliente);
+				$numeroDeElementos = count($usuarios);
+				$recomp        = Recompensa::where('id_cliente', $id_user)->where('status', 0)->where('visto', 0);
+				$valor         = Recompensa::where('id_cliente', $id_user)->where('status', 0)->where('visto', 0)->where('primaria', 0)->sum('valor');
+				$valor_primera = $recomp->where('primaria', 1)->sum('valor');
+				$adq_total     = $valor_primera + $valor;
+				$cantidad      = $adq_total / $numeroDeElementos;
 
+				dump($cantidad);
+
+				foreach ($usuarios as $res => $valor) {
+					$id = $valor['id'];
+
+
+					// $add2                   = new Recompensa();
+					// $add2->id_cliente       = $id;
+					// $add2->id_negocio       = null;
+					// $add2->reserva          = null;
+					// $add2->valor            = $cantidad;
+					// $add2->divide            = $id_user;
+					// $add2->descripcion      = 'División de recompensa :'.$data['refered'];
+					// $add2->fecha            = Carbon::now()->format('Y-m-d');   
+					// $add2->primaria         = 0;              
+					// $add2->save();
+					
 
 
 				}
