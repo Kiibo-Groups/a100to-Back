@@ -45,9 +45,13 @@ class Recompensa extends Model
             $add->descripcion      = isset($data['descripcion']) ? $data['descripcion'] : null;
             $add->fecha            = Carbon::now()->format('Y-m-d');
 
-
-
             $add->save();
+
+
+            $saldousu     = Recompensa::where('id_cliente', $data['id_user'])->where('status', 0)->sum('valor');
+            $resus        = AppUser::find($data['id_user']);
+            $resus->saldo = $saldousu;
+            $resus->save();
         }
     }
 

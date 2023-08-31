@@ -1913,6 +1913,15 @@ class ApiController extends Controller
 
 					// Notificamos al usuario
 					app('App\Http\Controllers\Controller')->sendPush("Recompensa recibida","Haz recibido". $cantidad." pesos de @".$usuario.".",$usuario_id);
+
+					// Actualizacion del saldo
+
+					$saldo      = Recompensa::where('id_cliente', $id)->where('status', 0)->sum('valor');
+					$res        = AppUser::find($id);
+					$res->saldo = $saldo;
+					$res->save();
+
+
 					
 
 				}
@@ -1936,9 +1945,23 @@ class ApiController extends Controller
 				$add1->primaria         = 0;              
 				$add1->save();
 
+				$saldousu     = Recompensa::where('id_cliente', $id_user)->where('status', 0)->sum('valor');
+				$resus        = AppUser::find($id_user);
+				$resus->saldo = $saldousu;
+				$resus->save();
+
 				return response()->json(['code' => 200, 'data' => $array, 'message' => 'Se ha dividido la recompensa.']);
 			} else {
 				
+				$recomprensa   = Recompensa::where('id_cliente', $id_user)->where('status', 0)->where('visto', 0)->get();
+				
+				foreach ($recomprensa as $res ) {
+
+					$res = Recompensa::find($res->id);
+					$res->visto = 1;
+					$res->save();			
+				}
+
 
 				return response()->json(['code' => 200, 'data' => $array, 'message' => 'No se ha dividido la recompensa.']);
 			}
