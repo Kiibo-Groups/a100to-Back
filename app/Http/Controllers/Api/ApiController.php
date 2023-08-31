@@ -1874,7 +1874,8 @@ class ApiController extends Controller
 		
 
 			$res     = AppUser::where('id', $id_user)->first();
-
+			$usuario = $res->user_name;
+			$usuario_id = $res->id;
 			$array[] = array(
 
 				'id'          => $res->id,
@@ -1893,42 +1894,41 @@ class ApiController extends Controller
 				$adq_total     = $valor_primera + $valor;
 				$cantidad      = $adq_total / $numeroDeElementos;
 
-				dump($cantidad);
+				//dump($cantidad);
 
 				foreach ($usuarios as $res => $valor) {
 					$id = $valor['id'];
 
 
-					// $add2                   = new Recompensa();
-					// $add2->id_cliente       = $id;
-					// $add2->id_negocio       = null;
-					// $add2->reserva          = null;
-					// $add2->valor            = $cantidad;
-					// $add2->divide            = $id_user;
-					// $add2->descripcion      = 'División de recompensa :'.$data['refered'];
-					// $add2->fecha            = Carbon::now()->format('Y-m-d');   
-					// $add2->primaria         = 0;              
-					// $add2->save();
-					
+					$add2                   = new Recompensa();
+					$add2->id_cliente       = $id;
+					$add2->id_negocio       = null;
+					$add2->reserva          = null;
+					$add2->valor            = $cantidad;
+					$add2->divide            = $id_user;
+					$add2->descripcion      = 'División de recompensa : ' .$usuario;
+					$add2->fecha            = Carbon::now()->format('Y-m-d');   
+					$add2->primaria         = 0;              
+					$add2->save();
 
+					// Notificamos al usuario
+					app('App\Http\Controllers\Controller')->sendPush("Recompensa recibida","Haz recibido". $cantidad." pesos de @".$usuario.".",$usuario_id);
+					
 
 				}
 
+				$delete   = Recompensa::where('id_cliente', $id_user)->where('status', 0)->where('visto', 0)->get();
+				
+				foreach ($delete as $res ) {
 
+					Recompensa::find($res->id)->delete();				
+				}
 				return response()->json(['code' => 200, 'data' => $array, 'message' => 'Se ha dividido la recompensa.']);
 			} else {
 				
 
 				return response()->json(['code' => 200, 'data' => $array, 'message' => 'No se ha dividido la recompensa.']);
 			}
-			
-		
-
-	
-			// if (!$coleccion) {
-			// 	return response()->json(['code' => 500, 'data' => null, 'message' => 'Ha ocurrido un error al crear Coleccion.']);
-			// }
-
 			
 
 			
