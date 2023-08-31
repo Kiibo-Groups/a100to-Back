@@ -1904,7 +1904,8 @@ class ApiController extends Controller
 					$add2->id_negocio       = null;
 					$add2->reserva          = null;
 					$add2->valor            = $cantidad;
-					$add2->divide            = $id_user;
+					$add2->visto            = 1;
+					$add2->divide           = $id_user;
 					$add2->descripcion      = 'División de recompensa : ' .$usuario;
 					$add2->fecha            = Carbon::now()->format('Y-m-d');   
 					$add2->primaria         = 0;              
@@ -1927,13 +1928,14 @@ class ApiController extends Controller
 				$add1->id_cliente       = $id_user;
 				$add1->id_negocio       = null;
 				$add1->reserva          = null;
+				$add1->visto            = 1;
 				$add1->valor            = $cantidad;
 				$add1->divide            = $id_user;
 				$add1->descripcion      = 'División de recompensa';
 				$add1->fecha            = Carbon::now()->format('Y-m-d');   
 				$add1->primaria         = 0;              
 				$add1->save();
-				
+
 				return response()->json(['code' => 200, 'data' => $array, 'message' => 'Se ha dividido la recompensa.']);
 			} else {
 				
