@@ -1816,6 +1816,7 @@ class ApiController extends Controller
 			$recomp  = Recompensa::where('id_cliente', $id)->where('status', 0)->where('visto', 0);
 			$valor   = Recompensa::where('id_cliente', $id)->where('status', 0)->where('visto', 0)->where('primaria', 0)->sum('valor');
 			$valor_primera   = $recomp->where('primaria', 1)->sum('valor');
+			$recompensa =  Recompensa::where('id_cliente', $id)->where('visto', 0)->where('status', 0)->get(['id', 'valor']);
 			$array = [];
 
 
@@ -1827,12 +1828,13 @@ class ApiController extends Controller
 				'foto'        => asset($res->usuario->foto),
 				'adquiriste'  => $valor,
 				'adq_primera_compra'  => $valor_primera,
-				'adq_total'  => $valor_primera + $valor,
+				'adq_total'    => $valor_primera + $valor,
+				'recompensas'  => $recompensa,
 
 			);
 
 
-			$recompensa =  Recompensa::where('id_cliente', $id)->where('visto', 0)->where('status', 0)->get(['id', 'visto']);
+			$recompensa =  Recompensa::where('id_cliente', $id)->where('visto', 0)->where('status', 0)->get(['id', 'visto', 'valor']);
 			foreach ($recompensa as $res) {
 
 				$res = Recompensa::find($res->id);
