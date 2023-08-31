@@ -1811,12 +1811,11 @@ class ApiController extends Controller
 		try {
 
 
-
 			$res     = Recompensa::where('id_cliente', $id)->where('visto', 0)->first();
 			$recomp  = Recompensa::where('id_cliente', $id)->where('status', 0)->where('visto', 0);
 			$valor   = Recompensa::where('id_cliente', $id)->where('status', 0)->where('visto', 0)->where('primaria', 0)->sum('valor');
 			$valor_primera   = $recomp->where('primaria', 1)->sum('valor');
-			$recompensa =  Recompensa::where('id_cliente', $id)->where('visto', 0)->where('status', 0)->get(['id', 'valor']);
+			//$recompensa =  Recompensa::where('id_cliente', $id)->where('visto', 0)->where('status', 0)->get(['id', 'valor']);
 			$array = [];
 
 
@@ -1829,21 +1828,74 @@ class ApiController extends Controller
 				'adquiriste'  => $valor,
 				'adq_primera_compra'  => $valor_primera,
 				'adq_total'    => $valor_primera + $valor,
-				'recompensas'  => $recompensa,
+				//'recompensas'  => $recompensa,
 
 			);
 
 
-			$recompensa =  Recompensa::where('id_cliente', $id)->where('visto', 0)->where('status', 0)->get(['id', 'visto', 'valor']);
-			foreach ($recompensa as $res) {
+			// $recompensa =  Recompensa::where('id_cliente', $id)->where('visto', 0)->where('status', 0)->get(['id', 'visto', 'valor']);
+			// foreach ($recompensa as $res) {
 
-				$res = Recompensa::find($res->id);
-				$res->visto = 1;
-				$res->save();
-			}
+			// 	$res = Recompensa::find($res->id);
+			// 	$res->visto = 1;
+			// 	$res->save();
+			// }
 
 
 			return response()->json(['code' => 200, 'data' => $array, 'message' => 'Información encontrada.']);
+		} catch (\Exception $th) {
+			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
+		}
+	}
+
+
+	public function DividirRecompensasUsuario(Request $request)
+	{
+		try {
+			$input    = $request->all();
+			$id_user  = $input['id_user'];
+			$divide   = $input['divide'];
+			$usuarios = $input['usuarios'];
+
+			$res     = AppUser::where('id', $id_user)->first();
+
+			$array[] = array(
+
+				'id'          => $res->id,
+				'name'        => $res->name,
+				'usuario'     => $res->user_name,
+				'foto'        => asset($res->foto),
+			
+			);
+
+			if ($divide == 1) {
+
+				foreach ($usuarios as $res => $valor) {
+					$id_cliente = $valor['id'];
+					//dump($id_cliente);
+
+
+
+				}
+
+
+				return response()->json(['code' => 200, 'data' => $array, 'message' => 'Se ha dividido la recompensa.']);
+			} else {
+				
+
+				return response()->json(['code' => 200, 'data' => $array, 'message' => 'No se ha dividido la recompensa.']);
+			}
+			
+		
+
+	
+			// if (!$coleccion) {
+			// 	return response()->json(['code' => 500, 'data' => null, 'message' => 'Ha ocurrido un error al crear Coleccion.']);
+			// }
+
+			
+
+			
 		} catch (\Exception $th) {
 			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}

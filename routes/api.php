@@ -120,6 +120,7 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
 
     /*** Recompensas  */
     Route::get('recompensa/{id}','ApiController@RecompensasUsuario');
+    Route::post('dividir_recompensa','ApiController@DividirRecompensasUsuario');
 
 
   
