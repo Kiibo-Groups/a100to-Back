@@ -473,13 +473,12 @@ class ApiController extends Controller
 	{
 		try {
 			$user = new AppUser;
-			$row  = AppUser::where('id', $id)->first(['id', 'name', 'user_name', 'email', 'last_name', 'birthday', 'sex_type', 'phone', 'refered', 'foto', 'saldo', 'tickets']);
+			$row  = AppUser::where('id', $id)->first(['id', 'name', 'user_name', 'email', 'last_name', 'birthday', 'sex_type', 'phone', 'refered', 'foto', 'saldo', 'saldo_xp', 'tickets']);
 			if ($row->foto != null) {
 				$foto = asset($row->foto);
 			} else {
 				$foto = null;
 			}
-
 
 			$data[] = [
 				'id'          => $row->id,
@@ -493,6 +492,7 @@ class ApiController extends Controller
 				'phone'       => $row->phone,
 				'refered'     => $row->refered,
 				'saldo'       => $row->saldo,
+				'saldo_xp'    => $row->saldo_xp,
 				'tickets6m'   => $row->tickets,
 
 
@@ -507,7 +507,22 @@ class ApiController extends Controller
 			return response()->json(['data' => 'error', 'error' => $th->getMessage()]);
 		}
 	}
-
+	
+	public function getTrendingUsers()
+	{
+		try {
+			$data = [];
+			$trendingUser = TrendingUsers::where('type',0)->distinct('user_id')->sum('xp');
+			
+			//$deposit = new Deposit;
+			return response()->json([
+				'code' => 200,
+				'data' => $trendingUser
+			]);
+		} catch (\Exception $th) {
+			return response()->json(['code' => 301, 'data' => 'error', 'error' => $th->getMessage()]);
+		}
+	}
 
 	public function KardexUsuario()
 	{
@@ -1181,9 +1196,7 @@ class ApiController extends Controller
 	public function Tickets(Request $request)
 	{
 		//dd($request->imagen);
-		try {
-
-
+		try { 
 			$input  = $request->all();
 			$imagen = $input['imagen'];
 			//$imagen = $request->imagen;
@@ -1220,11 +1233,9 @@ class ApiController extends Controller
 				'id_cliente'   => $request->id_cliente,
 				'imagen'       => $target_path . $filename,
 				'fecha'        => Carbon::now()->format('Y-m-d'),
-
 			]);
 
 			//numero de tickets en 6 meses
-
 			$fecha = Carbon::now();
 			$fechaActual = $fecha->format('Y-m-d');
 			$fechaHace6Meses = $fecha->subMonths(6);
@@ -1237,6 +1248,13 @@ class ApiController extends Controller
 			$resus          = AppUser::find($request->id_cliente);
 			$resus->tickets = $tickets6m;
 			$resus->save();	
+
+			/**
+			 * Sumamos los XP
+			 * Subir comprobante de tu recibo 100XP
+			 */
+			$feed_survey = new FeedSurvey;
+			$feed_survey->addXpAward($request->id_cliente, 100);
 
 
 			if (!$tickets) {
@@ -1763,7 +1781,6 @@ class ApiController extends Controller
 					'cantidad'   => $res->cantidad,
 					'store_id'   => $res->store_id,
 					'data'       => $store->getStore($res->store_id),
-
 				);
 			}
 

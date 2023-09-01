@@ -62,6 +62,16 @@ class AppUser extends Authenticatable
                             $add2->fecha            = Carbon::now()->format('Y-m-d');   
                             $add2->primaria         = 0;              
                             $add2->save();
+
+                            /**
+                             * Sumamos los XP
+                             * En cada persona activa referida 250 XP
+                             * Ej.- En este caso:
+                             * Cuando un usuario A ingresa como referido a un usuario B
+                             * los XP se le brindaran al usuario B
+                             */
+                            $feed_survey = new FeedSurvey;
+                            $feed_survey->addXpAward($user->id, 250);
                             
                         }
 

@@ -55,6 +55,7 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
 
     /*Usuario*/
     Route::get('userinfo/{id}','ApiController@userinfo');
+    Route::get('getTrendingUsers','ApiController@getTrendingUsers');
     Route::post('editar_imagen','ApiController@ImagenUsuario');
     Route::get('usuarios','ApiController@KardexUsuario');
     Route::post('eliminar_cuenta','ApiController@EliminarCuenta');
