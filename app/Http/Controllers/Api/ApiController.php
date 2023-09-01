@@ -1807,7 +1807,7 @@ class ApiController extends Controller
 					'id'          => $res->id,
 					'name'        => $res->name,
 					'usuario'     => $res->user_name,
-					'foto'        => ($res->foto) ? asset($res->foto) : null,
+					'foto'        => ($res->foto != null) ? asset($res->foto) : null,
 				);
 
 
@@ -1827,8 +1827,7 @@ class ApiController extends Controller
 					'usuario'     => $res->usuario->user_name,
 					'foto'        => ($res->usuario->foto) ? asset($res->usuario->foto) : null,
 					'saldo'       => $valor,
-					'saldo_primera_compra'  => $valor_primera,
-					'id_negocio'  => $recompensa->id_negocio 
+					'saldo_primera_compra'  => $valor_primera
 					//'adq_total'    => $valor_primera + $valor,
 				);
 
