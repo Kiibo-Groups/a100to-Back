@@ -60,6 +60,8 @@ use App\Http\Controllers\OpenpayController;
 use App\Models\Recompensa;
 use App\Models\Reportar;
 
+use App\Models\FeedSurvey;
+
 class ApiController extends Controller
 {
 
@@ -2019,7 +2021,29 @@ class ApiController extends Controller
 			// 	"description_string": ""
 			// }
 
-			return response()->json(['code' => 200, 'data' => $array, 'message' => 'No se ha dividido la recompensa.']);
+			$input = $request->all();
+			$data  = [];
+			$lims_data_survey = new FeedSurvey;
+
+			$data['user_id'] = $input->usuario_id;
+			$data['id_negocio'] = $input->id_negocio;
+			$data['rating']  = $input->rating;
+			$data['descript_rating'] = $input->description_string;
+			$data['preguntas']  = json_encode($input->preguntas);
+			
+			$lims_data_survey->create($data);
+
+			/**
+			 * Sumamos los XP
+			 * Completar retroalimentacion al finalizar tu conssumo 50 XP
+			 */
+			$user = new AppUser;
+			$user->addXpAward($data['user_id'], 50);
+
+			return response()->json([
+				'code' => 200, 
+				'data' => $data, 
+				'message' => 'survey_complete']);
 
 		} catch (\Exception $th) {
 			return response()->json(['code' => 301, 'data' => "error", 'error' => $th->getMessage()]);
