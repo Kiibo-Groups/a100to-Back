@@ -1803,7 +1803,6 @@ class ApiController extends Controller
 				$res     = AppUser::where('id', $id)->first();
 
 				$array[] = array(
-
 					'id'          => $res->id,
 					'name'        => $res->name,
 					'usuario'     => $res->user_name,
@@ -1816,7 +1815,8 @@ class ApiController extends Controller
 				$recomp  = Recompensa::where('id_cliente', $id)->where('status', 0)->where('visto', 0);
 				$valor   = Recompensa::where('id_cliente', $id)->where('status', 0)->where('visto', 0)->where('primaria', 0)->sum('valor');
 				$valor_primera   = $recomp->where('primaria', 1)->sum('valor');
-				$recompensa =  Recompensa::where('id_cliente', $id)->where('visto', 0)->where('status', 0)->get(); // ['id', 'valor','id_negocio']
+				$chk_negocio = Recompensa::where('id_cliente',$id)->where('status',0)->where('visto',0)->where('id_negocio','!=',null)->get();
+				// $recompensa =  Recompensa::where('id_cliente', $id)->where('visto', 0)->where('status', 0)->get(['id', 'valor']);
 				$array = [];
 
 
@@ -1828,7 +1828,7 @@ class ApiController extends Controller
 					'foto'        => ($res->usuario->foto != null) ? asset($res->usuario->foto) : null,
 					'saldo'       => $valor,
 					'saldo_primera_compra'  => $valor_primera,
-					'id_negocio'  => $recompensa
+					'id_negocio'  => $chk_negocio
 					//'adq_total'    => $valor_primera + $valor,
 				);
 
