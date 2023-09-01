@@ -2025,11 +2025,11 @@ class ApiController extends Controller
 			$data  = [];
 			$lims_data_survey = new FeedSurvey;
 
-			$data['user_id'] = $input->usuario_id;
-			$data['id_negocio'] = $input->id_negocio;
-			$data['rating']  = $input->rating;
-			$data['descript_rating'] = $input->description_string;
-			$data['preguntas']  = json_encode($input->preguntas);
+			$data['user_id'] = $input['usuario_id'];
+			$data['id_negocio'] = $input['id_negocio'];
+			$data['rating']  = $input['rating'];
+			$data['descript_rating'] = $input['description_string'];
+			$data['preguntas']  = json_encode($input['preguntas']);
 			
 			$lims_data_survey->create($data);
 
