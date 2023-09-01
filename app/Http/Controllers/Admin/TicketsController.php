@@ -103,8 +103,6 @@ class TicketsController extends Controller
 
 	public function SelectReserva(Request $request)
 	{
-
-
 		$reservas = Reserva::where('store_id', $request->negocio_id)->where('user_id', $request->user_id)->where('status', 1)->get();
 
 		$arrayName[] = array('id' => '', 'valor' => 'Seleccione');

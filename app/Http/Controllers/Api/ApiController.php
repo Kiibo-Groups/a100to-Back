@@ -413,9 +413,7 @@ class ApiController extends Controller
 
 		return response()->json($res->loginFb($Request->all()));
 	}
-
-
-
+ 
 	public function getAddress($id)
 	{
 		$address = new Address;
@@ -527,7 +525,7 @@ class ApiController extends Controller
 					'name'        => $row->name,
 					'user_name'   => $row->user_name,
 					'email'       => $row->email,
-					'foto'        => asset($row->foto),
+					'foto'        => ($row->foto) ? asset($row->foto) : null,
 					'last_name'   => $row->last_name,
 					'birthday'    => $row->birthday,
 					'sex_type'    => $row->sex_type,
@@ -715,11 +713,7 @@ class ApiController extends Controller
 
 		return response()->json(['code' => 200, 'data' => $res->id, 'message' => 'Se ha actualizado la Ciudad.']);
 	}
-
-
-
-
-
+ 
 
 	public function signupOP(Request $Request)
 	{
@@ -1252,8 +1246,7 @@ class ApiController extends Controller
 			return response()->json(['data' => $th]);
 		}
 	}
-
-
+ 
 
 	public function TicketsHistorial($id)
 	{
@@ -1289,12 +1282,7 @@ class ApiController extends Controller
 		return response()->json(['data' => $array]);
 	}
 
-
-
-
-
-
-
+ 
 
 
 	public function getCausasSociales()
@@ -1379,6 +1367,7 @@ class ApiController extends Controller
 			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}
 	}
+
 	public function HistorialReserva($id)
 	{
 		try {
@@ -1444,7 +1433,7 @@ class ApiController extends Controller
 					'id'       => $res->usuario->id,
 					'name'     => $res->usuario->name,
 					'usuario'  => $res->usuario->user_name,
-					'foto'      => asset($res->usuario->foto),
+					'foto'     => ($res->usuario->foto) ? asset($res->usuario->foto) : null,
 					'siguiendo' => $res->seg_seguidor,
 				);
 			}
@@ -1468,7 +1457,7 @@ class ApiController extends Controller
 					'id'        => $res->seguidor->id,
 					'name'      => $res->seguidor->name,
 					'usuario'   => $res->seguidor->user_name,
-					'foto'      => asset($res->seguidor->foto),
+					'foto'      => ($res->seguidor->foto) ? asset($res->seguidor->foto) : null,
 					'siguiendo' => $res->siguiendo,
 
 
@@ -1586,8 +1575,7 @@ class ApiController extends Controller
 			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}
 	}
-
-
+ 
 	public function ColeccionEliminar($id)
 	{
 		try {
@@ -1599,8 +1587,7 @@ class ApiController extends Controller
 			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}
 	}
-
-
+ 
 	public function ColeccionesVer($id)
 	{
 		try {
@@ -1629,13 +1616,7 @@ class ApiController extends Controller
 			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}
 	}
-
-
-
-
-
-
-
+  
 	public function CrearColeccion(Request $request)
 	{
 		try {
@@ -1669,8 +1650,7 @@ class ApiController extends Controller
 			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}
 	}
-
-
+ 
 	public function HistorialColeccion($id)
 	{
 		try {
@@ -1698,10 +1678,7 @@ class ApiController extends Controller
 			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}
 	}
-
-
-
-
+ 
 	// ----------------Follow ----------------
 	public function FollowNegocio(Request $request)
 	{
@@ -1721,8 +1698,7 @@ class ApiController extends Controller
 			return response()->json(['data' => "error"]);
 		}
 	}
-
-
+ 
 	public function FollowNegocioVer($id)
 	{
 		try {
@@ -1753,8 +1729,7 @@ class ApiController extends Controller
 			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}
 	}
-
-
+ 
 	public function FollowNegocioEliminar($id)
 	{
 		try {
@@ -1818,14 +1793,10 @@ class ApiController extends Controller
 			return response()->json(['data' => $th]);
 		}
 	}
-
-
-
+ 
 	public function RecompensasUsuario($id)
 	{
 		try {
-
-
 			$res     = Recompensa::where('id_cliente', $id)->where('visto', 0)->first();
 
 			if ($res == null) {
@@ -1836,9 +1807,7 @@ class ApiController extends Controller
 					'id'          => $res->id,
 					'name'        => $res->name,
 					'usuario'     => $res->user_name,
-					'foto'        => asset($res->foto),
-
-
+					'foto'        => ($res->foto) ? asset($res->foto) : null,
 				);
 
 
@@ -1856,12 +1825,11 @@ class ApiController extends Controller
 					'id'          => $res->usuario->id,
 					'name'        => $res->usuario->name,
 					'usuario'     => $res->usuario->user_name,
-					'foto'        => asset($res->usuario->foto),
-					'saldo'  => $valor,
+					'foto'        => ($res->usuario->foto) ? asset($res->usuario->foto) : null,
+					'saldo'       => $valor,
 					'saldo_primera_compra'  => $valor_primera,
+					'id_negocio'  => $recomp->id_negocio 
 					//'adq_total'    => $valor_primera + $valor,
-
-
 				);
 
 
@@ -1872,8 +1840,7 @@ class ApiController extends Controller
 			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}
 	}
-
-
+ 
 	public function DividirRecompensasUsuario(Request $request)
 	{
 		try {
@@ -1891,7 +1858,7 @@ class ApiController extends Controller
 				'id'          => $res->id,
 				'name'        => $res->name,
 				'usuario'     => $res->user_name,
-				'foto'        => asset($res->foto),
+				'foto'        => ($res->foto) ? asset($res->foto) : null,
 
 			);
 
@@ -1973,6 +1940,89 @@ class ApiController extends Controller
 			}
 		} catch (\Exception $th) {
 			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
+		}
+	}
+
+	/**
+	 * Funciones para encuesta Retroalimentacion
+	 */
+	public function setSurvey(Request $request)
+	{
+		try {
+			// {
+			// 	"usuario_id": 0,
+			// 	"preguntas": [
+			// 		{
+			// 			"id": 1,
+			// 			"pregunta_string": "¿Elegiste regresar a KAMPAI porqué está en Aciento?",
+			// 			"respuesta": [
+			// 				{
+			// 					"id": 1,
+			// 					"respuesta_string": "SI"
+			// 				},
+			// 				{
+			// 					"id": 2,
+			// 					"respuesta_string": "NO"
+			// 				}
+			// 			],
+			// 			"respuesta_seleccionada": {
+			// 				"id": 0,
+			// 				"respuesta_string": ""
+			// 			}
+			// 		},
+			// 		{
+			// 			"id": 2,
+			// 			"pregunta_string": "Si no estuviera en Aciento, ¿qué harías?",
+			// 			"respuesta": [
+			// 				{
+			// 					"id": 1,
+			// 					"respuesta_string": "Iría aún así"
+			// 				},
+			// 				{
+			// 					"id": 2,
+			// 					"respuesta_string": "Escogería otro restaurante en Aciento"
+			// 				}
+			// 			],
+			// 			"respuesta_seleccionada": {
+			// 				"id": 0,
+			// 				"respuesta_string": ""
+			// 			}
+			// 		},
+			// 		{
+			// 			"id": 3,
+			// 			"pregunta_string": "¿Cuánto tiempo esperaste por tu mesa?",
+			// 			"respuesta": [
+			// 				{
+			// 					"id": 1,
+			// 					"respuesta_string": "0-10 minutos"
+			// 				},
+			// 				{
+			// 					"id": 2,
+			// 					"respuesta_string": "10-30 minutos"
+			// 				},
+			// 				{
+			// 					"id": 3,
+			// 					"respuesta_string": "30-60 minutos"
+			// 				},
+			// 				{
+			// 					"id": 4,
+			// 					"respuesta_string": "Más de 1 hora"
+			// 				}
+			// 			],
+			// 			"respuesta_seleccionada": {
+			// 				"id": 0,
+			// 				"respuesta_string": ""
+			// 			}
+			// 		}
+			// 	],
+			// 	"rating": {},
+			// 	"description_string": ""
+			// }
+
+			return response()->json(['code' => 200, 'data' => $array, 'message' => 'No se ha dividido la recompensa.']);
+
+		} catch (\Exception $th) {
+			return response()->json(['code' => 301, 'data' => "error", 'error' => $th->getMessage()]);
 		}
 	}
 }

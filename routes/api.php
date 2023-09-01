@@ -227,13 +227,17 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     Route::get('cancelComm_event/{id}','ApiController@cancelComm_event');
     Route::post('rateComm_event','ApiController@rateComm_event');
 
-   
-
 
     /**
      * Visitas
      */
     Route::get('SetNewVisitStore/{store}/{user}','ApiController@SetNewVisitStore');
+
+
+    /**
+     * Funciones para la encuesta  Retroalimentacion
+     */
+    Route::post('setSurvey','ApiController@setSurvey');
 
     include("dboy.php");
     include("store.php");
