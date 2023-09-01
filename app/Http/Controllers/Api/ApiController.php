@@ -61,6 +61,7 @@ use App\Models\Recompensa;
 use App\Models\Reportar;
 
 use App\Models\FeedSurvey;
+use App\Models\TrendingUsers;
 
 class ApiController extends Controller
 {
