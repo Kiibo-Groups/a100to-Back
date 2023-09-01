@@ -2037,7 +2037,7 @@ class ApiController extends Controller
 			 * Sumamos los XP
 			 * Completar retroalimentacion al finalizar tu conssumo 50 XP
 			 */
-			$user = new AppUser;
+			$user = new FeedSurvey;
 			$user->addXpAward($data['user_id'], 50);
 
 			return response()->json([
