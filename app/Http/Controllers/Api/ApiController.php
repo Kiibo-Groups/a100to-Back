@@ -472,7 +472,7 @@ class ApiController extends Controller
 		try {
 			$user = new AppUser;
 			$row  = AppUser::where('id', $id)->first(['id', 'name', 'user_name', 'email', 'last_name', 'birthday', 'sex_type', 'phone', 'refered', 'foto', 'saldo', 'tickets']);
-			if ($row->foto) {
+			if ($row->foto != null) {
 				$foto = asset($row->foto);
 			} else {
 				$foto = null;
@@ -525,7 +525,7 @@ class ApiController extends Controller
 					'name'        => $row->name,
 					'user_name'   => $row->user_name,
 					'email'       => $row->email,
-					'foto'        => ($row->foto) ? asset($row->foto) : null,
+					'foto'        => ($row->foto != null) ? asset($row->foto) : null,
 					'last_name'   => $row->last_name,
 					'birthday'    => $row->birthday,
 					'sex_type'    => $row->sex_type,
@@ -1433,7 +1433,7 @@ class ApiController extends Controller
 					'id'       => $res->usuario->id,
 					'name'     => $res->usuario->name,
 					'usuario'  => $res->usuario->user_name,
-					'foto'     => ($res->usuario->foto) ? asset($res->usuario->foto) : null,
+					'foto'     => ($res->usuario->foto != null) ? asset($res->usuario->foto) : null,
 					'siguiendo' => $res->seg_seguidor,
 				);
 			}
@@ -1457,7 +1457,7 @@ class ApiController extends Controller
 					'id'        => $res->seguidor->id,
 					'name'      => $res->seguidor->name,
 					'usuario'   => $res->seguidor->user_name,
-					'foto'      => ($res->seguidor->foto) ? asset($res->seguidor->foto) : null,
+					'foto'      => ($res->seguidor->foto != null) ? asset($res->seguidor->foto) : null,
 					'siguiendo' => $res->siguiendo,
 
 
@@ -1831,9 +1831,7 @@ class ApiController extends Controller
 					'id_negocio'  => $chk_negocio
 					//'adq_total'    => $valor_primera + $valor,
 				);
-
-
-
+ 
 				return response()->json(['code' => 200, 'data' => $array, 'message' => 'Información encontrada.']);
 			}
 		} catch (\Exception $th) {
@@ -1858,7 +1856,7 @@ class ApiController extends Controller
 				'id'          => $res->id,
 				'name'        => $res->name,
 				'usuario'     => $res->user_name,
-				'foto'        => ($res->foto) ? asset($res->foto) : null,
+				'foto'        => ($res->foto != null) ? asset($res->foto) : null,
 
 			);
 
@@ -1897,6 +1895,8 @@ class ApiController extends Controller
 					$res        = AppUser::find($id);
 					$res->saldo = $saldo;
 					$res->save();
+
+					// Actualizacion de XP
 				}
 
 				$delete   = Recompensa::where('id_cliente', $id_user)->where('status', 0)->where('visto', 0)->get();
