@@ -14,6 +14,7 @@ class FeedSurvey extends Model
 
     protected $fillable = [
         'user_id',
+        'id_negocio',
         'rating',
         'descript_rating',
         'preguntas'
