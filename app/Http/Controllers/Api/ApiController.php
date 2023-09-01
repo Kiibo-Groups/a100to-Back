@@ -494,8 +494,7 @@ class ApiController extends Controller
 				'refered'     => $row->refered,
 				'saldo'       => $row->saldo,
 				'saldo_xp'    => $row->saldo_xp,
-				'tickets6m'   => $row->tickets,
-
+				'tickets6m'   => $row->tickets, 
 
 			];
 			//$deposit = new Deposit;
@@ -512,13 +511,79 @@ class ApiController extends Controller
 	public function getTrendingUsers()
 	{
 		try {
-			$data = [];
-			$trendingUser = TrendingUsers::where('type',0)->distinct('user_id')->sum('xp');
+			$data = []; 
+			$level = 'Bronce';
+			$topic10 = [];
+			$trendUsers = [];
+			// Obtenemos todos los usuarios que sumen
+			$trendingUser = TrendingUsers::where('type',0)->select('user_id')->distinct('user_id')->get();
+			foreach ($trendingUser as $trend) {
+				$topic = TrendingUsers::where('user_id',$trend->user_id)->sum('xp');
+				$data[] = [
+					'user_id' => $trend->user_id,
+					'xp'      => $topic					
+				];
+			} 
+ 
+			// Ordenamos de mayor a menor
+			function array_sort_by_column(&$arr, $col, $dir = SORT_DESC) {
+				$sort_col = array();
+				foreach ($arr as $key => $row) {
+					$sort_col[$key] = $row[$col];
+				}
 			
+				array_multisort($sort_col, $dir, $arr);
+			}
+			array_sort_by_column($data, 'xp');
+
+			// Obtenemos los ultimos 10 mejores de la lista
+			for ($i=0; $i < 10; $i++) { 
+				if ($i < count($data)) {
+					$topic10[] = $data[$i];
+				}else {
+					break;
+				}
+			}
+
+			// Rellenamos con la informacion del usuario
+			foreach ($topic10 as $key => $value) {
+
+				$row = AppUser::find($value['user_id']);
+
+				// Obtenemos el nivel
+				if ($value['xp'] >= 50) {
+					$level = 'Bronce';
+				}
+				if ($value['xp'] >= 400) {
+					$level = 'Plata';
+				}
+				if ($value['xp'] >= 1000) {
+					$level = 'Oro';
+				}
+				if ($value['xp'] >= 2500) {
+					$level = 'Diamante';
+				}
+
+				$trendUsers[] = [
+					'id'          => $row->id,
+					'name'        => $row->name,
+					'user_name'   => $row->user_name,
+					'email'       => $row->email, 
+					'last_name'   => $row->last_name,
+					'foto'		  => ($row->foto != null) ? asset($row->foto) : null,
+					'birthday'    => $row->birthday,
+					'sex_type'    => $row->sex_type,
+					'phone'       => $row->phone, 
+					'saldo'       => $row->saldo,
+					'level'       => $level,
+					'xp_acum'  => $value['xp'], 
+				];	
+			}
+
 			//$deposit = new Deposit;
 			return response()->json([
-				'code' => 200,
-				'data' => $trendingUser
+				'code' => 200,   
+				'data' => $trendUsers
 			]);
 		} catch (\Exception $th) {
 			return response()->json(['code' => 301, 'data' => 'error', 'error' => $th->getMessage()]);

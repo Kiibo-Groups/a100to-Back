@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class TrendingUsers extends Model
-{
-    use HasFactory,SoftDeletes;
+{ 
     protected $table = "trending_users_xp";
 
     protected $fillable = [
