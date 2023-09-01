@@ -1816,7 +1816,7 @@ class ApiController extends Controller
 				$recomp  = Recompensa::where('id_cliente', $id)->where('status', 0)->where('visto', 0);
 				$valor   = Recompensa::where('id_cliente', $id)->where('status', 0)->where('visto', 0)->where('primaria', 0)->sum('valor');
 				$valor_primera   = $recomp->where('primaria', 1)->sum('valor');
-				$recompensa =  Recompensa::where('id_cliente', $id)->where('visto', 0)->where('status', 0)->get(['id', 'valor','id_negocio']);
+				$recompensa =  Recompensa::where('id_cliente', $id)->where('visto', 0)->where('status', 0)->get(); // ['id', 'valor','id_negocio']
 				$array = [];
 
 
