@@ -59,6 +59,7 @@ use App\Http\Controllers\WhatsAppCloud;
 use App\Http\Controllers\OpenpayController;
 use App\Models\Recompensa;
 use App\Models\Reportar;
+use App\Models\Bloquear;
 
 use App\Models\FeedSurvey;
 use App\Models\TrendingUsers;
@@ -1876,6 +1877,23 @@ class ApiController extends Controller
 			return response()->json(['code' => 200, 'data' => $reporte, 'message' => 'Se ha creado el Reporte.']);
 		} catch (\Throwable $th) {
 			return response()->json(['data' => $th]);
+		}
+	}
+
+	public function block_user(Request $request)
+	{
+		try {
+
+			$input = $request->all();
+			$bloqueo   = Bloquear::create($input);
+
+			if (!$bloqueo) {
+				return response()->json(['code' => 500, 'data' => null, 'message' => 'Ha ocurrido un error al Bloquear.']);
+			}
+
+			return response()->json(['code' => 200, 'data' => $bloqueo, 'message' => 'Se ha creado el Bloqueo.']);
+		} catch (\Exception $th) {
+			return response()->json(['data' => $th->getMessage()]);
 		}
 	}
  
