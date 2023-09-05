@@ -1883,7 +1883,6 @@ class ApiController extends Controller
 	public function block_user(Request $request)
 	{
 		try {
-
 			$input = $request->all();
 			$bloqueo   = Bloquear::create($input);
 
@@ -1893,7 +1892,7 @@ class ApiController extends Controller
 
 			return response()->json(['code' => 200, 'data' => $bloqueo, 'message' => 'Se ha creado el Bloqueo.']);
 		} catch (\Exception $th) {
-			return response()->json(['data' => $th->getMessage()]);
+			return response()->json(['code' => 401,'data' => $th->getMessage()]);
 		}
 	}
  
