@@ -23,13 +23,6 @@
                         <a href="{{ Asset(env('admin') . '/setting') }}" class=" menu-link">Configuración</a>
                     </li>
                 @endif
-                <!--
-                 @if ($admin->hasPerm('Dashboard - Textos de la aplicacion'))
-<li>
-                        <a href="{{ Asset(env('admin') . '/text/add') }}" class=" menu-link">Texto de la aplicación</a>
-                    </li>
-@endif
-                -->
                 @if ($admin->hasPerm('Paginas de la aplicacion'))
                     <li>
                         <a href="{{ Asset(env('admin') . '/page/add') }}" class=" menu-link">Páginas de aplicaciones</a>
@@ -92,13 +85,15 @@
     <!-- Ofertas de descuento -->
     @if ($admin->hasPerm('Ofertas de descuento'))
         <li>
-            <a href="{{ Asset(env('admin') . '/offer') }}" class=" menu-link">
+            <a href="{{ Asset(env('admin') . '/giftcards') }}" class=" menu-link">
                 <i class="mdi mdi-calendar"></i>
                 <span>
-                    Ofertas </span>
+                    GiftCards 
+                </span>
             </a>
         </li>
     @endif
+
     <!-- Reservas -->
     @if ($admin->hasPerm('Reservas'))
         <li>
@@ -111,15 +106,15 @@
     @endif
     <!-- Reservas -->
 
-        <!-- Reservas -->
-        @if ($admin->hasPerm('Recompensas'))
-        <li>
-            <a href="{{ Asset(env('admin') . '/recompensas') }}" class=" menu-link">
-                <i class="mdi mdi-file-outline"></i>
-                <span>
-                    Recompensas </span>
-            </a>
-        </li>
+    <!-- Reservas -->
+    @if ($admin->hasPerm('Recompensas'))
+    <li>
+        <a href="{{ Asset(env('admin') . '/recompensas') }}" class=" menu-link">
+            <i class="mdi mdi-file-outline"></i>
+            <span>
+                Recompensas </span>
+        </a>
+    </li>
     @endif
     <!-- Reservas -->
 
@@ -134,6 +129,7 @@
         </li>
     @endif
     <!-- Tickets -->
+
     <!-- Sociales -->
     @if ($admin->hasPerm('Causas sociales'))
         <li>

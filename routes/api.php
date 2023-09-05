@@ -141,7 +141,6 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     Route::get('cartCount/{cartNo}','ApiController@cartCount');
     Route::get('updateCart/{id}/{type}','ApiController@updateCart');
     Route::get('getCart/{cartNo}','ApiController@getCart');
-    Route::get('getOffer/{cartNo}','ApiController@getOffer');
     Route::get('applyCoupen/{id}/{cartNo}','ApiController@applyCoupen');
     Route::post('signup','ApiController@signup');
     Route::post('signupOP','ApiController@signupOP');
@@ -218,7 +217,6 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     /**
      * Mandaditos
      */
-
     Route::post('OrderComm','ApiController@OrderComm');
     Route::post('ViewCostShipCommanded','ApiController@ViewCostShipCommanded');
     Route::get('chkEvents_comm/{id}','ApiController@chkEvents_comm');
@@ -229,6 +227,11 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
     Route::get('cancelComm_event/{id}','ApiController@cancelComm_event');
     Route::post('rateComm_event','ApiController@rateComm_event');
 
+
+    /**
+     * GiftCards
+     */
+    Route::get('getGiftCards','ApiController@getGiftCards');
 
     /**
      * Visitas

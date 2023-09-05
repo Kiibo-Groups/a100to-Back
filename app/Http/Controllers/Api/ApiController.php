@@ -17,8 +17,7 @@ use App\Models\Page;
 use App\Models\Rate;
 use App\Models\Text;
 use App\Models\User;
-use App\Models\Admin;
-use App\Models\Offer;
+use App\Models\Admin; 
 use App\Models\Order;
 use App\Http\Requests;
 use App\Models\Banner;
@@ -36,12 +35,12 @@ use App\Models\Delivery;
 use App\Models\Language;
 use App\Models\Sociales;
 use App\Models\CardsUser;
-use App\Models\Coleccion;
+use App\Models\Coleccion; 
+use App\Models\GiftCards;
 
 use App\Models\Favorites;
 use App\Models\OrderItem;
-use App\Models\CartCoupen;
-use App\Models\OfferStore;
+use App\Models\CartCoupen; 
 use App\Models\OrderAddon;
 use App\Models\Order_staff;
 use Illuminate\Http\Request;
@@ -127,8 +126,7 @@ class ApiController extends Controller
 	{
 		$banner  = new Banner;
 		$store   = new User;
-		$text    = new Text;
-		$offer   = new Offer;
+		$text    = new Text; 
 		$cats    = new CategoryStore;
 		$cat     = isset($_GET['cat']) ? $_GET['cat'] : 0;
 
@@ -136,7 +134,6 @@ class ApiController extends Controller
 		$data = [
 			'store'		=> $store->getAppData($city_id),
 			'trending'	=> $store->InTrending($city_id), //$store->getAppData($city_id,true),
-			'offers'    => $offer->getAll(0),
 		];
 
 		return response()->json(['data' => $data]);
@@ -325,12 +322,7 @@ class ApiController extends Controller
 		return response()->json(['data' => $res->deleteAll($cartNo)]);
 	}
 
-	public function getOffer($cartNo)
-	{
-		$res = new Offer;
-
-		return response()->json(['data' => $res->getOffer($cartNo)]);
-	}
+	
 
 	public function applyCoupen($id, $cartNo)
 	{
@@ -1258,6 +1250,19 @@ class ApiController extends Controller
 	}
 
 
+	/**
+	 * GiftCars
+	 */
+	public function getGiftCards()
+	{
+		try {
+			$res = new GiftCards;
+			return response()->json(['code' => 200, 'data' => $res->getGiftCards()]);
+		} catch (\Exception $th) {
+			return response()->json(['code' => 401, 'data' => 'error', 'error' => $th->getMessage()]);
+		}
+	}
+
 	// ---------------Tickets ----------------
 
 	public function Tickets(Request $request)
@@ -1856,8 +1861,6 @@ class ApiController extends Controller
 			return response()->json(['data' => "error", 'error' => $th->getMessage()]);
 		}
 	}
-
-
 
 	// ----------------Follow ----------------
 	public function ReportarUsuario(Request $request)

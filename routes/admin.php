@@ -118,6 +118,15 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin','prefix' => env('admin
 
         /*
         |------------------------------
+        |Manage GiftCards
+        |------------------------------
+        */
+        Route::resource('giftcards','GiftCardsController');
+        Route::get('giftcards/delete/{id}','GiftCardsController@delete');
+        Route::get('giftcards/status/{id}','GiftCardsController@status'); 
+
+        /*
+        |------------------------------
         |Delivery Staff
         |------------------------------
         */

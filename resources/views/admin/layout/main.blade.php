@@ -19,10 +19,6 @@
     <title>@yield('title')</title>
     <link rel="icon" type="image/x-icon" href="{{ Asset('assets/img/logo.png') }}" />
     <link rel="icon" href="{{ Asset('assets/img/logo.png') }}" type="image/png" sizes="16x16">
-
-
-
-
     <!-- Plugins css -->
     <link rel="stylesheet" href="{{ Asset('assets_admin/libs/spectrum-colorpicker2/spectrum.min.css') }}"
         type="text/css">
@@ -84,7 +80,7 @@
             </div>
 
             <div class="row ">
-                <div class="col-lg-11 mx-auto mt-2">
+                <div class="col-lg-12 mx-auto mt-2">
 
                     <ul class="list-unstyled topnav-menu topnav-menu-left mb-0">
                         <li>
@@ -132,8 +128,7 @@
     <script src="{{ Asset('assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ Asset('assets/vendor/select2/js/select2.full.min.js') }}"></script>
     <script src="{{ Asset('assets/vendor/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
-    <script src="{{ Asset('assets/js/atmos.min.js?v=') }}<?php echo time(); ?>"></script>
-    <!-- Vendor js -->
+    <!-- Vendor js <script src="{{ Asset('assets/js/atmos.min.js?v=') }}<?php echo time(); ?>"></script> -->
     <script src="{{ Asset('assets_admin/js/vendor.min.js') }}"></script>
     <!-- Plugins js-->
     <script src="{{ Asset('assets_admin/libs/flatpickr/flatpickr.min.js') }}"></script>
