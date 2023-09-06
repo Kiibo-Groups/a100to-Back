@@ -63,7 +63,7 @@
                                                     {{ date('d-m-Y', strtotime($row->fecha)) }}</td>
                                                 <td class="col-md-1" style="text-align: center">
                                                     {{ Carbon\Carbon::parse($row->hora)->format('h:i  A') }}</td>
-                                                <td class="col-md-1" style="text-align: center">$ {{ $row->valor }} </td>
+                                                <td class="col-md-1" style="text-align: center">$ {{ number_format($row->valor,2) }} </td>
                                                 <td class="col-md-1" style="text-align: center">
 
                                                     @if ($row->reserva)
