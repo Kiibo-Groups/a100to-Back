@@ -296,14 +296,14 @@
     <div class="card ">
         <div class="card-body">
             <div class="form-row">
-                <div class="form-group col-md-6">
+                {{-- <div class="form-group col-md-6">
                     <label for="inputEmail6">Valor mínimo del carrito<br /> <small style="font-size:12px;">
                         (Si se declara un monto a partir de este monto el envio sera gratis.)</small></label>
                     {!! Form::text('min_cart_value', null, [
                         'placeholder' => 'Después de esta cantidad, la entrega será gratuita',
                         'class' => 'form-control',
                     ]) !!}
-                </div>
+                </div> --}}
 
                 <div class="form-group col-md-6">
                     <label for="inputEmail6">Alcance del servicio en KM <br /> <small style="font-size:12px;">(a
