@@ -65,7 +65,6 @@
                                                     {{ Carbon\Carbon::parse($row->hora)->format('h:i  A') }}</td>
                                                 <td class="col-md-1" style="text-align: center">$ {{ number_format($row->valor,2) }} </td>
                                                 <td class="col-md-1" style="text-align: center">
-
                                                     @if ($row->reserva)
                                                         {{ $row->reservas->invitados }}
                                                     @else
