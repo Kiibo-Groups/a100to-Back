@@ -51,7 +51,7 @@
 </head>
 
 <body class="loading "
-    data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": true}, "topbar": {"color": "light"}, "showRightSidebarOnPageLoad": true}'>
+    data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "dark", "size": "default", "showuser": true}, "topbar": {"color": "light"}, "showRightSidebarOnPageLoad": true}'>
 
     <div id="wrapper">
 
@@ -62,19 +62,19 @@
             <!-- LOGO -->
             <div class="logo-box">
                 <a href="/home" class="logo logo-light text-center">
-                    <span class="logo-sm">
-                        A100TO
+                    <span class="logo-sm"> 
+                        <img src="{{ Asset('assets/img/logo-sm.png') }}" alt="logo" style="width: 50px;margin: 0 20px;">
                     </span>
                     <span class="logo-lg">
-                        A100TO
+                        <img src="{{ Asset('assets/img/white.png') }}" alt="logo" style="height: 50px;">
                     </span>
                 </a>
                 <a href="{{ Asset(env('admin') . '/home') }}" class="logo logo-dark text-center">
-                    <span class="logo-sm">
-                        A100TO
+                    <span class="logo-sm"> 
+                        <img src="{{ Asset('assets/img/logo-sm.png') }}" alt="logo" style="width: 50px;margin: 0 20px;">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ Asset('assets/img/logo.png') }}" alt="" height="86">
+                        <img src="{{ Asset('assets/img/white.png') }}" alt="logo" style="height: 50px;">
                     </span>
                 </a>
             </div>

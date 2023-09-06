@@ -2,7 +2,7 @@
     <div class="col-lg-6 m-b-30">
         <div class="card">
             <div class="card-header">
-                <div class="card-title">Informe de pedidos de los últimos 6 meses</div>
+                <div class="card-title">Informe de reservas de los últimos 6 meses</div>
 
                 <div class="card-controls">
                     <a href="#" class="js-card-refresh icon"> </a>
@@ -22,7 +22,7 @@
                             <i class="mdi mdi-information"></i> Quiere ver más datos
                         </span>
                     </h6>
-                    <a href="report" class="btn btn-white shadow-none">Obtener informe completo</a>
+                     
                 </div>
             </div>
         </div>
@@ -50,8 +50,7 @@
                         <span class="opacity-75"> 
                             <i class="mdi mdi-information"></i> Quiere ver más datos
                         </span>
-                    </h6>
-                    <a href="report" class="btn btn-white shadow-none">Obtener informe completo</a>
+                    </h6>  
                 </div>
             </div>
         </div>

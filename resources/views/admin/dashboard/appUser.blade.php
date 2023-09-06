@@ -15,7 +15,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row ">
-                    <div class="col-lg-11 mx-auto mt-2">
+                    <div class="col-lg-12 mx-auto mt-2">
                         @include('user.layout.alert')
                         <div class="card py-3 m-b-30">
                             <div class="col-md-6" style="text-align: left;">
@@ -25,7 +25,7 @@
                             <div class="card-body">
                                 <table class="table table-hover " >
                                     <thead>
-                                        <tr style="font-size: 14px">
+                                        <tr >
                                             <th>Usuario</th>
                                             <th>Email</th>
                                             <th>Telefono</th>
@@ -42,7 +42,7 @@
                                     <tbody>
 
                                         @foreach ($data as $row)
-                                            <tr style="font-size: 14px">
+                                            <tr>
                                                 <td class="col-md-3">{{ $row->name }} </td>
                                                 <td class="col-md-2">{{ $row->email }}</td>
                                                 <td class="col-md-1">{{ $row->phone }}</td>

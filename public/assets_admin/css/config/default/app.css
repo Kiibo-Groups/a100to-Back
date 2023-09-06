@@ -101,7 +101,7 @@ body {
   color: #71b6f9; }
 
 #sidebar-menu .menuitem-active .active {
-  color: #71b6f9; }
+  color: #ffffff; background: rgba(255, 145, 77, 0.50);}
 
 .nav-second-level li a {
   padding: 8px 20px;
@@ -334,7 +334,7 @@ body[data-sidebar-color="dark"] .left-side-menu {
   body[data-sidebar-color="dark"] .left-side-menu #sidebar-menu .menuitem-active > a {
     color: #71b6f9; }
   body[data-sidebar-color="dark"] .left-side-menu #sidebar-menu .menuitem-active .active {
-    color: #71b6f9; }
+    color: #ffffff; }
   body[data-sidebar-color="dark"] .left-side-menu .nav-second-level li a,
   body[data-sidebar-color="dark"] .left-side-menu .nav-thrid-level li a {
     color: #9097a7; }

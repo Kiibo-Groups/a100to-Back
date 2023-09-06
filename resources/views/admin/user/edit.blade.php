@@ -16,7 +16,7 @@
             <div class="container-fluid">
 
                 <div class="row ">
-                    <div class="col-lg-11 mx-auto">
+                    <div class="col-lg-12 mx-auto">
                         @include('user.layout.alert')
                         <div class=" py-3 m-b-30">
                       

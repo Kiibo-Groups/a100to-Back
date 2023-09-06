@@ -65,59 +65,32 @@
 </head>
 
 <body class="loading "
-    data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": true}, "topbar": {"color": "light"}, "showRightSidebarOnPageLoad": true}'>
+    data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "dark", "size": "default", "showuser": true}, "topbar": {"color": "light"}, "showRightSidebarOnPageLoad": true}'>
 
     <div id="wrapper">
         <!-- Topbar Start -->
         <div class="navbar-custom">
-            <ul class="list-unstyled topnav-menu float-end mb-0" style="margin-top: 10px; margin-right: 70px">
-{{--
-                <li class="dropdown notification-list topbar-dropdown">
-                    @php
-                        $user 	= new App\Models\User;
-                        $overview = $user->overview();
-			            $currency  = App\Models\Admin::find(1)->currency;
-                    @endphp
-
-                    @if ($overview['saldos'] > 0)
-                        <!-- Saldo a favor -->
-                        <div class="nav-link "> <b style="font-size: 16px; color:black">Tienes un saldo a favor de:</b>
-                            <span
-                                style="color:green; font-size: 18px;">{{ $currency }}{{ number_format($overview['saldos'], 2) }}
-                                <i class="mdi mdi-trending-up"></i></span>
-                        </div>
-                    @else
-                        <!-- Saldo que debe -->
-                  
-                        <div class="nav-link "> <b style="font-size: 16px; color:black">Tienes un saldo deudor de:</b>
-                            <span
-                                style="color:red; font-size: 18px;">{{ $currency }}{{ number_format($overview['saldos'], 2) }}
-                                <i class="mdi mdi-trending-up"></i></span>
-                        </div>
-                    @endif
-                </li>--}}
-            </ul>
             <!-- LOGO -->
             <div class="logo-box">
                 <a href="/home" class="logo logo-light text-center">
-                    <span class="logo-sm">
-                        A100TO
+                    <span class="logo-sm"> 
+                        <img src="{{ Asset('assets/img/logo-sm.png') }}" alt="logo" style="width: 50px;margin: 0 20px;">
                     </span>
                     <span class="logo-lg">
-                        A100TO
+                        <img src="{{ Asset('assets/img/white.png') }}" alt="logo" style="height: 50px;">
                     </span>
                 </a>
-                <a href="{{ Asset(env('user') . '/home') }}" class="logo logo-dark text-center">
-                    <span class="logo-sm">
-                        A100TO
+                <a href="{{ Asset(env('admin') . '/home') }}" class="logo logo-dark text-center">
+                    <span class="logo-sm"> 
+                        <img src="{{ Asset('assets/img/logo-sm.png') }}" alt="logo" style="width: 50px;margin: 0 20px;">
                     </span>
-                    <span class="logo-lg" >
-                        <img src="{{ Asset('assets/img/logo.png') }}" alt="" height="86">
+                    <span class="logo-lg">
+                        <img src="{{ Asset('assets/img/white.png') }}" alt="logo" style="height: 50px;">
                     </span>
                 </a>
             </div>
             <div class="row ">
-                <div class="col-lg-11 mx-auto mt-2">
+                <div class="col-lg-12 mx-auto mt-2">
 
                     <ul class="list-unstyled topnav-menu topnav-menu-left mb-0">
                         <li>

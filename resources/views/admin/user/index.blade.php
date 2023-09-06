@@ -14,7 +14,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row ">
-                    <div class="col-lg-11 mx-auto mt-2">
+                    <div class="col-lg-12 mx-auto mt-2">
                         @include('user.layout.alert')
                         <div class="card py-3 m-b-30">
                             <div class="col-md-6" style="text-align: left;">
@@ -36,9 +36,7 @@
                                             <th>Nombre</th>
                                             <th>Ciudad</th>
                                             <th>Status</th>
-                                            <th>Trending</th>
-                                            <th>Comentarios</th>
-                                            <th>Saldos</th>
+                                            <th>Trending</th>  
                                             <th >Opciones</th>
                                         </tr>
 
@@ -84,36 +82,7 @@
                                                         class="btn btn-success width-md waves-effect waves-light" 
                                                             onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id . '?type=trend') }}')">Desactivar</button>
                                                     @endif
-                                                </td>
-                                                <td>
-                                                    <a href="{{ Asset($link . $row->id . '/rate') }}"
-                                                        class="btn m-b-15 ml-2 mr-2 btn btn-success waves-effect waves-light"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        data-original-title="Vista de comentarios"><i
-                                                            class="mdi mdi-chart-line"></i></a>
-                                                </td>
-                                                <td>
-                                                    @if ($row->saldo == 0)
-                                                        <!-- Saldo a favor -->
-                                                        <h5 style="color:blue;">
-                                                            {{ $currency }}{{ number_format($row->saldo, 2) }}</h5>
-                                                    @elseif($row->saldo > 0)
-                                                        <!-- Saldo a favor -->
-                                                        <h5 style="color:red;" data-toggle="tooltip" data-placement="top"
-                                                            data-original-title="Tiene un saldo a favor de:">
-                                                            {{ $currency }}{{ number_format($row->saldo, 2) }} <i
-                                                                class="mdi mdi-trending-down"></i></h5>
-                                                    @else
-                                                        <!-- Saldo que debe -->
-                                                        <?php
-                                                        $sal = str_replace('-', '', $row->saldo);
-                                                        ?>
-                                                        <h5 style="color:green;" data-toggle="tooltip" data-placement="top"
-                                                            data-original-title="Tiene un saldo deudor de:">
-                                                            {{ $currency }}{{ number_format($sal, 2) }} <i
-                                                                class="mdi mdi-trending-up"></i> </h5>
-                                                    @endif
-                                                </td>
+                                                </td> 
                                                 <td style="text-align: right">
                                                     <div class="btn-group" role="group">
 

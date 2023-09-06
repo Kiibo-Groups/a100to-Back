@@ -16,7 +16,7 @@
         <div class="container-fluid">
 
             <div class="row ">
-                <div class="col-lg-11 mx-auto mt-2">
+                <div class="col-lg-12 mx-auto mt-2">
                     @include('user.layout.alert')
                     <div class="card py-3 m-b-30">
 
@@ -73,28 +73,27 @@
                                             </td>
                                             <td>
                                                 @if ($row->status == 0)
-                                                    <button type="button" class="btn btn-success width-xs waves-effect waves-light"
-                                                        onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Activo</button>
+                                                    <span class="badge bg-success width-lg"
+                                                        onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Activo</span>
                                                 @else
-                                                    <button type="button" class="btn btn-danger width-xs waves-effect waves-light"
-                                                        onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Inactivo</button>
+                                                    <span class="badge bg-danger width-lg"
+                                                        onclick="confirmAlert('{{ Asset($link . 'status/' . $row->id) }}')">Inactivo</span>
                                                 @endif
                                             </td>
-                                            <td style="text-align: right">
-                                                <a href="{{ Asset($link . $row->id . '/edit') }}"
-                                                    class="btn btn-success waves-effect waves-light btn m-b-15 ml-2 mr-2 btn-md" 
-                                                    data-toggle="tooltip" data-placement="top"
-                                                    data-original-title="Editar"><i
-                                                        class="mdi mdi-border-color"></i></a>
-                                                     
-
-
-                                                <button type="button"
-                                                    class="btn m-b-15 ml-2 mr-2 btn-md  btn btn-danger waves-effect waves-light"
-                                                    data-toggle="tooltip" data-placement="top"
-                                                    data-original-title="Eliminar"
-                                                    onclick="deleteConfirm('{{ Asset($link . 'delete/' . $row->id) }}')"><i
-                                                        class="mdi mdi-delete-forever"></i></button>
+                                            <td>
+                                                <div class="dropdown" style="text-align: right">
+                                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Opciones  
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <a href="{{ Asset($link . $row->id . '/edit') }}" class="dropdown-item">
+                                                            <i class="mdi mdi-border-color"></i> Editar
+                                                        </a>
+                                                        <a href="javascript:void()" onclick="deleteConfirm('{{ Asset($link . 'delete/' . $row->id) }}')" class="dropdown-item">
+                                                            <i class="mdi mdi-delete-forever"></i> Eliminar
+                                                        </a>
+                                                    </div>
+                                                </div> 
                                             </td>
                                         </tr>
                                     @endforeach

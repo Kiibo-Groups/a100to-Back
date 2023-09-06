@@ -34,7 +34,7 @@
     </li>
 
 
-    <!-- Banners -->
+    <!-- Banners  
     @if ($admin->hasPerm('Banners'))
         <li>
             <a href="{{ Asset(env('admin') . '/banner') }}" class=" menu-link">
@@ -43,7 +43,7 @@
             </a>
         </li>
     @endif
-    <!-- Banners -->
+      Banners -->
 
     <!-- Ciudades -->
     @if ($admin->hasPerm('Administrar Ciudades'))

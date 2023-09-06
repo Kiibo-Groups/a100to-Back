@@ -83,11 +83,11 @@ class Admin extends Authenticatable
 		$update->max_distance_staff = isset($data['max_distance_staff']) ? $data['max_distance_staff'] : 0;
         $update->min_value          = isset($data['min_value']) ? $data['min_value'] : 0;
 		$update->store_type 		= isset($data['store_type']) ? $data['store_type'] : null;
-		$update->paypal_client_id 	= isset($data['paypal_client_id']) ? $data['paypal_client_id'] : null;
-		$update->stripe_client_id 	= isset($data['stripe_client_id']) ? $data['stripe_client_id'] : null;
-		$update->stripe_api_id 		= isset($data['stripe_api_id']) ? $data['stripe_api_id'] : null;
+		$update->paypal_client_id 	= isset($data['paypal_client_id']) ? $data['paypal_client_id'] : 'null';
+		$update->stripe_client_id 	= isset($data['stripe_client_id']) ? $data['stripe_client_id'] : 'null';
+		$update->stripe_api_id 		= isset($data['stripe_api_id']) ? $data['stripe_api_id'] : 'null';
 		$update->ApiKey_google   	= isset($data['ApiKey_google']) ? $data['ApiKey_google'] : null;
-		$update->comm_stripe   	    = isset($data['comm_stripe']) ? $data['comm_stripe'] : null;
+		$update->comm_stripe   	    = isset($data['comm_stripe']) ? $data['comm_stripe'] : 0;
 
 		$update->url1   	        = isset($data['url1']) ? $data['url1'] : null;
 		$update->url2   	        = isset($data['url2']) ? $data['url2'] : null;
@@ -154,8 +154,8 @@ class Admin extends Authenticatable
 	{
 		return [
 			'store' 	=> User::where('status',0)->count(),
-			'order'		=> Order::count(),
-			'complete'  => Order::where('status',6)->count(),
+			'reservas'  => Reserva::count(),
+			'ticket_complete'  => Tickets::where('status',2)->count(),
 			'month'  	=> Order::whereDate('created_at','LIKE',date('Y-m').'%')->count(),
 			'user'  	=> AppUser::count(),
 		];
@@ -178,17 +178,7 @@ class Admin extends Authenticatable
 	{
 		$month      = date('Y-m',strtotime(date('Y-m').' - '.$type.' month'));
 		
-		$order   = Order::where(function($query) use($sid){
-
-			if($sid > 0)
-			{
-				$query->where('store_id',Auth::user()->id);
-			}
-
-		})->where('status',6)->whereDate('created_at','LIKE',$month.'%')->count();
-
-
-		$cancel  = Order::where(function($query) use($sid){
+		$order   = Reserva::where(function($query) use($sid){
 
 			if($sid > 0)
 			{
@@ -197,14 +187,22 @@ class Admin extends Authenticatable
 
 		})->where('status',2)->whereDate('created_at','LIKE',$month.'%')->count();
 
+
+		$cancel  = Reserva::where(function($query) use($sid){
+
+			if($sid > 0)
+			{
+				$query->where('store_id',Auth::user()->id);
+			}
+
+		})->where('status',3)->whereDate('created_at','LIKE',$month.'%')->count();
+
 		return ['order' => $order,'cancel' => $cancel];
 	}
 
 	public function storeChart()
 	{
-		$storeID = Order::where('status',6)->pluck('store_id')->toArray();
-
-
+		$storeID = Reserva::where('status',2)->pluck('store_id')->toArray();
 		$data = [];
 
 		foreach(array_unique($storeID) as $sid)
@@ -213,7 +211,10 @@ class Admin extends Authenticatable
 
 			if(isset($user->id))
 			{
-				$data[] = ['name' => preg_replace('([^A-Za-z0-9])', '', $user->name),'order' => Order::where('store_id',$sid)->where('status',6)->count()];
+				$data[] = [
+					'name' => preg_replace('([^A-Za-z0-9])', '', $user->name),
+					'order' => Reserva::where('store_id',$sid)->where('status',2)->count()
+				];
 			}
 		}	
 

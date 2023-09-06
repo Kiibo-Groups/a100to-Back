@@ -15,7 +15,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row ">
-                    <div class="col-lg-11 mx-auto mt-2">
+                    <div class="col-lg-12 mx-auto mt-2">
                         @include('user.layout.alert')
                         <div class="card py-3 m-b-30">
 
@@ -74,16 +74,13 @@
 
                                                 <td class="col-md-1" style="text-align: center">
                                                     @if ($row->status == 0)
-                                                        <button type="button"
-                                                            class="btn btn-warning width-xs waves-effect waves-light">Pendiente</button>
+                                                        <span class="badge bg-warning width-lg">Pendiente</span>
                                                     @endif
                                                     @if ($row->status == 1)
-                                                        <button type="button"
-                                                            class="btn btn-success width-xs waves-effect waves-light">Cumplida</button>
+                                                        <span class="badge bg-success width-lg">Cumplida</span>
                                                     @endif
                                                     @if ($row->status == 3)
-                                                        <button type="button"
-                                                            class="btn btn-danger width-xs waves-effect waves-light">Cancelada</button>
+                                                        <span class="badge bg-danger width-lg">Cancelada</span>
                                                     @endif
                                                 </td>
 

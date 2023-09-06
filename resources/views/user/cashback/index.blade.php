@@ -18,7 +18,7 @@
 
 
                 <div class="row ">
-                    <div class="col-lg-11 mx-auto mt-2">
+                    <div class="col-lg-12 mx-auto mt-2">
                         @include('user.layout.alert')
                         <div class="card py-3 m-b-30">
 
@@ -39,7 +39,7 @@
 
                                 <table class="table table-hover ">
                                     <thead>
-                                        <tr style="text-align: center">
+                                        <tr>
                                             <th>#</th>
                                             <th>CashBack</th>
                                             <th>Hora</th>
@@ -51,11 +51,11 @@
                                     <tbody>
 
                                         @foreach ($data as $key => $row)
-                                            <tr style="text-align: center">
-                                                <td class="col-md-1">{{ $key +1 }}</td>                                             
+                                            <tr>
+                                                <td>#{{ $row->id }}</td>                                             
                                                 
-                                                <td width="25%"> {{ $row->cashback }} %</td>
-                                                <td width="25%">{{ Carbon\Carbon::parse($row->hora)->format('h:i  A') }}</td>
+                                                <td> {{ $row->cashback }} %</td>
+                                                <td>{{ Carbon\Carbon::parse($row->hora)->format('h:i  A') }}</td>
                                                 <td>
                                                     @if ($row->status == 0)
                                                         <button type="button" class="btn btn-success width-xs waves-effect waves-light"
@@ -66,22 +66,20 @@
                                                     @endif
                                                 </td>
 
-                                                <td class="col-md-2" style="text-align: center">
-
-                                                    <a href="{{ Asset($link . $row->id . '/edit') }}"
-                                                        class="btn m-b-15 ml-2 mr-2 btn-md   waves-effect waves-light btn-success"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        data-original-title="Editar"><i
-                                                            class="mdi mdi-border-color"></i></a>
-
-                                                    <button type="button"
-                                                        class="btn m-b-15 ml-2 mr-2 btn-md   waves-effect waves-light btn-danger"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        data-original-title="Eliminar"
-                                                        onclick="deleteConfirm('{{ Asset($link . 'delete/' . $row->id) }}')"><i
-                                                            class="mdi mdi-delete-forever"></i></button>
-
-
+                                                <td class="col-md-2">
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Opciones  
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a href="{{ Asset($link . $row->id . '/edit') }}" class="dropdown-item">
+                                                                <i class="mdi mdi-border-color"></i> Editar
+                                                            </a>
+                                                            <a href="javascript:void()" onclick="deleteConfirm('{{ Asset($link . 'delete/' . $row->id) }}')" class="dropdown-item">
+                                                                <i class="mdi mdi-delete-forever"></i> Eliminar
+                                                            </a>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach

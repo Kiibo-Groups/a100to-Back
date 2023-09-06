@@ -15,7 +15,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row ">
-                    <div class="col-lg-11 mx-auto mt-2">
+                    <div class="col-lg-12 mx-auto mt-2">
                         @include('user.layout.alert')
                         <div class="card py-3 m-b-30">
 
@@ -23,11 +23,6 @@
                                 <div class="col-md-6" style="text-align: left;">
                                     <b style="margin-left:20px">@yield('title')</b>
                                 </div>
-                                {{-- <divclass="col-md-6"style="text-align:right;"><ahref="Asset($link.'add')}}"
-                                    class="btn btn-warning rounded-pill waves-effect waves-light" style=" margin-right:20px" >Agregar
-                                    nuevo</a>&nbsp;&nbsp;&nbsp;
-                                </div> --}}
-
                             </div>
 
 
@@ -92,6 +87,7 @@
                                 <table class="table table-hover ">
                                     <thead>
                                         <tr style="text-align: center">
+                                            <th>ID</th>
                                             <th>Negocio</th>
                                             <th>Usuario</th>
                                             <th>Cashback</th>
@@ -107,6 +103,7 @@
 
                                         @foreach ($data as $row)
                                             <tr>
+                                                <td>#{{ $row->id }}</td>
                                                 <td class="col-md-2">
                                                     @if (!$row->id_negocio)
                                                     @else
@@ -125,7 +122,7 @@
                                                 <td class="col-md-1" style="text-align: center">
                                                     @if (!$row->valor)
                                                     @else
-                                                       $ {{ $row->valor }} 
+                                                       $ {{ number_format($row->valor,2) }} 
                                                     @endif
 
                                                 </td>
@@ -135,43 +132,34 @@
                                                         {{ $row->num_dias }}</td>
                                                 <td class="col-md-1" style="text-align: center">
                                                     @if ($row->status == 0)
-                                                        <button type="button"
-                                                            class="btn btn-info width-xs waves-effect waves-light">Registrada</button>
+                                                        <span class="badge bg-info width-lg">Registrada</span>
                                                     @endif
                                                     @if ($row->status == 1)
-                                                    <button type="button"
-                                                        class="btn btn-warning width-xs waves-effect waves-light">Pendiente</button>
+                                                    <span class="badge bg-warning width-lg">Pendiente</span>
                                                 @endif
                                                     @if ($row->status == 2)
-                                                        <button type="button"
-                                                            class="btn btn-success width-xs waves-effect waves-light">Aceptada</button>
+                                                        <span class="badge bg-success width-lg">Aceptada</span>
                                                     @endif
                                                     @if ($row->status == 3)
-                                                        <button type="button"
-                                                            class="btn btn-danger width-xs waves-effect waves-light">Rechazada</button>
+                                                        <span class="badge bg-danger width-lg">Rechazada</span>
                                                     @endif
                                                 </td>
                                                 </td>
-                                                <td class="col-md-2"style="text-align: center">
+                                                <td class="col-md-2" style="text-align: center">
 
-                                                    <a href="{{ url(env('admin') . '/tickets/file/' . $row->id) }}"
-                                                        class="btn btn-warning waves-effect waves-light btn m-b-15 ml-2 mr-2 btn-md"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        data-original-title="Descargar Imagen"><i
-                                                            class="mdi mdi-image"></i></a>
-
-                                                    <a href="{{ Asset($link . $row->id . '/edit') }}"
-                                                        class="btn btn-success waves-effect waves-light btn m-b-15 ml-2 mr-2 btn-md"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        data-original-title="Editar"><i
-                                                            class="mdi mdi-border-color"></i></a>
-
-                                                    {{--  <button type="button"
-                                                        class="btn m-b-15 ml-2 mr-2 btn-md  btn btn-danger waves-effect waves-light"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        data-original-title="Eliminar"
-                                                        onclick="deleteConfirm('{{ Asset($link . 'delete/' . $row->id) }}')"><i
-                                                        class="mdi mdi-delete-forever"></i></button> --}}
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Opciones  
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a href="{{ url(env('admin') . '/tickets/file/' . $row->id) }}" class="dropdown-item">
+                                                                <i class="mdi mdi-image"></i> Descargar Ticket
+                                                            </a>
+                                                            <a href="{{ Asset($link . $row->id . '/edit') }}" class="dropdown-item">
+                                                                <i class="mdi mdi-border-color"></i> Editar
+                                                            </a>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach

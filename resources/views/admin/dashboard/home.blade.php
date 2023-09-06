@@ -15,7 +15,7 @@
             <!-- Start Content-->
             <div class="container-fluid">
                 <div class="row ">
-                    <div class="col-lg-11 mx-auto mt-2">
+                    <div class="col-lg-12 mx-auto mt-2">
 
                         @include('admin.dashboard.overview')
                         @include('admin.dashboard.chart')
@@ -37,7 +37,7 @@
             if ($("#chart-01").length) {
 
                 var options = {
-                    colors: colors,
+                    colors: '#FF914D',
                     chart: {
                         type: 'area',
                         stacked: false,
@@ -66,7 +66,7 @@
                         colors: ['transparent']
                     },
                     series: [{
-                            name: 'Pedidos Cancelados',
+                            name: 'Reservas Canceladas',
                             data: [
                                 "<?php echo $admin->chart(6)['cancel']; ?>",
                                 "<?php echo $admin->chart(5)['cancel']; ?>",
@@ -79,7 +79,7 @@
 
                         },
                         {
-                            name: 'Pedidos Completos',
+                            name: 'Reservas Completas',
                             data: [
                                 "<?php echo $admin->chart(6)['order']; ?>",
                                 "<?php echo $admin->chart(5)['order']; ?>",
@@ -135,7 +135,7 @@
 
                         type: 'bar',
                     },
-                    colors: colors[8],
+                    colors: '#FF914D',
                     plotOptions: {
                         bar: {
                             horizontal: true,

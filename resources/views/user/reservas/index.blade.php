@@ -15,7 +15,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row ">
-                    <div class="col-lg-11 mx-auto mt-2">
+                    <div class="col-lg-12 mx-auto mt-2">
                         @include('user.layout.alert')
                         <div class="card py-3 m-b-30">
 
@@ -23,23 +23,18 @@
                                 <div class="col-md-6" style="text-align: left;">
                                     <b style="margin-left:20px">@yield('title')</b>
                                 </div>
-                                {{-- <divclass="col-md-6"style="text-align:right;"><ahref="Asset($link.'add')}}"
-                                    class="btn btn-warning rounded-pill waves-effect waves-light" style=" margin-right:20px" >Agregar
-                                    nuevo</a>&nbsp;&nbsp;&nbsp;
-                                </div> --}}
-
                             </div>
 
 
                             <div class="card-body">
                                 <table class="table table-hover ">
                                     <thead>
-                                        <tr style="text-align: center">
-                                           
+                                        <tr>
+                                            <th>ID</th>
                                             <th>Usuario</th>
                                             <th>Fecha</th>
-                                            <th>hora</th>
-                                            <th>Invitados</th>
+                                            <th style="text-align: center">hora</th>
+                                            <th style="text-align: center">Invitados</th>
                                             <th>Reserva</th>
                                             <th>Status</th>
                                             <th >Opciones</th>
@@ -50,15 +45,15 @@
 
                                         @foreach ($data as $row)
                                             <tr>
-                                             
-                                                <td class="col-md-4">{{ $row->usuario->name }}</td>
-                                                <td class="col-md-3" style="text-align: center;">
+                                                <td>3{{ $row->id }}</td>
+                                                <td>{{ $row->usuario->name }}</td>
+                                                <td>
                                                     {{ucfirst( Carbon\Carbon::parse($row->fecha)->dayName )}}, {{ date('d-M-Y', strtotime($row->fecha)) }} 
                                                     </td>
-                                                <td class="col-md-1" style="text-align: center">
+                                                <td style="text-align: center">
                                                     {{ Carbon\Carbon::parse($row->hora)->format('h:i  A') }}</td>
-                                                <td class="col-md-1" style="text-align: center">{{ $row->invitados }}</td>
-                                                <td class="col-md-1" style="text-align: center">
+                                                <td style="text-align: center">{{ $row->invitados }}</td>
+                                                <td>
                                                     @if ($row->reserva == 1)
                                                         <button type="button"
                                                             class="btn btn-warning width-xs waves-effect waves-light">No</button>
@@ -69,27 +64,29 @@
                                                     @endif
                                               
                                                 </td>
-                                                <td class="col-md-1" style="text-align: center">
+                                                <td>
                                                     @if ($row->status == 1)
-                                                        <button type="button"
-                                                            class="btn btn-warning width-xs waves-effect waves-light">Pendiente</button>
+                                                        <span class="badge bg-warning width-lg">Pendiente</span>
                                                     @endif
                                                     @if ($row->status == 2)
-                                                        <button type="button"
-                                                            class="btn btn-success width-xs waves-effect waves-light">Cumplida</button>
+                                                        <span class="badge bg-success width-lg">Cumplida</span>
                                                     @endif
                                                     @if ($row->status == 3)
-                                                        <button type="button"
-                                                            class="btn btn-danger width-xs waves-effect waves-light">Cancelada</button>
+                                                        <span class="badge bg-danger width-lg">Cancelada</span>
                                                     @endif
                                                 </td>
-                                                <td class="col-md-1" style="text-align: center">
-
-                                                    <a href="{{ Asset($link . $row->id . '/edit') }}"
-                                                        class="btn m-b-15 ml-2 mr-2 btn-md   waves-effect waves-light btn-success"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        data-original-title="Editar"><i
-                                                            class="mdi mdi-border-color"></i></a>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Opciones  
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a href="{{ Asset($link . $row->id . '/edit') }}" class="dropdown-item">
+                                                                <i class="mdi mdi-border-color"></i> Editar
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    
   
                                                 </td>
                                                 
