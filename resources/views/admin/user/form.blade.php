@@ -188,7 +188,7 @@
 
     @if (isset($admin))
         <input type="hidden" name="admin" value="1">
-
+{{--
         <h1 style="font-size: 20px">Establecer cargos de comisión por servicio<br />
             <small style="font-size:12px;">(dejar en 0 si no requiere cobrar comisión)</small>
         </h1>
@@ -237,7 +237,7 @@
             </div>
         </div>
 
-    {{--    <h1 style="font-size: 20px">Monedero Electronico <small>(CashBack)</small> </h1>
+        <h1 style="font-size: 20px">Monedero Electronico <small>(CashBack)</small> </h1>
         <div class="card py-3 m-b-30">
             <div class="card-body">
                 <div class="form-row">
