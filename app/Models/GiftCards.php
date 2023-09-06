@@ -23,6 +23,11 @@ class GiftCards extends Model
       'status'
     ];
 
+    public function getAll()
+    {
+      return GiftCards::get();
+    }
+
     public function getGiftCards()
     {
       $req   = GiftCards::where('status',0)->get();
