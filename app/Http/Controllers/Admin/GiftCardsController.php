@@ -120,7 +120,7 @@ class GiftCardsController extends Controller {
         if (isset($input['img'])) {
 
             $filename   = time() . rand(111, 699) . '.' . $input['img']->getClientOriginalExtension();
-            $input['img']->move("upload/giftcards/", $filename);
+            $input['img']->move("public/upload/giftcards/", $filename);
             $input['logo'] = $filename;
         }
 
