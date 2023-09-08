@@ -48,4 +48,24 @@ class GiftCards extends Model
 
       return $data;
     }
+
+    public function getGiftCard($id)
+    {
+      $value   = GiftCards::find($id);
+      $data  = [];
+    
+      $data = [
+        'id' => $value->id,
+        'logo' => asset('upload/giftcards/'.$value->logo),
+        'name' => $value->name,
+        'descript' => $value->descript,
+        'codigo'   => $value->codigo,
+        'trending' => $value->trending,
+        'stock_g'  => $value->stock_g,
+        'recompensas' => json_decode($value->recompensas, true),
+        'created'  => $value->created_at
+      ];
+
+      return $data;
+    }
 }

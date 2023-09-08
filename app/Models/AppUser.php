@@ -165,8 +165,7 @@ class AppUser extends Authenticatable
 
     public function login($data)
     {
-
-
+ 
         $chk = AppUser::where('email', $data['username'])->first();
 
         $msg = "Detalles de acceso incorrectos";
@@ -216,10 +215,10 @@ class AppUser extends Authenticatable
                 $chk->pswfacebook = $data['password'];
                 $chk->save();
                 // Registramos
-                return ['msg' => 'done', 'user_id' => $chk->id];
+                return ['code' => 200,'data' => 'done', 'user_id' => $chk->id];
             }
         } else {
-            return ['msg' => 'Opps! Detalles de acceso incorrectos'];
+            return ['code' => 401, 'data' => 'Opps! Detalles de acceso incorrectos'];
         }
     }
 

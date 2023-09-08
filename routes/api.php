@@ -232,6 +232,8 @@ Route::group(array('namespace' => 'App\Http\Controllers\Api'), function () {
      * GiftCards
      */
     Route::get('getGiftCards','ApiController@getGiftCards');
+    Route::post('addReward','ApiController@addReward');
+    Route::get('getRewards/{id}','ApiController@getRewards');
 
     /**
      * Visitas

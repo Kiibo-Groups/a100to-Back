@@ -59,6 +59,7 @@ use App\Http\Controllers\OpenpayController;
 use App\Models\Recompensa;
 use App\Models\Reportar;
 use App\Models\Bloquear;
+use App\Models\ChangedRewards;
 
 use App\Models\FeedSurvey;
 use App\Models\TrendingUsers;
@@ -1258,6 +1259,103 @@ class ApiController extends Controller
 		try {
 			$res = new GiftCards;
 			return response()->json(['code' => 200, 'data' => $res->getGiftCards()]);
+		} catch (\Exception $th) {
+			return response()->json(['code' => 401, 'data' => 'error', 'error' => $th->getMessage()]);
+		}
+	}
+
+
+	public function addReward(Request $request)
+	{
+		try {
+			$gifts = new GiftCards;
+			$input = $request->all();
+		
+			$idGift = $input['id'];
+			$user   = AppUser::find($input['user_id']);
+			$lims_data_gift = GiftCards::find($idGift);
+
+
+			$giftCard = $gifts->getGiftCard($idGift);
+			$newRecompensas = [];
+			$newStock_g = 0;
+			$amount_spent = 0;
+			for ($i=0; $i < count($giftCard['recompensas']); $i++) { 
+				// Obtenemos el nuevo Stock dela tarjeta
+				$newStock = ($giftCard['recompensas'][$i]['stock'] - $input['recompensas'][$i]['total']);
+				// Agregamos el nuevo Stock a la recompensa
+				$newRecompensas[] = [
+					'amount' => $giftCard['recompensas'][$i]['amount'],
+					'stock'  => $newStock
+				];
+				// Sumamos el stock General
+				$newStock_g += $newStock;
+				// Si se adquirio una recompensa agregamos el monto a cobrar al usuario
+				if ($input['recompensas'][$i]['total'] > 0) { // Siginifica que si se adquirio esta recompensa
+					$qty_amount = ($input['recompensas'][$i]['amount'] * $input['recompensas'][$i]['total']);
+					$amount_spent += $qty_amount;
+				}
+			}
+
+			// Agregamos el nuevo JSON
+			$input['stock_g']     = $newStock_g;
+			$input['recompensas'] = json_encode($newRecompensas);
+			// Guardamos
+			$lims_data_gift->update($input);
+
+			// Descontamos saldo del usuario
+			$saldo = $user->saldo;
+			$user->saldo = ($saldo - $amount_spent); 
+			$user->save();
+
+			// Agregamos al historial
+			$lims_data_chrew = new ChangedRewards;
+			$inputChrew['user_id'] = $user->id;
+			$inputChrew['gift_card_id'] = $idGift;
+			$inputChrew['spent'] 		= $amount_spent;
+			$inputChrew['reward_code']  = $giftCard['codigo'];
+
+			$lims_data_chrew->create($inputChrew);
+
+			// Enviamos respuesta
+			return response()->json([
+				'code' 		=> 200, 
+				'amount_spent' => $amount_spent,
+				'reward_code'  => $giftCard['codigo']
+			]);
+		
+		} catch (\Exception $th) {
+			return response()->json(['code' => 401, 'data' => 'error', 'error' => $th->getMessage()]);
+		}
+	}
+
+	public function getRewards($id)
+	{
+		try {
+			$res = ChangedRewards::where('user_id',$id)->get();
+			$data = [];
+
+			foreach ($res as $key => $value) {
+
+				// Obtenemos la GiftCard
+				$gifts = new GiftCards;
+				$giftCard = GiftCards::find($value->gift_card_id);
+				$card     = []; //collect($giftCard)->except(['codigo','trending','stock_g','recompensas','created','updated_at','created_at']);
+
+				// Creamos la tarjeta
+				$card['id']  = $giftCard['id'];
+				$card['logo'] = asset('upload/giftcards/'.$giftCard['logo']);
+				$card['name'] = $giftCard['name'];
+				$card['descript'] = $giftCard['descript'];
+
+
+				$data[] = [
+					'spent'    		=> $value->spent,
+					'reward_code' 	=> $value->reward_code,
+					'giftCard' 		=> $card
+				];
+			}
+			return response()->json(['code' => 200, 'data' => $data]);
 		} catch (\Exception $th) {
 			return response()->json(['code' => 401, 'data' => 'error', 'error' => $th->getMessage()]);
 		}
