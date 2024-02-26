@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Cashback;
+use App\Models\{Cashback, Hora, Day, Schedule, BlockedDay};
+use App\Helpers\Schedules;
 use Illuminate\Http\Request;
 
 class CashbackController extends Controller
@@ -17,15 +18,27 @@ class CashbackController extends Controller
 
 
 	public function index()
-	{					
-		$id = auth()->user()->id;	
+	{	
         
-		return View($this->folder.'index',[
+        $schedule = Schedule::get();
+
+        $days = Schedules::$days;
+
+        foreach($schedule as $item) {
+            $days = Schedules::updateDay($days, $item->id, $item->day->name, $item->hora->name, $item->per, $item->status);
+        }
+
+		$id = auth()->user()->id;	
+        $hours = Hora::get();
+
+            return View($this->folder.'index',[
 			'data' => Cashback::where('store_id', $id)->orderBy('status','ASC')->paginate(10),
+            'blocked_days' => BlockedDay::where('store_id', $id)->latest()->paginate(10),
 			'user' => $id,
 			'name' => '',
 			'type' => 0,
-			
+			'hours' => $hours,
+            'schedules' => $days,
 			'link' => env('user').'/cashback/']);
 	}	
     /**
@@ -46,8 +59,12 @@ class CashbackController extends Controller
      */
     public function store(Request $request)
     {
-        //dd( $request);
-        $Cashback = Cashback::create($request->all());
+        $cashback = Schedule::where('day_id', $request->day_id)->where('hora_id', $request->hora_id)->where('store_id', $request->store_id)->first();
+
+        if ($cashback) {
+            return redirect(env('user').'/cashback')->with('message','Cashback de Hora de ya existe.');
+        }
+        $data = Schedule::create($request->all());
         return redirect(env('user').'/cashback')->with('message','Nuevo registro agregado con éxito.');
 	
     }
@@ -66,11 +83,41 @@ class CashbackController extends Controller
 			[
 				'data' => new Cashback,
 				'user' => $id,
+                'days' => Day::get(),
+                'hours' => Hora::get(),
 				'stat' => 'new',
 				'form_url' => env('user').'/cashback'
 			]
 		);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function addBlockedDays()
+    {
+        $id = auth()->user()->id;	
+        return View(
+			$this->folder.'blocked_days',
+			[
+				'data' => new BlockedDay,
+				'user' => $id,
+				'stat' => 'new',
+				'form_url' => env('user').'/cashback/blocked_days'
+			]
+		);
+    }
+
+    public function saveBlockedDays(Request $request)
+    {
+
+        $blockedDay = BlockedDay::create($request->all());
+        return redirect(env('user').'/cashback')->with('message','Nuevo registro agregado con éxito.');
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -83,10 +130,11 @@ class CashbackController extends Controller
         $iduser = auth()->user()->id;
         return View(
 			$this->folder.'edit',
-			['data' => Cashback::find($id),
+			['data' => Schedule::find($id),
 			'user' => $iduser,
 			'stat'  => 'edit',
-			
+            'days' => Day::get(),
+            'hours' => Hora::get(),
 			'form_url' => env('user').'/cashback/'.$id]
 		);
     }
@@ -128,10 +176,16 @@ class CashbackController extends Controller
 	*/
 	public function status($id)
 	{
-		$res 			= Cashback::find($id);
-		$res->status 	= $res->status == 0 ? 1 : 0;
-		$res->save();
+        $res 			= Schedule::find($id);
 
-		return redirect(env('user').'/cashback')->with('message','Estado actualizado con éxito.');
+        if($res) {
+            $res->status 	= $res->status == 0 ? 1 : 0;
+		    $res->save();
+
+            return redirect(env('user').'/cashback')->with('message','Estado actualizado con éxito.');
+  
+        }
+
+		return redirect(env('user').'/cashback')->with('message','Se requiere tener porcentaje para cambio de status.');
 	}
 }

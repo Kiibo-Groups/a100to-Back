@@ -430,14 +430,16 @@ class User extends Authenticatable
             /* CashBack   */
 
 
-            $cashback  = Cashback::where('store_id', $row->id)->where('status', 0)->get();
+            $cashback  = Schedule::where('store_id', $row->id)->where('status', 0)->get();
 
             $arrayCash = [];
 
             foreach ($cashback as $cash) {
                 $arrayCash[] = array(
-                    'valor' => $cash->cashback,
+                    'dia' => $cash->dia->name,
+                    'valor' => $cash->per,
                     'hora'  => date('h:i  A', strtotime($cash->hora)),
+                    'status' => $cash->status
                 );
             }
 
@@ -1336,14 +1338,16 @@ class User extends Authenticatable
             /* CashBack   */
 
 
-            $cashback  = Cashback::where('store_id', $row->id)->where('status', 0)->get();
+            $cashback  = Schedule::where('store_id', $row->id)->get();
 
             $arrayCash = [];
-
+            $cashDay = BlockedDay::where('store_id', $row->id)->get();
             foreach ($cashback as $cash) {
                 $arrayCash[] = array(
-                    'valor' => $cash->cashback,
-                    'hora'  => date('h:i  A', strtotime($cash->hora)),
+                    'valor' => $cash->per,
+                    'Dia' => $cash->day->name,
+                    'hora'  => date('h:i  A', strtotime($cash->hora->name)),
+                    'status' => $cash->status
                 );
             }
 
@@ -1388,6 +1392,7 @@ class User extends Authenticatable
                 'urlproductos'  => $row->urlproductos,
                 'c_social'      => $arraySocial,
                 'cashback'      => $arrayCash,
+                'cashday'      => $cashDay,
                 'times'         => $times->getAllApi($row->id),
             ];
         }

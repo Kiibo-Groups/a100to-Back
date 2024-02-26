@@ -153,11 +153,11 @@ Route::group(['namespace' => 'App\Http\Controllers\User','prefix' => env('user')
         |Delivery Staff
         |------------------------------
         */
+        Route::get('cashback/blocked_days','CashbackController@addBlockedDays');
         Route::resource('cashback','CashbackController');
         Route::get('cashback/status/{id}','CashbackController@status');
         Route::get('cashback/delete/{id}','CashbackController@delete');
-
-
+        Route::post('cashback/blocked_days','CashbackController@saveBlockedDays');
 
           /*
         |------------------------------

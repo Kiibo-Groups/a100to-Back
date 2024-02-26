@@ -45,7 +45,6 @@ class AdminController extends Controller {
 		
 		$username = $request->input('username');
 		$password = $request->input('password');
-
 		if (auth()->guard('admin')->attempt(['username' => $username, 'password' => $password]))
 		{
 			return Redirect::to(env('admin').'/home')->with('message', 'Bienvenido ! Estás conectado ahora.');

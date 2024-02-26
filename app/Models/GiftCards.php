@@ -20,6 +20,7 @@ class GiftCards extends Model
       'trending',
       'stock_g',
       'recompensas',
+      'codigos',
       'status'
     ];
 
@@ -42,6 +43,7 @@ class GiftCards extends Model
           'trending' => $value->trending,
           'stock_g'  => $value->stock_g,
           'recompensas' => json_decode($value->recompensas, true),
+          'codigos' => json_decode($value->codigos, true),
           'created'  => $value->created_at
         ];
       }
@@ -63,6 +65,7 @@ class GiftCards extends Model
         'trending' => $value->trending,
         'stock_g'  => $value->stock_g,
         'recompensas' => json_decode($value->recompensas, true),
+        'codigos' => json_decode($value->codigos, true),
         'created'  => $value->created_at
       ];
 

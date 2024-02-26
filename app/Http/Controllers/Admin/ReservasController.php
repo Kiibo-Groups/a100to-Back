@@ -26,7 +26,7 @@ class ReservasController extends Controller
 
             return View($this->folder.'index', [
 
-                'data' 		=> $res->orderBy('status', 'asc')->paginate(10),
+                'data' 		=> $res->orderBy('status', 'desc')->paginate(10),
                 'link' 		=> env('admin').'/reservas/',
                 'form_url'	=> env('admin').'/reservas/assign',
                

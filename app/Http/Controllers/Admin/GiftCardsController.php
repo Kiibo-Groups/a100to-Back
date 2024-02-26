@@ -11,6 +11,8 @@ use DB;
 use Validator;
 use Redirect;
 use IMS;
+use PhpParser\Node\Stmt\Catch_;
+
 class GiftCardsController extends Controller {
 
 	public $folder  = "admin/giftcards.";
@@ -50,12 +52,14 @@ class GiftCardsController extends Controller {
 	|---------------------------------------
 	*/
 	public function store(Request $Request)
-	{			
+	{	
 		$lims_data_gifts = new GiftCards;	
 		$input           = $Request->all();
         $stock_g         = 0;
         $data = [];
         $recompensas     = [];
+		$codigos    = [];
+
         for ($i=0; $i < count($input['amount']) ; $i++) { 
             $recompensas[] = [
                 'amount' => $input['amount'][$i],
@@ -65,6 +69,14 @@ class GiftCardsController extends Controller {
             $stock_g += $input['stock'][$i];
         }
 
+		for ($i=0; $i < count($input['codigo']) ; $i++) { 
+            $codigos[] = [
+                'statu' => $input['statu'][$i],
+                'codigo'  => $input['codigo'][$i]
+            ];
+        }
+
+
         if ($input['img']) {
             $filename   = time() . rand(111, 699) . '.' . $input['img']->getClientOriginalExtension();
             $input['img']->move("public/upload/giftcards/", $filename);
@@ -72,6 +84,7 @@ class GiftCardsController extends Controller {
         }
 
         $input['recompensas'] = json_encode($recompensas);
+		$input['codigos'] = json_encode($codigos);
         $input['stock_g']     = $stock_g;
 
         $lims_data_gifts->create($input);
@@ -89,6 +102,7 @@ class GiftCardsController extends Controller {
         $req   = GiftCards::find($id);
         $data  = $req;
         $data->recompensas = json_decode($req->recompensas, true);
+		$data->codigos = json_decode($req->codigos, true);
 
 		return View($this->folder.'edit',[
 			'data' 		=> $data,
@@ -108,6 +122,7 @@ class GiftCardsController extends Controller {
         $stock_g         = 0;
         $data = [];
         $recompensas     = [];
+		$codigos    = [];
         for ($i=0; $i < count($input['amount']) ; $i++) { 
             $recompensas[] = [
                 'amount' => $input['amount'][$i],
@@ -115,6 +130,13 @@ class GiftCardsController extends Controller {
             ];
 
             $stock_g += $input['stock'][$i];
+        }
+
+		for ($i=0; $i < count($input['codigo']) ; $i++) { 
+            $codigos[] = [
+                'statu' => $input['statu'][$i],
+                'codigo'  => $input['codigo'][$i]
+            ];
         }
 
         if (isset($input['img'])) {
@@ -125,6 +147,7 @@ class GiftCardsController extends Controller {
         }
 
         $input['recompensas'] = json_encode($recompensas);
+		$input['codigos'] = json_encode($codigos);
         $input['stock_g']     = $stock_g;
          
 

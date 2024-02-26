@@ -7,7 +7,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin','prefix' => env('admin
     Route::post('login','AdminController@login');
 
     Route::group(['middleware' => 'admin'], function(){
-
         /*
         |-----------------------------------------
         |Dashboard and Account Setting & Logout
