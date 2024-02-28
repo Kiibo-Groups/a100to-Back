@@ -772,6 +772,7 @@ class ComposerStaticInitedc0ba0ba2ba66b90f1da7e80a290d66
         'App\\Models\\AppUser' => __DIR__ . '/../..' . '/app/Models/AppUser.php',
         'App\\Models\\Banner' => __DIR__ . '/../..' . '/app/Models/Banner.php',
         'App\\Models\\BannerStore' => __DIR__ . '/../..' . '/app/Models/BannerStore.php',
+        'App\\Models\\BlockedDay' => __DIR__ . '/../..' . '/app/Models/BlockedDay.php',
         'App\\Models\\Bloquear' => __DIR__ . '/../..' . '/app/Models/Bloquear.php',
         'App\\Models\\CardsUser' => __DIR__ . '/../..' . '/app/Models/CardsUser.php',
         'App\\Models\\Cart' => __DIR__ . '/../..' . '/app/Models/Cart.php',

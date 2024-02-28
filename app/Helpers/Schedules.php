@@ -1,7 +1,22 @@
 <?php
 namespace App\Helpers;
+use Carbon\Carbon;
 
 class Schedules {
+
+    private static $daysRelation = [
+        'lunes' => 1,
+        'martes' => 2,
+        'miercoles' => 3,
+        'jueves' => 4,
+        'viernes' => 5,
+        'sabado' => 6,
+        'domingo' => 7,
+    ];
+
+    public static function getDayRelation($day) {
+        return self::$daysRelation[strtolower($day)];
+    }
 
     public static function updateDay(&$days, $id, $day, $hour, $per, $status) {
         foreach ($days[$day] as &$hours) {

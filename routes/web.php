@@ -158,7 +158,7 @@ Route::group(['namespace' => 'App\Http\Controllers\User','prefix' => env('user')
         Route::get('cashback/status/{id}','CashbackController@status');
         Route::get('cashback/delete/{id}','CashbackController@delete');
         Route::post('cashback/blocked_days','CashbackController@saveBlockedDays');
-
+        Route::post('cashback/import','CashbackController@import')->name('cashback.import');
           /*
         |------------------------------
         |Reservas

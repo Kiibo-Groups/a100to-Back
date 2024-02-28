@@ -89,6 +89,7 @@ return array(
     'App\\Models\\AppUser' => $baseDir . '/app/Models/AppUser.php',
     'App\\Models\\Banner' => $baseDir . '/app/Models/Banner.php',
     'App\\Models\\BannerStore' => $baseDir . '/app/Models/BannerStore.php',
+    'App\\Models\\BlockedDay' => $baseDir . '/app/Models/BlockedDay.php',
     'App\\Models\\Bloquear' => $baseDir . '/app/Models/Bloquear.php',
     'App\\Models\\CardsUser' => $baseDir . '/app/Models/CardsUser.php',
     'App\\Models\\Cart' => $baseDir . '/app/Models/Cart.php',

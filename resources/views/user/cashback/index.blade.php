@@ -55,7 +55,8 @@
                                 <div class="col-md-6" style="text-align: right;"><a style=" margin-right:20px"
                                         href="{{ Asset($link . 'add') }}"
                                         class="btn btn-warning rounded-pill waves-effect waves-light width-md">
-                                        Agregar Nuevo</a>&nbsp;&nbsp;&nbsp;
+                                        Agregar Nuevo</a>&nbsp;
+                                        <button type="button" class="btn btn-success rounded-pill width-md waves-effect waves-light mr-2" onclick="handleImport()">Importar Excel</button>
                                 </div>
 
                             </div>
@@ -98,4 +99,22 @@
             </div>
         </div>
     </div>
+
+    <form action="{{ route('cashback.import') }}" method="POST" id="import"
+        enctype="multipart/form-data">
+        @csrf
+        <input type="file" name="import_file" class="d-none" onchange="submitImport()">
+    </form>
+@endsection
+@section('js')
+    <script>
+        function handleImport() {
+            $('input[name=import_file]').click();
+        }
+
+        // Importar porcentajes de horas
+        function submitImport() {
+            $('#import').submit();
+        }
+    </script>
 @endsection

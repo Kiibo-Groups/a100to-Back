@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\{Cashback, Hora, Day, Schedule, BlockedDay};
 use App\Helpers\Schedules;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Excel;
 
 class CashbackController extends Controller
 {
@@ -49,6 +51,55 @@ class CashbackController extends Controller
     public function create()
     {
         //
+    }
+
+    public function import(Request $request) {
+        
+        try {
+            DB::beginTransaction();
+            $array = Excel::toArray(new Schedule(),  $request->file('import_file')); 
+
+        foreach($array[0] as  $key =>$value)
+        {
+           if ($key == 0) continue;
+
+           if ($value[1] == null) continue;
+           //obtener el dia
+
+           $dia_id = Schedules::getDayRelation($value[1]);
+
+           for ($i=1; $i <= 14; $i++) { 
+                $e = 1 + $i;
+                $this->updateSchedule($value[0], $value[$e], $dia_id, $i);
+                
+           }
+
+          
+        }
+            DB::commit();
+            return redirect(env('user').'/cashback')->with('message','Archivo importado exitosamente.');
+
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return redirect(env('user').'/cashback')->with('error','Error al importar excel.');
+        }
+
+    }
+
+    // Negocia, porcentaje, dia, hora
+    private function updateSchedule($store_id, $per, $dia_id, $hora_id) {
+        $schedule = Schedule::updateOrCreate(
+            [
+                'store_id' => $store_id,
+                'day_id' => $dia_id,
+                'hora_id' => $hora_id,
+            ],
+            [
+                'per' => $per,
+                'status' => 0
+            ],
+
+        );
     }
 
     /**
