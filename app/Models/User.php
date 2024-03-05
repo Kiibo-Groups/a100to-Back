@@ -1256,6 +1256,22 @@ class User extends Authenticatable
         return $data;
     }
 
+    private function getAddress($lat, $lon) {
+        $apiKey = Admin::find(1)->ApiKey_google;
+
+        $url = "https://maps.googleapis.com/maps/api/geocode/json?latlng={$lat},{$lon}&key={$apiKey}";
+
+        $response= file_get_contents($url);
+
+        $data = json_decode($response, true);
+
+        $address = $data['status'] === 'OK' && count($data['results']) > 0
+        ? $data['results'][0]['formatted_address']
+        : null;
+
+        return $address;
+    }
+
     function SaveData($res, $lat, $lon) //Envio info Api
     {
         $user_id    = isset($_GET['user_id']) ? $_GET['user_id'] : 0;
@@ -1367,11 +1383,14 @@ class User extends Authenticatable
 
             $times = new Opening_times;
 
+            $address = $this->getAddress($row->lat, $row->lng);
+
             $data[] = [
                 'id'            => $row->id,
                 'title'         => $row->name,
                 'lat'           => $row->lat,
                 'lng'           => $row->lng,
+                'address'       => $address,
                 'img'           => asset('upload/user/' . $row->img),
                 'logo'          => asset('upload/user/logo/' . $row->logo),
                 'open'          => $open,
