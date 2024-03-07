@@ -1398,20 +1398,30 @@ class ApiController extends Controller
 
 			file_put_contents($rutaImagenJPG, $imageData);
 
-
-			$tickets   = Tickets::create([
+			$data = [
 				'id_cliente'   => $request->id_cliente,
 				'imagen'       => $target_path . $filename,
 				'fecha'        => Carbon::now()->format('Y-m-d'),
-			]);
+			];
+
+			if (isset($request->id_negocio)) {
+				$data['id_negocio'] = $request->id_negocio;
+			}
+
+			$tickets   = Tickets::create($data);
 
 			//numero de tickets en 6 meses
 			$fecha = Carbon::now();
 			$fechaActual = $fecha->format('Y-m-d');
 			$fechaHace6Meses = $fecha->subMonths(6);
 
-			$tickets6m = Tickets::where('id_cliente', $request->id_cliente)->whereIn('status', [0,1, 2])
-				->whereBetween('fecha', [$fechaHace6Meses, $fechaActual])
+			$tickets6m = Tickets::where('id_cliente', $request->id_cliente)->whereIn('status', [0,1, 2]);
+
+			if (isset($request->id_negocio)) {
+				$tickets6m = $tickets6m->where('id_negocio', $request->id_negocio);
+			}
+
+			$tickets6m = $tickets6m->whereBetween('fecha', [$fechaHace6Meses, $fechaActual])
 				->count();
 
 				
