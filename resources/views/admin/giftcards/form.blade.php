@@ -75,6 +75,7 @@
 				</div>
 				@if($data->id)
 				<?php $i =1; ?>
+				@if ($data->codigos && is_array($data->codigos))
 				@for ($i = 1; $i < count($data->codigos); $i++) 
 				<div class="form-row list_awards_code" id="award_code_el_{{$i}}" style="width: 100%;">
 					<div class="form-group col-md-5">
@@ -99,6 +100,7 @@
 					</div>
 				</div>
 				@endfor
+				@endif
 				@endif
 			</div> 
 			
