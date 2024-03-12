@@ -34,13 +34,17 @@
 
                         </div>
                         <div class="card_body">
-                            <ul>
+                            <div class="d-flex flex-wrap mt-4">
                                 @foreach ($blocked_days as $day)
-                                    <li>{{ Carbon\Carbon::parse($day->fecha)->format('d-m-Y') }}</li>
+                                    <div class="mb-3 mx-2" style="border: solid 2px; width: 180px; padding: 10px;">
+                                        <h4>{{ Carbon\Carbon::parse($day->fecha)->format('d-m-Y') }}
+                                        <a href="javascript:void()" class="btn btn-danger" onclick="deleteConfirm('{{ Asset($link . 'delete/' . $day->id) }}')">
+                                            <i class="mdi mdi-delete-forever"></i>
+                                        </a>
+                                    </h4>
+                                    </div>
                                 @endforeach
-                            </ul>
-
-                        </div>
+                            </div>
                     </div>
                 </div>
 

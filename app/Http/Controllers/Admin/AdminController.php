@@ -155,6 +155,45 @@ class AdminController extends Controller {
 		}
 	}
 
+	public function appUserEdit($id) {
+		$admin = new Admin;
+		if(!$admin->hasperm('Subaccount')){return Redirect::to(env('admin').'/home')->with('error', 'No tienes permiso de ver la sección Editar Usuarios Registrados');
+		}
+
+		return View($this->folder.'dashboard.appUserEdit',[
+			'data' 		 => AppUser::find($id),
+			'form_url'   =>  env('admin').'/appUser/'.$id
+		]);
+	}
+
+	public function appUserUpdate(Request $request, $id) {
+
+		try {
+		
+		$res = AppUser::find($id);
+
+		if (isset($request->password_change)) {
+            $res->password = bcrypt($request->password_change);
+        }
+
+		$res->saldo = $request->saldo;
+		$res->saldo_xp = $request->saldo_xp;
+		$res->name = $request->name;
+		$res->last_name = $request->last_name;
+		$res->tickets = $request->tickets;
+		$res->phone = $request->phone;
+		$res->otp = $request->otp;
+
+		$res->save();
+
+		return redirect(env('admin').'/appUser')->with('message','Usuario Actualizado');
+
+		} catch (\Throwable $th) {
+			return redirect(env('admin').'/appUser')->with('error','Usuarios No Encontrado');
+
+		}
+	}
+
 	public function status($id)
 	{
 		$res = AppUser::find($id);

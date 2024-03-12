@@ -215,8 +215,8 @@ class CashbackController extends Controller
      */
     public function delete($id)
     {
-       
-        Cashback::find($id)->delete();
+        BlockedDay::find($id)->delete();
+        //Cashback::find($id)->delete();
         return redirect(env('user').'/cashback')->with('message','Registro eliminado con éxito.');
     }
 

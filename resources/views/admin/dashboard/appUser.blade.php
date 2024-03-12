@@ -69,10 +69,9 @@
                                                     @endif
                                                 </td>--}}
                                                 <td class="col-md-1">
-                                                  
 
                                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                                        <button type="button" class="btn btn-success" title="Editar Cuenta de Usuario"><i class="mdi mdi-pencil" ></i></button>
+                                                        <a class="btn btn-success text-white" href="{{  Asset($link . $row->id . '/edit') }}" title="Editar Cuenta de Usuario"><i class="mdi mdi-pencil" ></i></a>
                                                   
                                                         <button type="button" class="btn btn-danger" 
                                                             onclick="confirmAlert('{{ Asset($link . 'trash/' . $row->id) }}')"

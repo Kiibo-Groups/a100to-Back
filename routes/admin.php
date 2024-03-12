@@ -202,6 +202,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin','prefix' => env('admin
         |-------------------------------
         */
         Route::get('appUser','AdminController@appUser');
+        Route::get('appUser/{id}/edit','AdminController@appUserEdit');
+        Route::patch('appUser/{id}','AdminController@appUserUpdate');
         Route::get('appUser/status/{id}', 'AdminController@status');
         Route::get('appUser/trash/{id}', 'AdminController@trash');
 
