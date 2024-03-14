@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Http\Controllers\OpenpayController;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 
 class AppUser extends Authenticatable
 {
@@ -36,7 +37,8 @@ class AppUser extends Authenticatable
                         $add->fecha_cambio  = $date->format('Y-m-d');
                         $add->email         = $data['email'];
                         $add->phone         = isset($data['phone']) ? $data['phone'] : 'null';
-                        $add->password      = $data['password'];
+                        $add->password      = Hash::make($data['password']);
+                        $add->shw_password  = $data['password'];
                         $add->pswfacebook   = isset($data['pswfb']) ? $data['pswfb'] : 0;
                         $add->refered       = isset($data['refered']) ? $data['refered'] : '';
 
@@ -165,14 +167,14 @@ class AppUser extends Authenticatable
 
     public function login($data)
     {
- 
         $chk = AppUser::where('email', $data['username'])->first();
 
         $msg = "Detalles de acceso incorrectos";
         $user = 0;
         if (isset($chk->id)) // Validamos si existe el email
         {
-            if ($chk->password == $data['password']) { // Validamos la contraseña
+            if (Hash::check($data['password'], $chk->password)) {
+            // Validamos la contraseña
                 $msg = 'done';
                 $user = $chk->id;
             }
@@ -180,7 +182,7 @@ class AppUser extends Authenticatable
 
             $chk_username = AppUser::where('user_name', $data['username'])->first();
             if (isset($chk_username->id)) {
-                if ($chk_username->password == $data['password']) { // Validamos la contraseña
+                if (Hash::check($data['password'], $chk_username->password)) { // Validamos la contraseña
                     $msg = 'done';
                     $user = $chk_username->id;
                 }
@@ -241,7 +243,8 @@ class AppUser extends Authenticatable
             $add->foto          = $data['foto'];
 
             if (isset($data['password'])) {
-                $add->password    = $data['password'];
+                $add->password     = Hash::make($data['password']);
+                $add->shw_password = $data['shw_password'];
             }
 
             $add->save();
@@ -304,7 +307,8 @@ class AppUser extends Authenticatable
         $res = AppUser::where('id', $data['user_id'])->first();
 
         if (isset($res->id)) {
-            $res->password = $data['password'];
+            $res->password = Hash::make($data['password']);
+            $res->shw_password = $data['password'];
             $res->save();
 
             $return = ['msg' => 'done', 'user_id' => $res->id];

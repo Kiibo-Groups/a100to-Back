@@ -436,7 +436,7 @@ class User extends Authenticatable
 
             foreach ($cashback as $cash) {
                 $arrayCash[] = array(
-                    'dia' => $cash->dia->name,
+                    'dia' => $cash->day->name,
                     'valor' => $cash->per,
                     'hora'  => date('h:i  A', strtotime($cash->hora)),
                     'status' => $cash->status
@@ -445,10 +445,8 @@ class User extends Authenticatable
 
             $times = new Opening_times;
             /****** Validamos si el negocios es nuevo *******/
-
             $data = [
                 'id'            => $row->id,
-
                 'title'         => $this->getLang($row->id)['name'],
                 'img'           => Asset('upload/user/' . $row->img),
                 'logo'           => Asset('upload/user/logo/' . $row->logo),
