@@ -672,11 +672,16 @@ class User extends Authenticatable
         //dd( $res );
         foreach ($res as $row) {
             //dump($row);
-            $array_sociales = explode(",", $id_sociales);
-           // $valores_sociales = "'" . implode("','", $array) . "'";
 
+            $socialarray  = SocialesNegocios::where('social_id', $row->id);
 
-            $socialarray  = SocialesNegocios::where('social_id', $row->id)->whereIn('store_id', $array_sociales)->count();
+            if ($id_sociales) {
+                $array_sociales = explode(",", $id_sociales);
+                
+                $socialarray  = $socialarray->whereIn('store_id', $array_sociales);
+            }
+
+            $socialarray =  $socialarray->count();
 
            
             if ($socialarray >= 1) {
