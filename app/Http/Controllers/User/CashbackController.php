@@ -21,8 +21,9 @@ class CashbackController extends Controller
 
 	public function index()
 	{	
-        
-        $schedule = Schedule::get();
+        $id = auth()->user()->id;	
+
+        $schedule = Schedule::where('store_id', $id)->get();
 
         $days = Schedules::$days;
 
@@ -30,7 +31,6 @@ class CashbackController extends Controller
             $days = Schedules::updateDay($days, $item->id, $item->day->name, $item->hora->name, $item->per, $item->status);
         }
 
-		$id = auth()->user()->id;	
         $hours = Hora::get();
 
             return View($this->folder.'index',[
