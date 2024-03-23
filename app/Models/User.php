@@ -23,7 +23,7 @@ class User extends Authenticatable
         if ($type === "add") {
             return [
 
-                'name'      => 'required',
+                'name'      => 'required|unique:users',
                 'phone'     => 'required',
                 'email'     => 'required|unique:users',
                 'password'  => 'required|min:6',
@@ -32,7 +32,7 @@ class User extends Authenticatable
         } else {
             return [
 
-                'name'      => 'required',
+                'name'      => 'required|unique:users,name,' . $type,
                 'phone'    => 'required',
                 'email'     => 'required|unique:users,email,' . $type,
 

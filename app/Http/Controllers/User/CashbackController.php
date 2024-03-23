@@ -35,7 +35,7 @@ class CashbackController extends Controller
 
             return View($this->folder.'index',[
 			'data' => Cashback::where('store_id', $id)->orderBy('status','ASC')->paginate(10),
-            'blocked_days' => BlockedDay::where('store_id', $id)->latest()->paginate(10),
+            'blocked_days' => BlockedDay::where('store_id', $id)->orderBy('fecha','ASC')->paginate(10),
 			'user' => $id,
 			'name' => '',
 			'type' => 0,
@@ -113,7 +113,9 @@ class CashbackController extends Controller
         $cashback = Schedule::where('day_id', $request->day_id)->where('hora_id', $request->hora_id)->where('store_id', $request->store_id)->first();
 
         if ($cashback) {
-            return redirect(env('user').'/cashback')->with('message','Cashback de Hora de ya existe.');
+            $cashback->per = $request->per;
+            $cashback->save();
+            return redirect(env('user').'/cashback')->with('message','Cashback de Hora actualizado.');
         }
         $data = Schedule::create($request->all());
         return redirect(env('user').'/cashback')->with('message','Nuevo registro agregado con éxito.');

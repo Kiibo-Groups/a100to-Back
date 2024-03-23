@@ -66,7 +66,7 @@
                     <div id="reservas" class="form-group col-md-6" style="display: none">
 
                         <label class="form-label">Reserva</label>
-                        <select name="reserva" id="id_reserva" class="form-control id_reserva  ">
+                        <select name="reserva" id="id_reserva" class="form-control id_reserva" required="required">
                         </select>
                     </div>
 

@@ -168,14 +168,16 @@ class TicketsController extends Controller
 	public function update(Request $request, $id)
 	{
 
-
+\Log::info($request->all());
 		$input         = $request->all();
 		$requests_data = Tickets::find($id);
 		$requests_data->update($input);
 
+		if (isset($request->reserva)) {
 		$res 			= Reserva::find($request->reserva);
 		$res->status 	= $request->status;
 		$res->save();
+		}
 
 		if ($request->status == 2) {
 

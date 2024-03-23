@@ -356,7 +356,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input  id="timepickerLA" width="276" name="open_mon" class="form-control"
+                                    <input type="time" id="timepickerLA" width="276" name="open_mon" class="form-control"
                                         @if ($tm->Mon != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Mon')['open_time'] }}" @endif>
                                 </div>
                             </div>
@@ -367,7 +367,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerLC" width="276" name="close_mon" class="form-control"
+                                    <input type="time" id="timepickerLC" width="276" name="close_mon" class="form-control"
                                         @if ($tm->Mon != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Mon')['close_time'] }}" @endif>
                                 </div>
                             </div>
@@ -403,7 +403,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerMA" width="276" name="open_tue" class="form-control"
+                                    <input type="time" id="timepickerMA" width="276" name="open_tue" class="form-control"
                                         @if ($tm->Tue != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Tue')['open_time'] }}" @endif>
 
                                 </div>
@@ -415,7 +415,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerMC" width="276" name="close_tue" class="form-control"
+                                    <input type="time" id="timepickerMC" width="276" name="close_tue" class="form-control"
                                         @if ($tm->Tue != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Tue')['close_time'] }}" @endif>
 
                                 </div>
@@ -452,7 +452,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerMierA" width="276" name="open_wed" class="form-control"
+                                    <input type="time" id="timepickerMierA" width="276" name="open_wed" class="form-control"
                                         @if ($tm->Wed != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Wed')['open_time'] }}" @endif>
 
                                 </div>
@@ -464,7 +464,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerMierC" width="276" name="close_wed" class="form-control"
+                                    <input type="time" id="timepickerMierC" width="276" name="close_wed" class="form-control"
                                         class="form-control without_ampm"
                                         @if ($tm->Wed != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Wed')['close_time'] }}" @endif>
 
@@ -503,7 +503,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerJA" width="276" name="open_thu" class="form-control"
+                                    <input type="time" id="timepickerJA" width="276" name="open_thu" class="form-control"
                                         @if ($tm->Thu != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Thu')['open_time'] }}" @endif>
 
                                 </div>
@@ -515,7 +515,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerJC" width="276" name="close_thu" class="form-control"
+                                    <input type="time" id="timepickerJC" width="276" name="close_thu" class="form-control"
                                         @if ($tm->Thu != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Thu')['close_time'] }}" @endif>
 
                                 </div>
@@ -552,7 +552,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerVA" width="276" name="open_fri" class="form-control"
+                                    <input type="time" id="timepickerVA" width="276" name="open_fri" class="form-control"
                                         @if ($tm->Fri != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Fri')['open_time'] }}" @endif>
 
                                 </div>
@@ -564,7 +564,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerVC" width="276" name="close_fri" class="form-control"
+                                    <input type="time" id="timepickerVC" width="276" name="close_fri" class="form-control"
                                         @if ($tm->Fri != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Fri')['close_time'] }}" @endif>
 
                                 </div>
@@ -601,7 +601,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerSA" width="276" name="open_sat" class="form-control"
+                                    <input type="time" id="timepickerSA" width="276" name="open_sat" class="form-control"
                                         @if ($tm->Sat != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Sat')['open_time'] }}" @endif>
 
                                 </div>
@@ -613,7 +613,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerSC" width="276" name="close_sat" class="form-control"
+                                    <input type="time" id="timepickerSC" width="276" name="close_sat" class="form-control"
                                         @if ($tm->Sat != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Sat')['close_time'] }}" @endif>
 
                                 </div>
@@ -650,7 +650,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerDA" width="276" name="open_sun" class="form-control"
+                                    <input type="time" id="timepickerDA" width="276" name="open_sun" class="form-control"
                                         @if ($tm->Sun != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Sun')['open_time'] }}" @endif>
 
                                 </div>
@@ -662,7 +662,7 @@
 
                             <div class="form-group col-md-12" style="padding:0;">
                                 <div class='input-group'>
-                                    <input id="timepickerDC" width="276" name="close_sun" class="form-control"
+                                    <input type="time" id="timepickerDC" width="276" name="close_sun" class="form-control"
                                         @if ($tm->Sun != 'closed') value="{{ $opening_time->ViewTimeDate($times, 'Sun')['close_time'] }}" @endif>
 
                                 </div>
