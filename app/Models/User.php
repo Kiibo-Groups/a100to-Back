@@ -405,13 +405,13 @@ class User extends Authenticatable
 
 
             /****** Rating *******/
-            $totalRate    = Rate::where('store_id', $row->id)->count();
-            $totalRateSum = Rate::where('store_id', $row->id)->sum('star');
+            $totalRate    = FeedSurvey::where('store_id', $row->id)->count();
+            $totalRateSum = FeedSurvey::where('store_id', $row->id)->sum('star');
+
+            $avg           = 0;
 
             if ($totalRate > 0) {
                 $avg          = $totalRateSum / $totalRate;
-            } else {
-                $avg           = 0;
             }
             /****** Rating *******/
 
@@ -520,8 +520,8 @@ class User extends Authenticatable
             $opening_day = $op_time->ViewTime($row->id)['w_close'];
             /****** Function IsClose or IsOpen ******************/
 
-            $totalRate    = Rate::where('store_id', $row->id)->count();
-            $totalRateSum = Rate::where('store_id', $row->id)->sum('star');
+            $totalRate    = FeedSurvey::where('store_id', $row->id)->count();
+            $totalRateSum = FeedSurvey::where('store_id', $row->id)->sum('star');
 
             if ($totalRate > 0) {
                 $avg          = $totalRateSum / $totalRate;
@@ -699,8 +699,8 @@ class User extends Authenticatable
                 /****** Funcion para validar si el comercio esta abierto ******************/
 
                 /****** Funcion para Obtener Ratings y Calificaciones *******/
-                $totalRate    = Rate::where('store_id', $row->id)->count();
-                $totalRateSum = Rate::where('store_id', $row->id)->sum('star');
+                $totalRate    = FeedSurvey::where('store_id', $row->id)->count();
+                $totalRateSum = FeedSurvey::where('store_id', $row->id)->sum('star');
 
                 if ($totalRate > 0) {
                     $avg          = $totalRateSum / $totalRate;
@@ -1298,8 +1298,8 @@ class User extends Authenticatable
             /****** Verificacion de abierto/Cerrado ******************/
 
             /****** Ratings ********/
-            $totalRate    = Rate::where('store_id', $row->id)->count();
-            $totalRateSum = Rate::where('store_id', $row->id)->sum('star');
+            $totalRate    = FeedSurvey::where('store_id', $row->id)->count();
+            $totalRateSum = FeedSurvey::where('store_id', $row->id)->sum('star');
 
             if ($totalRate > 0) {
                 $avg          = $totalRateSum / $totalRate;
