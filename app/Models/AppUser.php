@@ -209,9 +209,7 @@ class AppUser extends Authenticatable
         $chk = AppUser::where('email', $data['email'])->first();
 
         if (isset($chk->id)) {
-
             if (Hash::check($data['password'], $chk->password)) {
-
                 // Esta logeado con facebook
                 return ['msg' => 'done', 'user_id' => $chk->id];
             } else {
@@ -226,7 +224,61 @@ class AppUser extends Authenticatable
         }
     }
 
+    public function SocialMediaSign($data)
+    {
+        $email      = $data['email'];
+        $password   = $data['password'];
+        $type       = $data['type'];
 
+        $user = AppUser::where('email', $email)->first();
+
+        if (!$user) {
+            // Registramos
+            $date  = Carbon::now();
+            $add   = new AppUser;
+            $add->fecha_cambio  = $date->format('Y-m-d');
+            $add->email         = $email;
+            
+            switch ($type) {
+                case 1: // Login With Google
+                    $add->pswgoogle      = Hash::make($password);
+                    break;
+                case 2: // Login With Twtitter
+                    $add->pswtwitter      = Hash::make($password);
+                    break;
+                default:
+                    $add->pswgoogle      = Hash::make($password);
+                    break;
+            }
+
+            $add->save();
+
+            return ['data' => 'new_account_create', 'msg' => 'done', 'user_id' => $add->id];
+        }
+
+        switch ($type) {
+            case 1: // Login With Google
+                if (Hash::check($password, $chk->pswgoogle)) {
+                    // Esta logeado con facebook
+                    return ['msg' => 'done', 'user_id' => $chk->id];
+                }
+                break;
+            case 2: // Login With Twtitter
+                if (Hash::check($password, $chk->pswtwitter)) {
+                    // Esta logeado con facebook
+                    return ['msg' => 'done', 'user_id' => $chk->id];
+                }
+                break;
+            default:
+                if (Hash::check($password, $chk->pswgoogle)) {
+                    // Esta logeado con facebook
+                    return ['msg' => 'done', 'user_id' => $chk->id];
+                }
+                break;
+        }
+
+        return ['data' => 'error' ,'code' => 401, 'error' => 'Opps! Detalles de acceso incorrectos'];
+    }
 
     public function updateInfo($data, $id)
     {

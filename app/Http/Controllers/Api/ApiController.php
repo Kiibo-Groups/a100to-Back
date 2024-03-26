@@ -410,6 +410,19 @@ class ApiController extends Controller
 
 		return response()->json($res->loginFb($Request->all()));
 	}
+
+	public function SocialMediaSign(Request $Request)
+	{
+		try {
+			$res = new AppUser; 
+			return response()->json($res->SocialMediaSign($Request->all()));
+		} catch (\Exception $th) {
+			return response()->json([
+				'data' => 'error', 
+				'error' => $th->getMessage()
+			]);
+		}
+	}
  
 	public function getAddress($id)
 	{
