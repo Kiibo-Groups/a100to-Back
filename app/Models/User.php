@@ -473,7 +473,7 @@ class User extends Authenticatable
                 'descripcion'   => $row->descripcion,
                 'urlproductos'  => $row->urlproductos,
                 'cashback'      => $arrayCash,
-                'cashDay'       => $cashDay,
+                'cashday'       => $cashDay,
                 'times'         => $times->getAllApi($row->id),
             ];
         }
