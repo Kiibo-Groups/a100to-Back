@@ -431,7 +431,7 @@ class User extends Authenticatable
 
 
             $cashback  = Schedule::where('store_id', $row->id)->where('status', 0)->get();
-
+            $cashDay = BlockedDay::where('store_id', $row->id)->get();
             $arrayCash = [];
 
             foreach ($cashback as $cash) {
@@ -473,6 +473,7 @@ class User extends Authenticatable
                 'descripcion'   => $row->descripcion,
                 'urlproductos'  => $row->urlproductos,
                 'cashback'      => $arrayCash,
+                'cashDay'       => $cashDay,
                 'times'         => $times->getAllApi($row->id),
             ];
         }
