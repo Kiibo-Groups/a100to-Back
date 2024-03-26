@@ -438,7 +438,7 @@ class User extends Authenticatable
                 $arrayCash[] = array(
                     'dia' => $cash->day->name,
                     'valor' => $cash->per,
-                    'hora'  => date('h:i  A', strtotime($cash->hora)),
+                    'hora'  => date('h:i  A', strtotime($cash->hora->name)),
                     'status' => $cash->status
                 );
             }
