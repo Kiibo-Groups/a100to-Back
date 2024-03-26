@@ -104,6 +104,11 @@ class Admin extends Authenticatable
 			$update->shw_password = $data['new_password'];
 		}
 
+		if(isset($data['fecha']))
+		{
+			$update->fecha = $data['fecha'];
+		}
+
 		if(isset($data['logo']))
         {
             $filename   = time().rand(111,699).'.' .$data['logo']->getClientOriginalExtension(); 
