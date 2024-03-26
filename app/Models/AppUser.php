@@ -209,7 +209,9 @@ class AppUser extends Authenticatable
         $chk = AppUser::where('email', $data['email'])->first();
 
         if (isset($chk->id)) {
-            if ($chk->password == $data['password']) {
+
+            if (Hash::check($data['password'], $chk->password)) {
+
                 // Esta logeado con facebook
                 return ['msg' => 'done', 'user_id' => $chk->id];
             } else {
