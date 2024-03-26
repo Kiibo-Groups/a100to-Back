@@ -258,21 +258,21 @@ class AppUser extends Authenticatable
 
         switch ($type) {
             case 1: // Login With Google
-                if (Hash::check($password, $chk->pswgoogle)) {
+                if (Hash::check($password, $user->pswgoogle)) {
                     // Esta logeado con facebook
-                    return ['msg' => 'done', 'user_id' => $chk->id];
+                    return ['msg' => 'done', 'user_id' => $user->id];
                 }
                 break;
             case 2: // Login With Twtitter
-                if (Hash::check($password, $chk->pswtwitter)) {
+                if (Hash::check($password, $user->pswtwitter)) {
                     // Esta logeado con facebook
-                    return ['msg' => 'done', 'user_id' => $chk->id];
+                    return ['msg' => 'done', 'user_id' => $user->id];
                 }
                 break;
             default:
-                if (Hash::check($password, $chk->pswgoogle)) {
+                if (Hash::check($password, $user->pswgoogle)) {
                     // Esta logeado con facebook
-                    return ['msg' => 'done', 'user_id' => $chk->id];
+                    return ['msg' => 'done', 'user_id' => $user->id];
                 }
                 break;
         }
