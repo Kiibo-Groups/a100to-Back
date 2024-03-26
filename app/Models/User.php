@@ -620,9 +620,13 @@ class User extends Authenticatable
 
         $id_sociales        = isset($_GET['id_sociales']) ? $_GET['id_sociales'] : 0;
         $reembolso          = isset($_GET['reembolso']) ? $_GET['reembolso'] : 0;
+
+        if ($reembolso  != 0) {
         list($menor, $mayor) = explode("-", $reembolso);
-        $menorRango = $menor;
-        $mayorRango = $mayor;
+        }
+        $menorRango = $menor ?? 0;
+        $mayorRango = $mayor ?? 0;
+
 
         $precios          = isset($_GET['precios']) ? $_GET['precios'] : 0;
         
@@ -630,46 +634,46 @@ class User extends Authenticatable
             $menorPrecio =  $precios ;
             $mayorPrecio =  0;
         } else {
-            list($menorP, $mayorP) = explode("-", $precios);
-            $menorPrecio = $menorP;
-            $mayorPrecio = $mayorP;
+            if ($precios != 0) {
+                list($menorP, $mayorP) = explode("-", $precios);
+            }
+            $menorPrecio = $menorP ?? 0;
+            $mayorPrecio = $mayorP ?? 0;
         }
         
        
 
   
+        $res = User::where('status', 0)->where('city_id', $city_id);
+
+        if ($mayorPrecio != 0) {
+
+            $res  =  $res->whereBetween('reward', [$menorRango, $mayorRango]);
+        }
 
 
-        $res  = User::where(function ($query) use ($city_id, $menorRango,  $mayorRango, $menorPrecio, $mayorPrecio) {
-
-            if ($menorPrecio >= 1000) {
-             
-                $query->where('status', 0)->where('person_cost', '>=', $menorPrecio) 
-                       ->where('city_id', $city_id)->whereBetween('reward', [$menorRango, $mayorRango])
-                                  
-                ;
-            } else {
-               
-                $query->where('status', 0)->where('city_id', $city_id)->whereBetween('reward', [$menorRango, $mayorRango])
-                    ->whereBetween('person_cost', [$menorPrecio, $mayorPrecio])                   
-                    ;
+        if ($menorPrecio >= 1000) {
+            $res = $res->where('person_cost', '>=', $menorPrecio);
+        } else {
+            if ($mayorPrecio != 0) {
+                $res = $res->whereBetween('person_cost', [$menorPrecio, $mayorPrecio]);
             }
+        }
             
-           
-
-
-
-        })->select('users.*', DB::raw("6371 * acos(cos(radians(" . $lat . ")) 
+        if ($lat != 0 && $lon != 0) {
+            $res =$res->select('users.*', DB::raw("6371 * acos(cos(radians(" . $lat . ")) 
         * cos(radians(users.lat)) 
         * cos(radians(users.lng) - radians(" . $lon . ")) 
         + sin(radians(" . $lat . ")) 
-        * sin(radians(users.lat))) AS distance"))
-            ->orderBy('id', 'DESC')->get();
+        * sin(radians(users.lat))) AS distance"));
+        }
+
+        $res = $res->orderBy('id', 'DESC')->get();
 
         $data = [];
         $open_store = [];
         $close_store = [];
-        //dd( $res );
+        
         foreach ($res as $row) {
             //dump($row);
 
