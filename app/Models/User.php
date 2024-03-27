@@ -449,8 +449,10 @@ class User extends Authenticatable
                 'id'            => $row->id,
                 'title'         => $this->getLang($row->id)['name'],
                 'img'           => Asset('upload/user/' . $row->img),
-                'logo'           => Asset('upload/user/logo/' . $row->logo),
+                'logo'          => Asset('upload/user/logo/' . $row->logo),
                 'address'       => $this->getLang($row->id)['address'],
+                'lat'           => $this->getLang($row->id)['lat'],
+                'lng'           => $this->getLang($row->id)['lng'],
                 'open'          => $open,
                 'isNew'         => $isNew,
                 'reservation_available' => $row->reservation_available,
@@ -1509,6 +1511,8 @@ class User extends Authenticatable
         return [
             'name' => $data->name,
             'address' => $data->address,
+            'lat'     => $data->lat,
+            'lng'     => $data->lng,
             'time_delivery' => $data->delivery_time,
             'open_status' => $open
         ];
