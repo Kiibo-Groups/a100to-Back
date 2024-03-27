@@ -9,6 +9,7 @@
                     'placeholder' => 'cashback',
                     'class' => 'form-control',
                     'required' => 'required',
+                    'min' => 1
                 ]) !!}
             </div>
 
