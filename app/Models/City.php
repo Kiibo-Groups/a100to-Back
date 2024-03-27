@@ -120,11 +120,7 @@ class City extends Authenticatable
             ];
         }
 
-        if (count($data) > 0) {
-            return ['nearby' => true, 'data' => $data];
-        }else {
-            return ['nearby' => false, 'data' => $allCity];
-        }
+        return ['nearby' => true, 'data' => $data, 'allCitys' => $allCity];
     }
 
     public function getSData($data,$id,$field)
