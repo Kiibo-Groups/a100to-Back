@@ -238,6 +238,7 @@ class AppUser extends Authenticatable
             $add   = new AppUser;
             $add->fecha_cambio  = $date->format('Y-m-d');
             $add->email         = $email;
+            $add->birthday      = $date->format('Y-m-d');
             
             switch ($type) {
                 case 1: // Login With Google
