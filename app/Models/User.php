@@ -429,10 +429,10 @@ class User extends Authenticatable
 
             /* CashBack   */
 
-            $cashback = Schedule::with('horas')
+            $cashback = Schedule::with('hora')
             ->where('store_id', $row->id)
             ->where('status', 0)
-            ->orderBy('horas.name')
+            ->orderBy('hora.name')
             ->get();
 
             $cashDay = BlockedDay::where('store_id', $row->id)->get();
@@ -1367,10 +1367,10 @@ class User extends Authenticatable
 
             /* CashBack   */
 
-            $cashback = Schedule::with('horas')
+            $cashback = Schedule::with('hora')
             ->where('store_id', $row->id)
             ->where('status', 0)
-            ->orderBy('horas.name')
+            ->orderBy('hora.name')
             ->get();
 
             $arrayCash = [];
