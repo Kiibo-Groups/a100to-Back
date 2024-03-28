@@ -1592,7 +1592,8 @@ class ApiController extends Controller
 			foreach ($reserva as $res) {
 				$array[] = array(
 					'id'          => $res->id,
-					'negocio'    => $res->negocio->name,
+					'negocio'     => $res->negocio->name,
+					'logo' 		  => asset('upload/user/logo/' . $res->store->logo),
 					'store_id'    => $res->store_id,
 					'user_id'     => $res->user_id,
 					'invitados'   => $res->invitados,
