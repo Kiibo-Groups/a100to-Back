@@ -1593,7 +1593,7 @@ class ApiController extends Controller
 				$array[] = array(
 					'id'          => $res->id,
 					'negocio'     => $res->negocio->name,
-					'logo' 		  => asset('upload/user/logo/' . $res->store->logo),
+					'logo' 		  => asset('upload/user/logo/' . $res->negocio->logo),
 					'store_id'    => $res->store_id,
 					'user_id'     => $res->user_id,
 					'invitados'   => $res->invitados,
