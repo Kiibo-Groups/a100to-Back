@@ -23,9 +23,20 @@ class Opening_times extends Authenticatable
     public function getAllApi($id)
     {
         $times = Opening_times::where('store_id',$id)->get(['mon','tue','wed','thu','fri','sat','sun']);
-        
+        $newTimes = array();
         if ($times->count() > 0) {
-            return $times;
+            foreach ($times as $key) {
+                array_push($newTimes,[
+                    'mon' => $key->mon == 'closed' ? 'cerrado' :  $key->mon,
+                    'tue' => $key->tue == 'closed' ? 'cerrado' :  $key->tue,
+                    'wed' =>  $key->wed == 'closed' ? 'cerrado' :  $key->wed,
+                    'thu' =>  $key->thu == 'closed' ? 'cerrado' :  $key->thu,
+                    'fri' =>  $key->fri == 'closed' ? 'cerrado' :  $key->fri,
+                    'sat' =>  $key->sat == 'closed' ? 'cerrado' :  $key->sat,
+                    'sun' =>  $key->sun == 'closed' ? 'cerrado' :  $key->sun,
+                ]);
+            }
+            return $newTimes;
         }else {
             return $this->chkTimes();
         }
@@ -69,8 +80,6 @@ class Opening_times extends Authenticatable
         }else {
             $add        = new Opening_times;
         }
-
-    
         $add->store_id  = $type;
         $add->mon       = $data[0]['mon'];
         $add->tue       = $data[0]['tue'];
