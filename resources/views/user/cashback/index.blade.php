@@ -85,12 +85,18 @@
                                                 <td>{{ $dia }}</td>
                                                 @foreach ($horas as $hora)
                                                     <td>
-                                                        <button type="button"
+                                                        {{-- <button type="button"
                                                             onclick="confirmAlert('{{ Asset($link . 'status/' . $hora['id']) }}')"
-                                                            title="{{ is_null($hora['status']) ? 'No definido' : ($hora['status'] == 0 ? 'Activo' : 'inactivo') }}"
-                                                            class="badge {{ is_null($hora['status']) ? 'badge-soft-dark' : ($hora['status'] == 0 ? 'badge-soft-success' : 'badge-soft-danger') }}">
+                                                            
+                                                            >
                                                             {{ $hora['per'] . ' %' }}
-                                                        </button>
+                                                        </button> --}}
+                                                        
+                                                        <a href="{{ Asset($link . $hora['id'] .'/edit') }}" 
+                                                        title="{{ is_null($hora['status']) ? 'No definido' : ($hora['status'] == 0 ? 'Activo' : 'inactivo') }}"
+                                                        class="badge {{ is_null($hora['status']) ? 'badge-soft-dark' : ($hora['status'] == 0 ? 'badge-soft-success' : 'badge-soft-danger') }}">
+                                                            {{ $hora['per'] . ' %' }}
+                                                        </a>
                                                     </td>
                                                 @endforeach
                                             </tr>
