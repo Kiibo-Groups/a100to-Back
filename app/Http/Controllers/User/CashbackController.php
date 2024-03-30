@@ -202,7 +202,7 @@ class CashbackController extends Controller
     public function update(Request $request, $id)
     {
         
-        $registro = Cashback::find($id);  
+        $registro = Schedule::find($id);  
            
         $registro->day_id       = $request->day_id;
         $registro->hora_id      = $request->hora_id;
