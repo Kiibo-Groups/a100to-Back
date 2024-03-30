@@ -174,13 +174,10 @@
                     <textarea id="descripcion" name="descripcion"  class="form-control" rows="3" cols="50">{{ $data->descripcion }}</textarea>
                 </div>
 
-
-           
-
-
-
-
-
+                <div class="form-group col-md-12">
+                    <label for="recommendations">Recomendaciones</label>
+                    <textarea id="recommendations" name="recommendations"  class="form-control" rows="3" cols="50">{{ $data->recommendations }}</textarea>
+                </div>
             </div>
         </div>
     </div>

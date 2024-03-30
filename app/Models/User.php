@@ -90,6 +90,7 @@ class User extends Authenticatable
 
         $add->reward                = isset($data['reward']) ? $data['reward'] : null;
         $add->descripcion           = isset($data['descripcion']) ? $data['descripcion'] : null;
+        $add->recommendations           = isset($data['recommendations']) ? $data['recommendations'] : null;
         $add->numero_reserva        = isset($data['numero_reserva']) ? $data['numero_reserva'] : 0;
         $add->urlproductos          = isset($data['urlproductos']) ? $data['urlproductos'] : null;
 
@@ -222,8 +223,6 @@ class User extends Authenticatable
         $lat        = isset($_GET['lat']) ? $_GET['lat'] : 0;
         $lon        = isset($_GET['lng']) ? $_GET['lng'] : 0;
         $cat        = isset($_GET['cat']) ? $_GET['cat'] : 0;
-
-
 
         $res  = User::where(function ($query) use ($city_id, $trending, $cat) {
 
@@ -1429,6 +1428,7 @@ class User extends Authenticatable
                 'favorite'      => $favorite,
                 'reward'        => $row->reward,
                 'descripcion'   => $row->descripcion,
+                'recommendations' => $row->recommendations,
                 'urlproductos'  => $row->urlproductos,
                 'c_social'      => $arraySocial,
                 'cashback'      => $arrayCash,
@@ -2063,8 +2063,7 @@ class User extends Authenticatable
     {
         return round($numero, 2);
     }
-
-
+ 
     function Costs_shipKM($value, $min_distance, $min_value, $distance)
     {
         $km_inm       = $distance;

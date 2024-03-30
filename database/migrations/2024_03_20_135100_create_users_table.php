@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('numero_reserva')->nullable();
             $table->string('reward')->nullable();
             $table->longText('descripcion')->nullable();
+            $table->longText('recommendations')->nullable();
             $table->string('name', 250)->nullable();
             $table->string('email', 250)->nullable();
             $table->longText('urlproductos')->nullable();
