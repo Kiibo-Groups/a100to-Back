@@ -6,12 +6,12 @@
 
             <div class="form-group col-md-6">
                 <label for="hora">Dia</label>
-                {!! Form::select('day_id', $days->pluck('name', 'id'), null, ['id' => 'id', 'class' => 'form-control', 'required' => 'required']) !!}
+                {!! Form::select('day_id', $days->pluck('name', 'id'), null, ['id' => 'id', 'class' => 'form-select', 'required' => 'required']) !!}
             </div>
 
             <div class="form-group col-md-6">
                 <label for="hora">Hora</label>
-                {!! Form::select('hora_id', $hours->pluck('name', 'id'), null, ['id' => 'id', 'class' => 'form-control', 'required' => 'required']) !!}
+                {!! Form::select('hora_id', $hours->pluck('name', 'id'), null, ['id' => 'id', 'class' => 'form-select', 'required' => 'required']) !!}
             </div>
 
             <div class="form-group col-md-6">
@@ -26,8 +26,8 @@
             </div>
 
             <div class="form-group col-md-6">
-                <label for="status">Estatus</label>
-                <select name="status" id="status" class="form-control">
+                <label for="estatus">Estatus</label>
+                <select name="estatus" id="status" class="form-select">
                     <option value="0">Activo</option>
                     <option value="1">Inactivo</option>
                 </select>
