@@ -478,6 +478,7 @@ class User extends Authenticatable
                 'favorite'      => $favorite,
                 'reward'        => $row->reward,
                 'descripcion'   => $row->descripcion,
+                'recommendations' => $row->recommendations,
                 'urlproductos'  => $row->urlproductos,
                 'cashback'      => $arrayCash,
                 'cashday'       => $cashDay,
