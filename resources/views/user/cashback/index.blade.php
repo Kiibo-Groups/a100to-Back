@@ -92,7 +92,7 @@
                                                             {{ $hora['per'] . ' %' }}
                                                         </button> --}}
                                                         
-                                                        <a href="{{ Asset($link . $hora['id'] .'/edit') }}" 
+                                                        <a href="{{ is_null($hora['status']) ? Asset($link . 'add') : Asset($link . $hora['id'] .'/edit') }}" 
                                                         title="{{ is_null($hora['status']) ? 'No definido' : ($hora['status'] == 0 ? 'Activo' : 'inactivo') }}"
                                                         class="badge {{ is_null($hora['status']) ? 'badge-soft-dark' : ($hora['status'] == 0 ? 'badge-soft-success' : 'badge-soft-danger') }}">
                                                             {{ $hora['per'] . ' %' }}
