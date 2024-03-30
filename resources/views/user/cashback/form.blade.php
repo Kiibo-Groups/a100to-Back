@@ -27,7 +27,7 @@
 
             <div class="form-group col-md-6">
                 <label for="estatus">Estatus</label>
-                <select name="estatus" id="status" class="form-select">
+                <select name="estatus" id="status" class="form-select" style="display: block !important">
                     <option value="0">Activo</option>
                     <option value="1">Inactivo</option>
                 </select>
