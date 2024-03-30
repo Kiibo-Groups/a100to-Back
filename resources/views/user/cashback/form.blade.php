@@ -18,6 +18,7 @@
                 <label for="cashback">Valor de CashBack en (%)</label>
                 {!! Form::number('per', null, [
                     'id' => 'cashback',
+                    'name' => 'cashback',
                     'placeholder' => 'cashback',
                     'class' => 'form-control',
                     'required' => 'required',
