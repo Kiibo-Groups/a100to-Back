@@ -76,17 +76,18 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <div class="dropdown">
-                                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Opciones  
-                                                        </button>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                            <a href="{{ Asset($link . $row->id . '/edit') }}" class="dropdown-item">
-                                                                <i class="mdi mdi-border-color"></i> Editar
-                                                            </a>
+                                                    @if ($row->status == 1)
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                Opciones  
+                                                            </button>
+                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                <a href="{{ Asset($link . $row->id . '/edit') }}" class="dropdown-item">
+                                                                    <i class="mdi mdi-border-color"></i> Editar
+                                                                </a>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    
+                                                    @endif
   
                                                 </td>
                                                 
