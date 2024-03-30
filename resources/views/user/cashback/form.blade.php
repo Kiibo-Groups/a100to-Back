@@ -28,8 +28,8 @@
             <div class="form-group col-md-6">
                 <label for="estatus">Estatus</label>
                 <select name="status" id="estatus" class="form-select">
-                    <option value="0">Activo</option>
-                    <option value="1">Inactivo</option>
+                    <option value="0" @if($data->status == 0) selected @endif >Activo</option>
+                    <option value="1" @if($data->status == 1) selected @endif >Inactivo</option>
                 </select>
             </div>
         </div>
