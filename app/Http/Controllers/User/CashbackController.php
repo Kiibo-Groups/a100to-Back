@@ -201,10 +201,14 @@ class CashbackController extends Controller
      */
     public function update(Request $request, $id)
     {
-         
-        $registro = Cashback::find($id);      
-        $registro->cashback = $request->cashback;
-        $registro->hora     = $request->hora;
+        
+        $registro = Cashback::find($id);  
+           
+        $registro->day_id       = $request->day_id;
+        $registro->hora_id      = $request->hora_id;
+        $registro->per          = $request->cashback;
+        $registro->status       = $request->status;
+
         $registro->save();
 		return redirect(env('user').'/cashback')->with('message','Registro actualizado con éxito.');
     }
