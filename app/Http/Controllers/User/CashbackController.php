@@ -206,7 +206,7 @@ class CashbackController extends Controller
            
         $registro->day_id       = $request->day_id;
         $registro->hora_id      = $request->hora_id;
-        $registro->per          = $request->cashback;
+        $registro->per          = $request->per;
         $registro->status       = $request->status;
 
         $registro->save();
