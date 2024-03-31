@@ -37,4 +37,4 @@
 </div>
 
 <button type="submit" class="btn btn-success width-xl waves-effect waves-light btn-cta">Guardar</button>
-<a href="{{ asset($link . 'deleteCash/'. $data->id) }}" class="btn btn-danger width-xl waves-effect waves-light btn-cta">Eliminar</a>
+<a href="{{ asset('cashback/deleteCash/'. $data->id) }}" class="btn btn-danger width-xl waves-effect waves-light btn-cta">Eliminar</a>
