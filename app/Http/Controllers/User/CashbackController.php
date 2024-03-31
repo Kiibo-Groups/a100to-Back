@@ -226,7 +226,13 @@ class CashbackController extends Controller
         return redirect(env('user').'/cashback')->with('message','Registro eliminado con éxito.');
     }
 
-    	/*
+    public function deleteCash($id)
+    {
+        Schedule::find($id)->delete();
+        return redirect(env('user').'/cashback')->with('message','CashBack eliminado con éxito.');
+    }
+
+    /*
 	|---------------------------------------------
 	|@Change Status
 	|---------------------------------------------
