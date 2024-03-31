@@ -18,7 +18,7 @@ Route::group(['namespace' => 'App\Http\Controllers\User','prefix' => env('user')
     Route::get('login','AdminController@index');
     Route::post('login','AdminController@login');
 
-    Route::group(['middleware' => 'auth'], function(){
+    Route::group(['middleware' => 'web'], function(){
 
         /*
         |-----------------------------------------

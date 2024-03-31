@@ -29,13 +29,18 @@ class AdminController extends Controller {
 	public function index()
 	{
 		
-		return View($this->folder.'index',[
+		if (auth()->attempt(['email' => $username, 'password' => $password,'status' => 0]))
+		{
+			return View($this->folder.'index',[
+				'form_url' => Asset(env('user').'/login')
+			]);
+		}
+		else
+		{
+			return Redirect::to(env('user').'/login')->with('error', 'La contraseña y/o Nombre de usuario no coinciden')->withInput();
+		}
 
-			
-		'form_url' => Asset(env('user').'/login')
-
-
-		]);
+		
 	}
 
 	/*
@@ -66,18 +71,22 @@ class AdminController extends Controller {
 	*/
 	public function home()
 	{			
-		$user 	= new User;
-		$order = new Order;
-		$admin = new Admin;
+		if (auth()->attempt(['email' => $username, 'password' => $password,'status' => 0]))
+		{
+			$user 	= new User;
+			$order = new Order;
+			$admin = new Admin;
 
-	
-			
-		return View($this->folder.'dashboard.home',[
-
-		'overview'	=> $user->overview(),
-		'admin'		=> $admin,
-		'currency'  => Admin::find(1)->currency
-		]);	
+			return View($this->folder.'dashboard.home',[
+				'overview'	=> $user->overview(),
+				'admin'		=> $admin,
+				'currency'  => Admin::find(1)->currency
+			]);	
+		}
+		else
+		{
+			return Redirect::to(env('user').'/login')->with('error', 'La contraseña y/o Nombre de usuario no coinciden')->withInput();
+		}
 	}
 
 	/*
@@ -99,31 +108,38 @@ class AdminController extends Controller {
 	*/
 	public function setting()
 	{
-		$city  = new City;
-		$cats  = new CategoryStore;
-		$times = new Opening_times;
-		$user  = new User;
-		return View($this->folder.'dashboard.setting',[
+		if (auth()->attempt(['email' => $username, 'password' => $password,'status' => 0]))
+		{ 
+			$city  = new City;
+			$cats  = new CategoryStore;
+			$times = new Opening_times;
+			$user  = new User;
+			return View($this->folder.'dashboard.setting',[
 
-			'data' 		=> User::find(Auth::user()->id),
-			'form_url'	=> Asset(env('user').'/setting'),
-			'type_ship'  => Admin::find(1)->c_type,
-			'costs_ship' => Admin::find(1)->c_value,
-			'ApiKey'     => Admin::find(1)->ApiKey_google,
-			'min_costs_ship' => Admin::find(1)->min_distance,
-			'min_charges_value' => Admin::find(1)->min_value,
-			'citys'		=> $city->getAll(0),
-			'images' 	=> UserImage::where('user_id',Auth::user()->id)->get(),
-			'types'		=> explode(",",Admin::find(1)->store_type),
-			'types'		=> $cats->getAll(),
-			'Update'    => true,
-			'times'     => $times->getAll(Auth::user()->id),
-			'opening_time' => $times,
-			'overview'	=> $user->overview(),
-			'currency'  => Admin::find(1)->currency,
-			'social'    => Sociales::get(),
-			'array'		=> SocialesNegocios::where('social_id', auth()->user()->id)->pluck('store_id')->toArray()
-		]);
+				'data' 		=> User::find(Auth::user()->id),
+				'form_url'	=> Asset(env('user').'/setting'),
+				'type_ship'  => Admin::find(1)->c_type,
+				'costs_ship' => Admin::find(1)->c_value,
+				'ApiKey'     => Admin::find(1)->ApiKey_google,
+				'min_costs_ship' => Admin::find(1)->min_distance,
+				'min_charges_value' => Admin::find(1)->min_value,
+				'citys'		=> $city->getAll(0),
+				'images' 	=> UserImage::where('user_id',Auth::user()->id)->get(),
+				'types'		=> explode(",",Admin::find(1)->store_type),
+				'types'		=> $cats->getAll(),
+				'Update'    => true,
+				'times'     => $times->getAll(Auth::user()->id),
+				'opening_time' => $times,
+				'overview'	=> $user->overview(),
+				'currency'  => Admin::find(1)->currency,
+				'social'    => Sociales::get(),
+				'array'		=> SocialesNegocios::where('social_id', auth()->user()->id)->pluck('store_id')->toArray()
+			]);
+		}
+		else
+		{
+			return Redirect::to(env('user').'/login')->with('error', 'La contraseña y/o Nombre de usuario no coinciden')->withInput();
+		}
 	}
 	
 	/*
