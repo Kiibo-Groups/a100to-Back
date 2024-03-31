@@ -61,7 +61,7 @@
 
             <!-- LOGO -->
             <div class="logo-box">
-                <a href="/home" class="logo logo-light text-center">
+                <a href="{{ Asset(env('admin') . '/home') }}" class="logo logo-light text-center">
                     <span class="logo-sm"> 
                         <img src="{{ Asset('assets/img/logo-sm.png') }}" alt="logo" style="width: 50px;margin: 0 20px;">
                     </span>
