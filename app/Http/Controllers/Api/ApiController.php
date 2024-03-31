@@ -113,10 +113,7 @@ class ApiController extends Controller
 	{
 		$text    = new Text;
 		
-		$data = [
-			'text'		=> $text->getAppData(0),
-			'admin'		=> Admin::find(1),
-		];
+		$data = collect(Admin::find(1))->except(['password','shw_password','remember_token','city_id','city_notify','created_at','updated_at']);
 
 		return response()->json(['data' => $data]);
 	}
