@@ -112,11 +112,9 @@ class ApiController extends Controller
 	public function getDataInit()
 	{
 		$text    = new Text;
-		$l 		 = Language::find($_GET['lid']);
-
+		
 		$data = [
-			'text'		=> $text->getAppData($_GET['lid']),
-			'app_type'	=> isset($l->id) ? $l->type : 0,
+			'text'		=> $text->getAppData(0),
 			'admin'		=> Admin::find(1),
 		];
 
