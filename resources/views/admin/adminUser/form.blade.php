@@ -17,7 +17,7 @@
 <input type="password" name="password" class="form-control">
 @else
 <label for="inputEmail6">Password</label>
-<input type="password" name="password" class="form-control" required="required">
+<input type="password" name="password" class="form-control">
 @endif
 </div>
 
