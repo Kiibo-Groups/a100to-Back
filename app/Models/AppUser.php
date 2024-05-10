@@ -229,8 +229,20 @@ class AppUser extends Authenticatable
         $email      = $data['email'];
         $password   = $data['password'];
         $type       = $data['type'];
+        $uid       = $data['uid'];
 
-        $user = AppUser::where('email', $email)->first();
+        $query = AppUser::query();
+
+        if ($email !== null || $email !== '') {
+            
+            $query = $query->where('email', $email);
+
+        } else {
+
+            $query = $query->where('uid', $uid);
+        }
+
+        $user = $query->first();
 
         if (!$user) {
             // Registramos
@@ -239,7 +251,8 @@ class AppUser extends Authenticatable
             $add->fecha_cambio  = $date->format('Y-m-d');
             $add->email         = $email;
             $add->birthday      = $date->format('Y-m-d');
-            
+            $add->uid           = $uid;
+
             switch ($type) {
                 case 1: // Login With Google
                     $add->pswgoogle      = Hash::make($password);
